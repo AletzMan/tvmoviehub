@@ -1,0 +1,27 @@
+.header {
+    display: flex;
+    align-items: center;
+    height: 4em;
+    background-color: var(--terciaryColor);
+    grid-column: 2 / 3;
+
+    @media (width < 700px) {
+        grid-column: 1 / 2;
+    }
+
+    &_nav {
+        display: flex;
+        gap: 1em;
+        padding: 0 1.5em;
+    }
+
+    &_link {
+        color: var(--fontColor);
+        text-decoration: none;
+        transition: all 0.3s ease-in-out;
+
+        &:hover {
+            color: var(--highlightColor);
+        }
+    }
+}
