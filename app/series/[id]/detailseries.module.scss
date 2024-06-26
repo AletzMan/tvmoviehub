@@ -1,0 +1,222 @@
+.section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    padding: 0.5em;
+    height: calc(100svh - 4em);
+}
+
+.movie {
+    position: relative;
+    min-height: 30em;
+
+    &_image {
+        width: 100%;
+        height: 30em;
+        object-fit: cover;
+        filter: brightness(0.7);
+
+    }
+
+    &_shadow {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(0deg, #000000 0%, transparent 70%, #000000 100%);
+    }
+
+    &_header {
+        position: absolute;
+        top: 0;
+        left: 0.5em;
+    }
+
+    &_title {
+        color: var(--titleColor);
+        text-wrap: pretty;
+    }
+
+    &_subtitle {
+        font-size: 1em;
+        font-weight: 400;
+        color: #c4c4c4;
+    }
+
+    &_details {
+        position: absolute;
+        bottom: 0;
+        display: flex;
+        height: 50%;
+        padding: 0.5em;
+        gap: 0.5em;
+    }
+
+    &_poster {
+        //position: absolute;
+        border: 1px solid #FFFFFF25;
+        border-radius: 0.05em;
+    }
+
+    &_info {
+        display: flex;
+        flex-direction: column;
+        gap: 0.35em;
+    }
+
+    &_tagline {
+        color: var(--fontColor);
+    }
+
+    &_genres {
+        display: flex;
+        flex-flow: row wrap;
+        gap: 0.5em;
+    }
+
+    &_genre {
+        font-size: 0.85em;
+        border-radius: 0.35em;
+        padding: 0.1em 0.5em;
+        background-color: #13161b;
+        border: 1px solid #FFFFFF28;
+        color: var(--fontColor);
+    }
+
+    &_country {
+        display: flex;
+        align-items: center;
+        gap: 0.5em;
+        width: max-content;
+        padding: 0.25em 0.5em;
+        border-radius: 0.15em;
+        border: 1px solid #ffffff15;
+        background-color: transparent;
+        backdrop-filter: blur(10px);
+
+        &Flag {
+            position: relative;
+            object-fit: cover;
+        }
+
+        &Name {
+            font-size: 0.8em;
+            font-weight: 500;
+            color: var(--fontColor);
+        }
+
+    }
+
+    &_timeYear {
+        display: flex;
+        flex-flow: row wrap;
+        row-gap: 0.25em;
+        column-gap: 1em;
+        align-items: center;
+    }
+
+    &_runtime {
+        display: flex;
+        align-items: center;
+        padding: 0.25em 0;
+        gap: 0.35em;
+        color: #BBBBBB;
+    }
+
+    &_year {
+        display: flex;
+        align-items: center;
+        padding: 0.25em 0;
+        gap: 0.35em;
+        color: #BBBBBB;
+    }
+
+
+
+    &_play {
+        display: flex;
+        flex-direction: row;
+        gap: 0.5em;
+        padding: 0.2em 0.5em;
+        width: max-content;
+        border-radius: 0.2em;
+        align-items: center;
+        background-color: var(--highlightColorBasic);
+        border: none;
+        color: var(--primaryColor);
+        transition: all 0.25s ease-in-out;
+        cursor: pointer;
+
+        &:hover {
+            background-color: var(--highlightColor);
+        }
+
+        &Icon {
+            width: 2em;
+            height: 2em;
+            color: var(--fontColor);
+        }
+
+        &Text {
+            color: var(--fontColor);
+            font-weight: 300;
+        }
+    }
+
+    &_companies {
+        display: flex;
+        flex-flow: row wrap;
+        gap: 0.5em;
+    }
+
+    &_company {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 0.25em;
+        border-radius: 0.25em;
+        background-color: var(--hover);
+
+        &Name {
+            color: var(--fontSecondColor);
+            font-size: 0.8em;
+        }
+
+        &Logo {
+            object-fit: contain;
+        }
+    }
+
+
+    &_icon {
+        width: 1.2em;
+        height: 1.2em;
+    }
+
+    &_overview {
+        color: var(--fontColor);
+    }
+}
+
+.details {
+    display: flex;
+    flex-direction: column;
+    padding: 0.25em;
+    background-color: var(--hover);
+
+    &_title {
+        color: var(--fontColor);
+        margin: 0 0 0 0;
+        padding: 0.15em 0.5em;
+        background: linear-gradient(90deg, var(--hover), transparent);
+    }
+
+    &_overview {
+        color: var(--fontColor);
+        font-weight: 300;
+        font-size: 0.85em;
+        max-width: 800px;
+        padding: 0.25em 0.5em;
+    }
+}
