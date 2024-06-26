@@ -1,0 +1,99 @@
+.slider {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--hover);
+}
+
+.cast {
+    display: grid;
+    grid-template-columns: 1.5em 1fr 1.5em;
+    align-items: center;
+    gap: 0.25em;
+    padding: 0.5em;
+
+    &_title {
+        color: var(--fontColor);
+        margin: 0 0 0 0;
+        padding: 0.15em 0.5em;
+        background: linear-gradient(90deg, var(--hover), transparent);
+    }
+
+    &_arrow {
+        height: 3.5em;
+        border: 1px solid var(--hover);
+        background-color: var(--hover);
+        border-radius: 0.15em;
+        cursor: pointer;
+        transition: all 0.25em ease-in-out;
+
+        &:hover {
+            background-color: var(--highlightHoverColor);
+        }
+
+        &Icon {
+            width: 1.5em;
+            height: 1.5em;
+            color: var(--fontColor);
+
+            &Right {
+                transform: rotate(180deg);
+            }
+        }
+    }
+
+    &_container {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.25em;
+        grid-column: 2 / 3;
+
+    }
+}
+
+.actor {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25em;
+    min-width: 8em;
+    height: 10em;
+    padding: 0.25em 0.5em;
+    text-decoration: none;
+    //border-radius: 0.25em;
+    //border: 1px solid transparent;
+    transition: all ease-in-out 0.25s;
+    scroll-snap-align: start;
+    filter: opacity(0.8);
+    cursor: pointer;
+
+    &:hover {
+        //border-color: var(--hover);
+        filter: opacity(1) brightness(110%);
+        background: linear-gradient(0deg, #FFFFFF15, transparent);
+    }
+
+
+    &_photo {
+        object-fit: cover;
+        object-position: center top;
+        border-radius: 4em;
+        border: 2px solid var(--highlightColor);
+    }
+
+    &_description {
+        display: flex;
+        flex-direction: column;
+        line-height: 1em;
+    }
+
+    &_name {
+        color: var(--fontColor);
+        text-align: center;
+    }
+
+    &_character {
+        color: var(--titleColor);
+        text-align: center;
+        font-size: 0.85em;
+    }
+}
