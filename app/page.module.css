@@ -3,7 +3,7 @@
 	grid-template-columns: 17em 1fr;
 	grid-template-rows: 4em 1fr;
 	min-height: 100svh;
-	max-width: 1450px;
+	max-width: 1450px; 
 	margin: 0 auto;
 	background: #0d141a;
 }
@@ -21,6 +21,8 @@
 	flex-flow: row wrap;
 	grid-column: 2 / 3;
 	grid-row: 2 / 3;
+	padding: 0.5em;
+	column-gap: 0.5em;
 	height: calc(100svh - 4em);
 }
 
@@ -42,7 +44,7 @@
 
 .section_title {
 	padding: 0.25em 0.75em;
-	margin: 0.5em 0 0 0.5em;
+	margin: 0.5em 0 0.5em 0;
 	font-size: 1.15em;
 	width: max-content;
 	border-radius: 0.5em;
