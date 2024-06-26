@@ -3,8 +3,46 @@
     flex-direction: column;
     background-color: var(--hover);
     height: max-content;
-    width: 100%;
+    width: calc(100svw - 18em);
     max-width: 1150px;
+
+    @media (width < 750px) {
+        width: 100%;
+    }
+
+    &_header {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.25em 0.5em;
+        background: linear-gradient(90deg, var(--hover), transparent);
+    }
+
+    &_title {
+        color: var(--fontColor);
+        margin: 0 0 0 0;
+        font-size: 1.2em;
+    }
+
+    &_container {
+        margin: 0.5em 1.75em 0em 1.75em;
+    }
+
+    &_view {
+        display: flex;
+        align-items: center;
+        gap: 0.5em;
+        font-size: 0.8em;
+        padding: 0.15em 0.75em;
+        text-decoration: none;
+        border-radius: 0.5em;
+        color: var(--fontSecondColor);
+        background-color: var(--hover);
+        transition: color 0.25s ease-in-out;
+
+        &:hover {
+            color: var(--fontColor);
+        }
+    }
 }
 
 .cast {
@@ -14,6 +52,7 @@
     gap: 0.25em;
     padding: 0.5em;
     height: 100%;
+
 
     &_title {
         color: var(--fontColor);

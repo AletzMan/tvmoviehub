@@ -3,9 +3,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 14em;
-    min-width: 14em;
-    height: 17em;
+    max-width: 12em;
+    min-width: 12em;
+    height: 18em;
     border-radius: 0.2em;
     margin: 0 0.25em;
     overflow: hidden;
@@ -46,16 +46,16 @@
     }
 
     &_picture {
-        height: 14em;
-        width: 15em;
+        height: 15em;
+        width: 12em;
         overflow: hidden;
         //background-color: red;
     }
 
     &_photo {
         object-fit: cover;
-        width: 10em;
-        margin: 0 0 0 3.75em;
+        width: 12em;
+        height: 15em;
         object-position: center top;
         transition: all 0.3s ease-in-out;
         //border: 2px solid var(--highlightColor);
@@ -65,8 +65,8 @@
         position: absolute;
         top: 0;
         left: 0;
-        height: 14em;
-        width: 3.75em;
+        height: 15em;
+        width: 100%;
         background: linear-gradient(0deg, #000000, transparent, #000000BB);
     }
 
@@ -78,20 +78,6 @@
         padding: 0.15em 0.25em;
         background-color: var(--terciaryColor);
         min-height: 2.9em;
-    }
-
-    &_number {
-        position: absolute;
-        left: 0;
-        text-align: center;
-        bottom: 0.75em;
-        font-size: 3.5em;
-        //z-index: -1;
-        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-        color: var(--highlightColor);
-        background-color: #FFFFFF00;
-        border-radius: 0.15em;
-        width: 1.07em;
     }
 
     &_name {
@@ -106,23 +92,6 @@
     &_age {
         color: var(--fontSecondColor);
         font-size: 0.8em;
-    }
-
-
-    &_average {
-        position: absolute;
-        bottom: 0.25em;
-        right: 0.25em;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.25em;
-        padding: 0.1em 0.2em;
-        font-weight: 500;
-        font-size: 0.8em;
-        border-radius: 0.25em;
-        color: var(--primaryColor);
-        background-color: var(--averageColor);
     }
 
     &_fav {
@@ -154,8 +123,8 @@
         justify-content: center;
         background-color: transparent;
         backdrop-filter: sepia();
-        height: 14em;
-        width: 14em;
+        height: 15em;
+        width: 12em;
 
         &More {
             display: flex;

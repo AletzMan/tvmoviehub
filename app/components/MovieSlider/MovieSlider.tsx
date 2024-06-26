@@ -7,6 +7,8 @@ import { AddIcon, FavoriteFullIcon, MovieIcon, SerieIcon, StarIcon } from "@/app
 import { IPartCollection } from "@/app/interfaces/movie"
 import Link from "next/link"
 import Slider from "react-slick"
+import "slick-carousel/slick/slick.css"
+import "slick-carousel/slick/slick-theme.css"
 
 interface Props {
     parts: IPartCollection[]

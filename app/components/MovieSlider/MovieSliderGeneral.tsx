@@ -3,13 +3,18 @@
 import { ReactNode } from "react"
 import styles from "./movieslider.module.scss"
 import Slider from "react-slick"
+import "slick-carousel/slick/slick.css"
+import "slick-carousel/slick/slick-theme.css"
+import Link from "next/link"
+import { ViewIcon } from "@/app/utils/svg"
 
 interface Props {
     title: string
     children: ReactNode
+    list_link?: string
 }
 
-export const MovieSliderGeneral = ({ title, children }: Props) => {
+export const MovieSliderGeneral = ({ title, children, list_link }: Props) => {
 
     const settings = {
         infinite: false,
@@ -19,14 +24,18 @@ export const MovieSliderGeneral = ({ title, children }: Props) => {
         autoplaySpeed: 500,
         arrows: true,
         dots: false,
-        rows: 1
+        rows: 1,
+        nextArrow: <div>s</div>
     }
 
     return (
         <div className={styles.slider} >
-            <h4 className={styles.cast_title}>{title}</h4>
-            <div className={styles.cast_container}  >
-                <Slider {...settings} variableWidth rows={1} swipeToSlide swipe adaptiveHeight>
+            <header className={styles.slider_header} >
+                <h4 className={styles.slider_title}>{title}</h4>
+                {list_link && <Link className={styles.slider_view} href={`/movies/lists/${list_link}`}>Ver todo</Link>}
+            </header>
+            <div className={styles.slider_container}  >
+                <Slider {...settings} swipeToSlide swipe variableWidth waitForAnimate>
                     {children}
                 </Slider>
             </div>

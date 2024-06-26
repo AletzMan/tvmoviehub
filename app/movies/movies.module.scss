@@ -3,6 +3,8 @@
     flex-direction: column;
     gap: 0.5em;
     padding: 0.5em;
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
     width: 100%;
     height: calc(100svh - 4em);
 }

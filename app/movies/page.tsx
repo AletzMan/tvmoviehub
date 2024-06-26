@@ -1,5 +1,6 @@
 import { MainSlider } from "../components/MainSlider/MainSlider"
 import { MovieCard } from "../components/MovieCard/MovieCard"
+import { MovieCardUpcoming } from "../components/MovieCardUpcoming/MovieCardUpcoming"
 import { MovieSliderGeneral } from "../components/MovieSlider/MovieSliderGeneral"
 import { IMovieResponse } from "../interfaces/responses"
 import styles from "./movies.module.scss"
@@ -813,15 +814,654 @@ export default async function Page() {
         "total_results": 895979
     }
 
+    const ratingMovies: IMovieResponse = {
+        "page": 1,
+        "results": [
+            {
+                "adult": false,
+                "backdrop_path": "/zfbjgQE1uSd9wiPTX4VzsLi0rGG.jpg",
+                "genre_ids": [
+                    18,
+                    80
+                ],
+                "id": 278,
+                "original_language": "en",
+                "original_title": "The Shawshank Redemption",
+                "overview": "Andy Dufresne es un banquero injustamente encarcelado en la prisión de Shawshank por el asesinato de su esposa y su amante. Dentro de prisión, Andy entabla una amistad con Red, un prisionero con habilidades para conseguir cosas. Estos dos hombres encarcelados se unirán durante años, encontrando consuelo y eventual redención a través de actos de decencia común.",
+                "popularity": 134.068,
+                "poster_path": "/uRRTV7p6l2ivtODWJVVAMRrwTn2.jpg",
+                "release_date": "1994-09-23",
+                "title": "Sueño de fuga",
+                "video": false,
+                "vote_average": 8.705,
+                "vote_count": 26362
+            },
+            {
+                "adult": false,
+                "backdrop_path": "/tmU7GeKVybMWFButWEGl2M4GeiP.jpg",
+                "genre_ids": [
+                    18,
+                    80
+                ],
+                "id": 238,
+                "original_language": "en",
+                "original_title": "The Godfather",
+                "overview": "Don Vito Corleone es el respetado y temido jefe de una de las cinco familias de la mafia de Nueva York. Tiene cuatro hijos: una chica, Connie, y tres varones: el impulsivo Sonny, el pusilánime Freddie y Michael, que no quiere saber nada de los negocios de su padre. Cuando Corleone, siempre aconsejado por su consejero Tom Hagen, se niega a intervenir en el negocio de las drogas, el jefe de otra banda ordena su asesinato. Empieza entonces una violenta y cruenta guerra entre las familias mafiosas.",
+                "popularity": 192.441,
+                "poster_path": "/5HlLUsmsv60cZVTzVns9ICZD6zU.jpg",
+                "release_date": "1998-08-14",
+                "title": "El Padrino",
+                "video": false,
+                "vote_average": 8.694,
+                "vote_count": 19996
+            },
+            {
+                "adult": false,
+                "backdrop_path": "/b6w7gKLQLS2zw4JK0XmKgQ4gnzr.jpg",
+                "genre_ids": [
+                    18,
+                    80
+                ],
+                "id": 240,
+                "original_language": "en",
+                "original_title": "The Godfather Part II",
+                "overview": "Continuación de la historia de los Corleone por medio de dos historias paralelas: la elección de Michael como jefe de los negocios familiares y los orígenes del patriarca, Don Vito Corleone, primero en su Sicilia natal y posteriormente en Estados Unidos, donde, empezando desde abajo, llegó a ser un poderosísimo jefe de la mafia de Nueva York.",
+                "popularity": 96.805,
+                "poster_path": "/mbry0W5PRylSUHsYzdiY2FSJwze.jpg",
+                "release_date": "1976-03-12",
+                "title": "El Padrino II",
+                "video": false,
+                "vote_average": 8.577,
+                "vote_count": 12073
+            },
+            {
+                "adult": false,
+                "backdrop_path": "/zb6fM1CX41D9rF9hdgclu0peUmy.jpg",
+                "genre_ids": [
+                    18,
+                    36,
+                    10752
+                ],
+                "id": 424,
+                "original_language": "en",
+                "original_title": "Schindler's List",
+                "overview": "La emotiva y desgarradora historia real de Oskar Schindler, un empresario alemán que, durante el Holocausto, emplea a judíos en su fábrica para salvarlos del exterminio nazi, mostrando cómo un acto de compasión puede desafiar el horror y la barbarie.",
+                "popularity": 70.26,
+                "poster_path": "/xnvHaMFNXzemoH4uXHDMtKnpF7l.jpg",
+                "release_date": "1994-02-24",
+                "title": "La Lista de Schindler",
+                "video": false,
+                "vote_average": 8.568,
+                "vote_count": 15477
+            },
+            {
+                "adult": false,
+                "backdrop_path": "/qqHQsStV6exghCM7zbObuYBiYxw.jpg",
+                "genre_ids": [
+                    18
+                ],
+                "id": 389,
+                "original_language": "en",
+                "original_title": "12 Angry Men",
+                "overview": "Doce miembros de un jurado deliberan sobre el veredicto de un caso de homicidio. A medida que discuten, los prejuicios personales y las opiniones en conflicto emergen, desafiando la justicia y revelando la complejidad del sistema legal.",
+                "popularity": 56.653,
+                "poster_path": "/t88XfoxO5cX3f0qaSxWsBS0Lc3.jpg",
+                "release_date": "2000-01-01",
+                "title": "12 Hombres en Pugna",
+                "video": false,
+                "vote_average": 8.544,
+                "vote_count": 8326
+            },
+            {
+                "adult": false,
+                "backdrop_path": "/90ez6ArvpO8bvpyIngBuwXOqJm5.jpg",
+                "genre_ids": [
+                    35,
+                    18,
+                    10749
+                ],
+                "id": 19404,
+                "original_language": "hi",
+                "original_title": "दिलवाले दुल्हनिया ले जायेंगे",
+                "overview": "Los Singh son una familia india con grandes convicciones culturales de su nación de origen, que emigraron a Reino Unido antes de nacer sus primeros hijos. Uno de ellos querrá casarse con una mujer ajena a su cultura y para ello deberá hacer todos los esfuerzos por convencer a su familia.",
+                "popularity": 31.563,
+                "poster_path": "/2CAL2433ZeIihfX1Hb2139CX0pW.jpg",
+                "release_date": "1995-10-20",
+                "title": "Amor Contra Viento Y Marea",
+                "video": false,
+                "vote_average": 8.537,
+                "vote_count": 4401
+            },
+            {
+                "adult": false,
+                "backdrop_path": "/mSDsSDwaP3E7dEfUPWy4J0djt4O.jpg",
+                "genre_ids": [
+                    16,
+                    10751,
+                    14
+                ],
+                "id": 129,
+                "original_language": "ja",
+                "original_title": "千と千尋の神隠し",
+                "overview": "Durante la mudanza de su familia a los suburbios, una huraña niña de 10 años de edad deambula por un mundo gobernado por dioses, brujas y espíritus, y donde los humanos se convierten en bestias.",
+                "popularity": 107.606,
+                "poster_path": "/wn0wOGqFKl5hF4If8ev78mn4LGY.jpg",
+                "release_date": "2004-01-16",
+                "title": "El viaje de Chihiro",
+                "video": false,
+                "vote_average": 8.537,
+                "vote_count": 16048
+            },
+            {
+                "adult": false,
+                "backdrop_path": "/dqK9Hag1054tghRQSqLSfrkvQnA.jpg",
+                "genre_ids": [
+                    18,
+                    28,
+                    80,
+                    53
+                ],
+                "id": 155,
+                "original_language": "en",
+                "original_title": "The Dark Knight",
+                "overview": "Cuando la amenaza conocida como el Joker causa estragos y caos en la gente de Ciudad Gótica, Batman debe aceptar una de las mayores pruebas psicológicas y físicas de su capacidad para luchar contra la injusticia.",
+                "popularity": 94.65,
+                "poster_path": "/8QDQExnfNFOtabLDKqfDQuHDsIg.jpg",
+                "release_date": "2008-07-18",
+                "title": "Batman: El caballero de la noche",
+                "video": false,
+                "vote_average": 8.516,
+                "vote_count": 32122
+            },
+            {
+                "adult": false,
+                "backdrop_path": "/TU9NIjwzjoKPwQHoHshkFcQUCG.jpg",
+                "genre_ids": [
+                    35,
+                    53,
+                    18
+                ],
+                "id": 496243,
+                "original_language": "ko",
+                "original_title": "기생충",
+                "overview": "Tanto Gi Taek como su familia están sin trabajo. Cuando su hijo mayor, Gi Woo, empieza a recibir clases particulares en casa de Park, las dos familias, que tienen mucho en común pese a pertenecer a dos mundos totalmente distintos, comienzan una interrelación de resultados impresivibles.",
+                "popularity": 91.546,
+                "poster_path": "/4N55tgxDW0RRATyrZHbx0q9HUKv.jpg",
+                "release_date": "2019-12-25",
+                "title": "Parásitos",
+                "video": false,
+                "vote_average": 8.509,
+                "vote_count": 17677
+            },
+            {
+                "adult": false,
+                "backdrop_path": "/vxJ08SvwomfKbpboCWynC3uqUg4.jpg",
+                "genre_ids": [
+                    14,
+                    18,
+                    80
+                ],
+                "id": 497,
+                "original_language": "en",
+                "original_title": "The Green Mile",
+                "overview": "Las vidas de los guardias del corredor de la muerte se ven afectadas por uno de sus cargos: un hombre negro acusado de asesinato y violación de niños, pero que tiene un misterioso don.",
+                "popularity": 122.595,
+                "poster_path": "/1EFS40uFzv5ZVLSpu3xqYqnou67.jpg",
+                "release_date": "1999-12-10",
+                "title": "Milagros Inesperados",
+                "video": false,
+                "vote_average": 8.505,
+                "vote_count": 16925
+            },
+            {
+                "adult": false,
+                "backdrop_path": "/dIWwZW7dJJtqC6CgWzYkNVKIUm8.jpg",
+                "genre_ids": [
+                    16,
+                    10749,
+                    18
+                ],
+                "id": 372058,
+                "original_language": "ja",
+                "original_title": "君の名は。",
+                "overview": "Mitsuha es la hija del alcalde de una pequeña ciudad de montaña. Es una joven sencilla de escuela secundaria que vive con su hermana y su abuela y no tiene ningún reparo en que se sepa que no está interesada en los rituales sintoístas ni en ayudar a la campaña electoral de su padre. En su lugar sueña con abandonar la aburrida ciudad y probar suerte en Tokio. Taki es un chico de secundaria en Tokio que trabaja medio tiempo en un restaurante italiano y aspira a convertirse en arquitecto o artista. Cada noche tiene un extraño sueño donde se convierte... en una chica de escuela secundaria en un pequeño pueblo de montaña.",
+                "popularity": 91.835,
+                "poster_path": "/iaiy3tg9QVkDpObm1IGqmbC9A5C.jpg",
+                "release_date": "2017-08-04",
+                "title": "Tu Nombre",
+                "video": false,
+                "vote_average": 8.492,
+                "vote_count": 11055
+            },
+            {
+                "adult": false,
+                "backdrop_path": "/suaEOtk1N1sgg2MTM7oZd2cfVp3.jpg",
+                "genre_ids": [
+                    53,
+                    80
+                ],
+                "id": 680,
+                "original_language": "en",
+                "original_title": "Pulp Fiction",
+                "overview": "Jules y Vincent, dos asesinos a sueldo con muy pocas luces, trabajan para Marsellus Wallace. Vincent le confiesa a Jules que Marsellus le ha pedido que cuide de Mia, su mujer. Jules le recomienda prudencia porque es muy peligroso sobrepasarse con la novia del jefe. Cuando llega la hora de trabajar, ambos deben ponerse manos a la obra. Su misión: recuperar un misterioso maletín.",
+                "popularity": 215.637,
+                "poster_path": "/hNcQAuquJxTxl2fJFs1R42DrWcf.jpg",
+                "release_date": "1994-09-10",
+                "title": "Tiempos Violentos",
+                "video": false,
+                "vote_average": 8.488,
+                "vote_count": 27280
+            },
+            {
+                "adult": false,
+                "backdrop_path": "/2u7zbn8EudG6kLlBzUYqP8RyFU4.jpg",
+                "genre_ids": [
+                    12,
+                    14,
+                    28
+                ],
+                "id": 122,
+                "original_language": "en",
+                "original_title": "The Lord of the Rings: The Return of the King",
+                "overview": "Las fuerzas de Saruman han sido destruidas, y su fortaleza sitiada. Ha llegado el momento de que se decida el destino de la Tierra Media, y por primera vez en mucho tiempo, parece que hay una pequeña esperanza. La atención del señor oscuro Sauron se centra ahora en Gondor, el último reducto de los hombres, y del cual Aragorn tendrá que reclamar el trono para ocupar su puesto de rey. Pero las fuerzas de Sauron ya se preparan para lanzar el último y definitivo ataque contra el reino de Gondor, la batalla que decidirá el destino de todos. Mientras tanto, Frodo y Sam continuan su camino hacia Mordor, a la espera de que Sauron no repare en que dos pequeños Hobbits se acercan cada día más al final de su camino, el Monte del Destino.",
+                "popularity": 102.902,
+                "poster_path": "/mWuFbQrXyLk2kMBKF9TUPtDwuPx.jpg",
+                "release_date": "2003-12-17",
+                "title": "El señor de los anillos: El retorno del rey",
+                "video": false,
+                "vote_average": 8.481,
+                "vote_count": 23545
+            },
+            {
+                "adult": false,
+                "backdrop_path": "/mzfx54nfDPTUXZOG48u4LaEheDy.jpg",
+                "genre_ids": [
+                    35,
+                    18,
+                    10749
+                ],
+                "id": 13,
+                "original_language": "en",
+                "original_title": "Forrest Gump",
+                "overview": "Basada en la novela homónima del escritor Winston Groom, la película fue dirigida por Robert Zemeckis y protagonizada por Tom Hanks. La historia describe varias décadas de la vida de Forrest Gump, un nativo de Alabama que sufre de una leve discapacidad intelectual.",
+                "popularity": 133.323,
+                "poster_path": "/oiqKEhEfxl9knzWXvWecJKN3aj6.jpg",
+                "release_date": "1994-06-23",
+                "title": "Forrest Gump",
+                "video": false,
+                "vote_average": 8.475,
+                "vote_count": 26791
+            },
+            {
+                "adult": false,
+                "backdrop_path": "/Adrip2Jqzw56KeuV2nAxucKMNXA.jpg",
+                "genre_ids": [
+                    37
+                ],
+                "id": 429,
+                "original_language": "it",
+                "original_title": "Il buono, il brutto, il cattivo",
+                "overview": "Durante la rabia de la Guerra civil americana entre la Unión y la Confederación, tres hombres, “una persona solitaria tranquila, un asesino a sueldo despiadado y un bandido mexicano, peinan el territorio americano hacia el Sudoeste en busca de una caja fuerte que contiene $200,000 en el oro robado.",
+                "popularity": 132.493,
+                "poster_path": "/vd9uj5KLlOrJnvNH03exLDlMAE0.jpg",
+                "release_date": "1969-04-17",
+                "title": "El Bueno, El Malo y El Feo",
+                "video": false,
+                "vote_average": 8.464,
+                "vote_count": 8334
+            },
+            {
+                "adult": false,
+                "backdrop_path": "/d6UxFCGQxpszcf8mwgGjQ3ynqGl.jpg",
+                "genre_ids": [
+                    18,
+                    80
+                ],
+                "id": 769,
+                "original_language": "en",
+                "original_title": "GoodFellas",
+                "overview": "Henry Hill, hijo de padre irlandés y madre siciliana, vive en Brooklyn y se siente fascinado por la vida que llevan los gángsters de su barrio, donde la mayoría de los vecinos son inmigrantes. Paul Cicero, el patriarca de la familia Pauline, es el protector del barrio. A los trece años, Henry decide abandonar la escuela y entrar a formar parte de la organización mafiosa como chico de los recados; muy pronto se gana la confianza de sus jefes, gracias a lo cual irá subiendo de categoría.",
+                "popularity": 149.63,
+                "poster_path": "/3Yy0zBO9AlyAZH1cTI8Ko2ouCi.jpg",
+                "release_date": "1990-09-19",
+                "title": "Buenos Muchachos",
+                "video": false,
+                "vote_average": 8.464,
+                "vote_count": 12498
+            },
+            {
+                "adult": false,
+                "backdrop_path": "/gwj4R8Uy1GwejKqfofREKI9Jh7L.jpg",
+                "genre_ids": [
+                    16,
+                    18,
+                    10752
+                ],
+                "id": 12477,
+                "original_language": "ja",
+                "original_title": "火垂るの墓",
+                "overview": "Centrada en la ciudad de Kōbe, Japón, narra la dura historia de dos hermanos, Seita y Setsuko, y de su lucha desesperada por sobrevivir durante los últimos meses de la Segunda Guerra Mundial.",
+                "popularity": 0.076,
+                "poster_path": "/ufXfPXN5Yr4tS1oawcXdTr3oXw4.jpg",
+                "release_date": "2012-01-20",
+                "title": "La Tumba de las Luciérnagas",
+                "video": false,
+                "vote_average": 8.46,
+                "vote_count": 5295
+            },
+            {
+                "adult": false,
+                "backdrop_path": "/qvZ91FwMq6O47VViAr8vZNQz3WI.jpg",
+                "genre_ids": [
+                    28,
+                    18
+                ],
+                "id": 346,
+                "original_language": "ja",
+                "original_title": "七人の侍",
+                "overview": "Una banda de forajidos atemorizan a los habitantes de un pequeño pueblo, saqueándolos periódicamente sin piedad. Para repeler estos ataques, los aldeanos deciden contratar a mercenarios. Finalmente, consiguen los servicios de 7 guerreros, 7 samurais dispuestos a defenderlos a cambio, tan solo, de cobijo y comida.",
+                "popularity": 61.674,
+                "poster_path": "/zr4DkzWIMjaWtj6hlsbN6dnNeTX.jpg",
+                "release_date": "1954-04-26",
+                "title": "Los Siete Samuráis",
+                "video": false,
+                "vote_average": 8.459,
+                "vote_count": 3530
+            },
+            {
+                "adult": false,
+                "backdrop_path": "/k3SBILYxHRgjORb5tbvA5dm2N4h.jpg",
+                "genre_ids": [
+                    18,
+                    10749
+                ],
+                "id": 11216,
+                "original_language": "it",
+                "original_title": "Nuovo Cinema Paradiso",
+                "overview": "En los años previos a la llegada de la televisión (justo después del final de la Segunda Guerra Mundial), en un pequeño pueblo siciliano, el joven Toto vivía fascinado por el cine. Toto trata de entablar amistad con Alfredo, el proyeccionista del cine local, una persona muy irritable pero con un gran corazón. Todos estos hechos se presentan en forma de nostálgicos recuerdos de Toto que ha crecido hasta convertirse en un cineasta de éxito, y que revive a su infancia cuando recibe la noticia de que Alfredo ha muerto.",
+                "popularity": 59.717,
+                "poster_path": "/hHwsr3t5n7VVUbPyU8VZswn0jkL.jpg",
+                "release_date": "2000-01-25",
+                "title": "Cinema Paradiso",
+                "video": false,
+                "vote_average": 8.453,
+                "vote_count": 4227
+            },
+            {
+                "adult": false,
+                "backdrop_path": "/gavyCu1UaTaTNPsVaGXT6pe5u24.jpg",
+                "genre_ids": [
+                    35,
+                    18
+                ],
+                "id": 637,
+                "original_language": "it",
+                "original_title": "La vita è bella",
+                "overview": "Una obra maestra cinematográfica inspiradora. La vida es bella fue nominada para siete premios de la Academia® en 1998, ganando 3 Óscares®, incluyendo el de Mejor actor, para Roberto Benigni. En esta historia extraordinaria, Guido (Benigni), un encantador, pero incompetente camarero, dotado de una vívida imaginación y de un irresistible sentido del humor, ha conquistado el corazón de la mujer que ama y creado una hermosa vida para su joven familia. Sin embargo, la vida se ve amenazada por la Segunda Guerra Mundial y Guido debe tomar partido de sus fortalezas para salvar a su querida esposa e hijo de un destino cruel. Tras recibir un volumen abrumador de alabanzas por parte de la crítica, este logro cinematográfico excepcional reavivará su espíritu y cautivará su corazón.",
+                "popularity": 85.704,
+                "poster_path": "/aZ7MFlKPfB02Lr9NwZQ4vsYRgcy.jpg",
+                "release_date": "1999-02-26",
+                "title": "La Vida es Bella",
+                "video": false,
+                "vote_average": 8.451,
+                "vote_count": 12775
+            }
+        ],
+        "total_pages": 474,
+        "total_results": 9462
+    }
+
+    const upcomingMovies: IMovieResponse = {
+        "page": 1,
+        "results": [
+            {
+                "adult": false,
+                "backdrop_path": "/fDmci71SMkfZM8RnCuXJVDPaSdE.jpg",
+                "genre_ids": [
+                    16,
+                    10751,
+                    35,
+                    28
+                ],
+                "id": 519182,
+                "original_language": "en",
+                "original_title": "Despicable Me 4",
+                "overview": "Gru y Lucy dan a luz a Gru Jr. y ahi Gru, con su hijo y una aprendiz robaran algo para detener a los nuevos villanos de turno.",
+                "popularity": 711.785,
+                "poster_path": "/pbCfLF4pys3mXfpXsFtp7tMLtLb.jpg",
+                "release_date": "2024-07-04",
+                "title": "Mi villano favorito 4",
+                "video": false,
+                "vote_average": 8.49,
+                "vote_count": 49
+            },
+            {
+                "adult": false,
+                "backdrop_path": "/7aPrv2HFssWcOtpig5G3HEVk3uS.jpg",
+                "genre_ids": [
+                    28,
+                    53,
+                    12
+                ],
+                "id": 718821,
+                "original_language": "en",
+                "original_title": "Twisters",
+                "overview": "Kate Cooper, una ex cazadora de tormentas perseguida por un devastador encuentro con un tornado durante, es llamada por su amigo Javi de regreso a las llanuras abiertas para probar un nuevo e innovador sistema de seguimiento. Allí, se cruza con la encantadora e imprudente superestrella de las redes sociales Tyler Owens y su estridente equipo. A medida que la temporada de tormentas se intensifica, se desatarán fenómenos aterradores nunca antes vistos, y Kate, Tyler y sus equipos competidores se encuentran de lleno en el camino de múltiples sistemas de tormentas que convergen sobre el centro de Oklahoma en la lucha de sus vidas.",
+                "popularity": 68.691,
+                "poster_path": "/50xgtaDR0xJkLSVghdTGUeMoPHP.jpg",
+                "release_date": "2024-07-18",
+                "title": "Tornados",
+                "video": false,
+                "vote_average": 0,
+                "vote_count": 0
+            },
+            {
+                "adult": false,
+                "backdrop_path": "/hP3HWRujFCM2qLUYhSAJEm23ElP.jpg",
+                "genre_ids": [
+                    10749,
+                    35,
+                    18
+                ],
+                "id": 1096342,
+                "original_language": "en",
+                "original_title": "Beautiful Wedding",
+                "overview": "Abby y Travis se despiertan después de una noche loca en Las Vegas como recién casados accidentales. Con la mafia pisándoles los talones, huyen a México para una luna de miel salvaje y extraña, pero ¿les espera otro desastre?",
+                "popularity": 45.874,
+                "poster_path": "/zBUVnahhmgnj9j6igjFD1xqafG2.jpg",
+                "release_date": "2024-07-18",
+                "title": "Una Boda y Otros Desastres",
+                "video": false,
+                "vote_average": 4.84,
+                "vote_count": 97
+            },
+            {
+                "adult": false,
+                "backdrop_path": "/dapb1b0mQtGcxP4PYzNCjuN7gOr.jpg",
+                "genre_ids": [
+                    27,
+                    9648,
+                    53
+                ],
+                "id": 1023922,
+                "original_language": "en",
+                "original_title": "MaXXXine",
+                "overview": "En los años 80 en Hollywood, la estrella de cine para adultos y aspirante a actriz Maxine Minx finalmente obtiene su gran oportunidad. Pero cuando un misterioso asesino acecha a las estrellas de Hollywood, un rastro de sangre amenaza con revelar su siniestro pasado.",
+                "popularity": 59.352,
+                "poster_path": "/jDw7wTs3qg7M06uQyoMvBpT2Y6U.jpg",
+                "release_date": "2024-07-11",
+                "title": "MaXXXine",
+                "video": false,
+                "vote_average": 0,
+                "vote_count": 0
+            },
+            {
+                "adult": false,
+                "backdrop_path": "/dcGf6amsVeJ2oT75GhpeqavCWO8.jpg",
+                "genre_ids": [
+                    36,
+                    18,
+                    10752
+                ],
+                "id": 944194,
+                "original_language": "en",
+                "original_title": "The Great Escaper",
+                "overview": "En el verano de 2014, Bernard Jordan, un veterano de la Segunda Guerra Mundial de 89 años, se escapa de su residencia en la que vive junto a su mujer Rene, para unirse a sus compañeros veteranos de guerra en una playa de Normandía, conmemorando a sus camaradas caídos en el 70 aniversario del Desembarco del Día D.",
+                "popularity": 26.188,
+                "poster_path": "/6wUW0fLnLhApWlI72g5A0NsdwpN.jpg",
+                "release_date": "2024-07-04",
+                "title": "El Último Escape",
+                "video": false,
+                "vote_average": 6.676,
+                "vote_count": 54
+            },
+            {
+                "adult": false,
+                "backdrop_path": "/mKVHpoLi68ZL7FbrjBYkUhdUJT3.jpg",
+                "genre_ids": [
+                    35
+                ],
+                "id": 852247,
+                "original_language": "en",
+                "original_title": "Problemista",
+                "overview": "Alejandro, un aspirante a diseñador de juguetes, lucha por dar vida a sus insólitas ideas en Nueva York. A medida que se le acaba el tiempo de su visado de trabajo, su única esperanza es ayudar a un personaje particular y extraño del mundo del arte.",
+                "popularity": 18.293,
+                "poster_path": "/5uNMGqWEBWvdoWzbffTvlsdyCti.jpg",
+                "release_date": "2024-07-18",
+                "title": "Problemista",
+                "video": false,
+                "vote_average": 6.6,
+                "vote_count": 38
+            },
+            {
+                "adult": false,
+                "backdrop_path": "/f9jS1ASt9wSmNYxER0Dkzq3itAm.jpg",
+                "genre_ids": [
+                    18,
+                    14
+                ],
+                "id": 831395,
+                "original_language": "en",
+                "original_title": "Tuesday",
+                "overview": "",
+                "popularity": 23.993,
+                "poster_path": "/zrd6blans3SqghHSxPAl7tqnaOf.jpg",
+                "release_date": "2024-07-11",
+                "title": "Tuesday",
+                "video": false,
+                "vote_average": 6.7,
+                "vote_count": 3
+            },
+            {
+                "adult": false,
+                "backdrop_path": null,
+                "genre_ids": [
+                    35,
+                    10749
+                ],
+                "id": 1294931,
+                "original_language": "es",
+                "original_title": "Entra en mi vida",
+                "overview": "Eugenia está harta de los desengaños amorosos y laborales que ha vivido, por lo cual decide darle un giro a su vida tratatando de convertirse en influencer.",
+                "popularity": 4.016,
+                "poster_path": "/rrOQ4qAw6hrYTnS6AcPBW81b8q2.jpg",
+                "release_date": "2024-07-11",
+                "title": "Entra en mi vida",
+                "video": false,
+                "vote_average": 0,
+                "vote_count": 0
+            },
+            {
+                "adult": false,
+                "backdrop_path": null,
+                "genre_ids": [
+                    16,
+                    18
+                ],
+                "id": 1103569,
+                "original_language": "es",
+                "original_title": "Un Desvelo de Indocilidad",
+                "overview": "",
+                "popularity": 3.957,
+                "poster_path": "/1CXexqRZJOqzmITGMOGMwuc9MRl.jpg",
+                "release_date": "2024-07-06",
+                "title": "Un Desvelo de Indocilidad",
+                "video": false,
+                "vote_average": 0,
+                "vote_count": 0
+            },
+            {
+                "adult": false,
+                "backdrop_path": "/8hnzgv3YQzAGaaJhvCHNNhFB7qJ.jpg",
+                "genre_ids": [
+                    16
+                ],
+                "id": 717168,
+                "original_language": "en",
+                "original_title": "Scatter Brain",
+                "overview": "",
+                "popularity": 2.638,
+                "poster_path": "/P26tbRA5N0ku9EVHkl26mSvLwT.jpg",
+                "release_date": "2024-07-11",
+                "title": "Scatter Brain",
+                "video": false,
+                "vote_average": 0,
+                "vote_count": 0
+            },
+            {
+                "adult": false,
+                "backdrop_path": null,
+                "genre_ids": [
+                    28,
+                    12,
+                    878,
+                    10751
+                ],
+                "id": 1199937,
+                "original_language": "es",
+                "original_title": "Xenobot",
+                "overview": "",
+                "popularity": 2.538,
+                "poster_path": "/otPlq977eujwTfH2YIZEyrWfFsN.jpg",
+                "release_date": "2024-07-18",
+                "title": "Xenobot",
+                "video": false,
+                "vote_average": 0,
+                "vote_count": 0
+            }
+        ],
+        "total_pages": 1,
+        "total_results": 11
+    }
 
     return (
-        <section className={styles.section}>
+        <section className={`${styles.section} scrollBarStyle`}>
             <MainSlider movies={currentTheatres.results} />
-            <MovieSliderGeneral title="Top">
+            <MovieSliderGeneral title="Mejor Valoradas" list_link="toprated">
                 <>
                     {
-                        popularMovies.results.map(movie => (
-                            <MovieCard key={movie.id} movie={movie} />
+                        ratingMovies.results.map((movie, index) => (
+                            <MovieCard key={movie.id} movie={movie} top={index + 1} />
+                        ))
+                    }
+                </>
+            </MovieSliderGeneral>
+            <div className="separator"></div>
+            <MovieSliderGeneral title="Populares" list_link="popular">
+                <>
+                    {
+                        popularMovies.results.map((movie, index) => (
+                            <MovieCard key={movie.id} movie={movie} top={index + 1} />
+                        ))
+                    }
+                </>
+            </MovieSliderGeneral>
+            <div className="separator"></div>
+            <MovieSliderGeneral title="Próximamente" list_link="upcoming">
+                <>
+                    {
+                        upcomingMovies.results.map((movie, index) => (
+                            <MovieCardUpcoming key={movie.id} movie={movie} />
                         ))
                     }
                 </>

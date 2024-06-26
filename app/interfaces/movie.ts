@@ -1,13 +1,13 @@
 export interface IMovie {
 	adult: boolean
-	backdrop_path: string
+	backdrop_path: string | null
 	genre_ids: number[]
 	id: number
 	original_language: string
 	original_title: string
 	overview: string
 	popularity: number
-	poster_path: string
+	poster_path: string | null
 	release_date: string
 	title: string
 	video: boolean
@@ -17,7 +17,7 @@ export interface IMovie {
 
 export interface IMovieDetails {
 	adult: boolean
-	backdrop_path: string
+	backdrop_path: string | null
 	belongs_to_collection: BelongsToCollection
 	budget: number
 	genres: Genre[]
@@ -29,7 +29,7 @@ export interface IMovieDetails {
 	original_title: string
 	overview: string
 	popularity: number
-	poster_path: string
+	poster_path: string | null
 	production_companies: ProductionCompany[]
 	production_countries: ProductionCountry[]
 	release_date: string
@@ -75,9 +75,9 @@ export interface ICollectionDetails {
 	poster_path: string
 	backdrop_path: string
 	parts: IPartCollection[]
-  }
-  
-  export interface IPartCollection {
+}
+
+export interface IPartCollection {
 	backdrop_path: string
 	id: number
 	name: string
@@ -90,11 +90,10 @@ export interface ICollectionDetails {
 	title: string
 	original_language: string
 	genre_ids: number[]
-	popularity: number 
+	popularity: number
 	release_date: string
 	first_air_date: string
 	video: boolean
 	vote_average: number
 	vote_count: number
-  }
-  
+}
