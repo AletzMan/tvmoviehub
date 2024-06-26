@@ -2,6 +2,9 @@
 import type { Metadata } from "next"
 import { Jost } from "next/font/google"
 import "./globals.css"
+import { SideMenu } from "./components/SideMenu/SideMenu"
+import Header from "./components/Header/Header"
+import styles from "./page.module.css"
 
 const jost = Jost({ subsets: ["latin"] })
 
@@ -18,7 +21,13 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className={jost.className}>{children}</body>
+      <body className={jost.className}>
+        <main className={`${styles.main} `} >
+          <SideMenu />
+          <Header />
+          {children}
+        </main>
+      </body>
     </html>
   )
 }
