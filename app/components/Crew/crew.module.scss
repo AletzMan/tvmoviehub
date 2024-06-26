@@ -1,0 +1,29 @@
+.crew {
+    padding: 0.5em;
+    background-color: var(--highlightHoverColor);
+
+    &_title {
+        color: var(--highlightColor);
+        border-bottom: 1px solid var(--highlightColor);
+        margin: 0.25em 0 0.5em 0;
+    }
+
+    &_peoples {
+        &>:last-child {
+            border-right: none;
+        }
+
+    }
+
+    &_people {
+        color: var(--fontSecondColor);
+        padding: 0 0.75em;
+        border-right: 1px solid var(--fontSecondColor);
+        transition: all 0.3s ease-in-out;
+        cursor: pointer;
+
+        &:hover {
+            color: var(--fontColor);
+        }
+    }
+}
