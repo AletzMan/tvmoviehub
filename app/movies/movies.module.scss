@@ -1,0 +1,8 @@
+.section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    padding: 0.5em;
+    width: 100%;
+    height: calc(100svh - 4em);
+}
