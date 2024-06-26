@@ -38,8 +38,8 @@ body {
 }
 
 .separator{
-	margin: 0.25em 0;
-	border: 1px outset #57575750;
+	margin: 0.35em 0;
+	border: 2px outset #57575750;
 }
 
 .scrollBarStyle {
