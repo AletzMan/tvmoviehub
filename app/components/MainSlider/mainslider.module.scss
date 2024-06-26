@@ -4,12 +4,10 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: calc(100% - 1em);
+    min-height: 28em;
+    width: calc(100%);
     overflow: hidden;
-    margin: 0.5em;
-    padding: 0.25em;
     border-radius: 0.5em 0.5em 0 0;
-    //background-color: var(--terciaryColor);
 
     @media (width < 700px) {
         width: calc(100svw - 1.5em);

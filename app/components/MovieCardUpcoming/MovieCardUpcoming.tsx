@@ -4,13 +4,13 @@ import styles from "./moviecard.module.scss"
 import { AddIcon, FavoriteFullIcon, MovieIcon, SerieIcon, StarIcon } from "@/app/utils/svg"
 import { BASE_URL_IMG } from "@/app/utils/const"
 import { IMovie } from "@/app/interfaces/movie"
+import { FormattedDateUpcoming } from "@/app/utils/helpers"
 
 interface Props {
     movie: IMovie
-    top: number
 }
 
-export const MovieCard = ({ movie, top }: Props) => {
+export const MovieCardUpcoming = ({ movie }: Props) => {
     return (
         <div key={movie.id} className={styles.movie}>
             <Image className={styles.movie_backdrop} src={movie.poster_path ? BASE_URL_IMG.concat(movie.backdrop_path || '') : "/not_photo.png"} width={150} height={230} alt={`Poster de ${movie.title}`} />
@@ -23,14 +23,12 @@ export const MovieCard = ({ movie, top }: Props) => {
                     <AddIcon className={styles.movie_dialogIcon} />
                 </Link>
             </div>
-            {<span className={styles.movie_number}>{top}</span>}
-            <span className={styles.movie_average}><StarIcon className={styles.movie_iconDate} />{movie.vote_average.toFixed(1)}</span>
             <button className={styles.movie_fav}><FavoriteFullIcon className={styles.movie_favIcon} /> </button>
             <div className={styles.movie_description}>
                 {/*<span className={styles.movie_type}><MovieIcon className={styles.movie_typeIcon} />Película</span>*/}
 
                 <span className={styles.movie_name}>{movie.title}</span>
-                <span className={styles.movie_age}>{new Date(movie.release_date).getFullYear()}</span>
+                <span className={styles.movie_age}>{FormattedDateUpcoming(movie.release_date)}</span>
             </div>
         </div>
     )

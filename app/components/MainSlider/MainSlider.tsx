@@ -140,7 +140,7 @@ export const MainSlider = ({ movies }: Props) => {
                                 </div>
                                 <Image
                                     className={styles.movie_image}
-                                    src={BASE_URL_IMG.concat(movie.backdrop_path)}
+                                    src={BASE_URL_IMG.concat(movie.backdrop_path || 'https://raw.githubusercontent.com/AletzMan/ImagesStorage/main/streamin-movie-clone/Image_not_available_view.jpg')}
                                     width={1250}
                                     height={900}
                                     alt={`Cover de ${movie.title}`}

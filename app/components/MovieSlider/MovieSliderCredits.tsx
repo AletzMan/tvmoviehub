@@ -7,6 +7,8 @@ import { AddIcon, FavoriteFullIcon, MovieIcon, SerieIcon, StarIcon } from "@/app
 import Link from "next/link"
 import { IParticipationsCast, IParticipationsCrew } from "@/app/interfaces/credits"
 import Slider from "react-slick"
+import "slick-carousel/slick/slick.css"
+import "slick-carousel/slick/slick-theme.css"
 
 interface Props {
     parts: IParticipationsCast[] | IParticipationsCrew[]
