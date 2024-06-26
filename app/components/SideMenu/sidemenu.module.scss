@@ -1,0 +1,87 @@
+.aside {
+    grid-column: 1 / 2;
+    grid-row: 1 / span 2;
+    height: 100svh;
+    transition: all 0.3s ease-in-out;
+    border-right: 1px solid var(--terciaryColor);
+    background: linear-gradient(var(--secondaryColor), var(--primaryColor));
+
+    @media (width < 700px) {
+        display: none;
+    }
+}
+
+.logo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.5em;
+    height: 4em;
+    padding: 0.5em;
+
+    &_text {
+        display: flex;
+        flex-direction: column;
+        line-height: 1em;
+        color: var(--highlightColor);
+        font-size: 1.3em;
+    }
+}
+
+.separator {
+    height: 2px;
+    margin: 0;
+    background: linear-gradient(90deg, var(--terciaryColor), transparent);
+
+    &_first {
+        margin: 0 1em;
+    }
+}
+
+
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+    row-gap: 2.5em;
+
+    &_title {
+        color: var(--fontColor);
+        font-size: 1.2em;
+        font-weight: 600;
+    }
+
+    &_section {
+        display: flex;
+        flex-direction: column;
+        row-gap: 0.5em;
+    }
+
+    &_item {
+        display: flex;
+        column-gap: 0.7em;
+        align-items: center;
+        color: var(--fontSecondColor);
+        font-size: 1.1em;
+        text-decoration: none;
+        font-weight: 400;
+        border-radius: 0 1em 1em 0;
+        padding: 0.35em 0.5em;
+        border-left: 3px solid transparent;
+        transition: all 0.3s ease-in-out;
+
+        &:hover {
+            background: linear-gradient(90deg, var(--highlightColor) 0%, var(--highlightHoverColor) 100%);
+            border-color: var(--highlightColor);
+            color: var(--fontColor);
+        }
+
+        &Current {
+            background: linear-gradient(90deg, var(--highlightColor) 0%, var(--highlightHoverColor) 100%);
+            border-color: var(--highlightColor);
+            color: var(--fontColor);
+        }
+    }
+}
