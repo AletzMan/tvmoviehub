@@ -1,0 +1,94 @@
+.section {
+    padding: 0.5em;
+    height: calc(100svh - 4em);
+}
+
+.people {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+
+    @media (width < 590px) {
+        justify-content: center;
+    }
+
+    &_photo {
+        border: 2px solid var(--averageColor);
+        border-radius: 0.25em;
+    }
+
+    &_name {
+        font-size: 1.1em;
+        color: var(--subtitleColor);
+        padding: 0.15em 0.5em;
+
+        @media (width < 590px) {
+            text-align: center;
+        }
+    }
+
+    &_birthday {
+        color: var(--fontSecondColor);
+        background-color: var(--hover);
+        width: max-content;
+        padding: 0.15em 0.5em;
+        border-radius: 1em;
+
+        @media (width < 590px) {
+            margin: 0 auto;
+        }
+    }
+
+    &_place {
+        padding: 0.15em 0.5em;
+        color: var(--titleColor);
+
+        @media (width < 590px) {
+            text-align: center;
+        }
+    }
+
+    &_description {
+        display: flex;
+        flex-direction: column;
+        flex: 1 1 23em;
+        padding: 0.5em;
+    }
+
+    &_biography {
+        max-width: 80ch;
+        color: var(--fontColor);
+        font-size: 0.9em;
+        font-weight: 300;
+        padding: 0 0.5em;
+        margin: 0 0 0.5em 0;
+    }
+
+    &_title {
+        font-weight: 500;
+    }
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    background: linear-gradient(90deg, var(--highlightColor), var(--hover));
+    margin: 0 0 0.35em 0;
+    padding: 0.25em 0.5em;
+
+    &_title {
+        font-size: 1.5em;
+        color: var(--fontColor);
+
+        @media (width < 500px) {
+            font-size: 1.3em;
+        }
+    }
+
+    &_icon {
+        width: 2em;
+        height: 2em;
+        color: var(--fontColor);
+    }
+}
