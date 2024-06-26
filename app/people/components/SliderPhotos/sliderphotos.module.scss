@@ -1,0 +1,47 @@
+.photos {
+    position: relative;
+    width: calc(100% - 0.5em);
+    max-width: 1200px;
+    margin: auto 0.5em;
+}
+
+.photoContainer {
+    padding: 10px;
+}
+
+.photo {
+    border-radius: 10px;
+    border: 2px solid var(--secondaryColor);
+    transition: all 0.2s ease-in-out;
+    object-fit: contain;
+
+    &:hover {
+        transform: scale(1.07);
+        border-color: var(--highlightColor);
+        cursor: zoom-in;
+    }
+
+    &_large {
+        max-height: 95svh;
+        object-fit: contain;
+    }
+
+    &_button {
+        border: none;
+        background-color: transparent;
+    }
+}
+
+.dialog {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    width: 100svw;
+    height: 100svh;
+    background-color: #17171740;
+    backdrop-filter: blur(10px);
+    z-index: 3;
+    border: none;
+}
