@@ -1,0 +1,32 @@
+.search {
+    position: relative;
+    display: flex;
+    width: 100%;
+
+    &_input {
+        width: 100%;
+        padding: 0.5em 1em 0.5em 3em;
+        border-radius: 0.75em;
+        font-size: 1em;
+        border: 1px solid var(--terciaryColor);
+        background-color: var(--primaryColor);
+        color: var(--fontColor);
+        font-family: var(--font-family);
+        outline: 1px solid transparent;
+        transition: all 0.3s ease-in-out;
+
+        &:focus {
+            outline: 1px solid var(--highlightColor);
+        }
+
+    }
+
+    &_icon {
+        top: 0.4em;
+        left: 0.5em;
+        position: absolute;
+        width: 1.7em;
+        height: 1.7em;
+        color: var(--terciaryColor);
+    }
+}
