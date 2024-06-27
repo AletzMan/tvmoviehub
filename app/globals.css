@@ -29,7 +29,7 @@ body {
 }
 
 body {
-	background: linear-gradient(to bottom, var(--primaryColor), var(--primaryColor));
+	background: radial-gradient(circle, var(--fourthColor), var(--primaryColor));
 }
 
 .mainMenuLogo {
@@ -40,6 +40,14 @@ body {
 .separator{
 	margin: 0.35em 0;
 	border: 2px outset #57575750;
+}
+
+.logo_category{
+	position: relative;
+	width: 3em;
+	height: 3em;
+	transition: transform 0.25s ease-in-out;
+	transform: translateY(0);
 }
 
 .scrollBarStyle {
