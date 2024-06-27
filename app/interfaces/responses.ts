@@ -23,6 +23,20 @@ export interface IMovieResponse {
 	total_results: number
 }
 
+export interface ISerieResponse {
+	page: number
+	results: ISerie[]
+	total_pages: number
+	total_results: number
+}
+
+export interface IPeopleResponse {
+	page: number
+	results: IPeople[]
+	total_pages: number
+	total_results: number
+}
+
 export interface IRecommendationResponse {
 	page: number
 	results: IPartCollection[]

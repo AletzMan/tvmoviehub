@@ -69,12 +69,10 @@
         font-weight: 400;
         border-radius: 0 1em 1em 0;
         padding: 0.35em 0.5em;
-        border-left: 3px solid transparent;
         transition: all 0.3s ease-in-out;
 
         &:hover {
             background: linear-gradient(90deg, var(--highlightColor) 0%, var(--highlightHoverColor) 100%);
-            border-color: var(--highlightColor);
             color: var(--fontColor);
         }
 

@@ -6,7 +6,7 @@ import Slider from "react-slick"
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 import Link from "next/link"
-import { ViewIcon } from "@/app/utils/svg"
+import { ArrowLeftIcon } from "@/app/utils/svg"
 
 interface Props {
     title: string
@@ -25,7 +25,8 @@ export const MovieSliderGeneral = ({ title, children, list_link }: Props) => {
         arrows: true,
         dots: false,
         rows: 1,
-        nextArrow: <div>s</div>
+        nextArrow: <div><ArrowLeftIcon className="" /></div>
+
     }
 
     return (
@@ -35,7 +36,7 @@ export const MovieSliderGeneral = ({ title, children, list_link }: Props) => {
                 {list_link && <Link className={styles.slider_view} href={`/movies/lists/${list_link}`}>Ver todo</Link>}
             </header>
             <div className={styles.slider_container}  >
-                <Slider {...settings} swipeToSlide swipe variableWidth waitForAnimate>
+                <Slider {...settings} swipeToSlide swipe variableWidth >
                     {children}
                 </Slider>
             </div>

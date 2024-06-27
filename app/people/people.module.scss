@@ -12,3 +12,9 @@
         grid-column: 1 / span 2;
     }
 }
+
+.people {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(10em, 1fr));
+    gap: 0.5em;
+}

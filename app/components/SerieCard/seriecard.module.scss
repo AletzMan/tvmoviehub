@@ -1,0 +1,182 @@
+.movie {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 14em;
+    min-width: 14em;
+    height: 17em;
+    border-radius: 0.2em;
+    margin: 0 0.25em;
+    overflow: hidden;
+    border: 1px solid var(--hover);
+    transition: all ease-in-out 0.25s;
+    scroll-snap-align: start;
+    opacity: 0.8;
+    text-decoration: none;
+    background-color: var(--hover);
+
+    &:hover {
+        //border-color: var(--hover);
+        filter: opacity(1) brightness(110%);
+        background: linear-gradient(0deg, #FFFFFF15, transparent);
+        //box-shadow: 0 0 4px 2px var(--highlightColor);
+        border: 1px solid var(--highlightColor);
+
+
+
+        &>.movie_picture>.movie_photo {
+            transform: scale(1.04);
+        }
+
+        &>.movie_fav {
+            display: block;
+        }
+
+        &>.movie_dialog {
+            display: flex;
+        }
+    }
+
+    &_backdrop {
+        position: absolute;
+        object-fit: cover;
+        z-index: -1;
+        opacity: 0.3ala;
+    }
+
+    &_picture {
+        height: 14em;
+        width: 15em;
+        overflow: hidden;
+        //background-color: red;
+    }
+
+    &_photo {
+        object-fit: cover;
+        width: 10em;
+        margin: 0 0 0 3.75em;
+        object-position: center top;
+        transition: all 0.3s ease-in-out;
+        //border: 2px solid var(--highlightColor);
+    }
+
+    &_shadow {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 14em;
+        width: 3.75em;
+        background: linear-gradient(0deg, #000000, transparent, #000000BB);
+    }
+
+    &_description {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        padding: 0.15em 0.25em;
+        background-color: var(--terciaryColor);
+        min-height: 2.9em;
+    }
+
+    &_number {
+        position: absolute;
+        left: 0;
+        text-align: center;
+        bottom: 0.75em;
+        font-size: 3.5em;
+        //z-index: -1;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+        color: var(--highlightColor);
+        background-color: #FFFFFF00;
+        border-radius: 0.15em;
+        width: 1.07em;
+    }
+
+    &_name {
+        color: var(--fontColor);
+        font-size: 0.8em;
+        max-lines: 1;
+        overflow-wrap: break-word;
+        max-height: 1.5em;
+        overflow: hidden;
+    }
+
+    &_age {
+        color: var(--fontSecondColor);
+        font-size: 0.8em;
+    }
+
+
+    &_average {
+        position: absolute;
+        bottom: 0.25em;
+        right: 0.25em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.25em;
+        padding: 0.1em 0.2em;
+        font-weight: 500;
+        font-size: 0.8em;
+        border-radius: 0.25em;
+        color: var(--primaryColor);
+        background-color: var(--averageColor);
+    }
+
+    &_fav {
+        display: none;
+        position: absolute;
+        top: 0.25em;
+        left: 0.25em;
+        color: var(--fontColor);
+        background-color: transparent;
+        border: none;
+        transition: all 0.25s ease-in-out;
+        cursor: pointer;
+
+        &:hover {
+            color: #FF0000;
+        }
+
+        &Icon {
+            width: 2em;
+            height: 2em;
+        }
+    }
+
+    &_dialog {
+        position: absolute;
+        top: 0;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        background-color: transparent;
+        backdrop-filter: sepia();
+        height: 14em;
+        width: 14em;
+
+        &More {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 3em;
+            height: 3em;
+            border-radius: 3em;
+            overflow: hidden;
+            background-color: var(--highlightColorBasic);
+            transition: all 0.3s ease-in-out;
+
+            &:hover {
+                background-color: var(--highlightColor);
+            }
+        }
+
+        &Icon {
+            width: 2em;
+            height: 2em;
+            color: #FFFFFF;
+        }
+    }
+}
