@@ -1,6 +1,7 @@
 import { MainSlider } from "../components/MainSlider/MainSlider"
 import { MovieCard } from "../components/MovieCard/MovieCard"
 import { MovieCardUpcoming } from "../components/MovieCardUpcoming/MovieCardUpcoming"
+import { CategorySlider } from "../components/CategorySlider/CategorySlider"
 import { MovieSliderGeneral } from "../components/MovieSlider/MovieSliderGeneral"
 import { IMovieResponse } from "../interfaces/responses"
 import styles from "./movies.module.scss"
@@ -1436,7 +1437,8 @@ export default async function Page() {
 
     return (
         <section className={`${styles.section} scrollBarStyle`}>
-            <MainSlider movies={currentTheatres.results} />
+            <MainSlider movies={currentTheatres.results.filter((_, index) => index < 10)} />
+            <CategorySlider type="movie" />
             <MovieSliderGeneral title="Mejor Valoradas" list_link="toprated">
                 <>
                     {

@@ -45,13 +45,7 @@
         object-position: top center;
         border-radius: 0.4em;
 
-        @media (width < 1250px) {
-            max-height: 20em;
-        }
 
-        @media (width < 500px) {
-            max-height: 15em;
-        }
     }
 
     &_cover {
