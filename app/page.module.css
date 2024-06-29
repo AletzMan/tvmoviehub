@@ -1,7 +1,7 @@
 .main {
 	display: grid;
 	grid-template-columns: 17em 1fr;
-	grid-template-rows: 4em 1fr;
+	grid-template-rows: 5em 1fr;
 	min-height: 100svh;
 	max-width: 1450px; 
 	margin: 0 auto;
@@ -23,7 +23,7 @@
 	grid-row: 2 / 3;
 	padding: 0.5em;
 	column-gap: 0.5em;
-	height: calc(100svh - 4em);
+	height: calc(100svh - 5em);
 }
 
 .article {

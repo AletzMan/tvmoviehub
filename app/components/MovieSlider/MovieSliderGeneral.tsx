@@ -33,7 +33,7 @@ export const MovieSliderGeneral = ({ title, children, list_link }: Props) => {
         <div className={styles.slider} >
             <header className={styles.slider_header} >
                 <h4 className={styles.slider_title}>{title}</h4>
-                {list_link && <Link className={styles.slider_view} href={`/movies/lists/${list_link}`}>Ver todo</Link>}
+                {list_link && <Link className={styles.slider_view} href={`${list_link}&page=1`}>Ver todo</Link>}
             </header>
             <div className={styles.slider_container}  >
                 <Slider {...settings} swipeToSlide swipe variableWidth >

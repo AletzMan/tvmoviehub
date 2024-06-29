@@ -2,23 +2,28 @@
 import { ChangeEventHandler } from "react"
 import styles from "./combobox.module.scss"
 
-interface Props {
-    number: number
-    onChange?: ChangeEventHandler<HTMLSelectElement>
+interface IPropertiesCombobox {
+    option: string
+    value: string
 }
 
-export const ComboBox = ({ number, onChange }: Props) => {
-    const numberSeasons = new Array(number)
+interface Props {
+    properties: IPropertiesCombobox[]
+    onChange?: ChangeEventHandler<HTMLSelectElement>
+    label?: string
+}
 
-    for (let index = 0; index < numberSeasons.length; index++) {
-        numberSeasons[index] = (`Temporada ${index + 1}`)
-    }
+export const ComboBox = ({ properties, onChange, label }: Props) => {
+
 
     return (
-        <select className={styles.select} onChange={onChange}>
-            {numberSeasons.map((season, index) => (
-                <option key={season} className={styles.option} value={index + 1}>{season}</option>
-            ))}
-        </select>
+        <div className={styles.combobox} >
+            {label && <label className={styles.combobox_label} >{label}</label>}
+            <select className={styles.select} onChange={onChange}>
+                {properties.map((property, index) => (
+                    <option key={property.option} className={styles.option} value={property.value}>{property.option}</option>
+                ))}
+            </select>
+        </div>
     )
 }

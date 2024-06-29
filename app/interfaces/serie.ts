@@ -50,39 +50,23 @@ export interface ISerieDetails {
 	type: string
 	vote_average: number
 	vote_count: number
-  }
-  
-  export interface ICreatedBy {
+}
+
+export interface ICreatedBy {
 	id: number
 	credit_id: string
 	name: string
 	original_name: string
 	gender: number
 	profile_path: any
-  }
-  
-  export interface IGenre {
+}
+
+export interface IGenre {
 	id: number
 	name: string
-  }
-  
-  export interface ILastEpisodeToAir {
-	id: number
-	overview: string
-	name: string
-	vote_average: number
-	vote_count: number
-	air_date: string
-	episode_number: number
-	episode_type: string
-	production_code: string
-	runtime: any
-	season_number: number
-	show_id: number
-	still_path: any
-  }
-  
-  export interface INextEpisodeToAir {
+}
+
+export interface ILastEpisodeToAir {
 	id: number
 	overview: string
 	name: string
@@ -96,28 +80,44 @@ export interface ISerieDetails {
 	season_number: number
 	show_id: number
 	still_path: any
-  }
-  
-  export interface INetwork {
+}
+
+export interface INextEpisodeToAir {
+	id: number
+	overview: string
+	name: string
+	vote_average: number
+	vote_count: number
+	air_date: string
+	episode_number: number
+	episode_type: string
+	production_code: string
+	runtime: any
+	season_number: number
+	show_id: number
+	still_path: any
+}
+
+export interface INetwork {
 	id: number
 	logo_path: string
 	name: string
 	origin_country: string
-  }
-  
-  export interface IProductionCompany {
+}
+
+export interface IProductionCompany {
 	id: number
 	logo_path: any
 	name: string
 	origin_country: string
-  }
-  
-  export interface IProductionCountry {
+}
+
+export interface IProductionCountry {
 	iso_3166_1: string
 	name: string
-  }
-  
-  export interface ISeason {
+}
+
+export interface ISeason {
 	air_date: string
 	episode_count: number
 	id: number
@@ -126,16 +126,16 @@ export interface ISerieDetails {
 	poster_path?: string
 	season_number: number
 	vote_average: number
-  }
-  
-  export interface ISpokenLanguage {
+}
+
+export interface ISpokenLanguage {
 	english_name: string
 	iso_639_1: string
 	name: string
-  }
-  
+}
 
-  export interface ISeasonDetails {
+
+export interface ISeasonDetails {
 	_id: string
 	air_date: string
 	episodes: IEpisode[]
@@ -145,9 +145,9 @@ export interface ISerieDetails {
 	poster_path: string
 	season_number: number
 	vote_average: number
-  }
-  
-  export interface IEpisode {
+}
+
+export interface IEpisode {
 	air_date: string
 	episode_number: number
 	episode_type: string
@@ -163,10 +163,10 @@ export interface ISerieDetails {
 	vote_count: number
 	crew: ICrew[]
 	guest_stars: IGuestStar[]
-  }
-  
- 
-  export interface IGuestStar {
+}
+
+
+export interface IGuestStar {
 	character: string
 	credit_id: string
 	order: number
@@ -178,5 +178,23 @@ export interface ISerieDetails {
 	original_name: string
 	popularity: number
 	profile_path?: string
-  }
-  
+}
+
+
+export interface IQueryParamasSeries {
+	"air_date.gte"?: Date
+	"air_date.lte"?: Date
+	first_air_date_year?: number
+	"first_air_date.gte"?: Date
+	"first_air_date.lte"?: Date
+	include_adult?: boolean
+	nclude_null_first_air_dates?: boolean
+	language?: string
+	page?: number
+	sort_by?: string
+	timezone?: string
+	"vote_average.gte"?: number
+	"vote_average.lte"?: number
+	"vote_count.gte"?: number
+	"vote_count.lte"?: number
+}

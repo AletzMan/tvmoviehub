@@ -17,7 +17,7 @@ export default function Header() {
                 {MainMenu.find(menu => menu.link === section)?.name}
             </div>
             <div className={styles.header_search}>
-                <SearchInput />
+                <SearchInput section={section} />
             </div>
         </header>
     )

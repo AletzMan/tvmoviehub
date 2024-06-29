@@ -273,16 +273,13 @@ export const SliderPhotos = ({ id_people, name_people }: Props) => {
     const settings = {
         infinite: true,
         speed: 1000,
-        slidesToScroll: 3,
-        slidesToShow: 3,
+        slidesToScroll: 1,
+        slidesToShow: 1,
         autoplay: true,
         autoplaySpeed: 500,
         arrows: false,
         dots: false,
         rows: 1,
-        className: "center",
-        centerPadding: "60px",
-        centerMode: true
     }
 
     useEffect(() => {

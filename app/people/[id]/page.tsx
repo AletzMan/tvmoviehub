@@ -31,7 +31,7 @@ export default async function Page(params: { params: { id: string }, searchParam
                 <Image className={styles.people_photo} src={BASE_URL_IMG.concat(details.profile_path || "https://raw.githubusercontent.com/AletzMan/ImagesStorage/main/streamin-movie-clone/Image_not_available.jpg")} alt={`Foto de ${details.name}`} width={200} height={300} />
                 <div className={styles.people_description}>
                     <span className={styles.people_name}>{details.name}</span>
-                    <span className={styles.people_birthday}>{FormattedDate(details.birthday, "small")}</span>
+                    {details.deathday && <span className={styles.people_birthday}>{FormattedDate(details.birthday, "small")}</span>}
                     <span className={styles.people_place}>{details.place_of_birth}</span>
                     <div className="separator"></div>
                     {details.biography.split("\n").map(paragraph => (
