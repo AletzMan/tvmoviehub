@@ -5,6 +5,7 @@ import { CategorySlider } from "../components/CategorySlider/CategorySlider"
 import { MovieSliderGeneral } from "../components/MovieSlider/MovieSliderGeneral"
 import { IMovieResponse } from "../interfaces/responses"
 import styles from "./movies.module.scss"
+import { FormattedDateSearch } from "../utils/helpers"
 
 
 export default async function Page() {
@@ -1435,11 +1436,16 @@ export default async function Page() {
         "total_results": 11
     }
 
+
+    const dateStart = FormattedDateSearch(new Date(Date.UTC(new Date().getFullYear(), new Date().getMonth(), new Date().getDate())).toISOString())
+    const dateEnd = FormattedDateSearch(new Date(Date.UTC(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() + 90)).toISOString())
+
+
     return (
         <section className={`${styles.section} scrollBarStyle`}>
             <MainSlider movies={currentTheatres.results.filter((_, index) => index < 10)} />
             <CategorySlider type="movie" />
-            <MovieSliderGeneral title="Mejor Valoradas" list_link="toprated">
+            <MovieSliderGeneral title="Mejor Valoradas" list_link="/movies/search/result?page=1&sort_by=vote_average.desc&without_genres=99,10755&vote_count.gte=200">
                 <>
                     {
                         ratingMovies.results.map((movie, index) => (
@@ -1449,7 +1455,7 @@ export default async function Page() {
                 </>
             </MovieSliderGeneral>
             <div className="separator"></div>
-            <MovieSliderGeneral title="Populares" list_link="popular">
+            <MovieSliderGeneral title="Populares" list_link="/movies/search/result?page=1&sort_by=popularity.desc">
                 <>
                     {
                         popularMovies.results.map((movie, index) => (
@@ -1459,7 +1465,7 @@ export default async function Page() {
                 </>
             </MovieSliderGeneral>
             <div className="separator"></div>
-            <MovieSliderGeneral title="Próximamente" list_link="upcoming">
+            <MovieSliderGeneral title="Próximamente" list_link={`/movies/search/result?page=1&sort_by=popularity.desc&with_release_type=2,3&release_date.gte=${dateStart}&release_date.lte=${dateEnd}`}>
                 <>
                     {
                         upcomingMovies.results.map((movie, index) => (

@@ -20,8 +20,8 @@ export const SideMenu = () => {
                 <div className={styles.menu_section}>
                     {<h2 className={styles.menu_title}>Menu</h2>}
                     {
-                        MainMenu.filter((_, index) => index < 4).map(menu => (
-                            <Link key={menu.id} className={`${styles.menu_item} ${menu.link === section && styles.menu_itemCurrent} ${menu.name}`} href={`/${menu.link}`} title={`Ir a ${menu.name}`}>{menu.icon}{menu.name}</Link>
+                        MainMenu.filter((_, index) => index < 4).map((menu, index) => (
+                            <Link key={menu.id} className={`${styles.menu_item} ${menu.link === section && styles.menu_itemCurrent} ${menu.name}`} href={`/${menu.link}${index > 0 ? "?page=1" : ""}`} title={`Ir a ${menu.name}`}>{menu.icon}{menu.name}</Link>
                         ))
                     }
                 </div>

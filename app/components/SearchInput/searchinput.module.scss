@@ -6,7 +6,7 @@
     &_input {
         width: 100%;
         padding: 0.5em 1em 0.5em 3em;
-        border-radius: 0.75em;
+        border-radius: 5em;
         font-size: 1em;
         border: 1px solid var(--terciaryColor);
         background-color: var(--primaryColor);
@@ -29,4 +29,11 @@
         height: 1.7em;
         color: var(--terciaryColor);
     }
+}
+
+.checkbox {
+    display: flex;
+    justify-content: center;
+    padding: 0.15em 0.3em;
+    gap: 0.5em;
 }

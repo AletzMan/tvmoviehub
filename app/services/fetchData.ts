@@ -1,8 +1,8 @@
 import { ICredits, IMovieCredits, ISerieCredits } from "../interfaces/credits"
-import { ICollectionDetails, IMovie, IMovieDetails } from "../interfaces/movie"
+import { ICollectionDetails, IMovie, IMovieDetails, IQueryParamasMovies } from "../interfaces/movie"
 import { IPeopleDetails, IPeopleImages } from "../interfaces/people"
-import { IAiringTodayResponse, IMovieResponse, INowPlayingResponse, IPopularPeopleResponse, IRecommendationResponse } from "../interfaces/responses"
-import { ISeasonDetails, ISerie, ISerieDetails } from "../interfaces/serie"
+import { IAiringTodayResponse, IMovieResponse, INowPlayingResponse, IPeopleResponse, IRecommendationResponse, ISerieResponse } from "../interfaces/responses"
+import { IQueryParamasSeries, ISeasonDetails, ISerie, ISerieDetails } from "../interfaces/serie"
 
 const API_URL_BASE = "https://api.themoviedb.org/3"
 const TOP_RATING_SERIES_PATH = "/tv/top_rated?"
@@ -56,26 +56,41 @@ export const GetNowPlaying = async () => {
 	return results
 }
 
-export const GetPopularMovies = async () => {
-	const url = `${API_URL_BASE}/movie/popular?language=${LANGUAGE_MX}&region=MX`
+export const GetPopularMovies = async (page: number) => {
+	const url = `${API_URL_BASE}/movie/popular?language=${LANGUAGE_MX}&region=MX&page=${page}`
 	const response = await fetch(url, optionsGET)
 	const data = (await response.json()) as IMovieResponse
 	return data
 }
 
-export const GetTopRatedMovies = async () => {
-	const url = `${API_URL_BASE}/movie/top_rated?language=${LANGUAGE_MX}&region=MX`
+export const GetTopRatedMovies = async (page: number) => {
+	const url = `${API_URL_BASE}/movie/top_rated?language=${LANGUAGE_MX}&region=MX&page=${page}`
 	const response = await fetch(url, optionsGET)
 	const data = (await response.json()) as IMovieResponse
 	return data
 }
 
-export const GetUpcomingMovies = async () => {
-	const url = `${API_URL_BASE}/movie/upcoming?language=${LANGUAGE_MX}&region=MX`
+export const GetUpcomingMovies = async (page: number) => {
+	const url = `${API_URL_BASE}/movie/upcoming?language=${LANGUAGE_MX}&region=MX&page=${page}`
 	const response = await fetch(url, optionsGET)
 	const data = (await response.json()) as IMovieResponse
 	return data
 }
+
+export const GetSearchMovies = async (queryParams: IQueryParamasMovies) => {
+	const params = Object.entries(queryParams)
+	let stringParams = ""
+	params.forEach((param, index) => {
+		stringParams += `${"&"}${param[0]}=${param[1]}`
+	})
+
+	const url = `${API_URL_BASE}/discover/movie?language=${LANGUAGE_MX}&region=MX${stringParams}`
+	const response = await fetch(url, optionsGET)
+	const data = (await response.json()) as IMovieResponse
+	console.log(data)
+	return data
+}
+
 
 export const GetSeriesAiringToday = async () => {
 	const url = `${API_URL_BASE}/tv/airing_today?language=${LANGUAGE_MX}&region=MX`
@@ -101,10 +116,31 @@ export const GetSeriesAiringToday = async () => {
 	return results
 }
 
-export const GetPeoplePopular = async () => {
-	const url = `${API_URL_BASE}/person/popular?language=${LANGUAGE_MX}`
+export const GetTopRatedSeries = async (page: number) => {
+	const url = `${API_URL_BASE}/movie/top_rated?language=${LANGUAGE_MX}&region=MX&page=${page}`
 	const response = await fetch(url, optionsGET)
-	const data = (await response.json()) as IPopularPeopleResponse
+	const data = (await response.json()) as IMovieResponse
+	return data
+}
+
+export const GetSearchSeries = async (queryParams: IQueryParamasSeries) => {
+	const params = Object.entries(queryParams)
+	let stringParams = ""
+	params.forEach((param, index) => {
+		stringParams += `${"&"}${param[0]}=${param[1]}`
+	})
+
+	const url = `${API_URL_BASE}/discover/tv?language=${LANGUAGE_MX}&region=MX${stringParams}`
+	const response = await fetch(url, optionsGET)
+	const data = (await response.json()) as ISerieResponse
+	console.log(data)
+	return data
+}
+
+export const GetPeoplePopular = async (page: number) => {
+	const url = `${API_URL_BASE}/person/popular?language=${LANGUAGE_MX}&page=${page}`
+	const response = await fetch(url, optionsGET)
+	const data = (await response.json()) as IPeopleResponse
 	return data
 }
 

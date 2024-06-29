@@ -4,7 +4,7 @@ import Image from "next/image"
 import { IEpisode, ISeason, ISeasonDetails } from "@/app/interfaces/serie"
 import styles from "./season.module.scss"
 import { BASE_URL_IMG } from "@/app/utils/const"
-import { ComboBox } from "@/app/components/ComboBox/ComboBox"
+import { ComboBoxSession } from "@/app/components/ComboBoxSession/ComboBoxSession"
 import React, { ChangeEvent, Fragment, useEffect, useState } from "react"
 import { GetSeasonDetails } from "@/app/services/fetchData"
 import { ConvertMinutesToHours } from "@/app/utils/helpers"
@@ -42,7 +42,7 @@ export const Season = ({ seasons, idSerie, children }: Props) => {
         <section className={styles.section}>
             <article className={styles.season}>
                 <div className={styles.season_select}>
-                    <ComboBox number={seasons.filter(season => season.season_number !== 0 && season.episode_count > 0).length} onChange={HandleChangeSeason} />
+                    <ComboBoxSession number={seasons.filter(season => season.season_number !== 0 && season.episode_count > 0).length} onChange={HandleChangeSeason} />
                     {currentSeason && <Image src={BASE_URL_IMG.concat(seasons[currentSeason?.season_number]?.poster_path || "https://raw.githubusercontent.com/AletzMan/ImagesStorage/main/streamin-movie-clone/Image_not_available.jpg")} alt={seasons[currentSeason?.season_number]?.name} width={145} height={200} />}
                 </div>
                 <div className={styles.season_overview}>

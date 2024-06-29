@@ -25,7 +25,7 @@ export interface IMovieResponse {
 
 export interface ISerieResponse {
 	page: number
-	results: ISerie[]
+	results: IPartCollection[]
 	total_pages: number
 	total_results: number
 }
@@ -47,13 +47,6 @@ export interface IRecommendationResponse {
 export interface IAiringTodayResponse {
 	page: number
 	results: ISerie[]
-	total_pages: number
-	total_results: number
-}
-
-export interface IPopularPeopleResponse {
-	page: number
-	results: IPeople[]
 	total_pages: number
 	total_results: number
 }

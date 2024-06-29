@@ -388,7 +388,71 @@ export function MaleIcon({ className }: Props) {
 export function FemaleIcon({ className }: Props) {
     return (
         <svg className={className} width="1em" height="1em" viewBox="0 0 24 24">
-            <path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 15a6 6 0 1 0 0-12a6 6 0 0 0 0 12m0 0v4m0 2v-2m0 0h-2m2 0h2" /></svg>
+            <path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 15a6 6 0 1 0 0-12a6 6 0 0 0 0 12m0 0v4m0 2v-2m0 0h-2m2 0h2" />
+        </svg>
     )
 }
 
+export function NextPageIcon({ className }: Props) {
+    return (
+        <svg className={className} width="1em" height="1em" viewBox="0 0 24 24">
+            <path fill="currentColor" fillRule="evenodd" d="M8.512 4.43a.75.75 0 0 1 1.057.082l6 7a.75.75 0 0 1 0 .976l-6 7a.75.75 0 0 1-1.138-.976L14.012 12L8.431 5.488a.75.75 0 0 1 .08-1.057" clipRule="evenodd" />
+        </svg>
+    )
+}
+
+export function PrevPageIcon({ className }: Props) {
+    return (
+        <svg className={className} width="1em" height="1em" viewBox="0 0 24 24">
+            <path fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="m15 5l-6 7l6 7" />
+        </svg>
+    )
+}
+
+export function CheckOnlyIcon({ className }: Props) {
+    return (
+        <svg className={className} width="1em" height="1em" viewBox="0 0 16 16">
+            <path fill="currentColor" fillRule="evenodd" d="M12.78 4.62a.75.75 0 0 1 0 1.06l-6.097 6.097a.75.75 0 0 1-1.069-.009L3.211 9.284a.75.75 0 1 1 1.078-1.043l1.873 1.936L11.72 4.62a.75.75 0 0 1 1.06 0" clipRule="evenodd" />
+        </svg>
+    )
+}
+
+export function UpcomingIcon({ className }: Props) {
+    return (
+        <svg className={className} width="1em" height="1em" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M15.058 21v-1h3.326q.231 0 .424-.192t.192-.424v-8.768H5V14.5H4V6.616q0-.691.463-1.153T5.616 5h1.769V2.77h1.077V5h7.154V2.77h1V5h1.769q.69 0 1.153.463T20 6.616v12.769q0 .69-.462 1.153T18.384 21zM8 23.288l-.689-.688l3.056-3.1H1.5v-1h8.867l-3.056-3.1l.689-.688L12.289 19zM5 9.615h14v-3q0-.23-.192-.423T18.384 6H5.616q-.231 0-.424.192T5 6.616zm0 0V6z" />
+        </svg>
+    )
+}
+
+export function TopIcon({ className }: Props) {
+    return (
+        <svg className={className} width="1em" height="1em" viewBox="0 0 32 32">
+            <path fill="currentColor" d="m7.715 10.44l7.57-8.13a.992.992 0 0 1 1.43-.01l7.57 8.13c.56.596.12 1.563-.71 1.563h-3.64c-.35 0-.64.284-.64.625v5.195c0 .645-.53 1.163-1.19 1.163h-4.22c-.65 0-1.19-.518-1.18-1.153v-5.195a.637.637 0 0 0-.64-.625h-3.64c-.83 0-1.27-.958-.71-1.564m4.725 10.379H6c-.55 0-1 .45-1 1s.45 1 1 1h2.22v6.17c0 .55.45 1 1 1s1-.45 1-1v-6.17h2.22c.55 0 1-.45 1-1c0-.56-.45-1-1-1m9.39.01h2.77c1.51 0 2.74 1.23 2.74 2.74c0 1.51-1.23 2.74-2.74 2.74h-1.77v2.69c0 .55-.45 1-1 1s-1-.45-1-1v-7.17c0-.55.45-1 1-1m1 3.48h1.77c.41 0 .74-.33.74-.74s-.33-.74-.74-.74h-1.77zm-9.39 2.55c0 1.73 1.41 3.14 3.15 3.14c1.73 0 3.15-1.41 3.15-3.14v-2.88c0-1.73-1.41-3.14-3.15-3.14s-3.15 1.41-3.15 3.14zm2-2.88a1.15 1.15 0 0 1 2.3 0v2.88c0 .64-.52 1.15-1.15 1.15c-.63 0-1.15-.52-1.15-1.15z" />
+        </svg>
+    )
+}
+
+export function PopularIcon({ className }: Props) {
+    return (
+        <svg className={className} width="1em" height="1em" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M13.209 3.102c-.495-1.003-1.926-1.003-2.421 0L8.43 7.88l-5.273.766c-1.107.16-1.55 1.522-.748 2.303l3.815 3.719l-.9 5.25c-.19 1.104.968 1.945 1.959 1.424l4.715-2.48l4.716 2.48c.99.52 2.148-.32 1.96-1.423l-.902-5.251l3.816-3.72c.8-.78.359-2.141-.748-2.302l-5.273-.766zM9.74 8.614l2.258-4.575l2.259 4.575a1.35 1.35 0 0 0 1.016.739l5.05.734l-3.654 3.562a1.35 1.35 0 0 0-.388 1.195l.862 5.029l-4.516-2.375a1.35 1.35 0 0 0-1.257 0l-4.516 2.375l.862-5.03a1.35 1.35 0 0 0-.388-1.194l-3.654-3.562l5.05-.734c.44-.064.82-.34 1.016-.739M1.164 3.781a.75.75 0 0 0 .118 1.054l2.5 2a.75.75 0 1 0 .937-1.171l-2.5-2a.75.75 0 0 0-1.055.117m21.672 14.437a.75.75 0 0 0-.117-1.054l-2.5-2a.75.75 0 0 0-.937 1.171l2.5 2a.75.75 0 0 0 1.054-.117M1.282 17.164a.75.75 0 1 0 .937 1.171l2.5-2a.75.75 0 0 0-.937-1.171zM22.836 3.78a.75.75 0 0 1-.117 1.054l-2.5 2a.75.75 0 0 1-.937-1.171l2.5-2a.75.75 0 0 1 1.054.117" />
+        </svg>
+    )
+}
+
+export function SortDownIcon({ className }: Props) {
+    return (
+        <svg className={className} width="1em" height="1em" viewBox="0 0 20 20">
+            <path fill="currentColor" d="M15 2.75a.75.75 0 0 0-1.5 0v12.572l-1.447-1.579a.75.75 0 0 0-1.106 1.014l2.75 3a.75.75 0 0 0 1.106 0l2.75-3a.75.75 0 0 0-1.106-1.014L15 15.322zM2.75 3.5a.75.75 0 0 0 0 1.5h8.5a.75.75 0 0 0 0-1.5zM5 7.25a.75.75 0 0 1 .75-.75h5.5a.75.75 0 0 1 0 1.5h-5.5A.75.75 0 0 1 5 7.25M8.75 9.5a.75.75 0 0 0 0 1.5h2.5a.75.75 0 0 0 0-1.5z" />
+        </svg>
+    )
+}
+
+export function SortUpIcon({ className }: Props) {
+    return (
+        <svg className={className} width="1em" height="1em" viewBox="0 0 20 20">
+            <path fill="currentColor" d="M15 17.25a.75.75 0 0 1-1.5 0V4.678l-1.447 1.579a.75.75 0 0 1-1.106-1.014l2.75-3a.75.75 0 0 1 1.106 0l2.75 3a.75.75 0 0 1-1.106 1.014L15 4.678zM2.75 16.5a.75.75 0 0 1 0-1.5h8.5a.75.75 0 0 1 0 1.5zM5 12.75c0 .414.336.75.75.75h5.5a.75.75 0 0 0 0-1.5h-5.5a.75.75 0 0 0-.75.75m3.75-2.25a.75.75 0 0 1 0-1.5h2.5a.75.75 0 0 1 0 1.5z" />
+        </svg>
+    )
+}

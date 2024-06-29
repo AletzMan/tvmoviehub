@@ -1,0 +1,27 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 0.15em;
+    padding: 0.5em;
+    background: linear-gradient(90deg, var(--highlightHoverColor), var(--highlightHoverColor));
+
+    &_order {
+        display: flex;
+        align-items: flex-end;
+        gap: 0.5em;
+    }
+
+    &_title {
+        color: var(--fontColor);
+    }
+
+    &_icon {
+        width: 2.5em;
+        height: 2.5em;
+        color: var(--fontSecondColor);
+        animation: animation;
+    }
+
+    @keyframes animation {}
+}

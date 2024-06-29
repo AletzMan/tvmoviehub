@@ -1,0 +1,40 @@
+.section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    padding: 0.5em;
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+    width: 100%;
+    height: calc(100svh - 5em);
+
+    @media (width < 700px) {
+        grid-column: 1 / span 2;
+    }
+}
+
+.movies {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(10.5em, 1fr));
+    gap: 0.5em;
+
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 0.15em;
+    padding: 0.15em 0.5em;
+    background: linear-gradient(90deg, var(--highlightColorBasic), var(--highlightHoverColor));
+
+    &_title {
+        color: var(--fontColor);
+    }
+
+    &_icon {
+        width: 2.5em;
+        height: 2.5em;
+        color: var(--fontSecondColor);
+    }
+}

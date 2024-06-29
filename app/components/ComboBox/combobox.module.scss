@@ -1,13 +1,25 @@
 .select {
-    padding: 0.5em 0.75em;
-    background-color: var(--highlightColorBasic);
-    color: var(--fontColor);
-    font-family: var(--font-family);
+    padding: 0.25em 0.75em;
     border: none;
     font-size: 1em;
     max-width: 13em;
+    border-radius: 0.5em;
+    font-family: var(--font-family);
+    color: var(--fontColor);
+    background-color: var(--highlightColorBasic);
 }
 
 .option {
     padding: 0.5em 0.75em;
+}
+
+.combobox {
+    display: flex;
+    flex-direction: column;
+
+    &_label {
+        font-size: 0.85em;
+        padding: 0 0 0 0.5em;
+        color: var(--fontSecondColor);
+    }
 }

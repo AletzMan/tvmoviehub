@@ -2,7 +2,7 @@ import { MainSlider } from "./components/MainSlider/MainSlider"
 import { MainSliderSeries } from "./components/MainSlider/MainSliderSeries"
 import { PopularPeople } from "./components/PopularPeople/PopularPeople"
 import { IMovie } from "./interfaces/movie"
-import { IPopularPeopleResponse } from "./interfaces/responses"
+import { IPeopleResponse } from "./interfaces/responses"
 import { ISerie } from "./interfaces/serie"
 import styles from "./page.module.css"
 import { GetNowPlaying, GetSeriesAiringToday, GetPeoplePopular } from "./services/fetchData"
@@ -11,7 +11,7 @@ import { GetNowPlaying, GetSeriesAiringToday, GetPeoplePopular } from "./service
 export default async function Home(params: { params: { lang: string }, searchParams: {} }) {
   const data: IMovie[] = await GetNowPlaying()
   const dataSeries: ISerie[] = await GetSeriesAiringToday()
-  const dataPeople: IPopularPeopleResponse = await GetPeoplePopular()
+  const dataPeople: IPeopleResponse = await GetPeoplePopular(1)
 
   return (
     <>

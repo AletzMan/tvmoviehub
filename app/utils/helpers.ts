@@ -30,6 +30,14 @@ export const FormattedDateUpcoming = (date: string) => {
 	const currentTime = new Date().getTime()
 	const age = currentTime - birthday
 	const formatted = new Date(`${year}-${month}-${day}`).toLocaleDateString("es-MX", SmallDateLocal)
-	const years = Math.floor(((((age / 1000) / 60) / 60) / 24) / 365)
 	return `${formatted} `
+}
+
+export const FormattedDateSearch = (date: string) => {
+	const newDate = date.split("-")
+	const day = Number(newDate[2].substring(0, 2)).toString().padStart(2, "0").replace(" ", "")
+	const month = newDate[1].replace(" ", "")
+	const year = newDate[0].replace(" ", "")
+	console.log(day)
+	return `${year}-${month}-${day} `
 }

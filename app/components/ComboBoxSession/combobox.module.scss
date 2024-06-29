@@ -1,0 +1,13 @@
+.select {
+    padding: 0.5em 0.75em;
+    background-color: var(--highlightColorBasic);
+    color: var(--fontColor);
+    font-family: var(--font-family);
+    border: none;
+    font-size: 1em;
+    max-width: 13em;
+}
+
+.option {
+    padding: 0.5em 0.75em;
+}
