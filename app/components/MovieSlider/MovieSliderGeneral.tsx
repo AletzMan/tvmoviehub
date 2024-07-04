@@ -1,18 +1,20 @@
 "use client"
 
-import { ReactNode } from "react"
+import { CSSProperties, HTMLAttributes, MouseEventHandler, ReactNode } from "react"
 import styles from "./movieslider.module.scss"
 import Slider from "react-slick"
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 import Link from "next/link"
 import { ArrowLeftIcon } from "@/app/utils/svg"
+import { NextArrow, PrevArrow } from "../ArrowSlider/ArrowSlider"
 
 interface Props {
     title: string
     children: ReactNode
     list_link?: string
 }
+
 
 export const MovieSliderGeneral = ({ title, children, list_link }: Props) => {
 
@@ -25,7 +27,8 @@ export const MovieSliderGeneral = ({ title, children, list_link }: Props) => {
         arrows: true,
         dots: false,
         rows: 1,
-        nextArrow: <div><ArrowLeftIcon className="" /></div>
+        nextArrow: <NextArrow />,
+        prevArrow: <PrevArrow />
 
     }
 
@@ -36,7 +39,7 @@ export const MovieSliderGeneral = ({ title, children, list_link }: Props) => {
                 {list_link && <Link className={styles.slider_view} href={`${list_link}&page=1`}>Ver todo</Link>}
             </header>
             <div className={styles.slider_container}  >
-                <Slider {...settings} swipeToSlide swipe variableWidth >
+                <Slider {...settings} swipeToSlide swipe variableWidth>
                     {children}
                 </Slider>
             </div>

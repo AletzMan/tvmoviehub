@@ -1,4 +1,4 @@
-import { ICast, ICrew } from "./credits"
+import { ICast, ICrew, IMovieCredits, ISerieCredits } from "./credits"
 
 export interface IPeople {
 	adult: boolean
@@ -50,6 +50,8 @@ export interface IPeopleDetails {
 	place_of_birth: string
 	popularity: number
 	profile_path: string
+	movie_credits: IMovieCredits
+	tv_credits: ISerieCredits
 }
 
 

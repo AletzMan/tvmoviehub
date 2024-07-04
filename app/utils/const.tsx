@@ -1,56 +1,64 @@
-import { AccountIcon, ActionIcon, AdventureIcon, AnimationIcon, ComedyIcon, CrimeIcon, DocumentaryIcon, DramaIcon, FamilyIcon, FantasyIcon, FavoriteEmptyIcon, HistoryIcon, HomeIcon, HorrorIcon, KidIcon, LogoutIcon, MovieIcon, MovieListIcon, MusicIcon, MysteryIcon, NewsIcon, PeopleIcon, RealityIcon, RomanceIcon, SCIFiIcon, SerieIcon, SettingsIcon, SoapIcon, TVMovieIcon, TalkIcon, ThrillerIcon, WarIcon, WesternIcon } from "./svg"
+import { CSSProperties, MouseEventHandler } from "react"
+import { IPropertiesCombobox } from "../components/ComboBox/ComboBox"
+import { AccountIcon, ActionIcon, AdventureIcon, AnimationIcon, ArrowLeftIcon, ComedyIcon, CrimeIcon, DocumentaryIcon, DramaIcon, FamilyIcon, FantasyIcon, FavoriteEmptyIcon, HistoryIcon, HomeIcon, HorrorIcon, KidIcon, LogoutIcon, MovieIcon, MovieListIcon, MusicIcon, MysteryIcon, NewsIcon, PeopleIcon, RealityIcon, RomanceIcon, SCIFiIcon, SearchIcon, SerieIcon, SettingsIcon, SoapIcon, TVMovieIcon, TalkIcon, ThrillerIcon, WarIcon, WesternIcon } from "./svg"
 
 export const MainMenu = [
     {
         id: 0,
+        name: "Busqueda",
+        link: "search",
+        icon: <SearchIcon className="mainMenuLogo" />
+    },
+    {
+        id: 1,
         name: "Inicio",
         link: "",
         icon: <HomeIcon className="mainMenuLogo" />
     },
     {
-        id: 1,
+        id: 2,
         name: "Peliculas",
         link: "movies",
         icon: <MovieIcon className="mainMenuLogo" />
     },
     {
-        id: 2,
+        id: 3,
         name: "Series",
         link: "series",
         icon: <SerieIcon className="mainMenuLogo" />
     },
     {
-        id: 3,
+        id: 4,
         name: "Personas",
         link: "people",
         icon: <PeopleIcon className="mainMenuLogo" />
     },
     {
-        id: 4,
+        id: 5,
         name: "Favoritos",
         link: "favorites",
         icon: <FavoriteEmptyIcon className="mainMenuLogo" />
     },
     {
-        id: 5,
+        id: 6,
         name: "Listas",
         link: "lists",
         icon: <MovieListIcon className="mainMenuLogo" />
     },
     {
-        id: 6,
+        id: 7,
         name: "Cuenta",
         link: "account",
         icon: <AccountIcon className="mainMenuLogo" />
     },
     {
-        id: 7,
+        id: 8,
         name: "Configuración",
         link: "settings",
         icon: <SettingsIcon className="mainMenuLogo" />
     },
     {
-        id: 8,
+        id: 9,
         name: "Cerrar sesión",
         link: "logout",
         icon: <LogoutIcon className="mainMenuLogo" />
@@ -276,6 +284,7 @@ export const CategoriesSeries = [
 
 
 export const BASE_URL_IMG = 'https://image.tmdb.org/t/p/original'
+export const BASE_URL_IMG_CUSTOM = 'https://image.tmdb.org/t/p/'
 
 export const countryFlags = [
     {
@@ -1999,6 +2008,14 @@ export const countryFlags = [
     },
 ]
 
+export const GetRegions = (): IPropertiesCombobox[] => {
+    let options: IPropertiesCombobox[] = []
+    countryFlags.forEach(country => {
+        options.push({ option: country.country, value: country.code })
+    })
+    return options
+}
+
 export const OptionsDateLocal: Intl.DateTimeFormatOptions = {
     timeZone: "America/New_York",
     year: "numeric",
@@ -2024,3 +2041,5 @@ export const LargeDateLocal: Intl.DateTimeFormatOptions = {
     month: "long",
     day: "numeric",
 }
+
+

@@ -1,0 +1,102 @@
+.section {
+    display: flex;
+    gap: 0.5em;
+}
+
+.dialog {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5em;
+    width: 100svw;
+    height: 100svh;
+    padding: 2em 3em;
+    border: none;
+    background-color: var(--hover);
+    backdrop-filter: blur(20px);
+    z-index: 3;
+
+    @media (width < 500px) {
+        padding: 2em 1.75em;
+    }
+
+    &_picture {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        width: 100%;
+        min-height: 54svh;
+    }
+
+    &_loading {
+        position: absolute;
+        top: calc(50% - 10em);
+        width: 8em;
+        height: 8em;
+        color: var(--fontColor);
+        animation: loading 1s ease-in-out infinite;
+
+        @keyframes loading {
+            to {
+                transform: rotate(359deg);
+            }
+        }
+    }
+
+    &_options {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.25em;
+    }
+
+    &_image {
+        max-height: 54svh;
+        //max-width: 90svw;
+        object-fit: contain;
+        justify-self: center;
+        //border: 2px solid var(--terciaryColor);
+    }
+
+    &_sizes {
+        font-size: 0.85em;
+        color: var(--fontSecondColor);
+        padding: 0.1em 0.25em;
+        background-color: var(--terciaryColor);
+    }
+
+    &_download {
+        padding: 0.2em 0.5em;
+        border-radius: 0.25em;
+        color: var(--fontColor);
+        background-color: var(--highlightColor);
+    }
+
+    &_close {
+        position: absolute;
+        right: 0;
+        right: 2em;
+    }
+}
+
+.button {
+    padding: 0 0.5em 0 0;
+    overflow: hidden;
+    border: none;
+    background-color: transparent;
+
+    &>.button_image:hover {
+        border: 2px solid var(--highlightColor);
+    }
+
+    &_image {
+        border: 2px solid transparent;
+        border-radius: 0.35em;
+        object-fit: contain;
+        transition: all 0.25s ease-in-out;
+        background-color: var(--hover);
+    }
+}

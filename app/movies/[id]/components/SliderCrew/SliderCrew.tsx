@@ -25,7 +25,6 @@ export const SliderCrew = ({ credits, created_by, type, title }: Props) => {
         if (container !== null) {
 
             const UpdateScroll = () => {
-                console.log(container.scrollLeft)
                 setScrollLeft(container.scrollLeft)
             }
 
@@ -42,11 +41,9 @@ export const SliderCrew = ({ credits, created_by, type, title }: Props) => {
         if (container) {
             const widthContainer = container.getBoundingClientRect().width
             const scrollWidth = container.scrollWidth - widthContainer
-            //console.log(scrollLeft)
-            //console.log(scrollWidth)
+
             if (direction === "left") {
                 let newScroll = scrollLeft + (widthContainer / 2)
-                //console.log(newScroll)
                 if (newScroll <= scrollWidth) {
                     setScrollLeft(newScroll)
                 } else {
@@ -62,7 +59,6 @@ export const SliderCrew = ({ credits, created_by, type, title }: Props) => {
                     setScrollLeft(newScroll)
                 }
                 container.scrollTo({ left: newScroll })
-                //console.log(newScroll)
             }
         }
     }

@@ -1,12 +1,14 @@
 .select {
-    padding: 0.25em 0.75em;
+    padding: 0.38em 0.75em;
     border: none;
-    font-size: 1em;
-    max-width: 13em;
-    border-radius: 0.5em;
+    font-size: 0.9em;
+    max-width: 14.5em;
+    min-width: 8em;
+    border-radius: 0.25em;
     font-family: var(--font-family);
     color: var(--fontColor);
     background-color: var(--highlightColorBasic);
+    font-family: var(--font-family);
 }
 
 .option {

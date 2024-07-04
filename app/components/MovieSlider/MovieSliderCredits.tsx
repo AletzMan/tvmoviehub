@@ -9,6 +9,7 @@ import { IParticipationsCast, IParticipationsCrew } from "@/app/interfaces/credi
 import Slider from "react-slick"
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
+import { NextArrow, PrevArrow } from "../ArrowSlider/ArrowSlider"
 
 interface Props {
     parts: IParticipationsCast[] | IParticipationsCrew[]
@@ -26,7 +27,9 @@ export const MovieSliderCredits = ({ parts, title, type }: Props) => {
         autoplaySpeed: 500,
         arrows: true,
         dots: false,
-        rows: 1
+        rows: 1,
+        nextArrow: <NextArrow />,
+        prevArrow: <PrevArrow />
     }
 
     return (

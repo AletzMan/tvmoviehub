@@ -9,6 +9,7 @@ import Link from "next/link"
 import Slider from "react-slick"
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
+import { NextArrow, PrevArrow } from "../ArrowSlider/ArrowSlider"
 
 interface Props {
     parts: IPartCollection[]
@@ -25,7 +26,9 @@ export const MovieSlider = ({ parts, title }: Props) => {
         autoplaySpeed: 500,
         arrows: true,
         dots: false,
-        rows: 1
+        rows: 1,
+        nextArrow: <NextArrow />,
+        prevArrow: <PrevArrow />
     }
 
     return (
@@ -38,7 +41,7 @@ export const MovieSlider = ({ parts, title }: Props) => {
                         parts.map(movie => (
                             <div key={movie.id} className={styles.movie}>
                                 <div className={styles.movie_picture}>
-                                    <Image className={styles.movie_photo} src={movie.poster_path ? BASE_URL_IMG.concat(movie.poster_path || '') : "/not_photo.png"} width={150} height={200} alt={`Poster de ${movie.title}`} />
+                                    <Image className={styles.movie_photo} src={movie.poster_path ? BASE_URL_IMG.concat(movie.poster_path || '') : "/not_photo.png"} width={157} height={210} alt={`Poster de ${movie.title}`} />
                                 </div>
                                 <div className={styles.movie_shadow}></div>
                                 <div className={styles.movie_dialog}>
@@ -46,13 +49,13 @@ export const MovieSlider = ({ parts, title }: Props) => {
                                         <AddIcon className={styles.movie_dialogIcon} />
                                     </Link>
                                 </div>
-                                <span className={styles.movie_average}><StarIcon className={styles.movie_iconDate} />{movie.vote_average.toFixed(1)}</span>
+                                <span className={styles.movie_average}><StarIcon className={styles.movie_iconDate} />{movie.vote_average?.toFixed(1)}</span>
                                 <button className={styles.movie_fav}><FavoriteFullIcon className={styles.movie_favIcon} /> </button>
                                 <div className={styles.movie_description}>
                                     {movie.media_type && movie.media_type === "movie" && <span className={styles.movie_type}><MovieIcon className={styles.movie_typeIcon} />Película</span>}
                                     {movie.media_type && movie.media_type === "tv" && <span className={styles.movie_type}><SerieIcon className={styles.movie_typeIcon} />Serie</span>}
                                     <span className={styles.movie_name}>{movie.title || movie.name}</span>
-                                    <span className={styles.movie_age}>{new Date(movie.release_date || movie.first_air_date).getFullYear()}</span>
+                                    <span className={styles.movie_age}>{(movie.release_date || movie.first_air_date) ? new Date(movie.release_date || movie.first_air_date || "").toISOString().split("-")[0] : ""}</span>
                                 </div>
                             </div>
                         ))

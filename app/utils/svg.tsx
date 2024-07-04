@@ -1,5 +1,5 @@
 interface Props {
-    className: string
+    className?: string
 }
 
 export function FavoriteEmptyIcon({ className }: Props) {
@@ -453,6 +453,66 @@ export function SortUpIcon({ className }: Props) {
     return (
         <svg className={className} width="1em" height="1em" viewBox="0 0 20 20">
             <path fill="currentColor" d="M15 17.25a.75.75 0 0 1-1.5 0V4.678l-1.447 1.579a.75.75 0 0 1-1.106-1.014l2.75-3a.75.75 0 0 1 1.106 0l2.75 3a.75.75 0 0 1-1.106 1.014L15 4.678zM2.75 16.5a.75.75 0 0 1 0-1.5h8.5a.75.75 0 0 1 0 1.5zM5 12.75c0 .414.336.75.75.75h5.5a.75.75 0 0 0 0-1.5h-5.5a.75.75 0 0 0-.75.75m3.75-2.25a.75.75 0 0 1 0-1.5h2.5a.75.75 0 0 1 0 1.5z" />
+        </svg>
+    )
+}
+
+export function FiltersIcon({ className }: Props) {
+    return (
+        <svg className={className} width="1em" height="1em" viewBox="0 0 12 12">
+            <path fill="currentColor" d="M1 2.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m2 3a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5M5 8a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1z" />
+        </svg>
+    )
+}
+
+export function ArrowDownSolidIcon({ className }: Props) {
+    return (
+        <svg className={className} width="1em" height="1em" viewBox="0 0 24 24">
+            <path fill="currentColor" d="m12.37 15.835l6.43-6.63C19.201 8.79 18.958 8 18.43 8H5.57c-.528 0-.771.79-.37 1.205l6.43 6.63c.213.22.527.22.74 0" />
+        </svg>
+    )
+}
+
+export function SuccessIcon({ className }: Props) {
+    return (
+        <svg className={className} width="1em" height="1em" viewBox="0 0 1024 1024">
+            <path fill="currentColor" d="M512 64a448 448 0 1 1 0 896a448 448 0 0 1 0-896m-55.808 536.384l-99.52-99.584a38.4 38.4 0 1 0-54.336 54.336l126.72 126.72a38.27 38.27 0 0 0 54.336 0l262.4-262.464a38.4 38.4 0 1 0-54.272-54.336z" />
+        </svg>
+    )
+}
+
+export function ResetIcon({ className }: Props) {
+    return (
+        <svg className={className} width="1em" height="1em" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M22 12c0 5.523-4.477 10-10 10S2 17.523 2 12S6.477 2 12 2v2a8 8 0 1 0 4.5 1.385V8h-2V2h6v2H18a9.99 9.99 0 0 1 4 8" />
+        </svg>
+    )
+}
+
+export function NotFoundIcon({ className }: Props) {
+    return (
+        <svg className={className} width="1em" height="1em" viewBox="0 0 24 24">
+            <g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2">
+                <path d="m13.5 8.5l-5 5m0-5l5 5" />
+                <circle cx="11" cy="11" r="8" />
+                <path d="m21 21l-4.3-4.3" />
+            </g>
+        </svg>
+    )
+}
+
+export function NotIcon({ className }: Props) {
+    return (
+        <svg className={className} width="1em" height="1em" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2m0 18c-4.42 0-8-3.58-8-8c0-1.85.63-3.55 1.69-4.9L16.9 18.31A7.902 7.902 0 0 1 12 20m6.31-3.1L7.1 5.69A7.902 7.902 0 0 1 12 4c4.42 0 8 3.58 8 8c0 1.85-.63 3.55-1.69 4.9" />
+        </svg>
+    )
+}
+
+export function CloseIcon({ className }: Props) {
+    return (
+        <svg className={className} width="1em" height="1em" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M18.3 5.71a.996.996 0 0 0-1.41 0L12 10.59L7.11 5.7A.996.996 0 1 0 5.7 7.11L10.59 12L5.7 16.89a.996.996 0 1 0 1.41 1.41L12 13.41l4.89 4.89a.996.996 0 1 0 1.41-1.41L13.41 12l4.89-4.89c.38-.38.38-1.02 0-1.4" />
         </svg>
     )
 }

@@ -9,6 +9,7 @@ import { IParticipationsCast, IParticipationsCrew, ISeriesCast } from "@/app/int
 import Slider from "react-slick"
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
+import { NextArrow, PrevArrow } from "../ArrowSlider/ArrowSlider"
 
 interface Props {
     parts: ISeriesCast[]
@@ -26,10 +27,10 @@ export const SeriesSliderCredits = ({ parts, title, type }: Props) => {
         autoplaySpeed: 500,
         arrows: true,
         dots: false,
-        rows: 1
+        rows: 1,
+        nextArrow: <NextArrow />,
+        prevArrow: <PrevArrow />
     }
-
-    console.log(parts)
 
     return (
         <div className={styles.slider}>

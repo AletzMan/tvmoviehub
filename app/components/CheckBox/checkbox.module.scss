@@ -3,21 +3,21 @@
     left: 0;
     height: 2em;
     width: 100%;
-    background-color: var(--terciaryColor);
+    background-color: var(--fontSecondColor);
     border: none;
-    opacity: 0;
+    opacity: 1;
 
     &_check {
         position: absolute;
         top: 0.25em;
-        left: 0em;
+        left: 0.25em;
         width: 1.5em;
         height: 1.5em;
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: var(--terciaryColor);
-        border: 1px solid var(--hover);
+        background-color: var(--fontColor);
+        border: 1px solid var(--terciaryColor);
         border-radius: 0.25em;
         overflow: hidden;
         transition: all 0.2s ease-in-out;
@@ -67,27 +67,26 @@
         flex-direction: row;
         align-items: center;
         justify-content: flex-start;
-        font-weight: 400;
+        font-weight: 500;
         height: 2em;
-        width: max-content;
+        width: 100%;
         column-gap: 0.25em;
         padding: 0.15em 0.25em 0.15em 2em;
         transition: all 0.2s ease-in-out;
-        color: var(--fontColor);
-        font-weight: 500;
+        font-family: var(--font-family);
+        border: none;
+        color: var(--primaryColor);
+        background-color: transparent;
         cursor: pointer;
 
-        &:hover>.checkbox_check {
-            border-color: var(--highlightColorBasic);
-        }
 
-        /*&:hover {
+        &:hover {
 
             @media(hover: hover) and (pointer: fine) {
-                background-color: var(--hover);
+                background-color: var(--fontSecondColor);
 
             }
-        }*/
+        }
 
     }
 }
