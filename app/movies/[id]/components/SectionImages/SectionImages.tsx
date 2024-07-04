@@ -50,7 +50,7 @@ export function SectionImages({ images }: Props) {
                     <div className={styles.dialog_options}>
                         <picture className={styles.dialog_picture}>
                             {loadImage && <LoadingIcon className={styles.dialog_loading} />}
-                            <Image className={styles.dialog_image} onLoad={HandleOnLoadImage} key={currentImages.file_path} src={BASE_URL_IMG.concat(currentImages.file_path)} alt="image" width={currentImages.width} height={currentImages.height} />
+                            <Image className={styles.dialog_image} onLoad={HandleOnLoadImage} key={currentImages.file_path} src={BASE_URL_IMG_CUSTOM.concat(URL_SIZE_IMAGE_LARGE[openDialog.type].concat(currentImages.file_path))} alt="image" width={800} height={currentImages.height} />
                         </picture>
                         <span className={styles.dialog_sizes}>{`${currentImages.width}x${currentImages.height}`}</span>
                         <div>
@@ -74,6 +74,12 @@ const URL_SIZE_IMAGE = {
     backdrops: "w300",
     posters: "w154",
     logos: "w342"
+}
+
+const URL_SIZE_IMAGE_LARGE = {
+    backdrops: "w780",
+    posters: "w500",
+    logos: "w500"
 }
 
 const settings = {
