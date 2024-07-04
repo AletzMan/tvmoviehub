@@ -20,7 +20,7 @@ export const SerieCardUpcoming = ({ serie }: Props) => {
             </div>
             <div className={styles.movie_shadow}></div>
             <div className={styles.movie_dialog}>
-                <Link className={styles.movie_dialogMore} href={`/movies/${serie.id}`} title={serie.name}>
+                <Link className={styles.movie_dialogMore} href={`/series/${serie.id}`} title={serie.name}>
                     <AddIcon className={styles.movie_dialogIcon} />
                 </Link>
             </div>

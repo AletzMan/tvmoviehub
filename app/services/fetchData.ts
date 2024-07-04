@@ -1,5 +1,8 @@
 import { ICredits, IMovieCredits, ISerieCredits } from "../interfaces/credits"
+import { IImages } from "../interfaces/image"
+import { IKeywords } from "../interfaces/keyword"
 import { ICollectionDetails, IMovie, IMovieDetails, IQueryParamasMovies } from "../interfaces/movie"
+import { IMultiResponse } from "../interfaces/multi"
 import { IPeopleDetails, IPeopleImages } from "../interfaces/people"
 import { IAiringTodayResponse, IMovieResponse, INowPlayingResponse, IPeopleResponse, IRecommendationResponse, ISerieResponse } from "../interfaces/responses"
 import { IQueryParamasSeries, ISeasonDetails, ISerie, ISerieDetails } from "../interfaces/serie"
@@ -77,7 +80,26 @@ export const GetUpcomingMovies = async (page: number) => {
 	return data
 }
 
-export const GetSearchMovies = async (queryParams: IQueryParamasMovies) => {
+export const GetSearchMovies = async (type: 'movie' | 'tv' | 'person' | 'multi', queryParams: IQueryParamasMovies) => {
+	const params = Object.entries(queryParams)
+	let stringParams = ""
+	params.forEach((param, index) => {
+		stringParams += `${"&"}${param[0]}=${param[1]}`
+	})
+
+	const url = `${API_URL_BASE}/search/${type}?language=${LANGUAGE_MX}&region=MX${stringParams}`
+	const response = await fetch(url, optionsGET)
+
+	let data: IMovieResponse = { page: 0, results: [], total_pages: 0, total_results: 0 }
+	if (response.status === 400) {
+		return data
+	} else {
+		data = (await response.json()) as IMovieResponse
+	}
+	return data
+}
+
+export const GetDiscoverMovies = async (queryParams: IQueryParamasMovies) => {
 	const params = Object.entries(queryParams)
 	let stringParams = ""
 	params.forEach((param, index) => {
@@ -86,8 +108,13 @@ export const GetSearchMovies = async (queryParams: IQueryParamasMovies) => {
 
 	const url = `${API_URL_BASE}/discover/movie?language=${LANGUAGE_MX}&region=MX${stringParams}`
 	const response = await fetch(url, optionsGET)
-	const data = (await response.json()) as IMovieResponse
-	console.log(data)
+
+	let data: IMovieResponse = { page: 0, results: [], total_pages: 0, total_results: 0 }
+	if (response.status === 400) {
+		return data
+	} else {
+		data = (await response.json()) as IMovieResponse
+	}
 	return data
 }
 
@@ -123,7 +150,7 @@ export const GetTopRatedSeries = async (page: number) => {
 	return data
 }
 
-export const GetSearchSeries = async (queryParams: IQueryParamasSeries) => {
+export const GetDiscoverSeries = async (queryParams: IQueryParamasSeries) => {
 	const params = Object.entries(queryParams)
 	let stringParams = ""
 	params.forEach((param, index) => {
@@ -132,10 +159,79 @@ export const GetSearchSeries = async (queryParams: IQueryParamasSeries) => {
 
 	const url = `${API_URL_BASE}/discover/tv?language=${LANGUAGE_MX}&region=MX${stringParams}`
 	const response = await fetch(url, optionsGET)
-	const data = (await response.json()) as ISerieResponse
-	console.log(data)
+
+	let data: ISerieResponse = { page: 0, results: [], total_pages: 0, total_results: 0 }
+	if (response.status === 400) {
+		return data
+	} else {
+		data = (await response.json()) as ISerieResponse
+	}
+
 	return data
 }
+
+export const GetSearchSeries = async (queryParams: IQueryParamasSeries) => {
+	const params = Object.entries(queryParams)
+	let stringParams = ""
+	params.forEach((param, index) => {
+		stringParams += `${"&"}${param[0]}=${param[1]}`
+	})
+
+	const url = `${API_URL_BASE}/search/tv?language=${LANGUAGE_MX}&region=MX${stringParams}`
+	const response = await fetch(url, optionsGET)
+
+	let data: ISerieResponse = { page: 0, results: [], total_pages: 0, total_results: 0 }
+	if (response.status === 400) {
+		return data
+	} else {
+		data = (await response.json())
+	}
+
+	return data
+}
+
+export const GetSearchPeople = async (queryParams: IQueryParamasSeries) => {
+	const params = Object.entries(queryParams)
+	let stringParams = ""
+	params.forEach((param, index) => {
+		stringParams += `${"&"}${param[0]}=${param[1]}`
+	})
+
+	const url = `${API_URL_BASE}/search/person?language=${LANGUAGE_MX}&include_adult=true${stringParams}`
+	const response = await fetch(url, optionsGET)
+
+	let data: IPeopleResponse = { page: 0, results: [], total_pages: 0, total_results: 0 }
+	if (response.status === 400) {
+		return data
+	} else {
+		data = (await response.json())
+	}
+
+	return data
+}
+
+
+export const GetSearchMulti = async (queryParams: IQueryParamasSeries) => {
+	const params = Object.entries(queryParams)
+	let stringParams = ""
+	params.forEach((param, index) => {
+		stringParams += `${"&"}${param[0]}=${param[1]}`
+	})
+
+	const url = `${API_URL_BASE}/search/multi?language=${LANGUAGE_MX}&include_adult=true${stringParams}`
+	const response = await fetch(url, optionsGET)
+
+	let data: IMultiResponse = { page: 0, results: [], total_pages: 0, total_results: 0 }
+	if (response.status === 400) {
+		return data
+	} else {
+		data = (await response.json())
+	}
+
+	return data
+}
+
+
 
 export const GetPeoplePopular = async (page: number) => {
 	const url = `${API_URL_BASE}/person/popular?language=${LANGUAGE_MX}&page=${page}`
@@ -147,28 +243,88 @@ export const GetPeoplePopular = async (page: number) => {
 export const GetMovieDetails = async (idMovie: string) => {
 	const url = `${API_URL_BASE}${DETAILS_MOVIES_PATH}${idMovie}?language=${LANGUAGE_MX}`
 	const response = await fetch(url, optionsGET)
-	const data = (await response.json()) as IMovieDetails
+	let data: IMovieDetails | null = null
+	if (response.status !== 404) {
+		return (await response.json()) as IMovieDetails
+	}
+
 	return data
 }
 
 export const GetCredits = async (idMovie: string) => {
 	const url = `${API_URL_BASE}${DETAILS_MOVIES_PATH}${idMovie}/credits?language=${LANGUAGE_MX}`
 	const response = await fetch(url, optionsGET)
-	const data = (await response.json()) as ICredits
+	let data: ICredits | null = null
+	if (response.status !== 404) {
+		return (await response.json()) as ICredits
+	}
+
+	return data
+}
+
+export const GetMovieImages = async (idMovie: string) => {
+	const url = `${API_URL_BASE}/movie/${idMovie}/images?`
+	const response = await fetch(url, optionsGET)
+	let data: IImages | null = null
+	if (response.status !== 404) {
+		return (await response.json()) as IImages
+	}
+
+	return data
+}
+
+export const GetSeriesKeywords = async (idMovie: string) => {
+	const url = `${API_URL_BASE}/tv/${idMovie}/keywords?`
+	const response = await fetch(url, optionsGET)
+	let data: IKeywords | null = null
+	if (response.status !== 404) {
+		return (await response.json()) as IKeywords
+	}
+
+	return data
+}
+
+export const GetMovieKeywords = async (idMovie: string) => {
+	const url = `${API_URL_BASE}/movie/${idMovie}/keywords`
+	const response = await fetch(url, optionsGET)
+	let data: IKeywords | null = null
+	if (response.status !== 404) {
+		return (await response.json()) as IKeywords
+	}
+
+	return data
+}
+
+export const GetSeriesImages = async (idMovie: string) => {
+	const url = `${API_URL_BASE}/tv/${idMovie}/images?`
+	const response = await fetch(url, optionsGET)
+	let data: IImages | null = null
+	if (response.status !== 404) {
+		return (await response.json()) as IImages
+	}
+
 	return data
 }
 
 export const GetCollectionsDetails = async (idCollection: string) => {
 	const url = `${API_URL_BASE}${DETAILS_COLLECTION_PATH}${idCollection}?language=${LANGUAGE_MX}`
 	const response = await fetch(url, optionsGET)
-	const data = (await response.json()) as ICollectionDetails
+	let data: ICollectionDetails | null = null
+	if (response.status !== 404) {
+		return (await response.json()) as ICollectionDetails
+	}
+
 	return data
 }
 
 export const GetRecommendations = async (idMovie: string) => {
 	const url = `${API_URL_BASE}${DETAILS_MOVIES_PATH}${idMovie}/recommendations?language=${LANGUAGE_MX}`
 	const response = await fetch(url, optionsGET)
-	const data = (await response.json()) as IRecommendationResponse
+	let data: IRecommendationResponse | null = null
+	if (response.status !== 404) {
+		return (await response.json()) as IRecommendationResponse
+	}
+
 	return data
 }
 
@@ -176,21 +332,31 @@ export const GetRecommendations = async (idMovie: string) => {
 export const GetSerieDetails = async (idSerie: string) => {
 	const url = `${API_URL_BASE}${DETAILS_SERIES_PATH}${idSerie}?language=${LANGUAGE_MX}`
 	const response = await fetch(url, optionsGET)
-	const data = (await response.json()) as ISerieDetails
+	let data: ISerieDetails | null = null
+	if (response.status !== 404) {
+		return (await response.json()) as ISerieDetails
+	}
 	return data
 }
 
 export const GetSerieCredits = async (idMovie: string) => {
 	const url = `${API_URL_BASE}${DETAILS_SERIES_PATH}${idMovie}/credits?language=${LANGUAGE_MX}`
 	const response = await fetch(url, optionsGET)
-	const data = (await response.json()) as ICredits
+	let data: ICredits | null = null
+	if (response.status !== 404) {
+		return (await response.json()) as ICredits
+	}
 	return data
 }
 
 export const GetSerieRecommendations = async (idMovie: string) => {
 	const url = `${API_URL_BASE}${DETAILS_SERIES_PATH}${idMovie}/recommendations?language=${LANGUAGE_MX}`
 	const response = await fetch(url, optionsGET)
-	const data = (await response.json()) as IRecommendationResponse
+	let data: IRecommendationResponse | null = null
+	if (response.status !== 404) {
+		return (await response.json()) as IRecommendationResponse
+	}
+
 	return data
 }
 
@@ -203,23 +369,35 @@ export const GetSeasonDetails = async (idSerie: string, season: number) => {
 
 export const GetPersonDetails = async (idPeople: string, language: 'ES' | 'EN') => {
 	let LANGUAGE = language === "ES" ? LANGUAGE_ES : LANGUAGE_EN
-	const url = `${API_URL_BASE}/person/${idPeople}?language=${LANGUAGE}`
+	const url = `${API_URL_BASE}/person/${idPeople}?language=${LANGUAGE}&append_to_response=movie_credits%2Ctv_credits`
 	const response = await fetch(url, optionsGET)
-	const data = (await response.json()) as IPeopleDetails
+	let data: IPeopleDetails | null = null
+	if (response.status !== 404) {
+		return (await response.json()) as IPeopleDetails
+	}
+
 	return data
 }
 
 export const GetMoviesCredits = async (idPeople: string) => {
 	const url = `${API_URL_BASE}/person/${idPeople}/movie_credits?language=${LANGUAGE_MX}`
 	const response = await fetch(url, optionsGET)
-	const data = (await response.json()) as IMovieCredits
+	let data: IMovieCredits | null = null
+	if (response.status !== 404) {
+		return (await response.json()) as IMovieCredits
+	}
+
 	return data
 }
 
 export const GetSeriesCredits = async (idPeople: string) => {
 	const url = `${API_URL_BASE}/person/${idPeople}/tv_credits?language=${LANGUAGE_MX}`
 	const response = await fetch(url, optionsGET)
-	const data = (await response.json()) as ISerieCredits
+	let data: ISerieCredits | null = null
+	if (response.status !== 404) {
+		return (await response.json()) as ISerieCredits
+	}
+
 	return data
 }
 

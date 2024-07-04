@@ -18,15 +18,12 @@ interface Props {
 }
 
 export const Season = ({ seasons, idSerie, children }: Props) => {
-    const [currentSeason, setCurrentSeason] = useState<ISeason>(seasons[0])
+    const [currentSeason, setCurrentSeason] = useState<ISeason>(seasons[0].season_number === 0 ? seasons[1] : seasons[0])
     const [currentEpisodes, setCurrentEpisodes] = useState<IEpisode[]>()
 
     useEffect(() => {
         const GetEpisodes = async () => {
-            console.log(idSerie.toString())
-            console.log(currentSeason.season_number)
             const details = await GetSeasonDetails(idSerie.toString(), currentSeason.season_number)
-            console.log(details)
             setCurrentEpisodes(details.episodes)
         }
         GetEpisodes()

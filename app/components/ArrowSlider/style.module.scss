@@ -1,0 +1,49 @@
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    height: 2.5em;
+    width: 1.5em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    border: 1px solid var(--hover);
+
+    &_right {
+        right: -25px;
+        border-radius: 0 0.25em 0.25em 0;
+        background-color: var(--hover);
+    }
+
+    &_left {
+        left: -25px;
+        border-radius: 0.25em 0 0 0.25em;
+        background-color: var(--hover);
+    }
+
+    &::before {
+        border-radius: 0;
+    }
+
+    &:hover {
+        border-color: var(--highlightColorBasic);
+        background-color: var(--highlightHoverColor);
+
+        &>svg {
+            color: var(--highlightColor);
+        }
+    }
+
+    &_icon {
+        width: 2em;
+        height: 2em;
+        color: var(--fontSecondColor);
+        transition: color 0.2s ease-in-out;
+
+        &Right {
+            transform: rotate(180deg);
+        }
+    }
+}

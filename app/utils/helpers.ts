@@ -3,7 +3,7 @@ import { SmallDateLocal } from "./const"
 export const ConvertMinutesToHours = (time: number) => {
 	const hours = Math.floor(time / 60)
 	const minutes = time - hours * 60
-	console.log(hours, minutes)
+
 	return `${hours}h ${minutes}m`
 }
 
@@ -38,6 +38,25 @@ export const FormattedDateSearch = (date: string) => {
 	const day = Number(newDate[2].substring(0, 2)).toString().padStart(2, "0").replace(" ", "")
 	const month = newDate[1].replace(" ", "")
 	const year = newDate[0].replace(" ", "")
-	console.log(day)
+
 	return `${year}-${month}-${day} `
+}
+
+export const GetLatestYears = (defaultValue?: boolean) => {
+	const propertiesYears: IPropertiesCombobox[] = []
+	const currentYear = new Date().getFullYear()
+	const numberYears = currentYear - 1873
+	if (defaultValue) {
+		propertiesYears.push({ option: "Mostrar todo", value: "" })
+	}
+	for (let index = 0; index < numberYears; index++) {
+		propertiesYears.push({ option: (currentYear - index).toString(), value: (currentYear - index).toString() })
+	}
+	return propertiesYears
+}
+
+
+interface IPropertiesCombobox {
+	option: string | number
+	value: string
 }

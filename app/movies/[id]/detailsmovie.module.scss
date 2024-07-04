@@ -143,33 +143,7 @@
     }
 
     &_play {
-        display: flex;
-        flex-direction: row;
-        gap: 0.5em;
-        padding: 0.2em 0.5em;
-        width: max-content;
-        border-radius: 0.2em;
-        align-items: center;
-        background-color: var(--highlightColorBasic);
-        border: none;
-        color: var(--primaryColor);
-        transition: all 0.25s ease-in-out;
-        cursor: pointer;
-
-        &:hover {
-            background-color: var(--highlightColor);
-        }
-
-        &Icon {
-            width: 2em;
-            height: 2em;
-            color: var(--fontColor);
-        }
-
-        &Text {
-            color: var(--fontColor);
-            font-weight: 300;
-        }
+        font-size: 1em !important;
     }
 
     &_companies {
@@ -178,22 +152,31 @@
         gap: 0.5em;
     }
 
+
     &_company {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        padding: 0.25em;
+        width: 7em;
+        height: 5.5em;
+        padding: 0.5em;
         border-radius: 0.25em;
-        background-color: var(--hover);
+        background: radial-gradient(circle, var(--terciaryColor), var(--secondaryColor));
+        //border: 1px solid var(--fontColor);
 
         &Name {
-            color: var(--fontSecondColor);
-            font-size: 0.8em;
+            color: var(--fontColor);
+            font-size: 0.7em;
+            font-weight: 300;
+            text-align: center;
+            text-wrap: balance;
         }
 
         &Logo {
-            object-fit: contain;
+            object-fit: scale-down;
+            filter: grayscale(1) invert(1);
+
         }
     }
 
@@ -227,5 +210,13 @@
         font-size: 0.85em;
         max-width: 800px;
         padding: 0.25em 0.5em;
+    }
+}
+
+.keywords {
+    display: flex;
+
+    &_word {
+        background-color: var(--fontColor);
     }
 }

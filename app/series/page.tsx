@@ -1742,7 +1742,7 @@ export default async function Page() {
         <section className={`${styles.section} scrollBarStyle`}>
             <MainSliderSeries movies={airingToday.results.filter((_, index) => index < 10) as ISerie[]} />
             <CategorySlider type="serie" />
-            <MovieSliderGeneral title="Mejor Valoradas" list_link="/series/search/result?sort_by=vote_average.desc&vote_count.gte=200">
+            <MovieSliderGeneral title="Mejor Valoradas" list_link="/series/results/list?sort_by=vote_average.desc&vote_count.gte=200">
                 <>
                     {
                         ratingSeries.results.map((serie, index) => (
@@ -1752,7 +1752,7 @@ export default async function Page() {
                 </>
             </MovieSliderGeneral>
             <div className="separator"></div>
-            <MovieSliderGeneral title="Populares" list_link="/series/search/result?sort_by=popularity.desc">
+            <MovieSliderGeneral title="Populares" list_link="/series/results/list?sort_by=popularity.desc">
                 <>
                     {
                         popularSeries.results.map((serie, index) => (
@@ -1762,7 +1762,7 @@ export default async function Page() {
                 </>
             </MovieSliderGeneral>
             <div className="separator"></div>
-            <MovieSliderGeneral title="Emitidas los próximos días" list_link={`/series/search/result?sort_by=popularity.desc&air_date.lte=${dateEnd.replace(" ", "")}&air_date.gte=${dateStart.replace(" ", "")}`}>
+            <MovieSliderGeneral title="Emitidas los próximos días" list_link={`/series/results/list?sort_by=popularity.desc&air_date.lte=${dateEnd.replace(" ", "")}&air_date.gte=${dateStart.replace(" ", "")}`}>
                 <>
                     {
                         upcomingSeries.results.map((serie, index) => (

@@ -1,17 +1,20 @@
+import { HeaderSection } from "../components/HeaderSection/HeaderSection"
 import { Pagination } from "../components/Pagination/Pagination"
 import { IPeopleResponse } from "../interfaces/responses"
 import { GetPeoplePopular } from "../services/fetchData"
+import { PopularIcon } from "../utils/svg"
 import { PersonCard } from "./components/PersonCard/PersonCard"
 import styles from "./people.module.scss"
 
 export default async function Page(params: { params: { lang: string }, searchParams: { page: number } }) {
-    console.log(params.searchParams.page)
+
 
     const popularPeople: IPeopleResponse = await GetPeoplePopular(params.searchParams.page)
 
     return (
-        <section className={`${styles.section} scrollBarStyle`}>
-            <div className={styles.people}>
+        <section className={`${styles.section} `}>
+            <HeaderSection title="Top personas (Popularidad)" icon={<PopularIcon />} />
+            <div className={`${styles.people} scrollBarStyle`}>
                 {
                     popularPeople.results.map(person => (
                         <PersonCard key={person.id} person={person} />

@@ -185,3 +185,19 @@
         }
     }
 }
+
+.loading {
+    position: absolute;
+    top: calc(50% - 4.5em);
+    width: 5em;
+    height: 5em;
+    color: var(--fontColor);
+    animation: loading 1s ease-in-out infinite;
+    z-index: 100;
+
+    @keyframes loading {
+        to {
+            transform: rotate(359deg);
+        }
+    }
+}
