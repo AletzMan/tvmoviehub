@@ -1,0 +1,105 @@
+.details {
+    appearance: none;
+    border-radius: 0.15em;
+    border: 1px solid var(--hover);
+    background-color: #DDDDDD;
+
+    &::-webkit-details-marker {
+        display: none;
+    }
+
+    &[open] .summary_icon {
+        transform: rotate(180deg);
+    }
+}
+
+.summary {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 2em;
+    padding: 0.5em 2em 0.5em 0.5em;
+    position: relative;
+    color: transparent;
+    cursor: pointer;
+    transition: background-color 0.25s ease-in-out;
+    //background-color: red;
+
+    &:hover {
+        background-color: var(--hover);
+
+        &>.summary_title {
+            color: var(--highlightColor);
+        }
+
+        &>.summary_icon {
+            color: var(--highlightColor);
+        }
+    }
+
+    &_title {
+        font-weight: 500;
+        font-size: 0.95em;
+        color: var(--primaryColor);
+        transition: color 0.25s ease-in-out;
+    }
+
+    &_count {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 1.5em;
+        height: 1.5em;
+        font-size: 0.85em;
+        font-weight: 500;
+        border-radius: 0.2em;
+        color: var(--fontColor);
+        border: 1px solid var(--hover);
+        background-color: var(--highlightColor);
+    }
+
+    &_icon {
+        position: absolute;
+        right: 0;
+        width: 1.25em;
+        height: 1.25em;
+        transition: all 0.2s ease-in-out;
+        color: var(--primaryColor);
+    }
+}
+
+.options {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0.5em;
+    width: 100%;
+
+    &_label {
+        font-size: 0.8em;
+        color: var(--terciaryColor);
+    }
+
+    &_select {
+        padding: 0.2em 0.5em 0.2em 0.5em;
+        font-family: var(--font-family);
+        color: var(--primaryColor);
+        min-width: 20em;
+        border-radius: 0.2em;
+        border: 1px solid var(--secondaryColor);
+        background-color: var(--fontColor);
+
+        &:disabled {
+            cursor: not-allowed;
+            border: 1px solid var(--fontSecondColor);
+            color: var(--fontSecondColor);
+        }
+    }
+}
+
+.footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5em;
+    padding: 0.25em;
+}
