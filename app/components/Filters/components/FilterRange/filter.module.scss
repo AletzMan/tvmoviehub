@@ -1,0 +1,135 @@
+.details {
+    appearance: none;
+    border-radius: 0.15em;
+    border: 1px solid var(--hover);
+    background-color: #DDDDDD;
+
+    &::-webkit-details-marker {
+        display: none;
+    }
+
+    &[open] .summary_icon {
+        transform: rotate(180deg);
+    }
+}
+
+.summary {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 2em;
+    padding: 0.5em 2em 0.5em 0.5em;
+    position: relative;
+    color: transparent;
+    cursor: pointer;
+    transition: background-color 0.25s ease-in-out;
+    //background-color: red;
+
+    &:hover {
+        background-color: var(--hover);
+
+        &>.summary_title {
+            color: var(--highlightColor);
+        }
+
+        &>.summary_icon {
+            color: var(--highlightColor);
+        }
+
+    }
+
+    &_title {
+        font-weight: 500;
+        font-size: 0.95em;
+        color: var(--primaryColor);
+        transition: color 0.25s ease-in-out;
+    }
+
+    &_count {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 1.5em;
+        height: 1.5em;
+        font-size: 0.85em;
+        font-weight: 500;
+        border-radius: 0.2em;
+        color: var(--fontColor);
+        border: 1px solid var(--hover);
+        background-color: var(--highlightColor);
+    }
+
+    &_icon {
+        position: absolute;
+        right: 0;
+        width: 1.25em;
+        height: 1.25em;
+        transition: all 0.2s ease-in-out;
+        color: var(--primaryColor);
+    }
+}
+
+.options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5em;
+    width: 100%;
+    padding: 0.5em;
+
+    &_label {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        font-size: 0.8em;
+        width: 10em;
+        color: var(--terciaryColor);
+    }
+
+    &_input {
+        padding: 0.2em;
+        font-family: var(--font-family);
+        color: var(--primaryColor);
+        border-radius: 0.2em;
+        border: 1px solid var(--secondaryColor);
+        background-color: var(--fontColor);
+
+        &:disabled {
+            cursor: not-allowed;
+            border: 1px solid var(--fontSecondColor);
+            color: var(--fontSecondColor);
+        }
+
+        &Error {
+            border: 1px dashed #FF0000;
+        }
+    }
+
+    &_error {
+        position: absolute;
+        bottom: -1.75em;
+        left: 0;
+        padding: 0.05em 0.4em;
+        border-radius: 0.2em;
+        color: var(--fontColor);
+        background-color: #FF0000;
+
+        &::before {
+            position: absolute;
+            top: -0.25em;
+            content: "";
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-bottom: 5px solid #FF0000;
+
+        }
+    }
+}
+
+.footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5em;
+    padding: 0.25em;
+    margin: 1.5em 0 0 0;
+}
