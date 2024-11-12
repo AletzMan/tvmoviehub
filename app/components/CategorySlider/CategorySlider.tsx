@@ -13,7 +13,7 @@ export const CategorySlider = ({ type }: Props) => {
         <MovieSliderGeneral title="Categorías"  >
             {type === "movie" && CategoriesMovies.map(category => (
                 <div className={styles.category} key={category.id}>
-                    <Link className={styles.category_link} href={`movies/category/${category.link}`}>
+                    <Link className={styles.category_link} href={`movies/results/list?with_genres=${category.id}`}>
                         {category.icon}
                         <span className={styles.category_name}>{category.name}</span>
                     </Link>
@@ -21,7 +21,7 @@ export const CategorySlider = ({ type }: Props) => {
             ))}
             {type === "serie" && CategoriesSeries.map(category => (
                 <div className={styles.category} key={category.id}>
-                    <Link className={styles.category_link} href={`series/category/${category.link}`}>
+                    <Link className={styles.category_link} href={`series/results/list?with_genres=${category.id}`}>
                         {category.icon}
                         <span className={styles.category_name}>{category.name}</span>
                     </Link>

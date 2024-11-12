@@ -1,24 +1,22 @@
 "use client"
-import { IMovie } from "@/app/interfaces/movie"
 import styles from "./mainslider.module.scss"
 import Image from "next/image"
 import { BASE_URL_IMG } from "@/app/utils/const"
-import { Fragment, useEffect, useRef, useState } from "react"
-import { AddIcon, ArrowLeftIcon, DateIcon, LoadingIcon, StarIcon } from "@/app/utils/svg"
+import { useEffect, useState } from "react"
+import { AddIcon, StarIcon } from "@/app/utils/svg"
 import { ISerie } from "@/app/interfaces/serie"
 import Link from "next/link"
+import { NextArrow, PrevArrow } from "../ArrowSlider/ArrowSlider"
+import Slider from "react-slick"
+import "slick-carousel/slick/slick.css"
+import "slick-carousel/slick/slick-theme.css"
 
 interface Props {
     movies: ISerie[];
 }
 
 export const MainSliderSeries = ({ movies }: Props) => {
-    const refSlider = useRef<HTMLDivElement | null>(null)
-    const [position, setPosition] = useState(-100)
-    const [isTransitioning, setIsTransitioning] = useState(false)
     const [carouselMovies, setCarouselMovies] = useState<ISerie[]>([])
-    const [manualMove, setManualMove] = useState(false)
-    const [timeSlider, setTimeSlider] = useState(0)
 
     useEffect(() => {
         if (movies.length > 0) {
@@ -28,149 +26,59 @@ export const MainSliderSeries = ({ movies }: Props) => {
                 movies[0],
             ]
             setCarouselMovies(extendedMovies)
-            setPosition(-100) // Start at the first movie
         }
     }, [movies])
 
-    useEffect(() => {
-        const slider = refSlider.current
-        if (!slider) return
-
-        const handleTransitionEnd = () => {
-            setIsTransitioning(false)
-            const totalMovies = movies.length
-
-            if (position === -(totalMovies + 1) * 100) {
-                setPosition(-100)
-            } else if (position === 0) {
-                setPosition(-totalMovies * 100)
-            }
-        }
-        const timerPrev = setInterval(() => {
-            setTimeSlider(prev => prev + 1.75)
-        }, 100)
-        slider.addEventListener("transitionend", handleTransitionEnd)
-
-        return () => {
-            slider.removeEventListener("transitionend", handleTransitionEnd)
-            clearInterval(timerPrev)
-            setTimeSlider(0)
-        }
-    }, [position, movies.length])
-
-    const handleMoveSlider = (move: "left" | "right") => {
-        if (isTransitioning) return
-        setIsTransitioning(true)
-        setManualMove(true)
-
-        if (move === "left") {
-            setPosition((prev) => prev + 100)
-        } else {
-            setPosition((prev) => prev - 100)
-        }
-    }
-
-    useEffect(() => {
-        if (manualMove) {
-
-            const timer = setTimeout(() => {
-                setManualMove(false)
-
-            }, 3000)
-            return () => clearTimeout(timer)
-        }
-    }, [manualMove])
-
-    useEffect(() => {
-        if (manualMove) return
-
-        const interval = setInterval(() => {
-            handleMoveSlider("right")
-        }, 3000)
-
-        return () => clearInterval(interval)
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [manualMove])
-
-
-    const HandleSetPosition = (pos: number) => {
-        setPosition(pos)
-    }
 
     return (
         <article className={styles.article}>
-            <button
-                className={`${styles.direction} ${styles.direction_left}`}
-                onClick={() => handleMoveSlider("left")}
-            >
-                <ArrowLeftIcon className={`${styles.direction_icon}`} />
-            </button>
-            <div className={styles.container}>
-                {carouselMovies.length === 0 &&
-                    <div className={styles.loading}>
-                        <LoadingIcon className={styles.loading_icon} />
-                        <span className={styles.loading_text} >LOADING</span>
-                    </div>
-                }
-                {carouselMovies.length > 0 &&
-                    <div
-                        className={styles.slider}
-                        ref={refSlider}
-                        style={{
-                            position: "relative",
-                            top: "0",
-                            transition: isTransitioning ? "all 0.3s ease-out" : "none",
-                            display: "flex",
-                            width: `${carouselMovies.length * 100}%`,
-                            left: `${position}%`,
-                            overflow: "hidden"
-                        }}
-                    >
-                        {carouselMovies.map((movie, index) => (
-                            <div key={`${movie.id}-${index}`} className={styles.movie} >
-                                <div className={styles.movie_cover}>
-                                    <div className={styles.movie_description}>
-                                        <h3 className={styles.movie_title}>{movie.name}</h3>
-                                        <h4 className={styles.movie_subtitle}>{`(${movie.original_name})`}</h4>
-                                        <div className={styles.movie_details}>
-                                            <p className={styles.movie_average}><StarIcon className={styles.movie_icon} />{movie.vote_average.toFixed(1)}</p>
-                                            <Link className={styles.movie_info} href={`/series/${movie.id}`}><AddIcon className={styles.movie_icon} /> MÁS INFORMACIÓN</Link>
-                                        </div>
-
-                                    </div>
+            <Slider  {...settings} >
+                {carouselMovies.map((movie, index) => (
+                    <div key={`${movie.id}-${index}`} className={styles.movie} >
+                        <div className={styles.movie_cover}>
+                            <div className={styles.movie_description}>
+                                <h3 className={styles.movie_title}>{movie.name}</h3>
+                                <h4 className={styles.movie_subtitle}>{`(${movie.original_name})`}</h4>
+                                <div className={styles.movie_details}>
+                                    <p className={styles.movie_average}><StarIcon className={styles.movie_icon} />{movie.vote_average.toFixed(1)}</p>
+                                    <Link className={styles.movie_info} href={`/series/${movie.id}`}><AddIcon className={styles.movie_icon} /> MÁS INFORMACIÓN</Link>
                                 </div>
-                                <Image
-                                    className={styles.movie_image}
-                                    src={BASE_URL_IMG.concat(movie.backdrop_path)}
-                                    width={1250}
-                                    height={900}
-                                    alt={`Cover de ${movie.name}`}
-                                />
+
                             </div>
-                        ))}
+                        </div>
+                        <Image
+                            className={styles.movie_image}
+                            src={BASE_URL_IMG.concat(movie.backdrop_path)}
+                            width={1980}
+                            height={900}
+                            alt={`Cover de ${movie.name}`}
+                        />
                     </div>
-                }
-                <div className={styles.timebar} style={{ position: "absolute", bottom: "0", height: "0.15em", backgroundColor: "var(--highlightColorBasic)", width: `${timeSlider}%`, transition: "all ease-in-out" }}></div>
-            </div>
-            <button
-                className={`${styles.direction} ${styles.direction_right}`}
-                onClick={() => handleMoveSlider("right")}
-            >
-                <ArrowLeftIcon className={`${styles.direction_icon}`} />
-            </button>
-            <div className={styles.footer}>
-                {
-                    carouselMovies.map((point, index) => (
-                        <Fragment key={`${point.name}-${index}`}>
-                            {index !== 0 && index !== carouselMovies.length - 1 &&
-                                <button className={`${styles.footer_point} ${((position / - 100) === index) && styles.footer_pointCurrent}`}
-                                    onClick={() => HandleSetPosition(index * -100)}
-                                    data-title={point.name}>
-                                </button>}
-                        </Fragment>
-                    ))
-                }
-            </div>
+                ))}
+            </Slider>
         </article>
     )
+}
+
+const settings = {
+    customPaging: function (i: number) {
+        return (
+            <a className={styles.slider_dots}>
+                {i}
+            </a>
+        )
+    },
+    infinite: true,
+    dotsClass: "slick-dots slick-thumb",
+    speed: 1500,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    arrows: false,
+    dots: true,
+    rows: 1,
+    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow />,
+    swipeToSlide: true,
+    swipe: true
 }

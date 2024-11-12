@@ -18,7 +18,7 @@
         transition: all 0.3s ease-in-out;
 
         &:focus {
-            border: 1px solid var(--highlightColor);
+            border: 1px solid var(--highlightColorBasic);
             border-right: none;
         }
 
@@ -44,6 +44,15 @@
         height: 1.5em;
         color: var(--fontSecondColor);
     }
+
+    &_header {
+        display: flex;
+        flex-direction: column;
+        padding: 1.5em 1em 1em 1em;
+        background-color: var(--secondaryColor);
+    }
+
+
 
 }
 

@@ -1,0 +1,93 @@
+.textbox {
+    position: relative;
+    border: none;
+    width: 100%;
+
+    &_input {
+        display: flex;
+        flex-direction: column;
+        font-size: 1em;
+        font-weight: 300;
+        padding: 0.45em 1em;
+        width: 100%;
+        border-radius: 0.2em;
+        font-family: var(--font-family);
+        color: var(--fontColor);
+        background-color: var(--primaryColor);
+        border: 1px solid var(--terciaryColor);
+        z-index: 1;
+
+        &:focus {
+            outline: 1px solid var(--highlightColorBasic);
+        }
+
+        &Error {
+            border: 1px dashed #c50101;
+        }
+
+
+
+    }
+
+    &_label {
+        padding: 0 0 0 0.25em;
+        font-size: 0.85em;
+        color: var(--fontSecondColor);
+    }
+
+
+    &_error {
+        position: absolute;
+        bottom: -2.1em;
+        left: 0.25em;
+        padding: 0.15em 0.45em;
+        font-size: 0.7em;
+        border-radius: 0.2em;
+        background-color: #c50101;
+        color: var(--fontColor);
+        z-index: 0;
+        opacity: 0;
+        transform: translateY(-1em);
+        animation: error 0.3s ease-in-out both;
+
+        &::before {
+            position: absolute;
+            top: -0.5em;
+            content: "";
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-bottom: 8px solid #c50101;
+        }
+
+        @keyframes error {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+    }
+
+    &_view {
+        position: absolute;
+        right: 0.95em;
+        top: 50%;
+        width: 2em;
+        height: 2em;
+        border: none;
+        background-color: var(--primaryColor);
+        color: var(--fontSecondColor);
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+
+        &:hover {
+            color: var(--fontColor);
+        }
+
+        &Icon {
+            width: 1.5em;
+            height: 1.5em;
+
+
+        }
+    }
+}

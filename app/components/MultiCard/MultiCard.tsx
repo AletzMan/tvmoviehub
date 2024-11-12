@@ -2,9 +2,8 @@
 import styles from "./multicard.module.scss"
 import Link from "next/link"
 import Image from "next/image"
-import { BASE_URL_IMG, BASE_URL_IMG_CUSTOM } from "@/app/utils/const"
-import { AddIcon, FavoriteFullIcon, FemaleIcon, LoadingIcon, MaleIcon, MovieIcon, PeopleIcon, SerieIcon, StarIcon } from "@/app/utils/svg"
-import { IPartCollection } from "@/app/interfaces/movie"
+import { BASE_URL_IMG_CUSTOM } from "@/app/utils/const"
+import { DetailsIcon, FavoriteFullIcon, FemaleIcon, LoadingIcon, MaleIcon, MovieIcon, PeopleIcon, SerieIcon, StarIcon } from "@/app/utils/svg"
 import { IResult } from "@/app/interfaces/multi"
 import { useState } from "react"
 
@@ -27,7 +26,7 @@ export function MultiCard({ result }: Props) {
             <div className={styles.movie_shadow}></div>
             <div className={styles.movie_dialog}>
                 <Link className={styles.movie_dialogMore} href={result.media_type === "movie" ? `/movies/${result.id}` : result.media_type === "tv" ? `/series/${result.id}` : `/people/${result.id}`} title={result.title}>
-                    <AddIcon className={styles.movie_dialogIcon} />
+                    <DetailsIcon className={styles.movie_dialogIcon} />
                 </Link>
             </div>
             {(result.media_type === "movie" || result.media_type === "tv") && <span className={styles.movie_average}><StarIcon className={styles.movie_iconDate} />{result?.vote_average?.toFixed(1)}</span>}

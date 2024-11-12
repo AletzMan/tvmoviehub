@@ -18,6 +18,7 @@ interface Props {
 export function Filters({ section }: Props) {
     const [categories, setCategories] = useState(categoriesMovies)
     const [open, setOpen] = useState(false)
+    const [numberFilters, setNumberFilters] = useState(0)
     const router = useRouter()
     const pathname = usePathname()
     const searchParams = useSearchParams()
@@ -25,17 +26,24 @@ export function Filters({ section }: Props) {
     useEffect(() => {
         const newCategories = section === "movies" ? categoriesMovies : categoriesSeries
         setCategories(newCategories)
+        let number = 0
+        for (let index = 0; index < FilterNames.length; index++) {
+            const filter = searchParams.get(FilterNames[index])
+            if (filter) {
+                number++
+            }
+        }
+        setNumberFilters(number)
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [searchParams])
 
     const HandleOpen = () => {
         setOpen(prev => !prev)
     }
 
     const HandleAllResetFilter = () => {
-        const page = searchParams.get("page")
         router.push(`${pathname}?page=1`)
-
+        setNumberFilters(0)
     }
 
 
@@ -45,15 +53,17 @@ export function Filters({ section }: Props) {
                 <button className={`${styles.button} ${open && styles.button_active}`} onClick={HandleOpen}>
                     <FiltersIcon className={styles.button_icon} />
                     Filtros
+                    <span className={styles.button_number}>{numberFilters}</span>
                 </button>
                 <div className={`${styles.filters_triangle} ${open && styles.filters_triangleOpen}`}></div>
                 <div className={`${styles.filters} ${open && styles.filters_open} scrollBarStyle`}>
                     <Filter properties={categories} nameView="Géneros" nameParam="with_genres" />
+                    {section === "movies" && <Filter properties={Certifications} nameView="Clasificación" nameParam="certification" />}
                     {section === "movies" && <Filter properties={releaseTypes} nameView="Tipos de lanzamiento" nameParam="with_release_type" />}
                     <FilterDate nameView="Fecha de lanzamiento" section={section} nameParam={section === "movies" ? "primary_release_date" : "first_air_date"} />
                     <FilterComboBox properties={years} section={section} nameView="Año de lanzamiento" nameParam={section === "movies" ? "primary_release_year" : "first_air_date_year"} />
-                    <FilterRange nameView="Valoración" section={section} nameParam={section === "movies" ? "vote_average" : "vote_average"} />
-                    <FilterRange nameView="Votos" section={section} nameParam={section === "movies" ? "vote_count" : "vote_count"} />
+                    <FilterRange nameView="Valoración" section={section} nameParam={"vote_average"} />
+                    <FilterRange nameView="Votos" section={section} nameParam={"vote_count"} />
                     <footer className={styles.filters_footer}>
                         <Button text="Reestablecer todo" icon={<ResetIcon />} onClick={HandleAllResetFilter} mode="button" />
                     </footer>
@@ -67,6 +77,18 @@ export function Filters({ section }: Props) {
         </>
     )
 }
+
+const FilterNames = [
+    "with_genres",
+    "certification",
+    "with_release_type",
+    "primary_release_date.gte",
+    "first_air_date",
+    "primary_release_year",
+    "first_air_date_year",
+    "vote_average.gte",
+    "vote_count.gte"
+]
 
 
 const categoriesMovies = [{
@@ -234,6 +256,33 @@ const releaseTypes = [
     {
         option: "Lanzamiento en TV",
         value: "6"
+    }
+]
+
+export const Certifications = [
+    {
+        value: "AA",
+        option: "Menores de 7 años (AA)"
+    },
+    {
+        value: "A",
+        option: "Para todos los grupos de edad (A)"
+    },
+    {
+        value: "B",
+        option: "Adolescentes a partir de 12 años (B)"
+    },
+    {
+        value: "B-15",
+        option: "Mayores de 15 años (B-15)"
+    },
+    {
+        value: "C",
+        option: "Para mayores de 18 años. (C)"
+    },
+    {
+        value: "D",
+        option: "Películas para adultos (D)"
     }
 ]
 

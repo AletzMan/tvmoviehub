@@ -1,0 +1,111 @@
+.lists {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5em 0.25em;
+
+    @media (width < 700px) {
+        padding: 0.25em 0.35em 0.25em 0;
+    }
+
+    &_section {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
+        gap: 0.25em;
+        height: calc(100svh - 15em);
+    }
+}
+
+.listCard {
+    background: linear-gradient(-25deg, var(--fourthColor), var(--secondaryColor));
+    border: 1px solid var(--terciaryColor);
+    height: 10em;
+    padding: 0.5em;
+    border-radius: 0.25em;
+
+    &:hover {
+        filter: brightness(120%);
+    }
+
+    &_title {
+        color: var(--fontColor);
+    }
+
+    &_description {
+        color: var(--fontSecondColor);
+    }
+
+    &_count {
+        display: flex;
+        padding: 0.1em 0.25em;
+        border-radius: 0.45em;
+        border: 1px solid var(--hover);
+        font-weight: 500;
+        gap: 0.25em;
+        max-width: max-content;
+        color: var(--averageColor);
+        background-color: var(--hover);
+
+        &Text {
+            color: var(--subtitleColor);
+        }
+    }
+}
+
+.message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4em 1em;
+    width: 100%;
+
+    &_title {
+        color: var(--titleColor);
+        font-size: 1.5em;
+        font-weight: 500;
+    }
+
+    &_text {
+        color: var(--fontColor);
+        margin: 0 0 1em 0;
+    }
+}
+
+.dialog {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    width: 100svw;
+    height: 100svh;
+    border: none;
+    background-color: #2BA84A05;
+    backdrop-filter: blur(15px);
+    z-index: 2;
+
+    &_form {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2em;
+        padding: 2em 1.5em;
+        border-radius: 0.25em;
+        max-width: 20em;
+        min-width: 15em;
+        border: 1px solid var(--hover);
+        background-color: var(--secondaryColor);
+    }
+
+    &_title {
+        color: var(--fontColor);
+        align-self: flex-start;
+        padding: 0 0 0 0.5em;
+    }
+
+    &_buttons {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        border: none;
+    }
+}

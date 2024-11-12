@@ -18,7 +18,7 @@ export const PopularPeople = ({ people }: Props) => {
                 people.map((person, index) => (
                     <Link key={person.id} className={styles.person} href={`/people/${person.id}`}>
                         <picture className={styles.person_picture}>
-                            <Image className={styles.person_image} src={BASE_URL_IMG.concat(person.profile_path)} alt={`Foto de ${person.name}`} width={90} height={120} />
+                            <Image className={styles.person_image} src={BASE_URL_IMG.concat(person.profile_path || "/not_photo.png")} alt={`Foto de ${person.name}`} width={90} height={120} />
                         </picture>
                         <span className={styles.person_name}>{person.name}</span>
                         {<div className={styles.person_position}><StarIcon className={styles.person_positionIcon} /> <span className={styles.person_positionNumber}>{index + 1}</span></div>}

@@ -14,21 +14,22 @@ export default async function Home(params: { params: { lang: string }, searchPar
   const dataPeople: IPeopleResponse = await GetPeoplePopular(1)
 
   return (
-    <>
-      <section className={`${styles.section} scrollBarStyle`}>
+    <section className={`${styles.home} scrollBarStyle`}>
+      <section className={`${styles.section} `}>
         <article className={styles.article}>
           <h3 className={styles.section_title}>PELÍCULAS EN CARTELERA</h3>
           <MainSlider movies={data} />
         </article>
-        <article className={styles.article}>
+        {/*<article className={styles.article}>
           <h3 className={styles.section_title}>SERIES EMITIDAS HOY</h3>
           <MainSliderSeries movies={dataSeries} />
-        </article>
-        <article className={styles.articleThree}>
-          <h3 className={styles.section_title}>TOP 20 ACTORES POPULARES</h3>
-          <PopularPeople people={dataPeople.results} />
-        </article>
+  </article>*/}
       </section>
-    </>
+      <article className={styles.articleThree}>
+        <div className="separator"></div>
+        <h3 className={styles.section_title}>TOP 20 ACTORES POPULARES</h3>
+        <PopularPeople people={dataPeople.results} />
+      </article>
+    </section>
   )
 }

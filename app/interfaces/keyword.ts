@@ -1,11 +1,11 @@
 export interface IKeywords {
     id: number
-    results?: Result[]
-    keywords?: Result[]
+    results?: IResult[]
+    keywords?: IResult[]
 }
 
 
-export interface Result {
+export interface IResult {
     name: string
     id: number
 }

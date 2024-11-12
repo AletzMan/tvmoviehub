@@ -3,20 +3,50 @@ import styles from "./moviecarddetails.module.scss"
 import Link from "next/link"
 import Image from "next/image"
 import { BASE_URL_IMG_CUSTOM } from "@/app/utils/const"
-import { AddIcon, FavoriteFullIcon, LoadingIcon, MovieIcon, SerieIcon, StarIcon } from "@/app/utils/svg"
+import { DetailsIcon, FavoriteFullIcon, LoadingIcon, MovieIcon, SerieIcon, StarIcon } from "@/app/utils/svg"
 import { IPartCollection } from "@/app/interfaces/movie"
 import { useState } from "react"
+import { AddRemoveFavorite } from "@/app/services/fetchData"
+import { useSession } from "@/app/hooks/useSession"
+import { RevalidateURL } from "@/app/utils/serveractions"
+import { useSnackbar } from "notistack"
 
 interface Props {
     movie: IPartCollection
     type: 'movie' | 'tv'
+    isFavorites?: boolean
 }
 
-export function MovieCardDetails({ movie, type }: Props) {
+export function MovieCardDetails({ movie, type, isFavorites }: Props) {
+    const { enqueueSnackbar } = useSnackbar()
+    const { session_id } = useSession()
     const [load, setLoad] = useState(true)
+    const [isFavorite, setIsFavorite] = useState(isFavorites || false)
 
     const HandleLoadImage = () => {
         setLoad(false)
+    }
+
+    const HandleAddRemoveFavorite = async () => {
+        const AddFavorite = async () => {
+            const response = await AddRemoveFavorite(session_id, type, movie.id, !isFavorite)
+            console.log(response)
+            if (response.success) {
+                if (type === "movie") {
+                    RevalidateURL("favoriteMovies")
+                } else {
+                    RevalidateURL("favoriteSeries")
+                }
+                if (response.status_code === 1) {
+                    enqueueSnackbar(`${type === "movie" ? "Película" : "Serie"} '${movie.title || movie.name}' agregada a favoritos.`, { variant: "success" })
+                } else if (response.status_code === 13) {
+                    enqueueSnackbar(`${type === "movie" ? "Película" : "Serie"} '${movie.title || movie.name}' eliminada de favoritos.`, { variant: "success" })
+                }
+                console.log(response.status_message)
+            }
+            setIsFavorite(prev => !prev)
+        }
+        AddFavorite()
     }
 
     return (
@@ -24,19 +54,19 @@ export function MovieCardDetails({ movie, type }: Props) {
             <div className={styles.movie_picture}>
                 {movie.poster_path
                     ?
-                    <Image className={styles.movie_photo} onLoad={HandleLoadImage} src={movie.poster_path ? BASE_URL_IMG_CUSTOM.concat(`/w342`.concat(movie.poster_path) || '') : "/not_photo.png"} width={150} height={200} alt={`Poster de ${movie.title}`} />
+                    <Image className={styles.movie_photo} onLoad={HandleLoadImage} src={movie.poster_path ? BASE_URL_IMG_CUSTOM.concat(`/w342`.concat(movie.poster_path) || '') : "/not_photo.png"} width={180} height={210} alt={`Poster de ${movie.title}`} />
                     :
-                    <Image className={styles.movie_photo} onLoad={HandleLoadImage} src={"/not_photo.png"} width={150} height={200} alt={`Poster de ${movie.title}`} />
+                    <Image className={styles.movie_photo} onLoad={HandleLoadImage} src={"/not_photo.png"} width={180} height={210} alt={`Poster de ${movie.title}`} />
                 }
             </div>
             <div className={styles.movie_shadow}></div>
             <div className={styles.movie_dialog}>
                 <Link className={styles.movie_dialogMore} href={type === "movie" ? `/movies/${movie.id}` : `/series/${movie.id}`} title={movie.title}>
-                    <AddIcon className={styles.movie_dialogIcon} />
+                    <DetailsIcon className={styles.movie_dialogIcon} />
                 </Link>
             </div>
             <span className={styles.movie_average}><StarIcon className={styles.movie_iconDate} />{movie?.vote_average?.toFixed(1)}</span>
-            <button className={styles.movie_fav}><FavoriteFullIcon className={styles.movie_favIcon} /> </button>
+            <button className={styles.movie_fav} onClick={HandleAddRemoveFavorite}><FavoriteFullIcon className={`${styles.movie_favIcon} ${isFavorite && styles.movie_favActive}`} /> </button>
             <div className={styles.movie_description}>
                 {movie.media_type && movie.media_type === "movie" && <span className={styles.movie_type}><MovieIcon className={styles.movie_typeIcon} />Película</span>}
                 {movie.media_type && movie.media_type === "tv" && <span className={styles.movie_type}><SerieIcon className={styles.movie_typeIcon} />Serie</span>}

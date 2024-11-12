@@ -4,16 +4,13 @@ import Image from "next/image"
 import { BASE_URL_IMG, countryFlags } from "@/app/utils/const"
 import { ConvertMinutesToHours } from "@/app/utils/helpers"
 import { DateIcon, StarIcon, TimeIcon, TrilerIcon } from "@/app/utils/svg"
-import { ICredits } from "@/app/interfaces/credits"
 import { SliderCrew } from "./components/SliderCrew/SliderCrew"
 import { MovieSlider } from "@/app/components/MovieSlider/MovieSlider"
-import { IRecommendationResponse } from "@/app/interfaces/responses"
-import { GetCollectionsDetails, GetCredits, GetMovieDetails, GetMovieImages, GetMovieKeywords, GetRecommendations } from "@/app/services/fetchData"
+import { GetCollectionsDetails, GetMovieDetails, GetMovieImages } from "@/app/services/fetchData"
 import { Crew } from "@/app/components/Crew/Crew"
 import { NotResults } from "@/app/components/NotResults/NotResults"
 import { IImages } from "@/app/interfaces/image"
 import { SectionImages } from "./components/SectionImages/SectionImages"
-import { IKeywords } from "@/app/interfaces/keyword"
 import { SectionTags } from "./components/SectionTags/SectionTags"
 import { Button } from "@/app/components/Button/Button"
 
@@ -21,15 +18,15 @@ export default async function Page(params: { params: { id: string }, searchParam
 
     const data: IMovieDetails | null = await GetMovieDetails(params.params.id)
 
-    const credits: ICredits | null = await GetCredits(params.params.id)
+    //const credits: ICredits | null = await GetCredits(params.params.id)
 
     const collections: ICollectionDetails | null = await GetCollectionsDetails(data?.belongs_to_collection?.id.toString() || "")
 
-    const recommendation: IRecommendationResponse | null = await GetRecommendations(params.params.id)
+    //const recommendation: IRecommendationResponse | null = await GetRecommendations(params.params.id)
 
     const images: IImages | null = await GetMovieImages(params.params.id)
 
-    const keywords: IKeywords | null = await GetMovieKeywords(params.params.id)
+    //const keywords: IKeywords | null = await GetMovieKeywords(params.params.id)
 
     return (
         <section className={`${styles.section} scrollBarStyle`}>
@@ -78,16 +75,16 @@ export default async function Page(params: { params: { id: string }, searchParam
                         }
                     </div>
                     {images && <SectionImages images={images} />}
-                    {keywords && <SectionTags keywords={keywords} />}
+                    {data.keywords && <SectionTags keywords={data.keywords} />}
                     <h4 className={styles.details_title}>SINOPSIS</h4>
                     <article className={styles.details}>
                         <p className={styles.details_overview}>{data.overview}</p>
                     </article>
-                    {credits && <SliderCrew credits={credits} type="cast" title="REPARTO" />}
-                    {credits && <Crew credits={credits} />}
+                    {data.credits && <SliderCrew credits={data.credits} type="cast" title="REPARTO" />}
+                    {data.credits && <Crew credits={data.credits} />}
                     <hr className="separator" />
                     {(collections && collections?.parts) && <MovieSlider parts={collections?.parts?.filter(movie => movie.id.toString() !== params.params.id)} title="DE LA MISMA COLECCIÓN" />}
-                    {(recommendation && recommendation.results.length > 0) && <MovieSlider parts={recommendation.results} title="RECOMENDACIONES" />}
+                    {(data.recommendations && data.recommendations.results.length > 0) && <MovieSlider parts={data.recommendations.results} title="RECOMENDACIONES" />}
                 </>
                 :
                 <NotResults id={params.params.id} type="movie" />

@@ -5,7 +5,6 @@ import { SortButton } from "../SortButton/SortButton"
 import styles from "./header.module.scss"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { Filters } from "../Filters/Filters"
-import { SectionTags } from "@/app/movies/[id]/components/SectionTags/SectionTags"
 
 export function HeaderFilters() {
     const [defaultSort, setDefaultSort] = useState("")
@@ -16,9 +15,13 @@ export function HeaderFilters() {
 
     useEffect(() => {
         const currentSort = searchParams.get("sort_by")
+        const newSort = new URLSearchParams(searchParams)
         if (currentSort) {
             const currentSortValue = currentSort.split(".")[0]
             setDefaultSort(currentSortValue)
+        } else {
+            newSort.set("sort_by", `popularity.desc`)
+            router.push(`${pathname}?${newSort}`)
         }
         const section = pathname.split("/")[1]
         const options = section === "movies" ? sortMovies : sortSeries
@@ -28,13 +31,16 @@ export function HeaderFilters() {
 
     const HandleChangeSort = (e: ChangeEvent<HTMLSelectElement>) => {
         const value = e.currentTarget.value
+        console.log(value)
         const currentSort = searchParams.get("sort_by")
+        const newSort = new URLSearchParams(searchParams)
         if (currentSort) {
             const currentSortValue = currentSort.split(".")[1]
-            const newSort = new URLSearchParams(searchParams)
             newSort.set("sort_by", `${value}.${currentSortValue}`)
-            router.push(`${pathname}?${newSort}`)
+        } else {
+            newSort.set("sort_by", `${value}.desc`)
         }
+        router.push(`${pathname}?${newSort}`)
     }
 
     return (
