@@ -1,7 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import styles from "./moviecard.module.scss"
-import { AddIcon, FavoriteFullIcon, MovieIcon, SerieIcon, StarIcon } from "@/app/utils/svg"
+import { DetailsIcon, FavoriteFullIcon } from "@/app/utils/svg"
 import { BASE_URL_IMG, BASE_URL_IMG_CUSTOM } from "@/app/utils/const"
 import { IMovie } from "@/app/interfaces/movie"
 import { FormattedDateUpcoming } from "@/app/utils/helpers"
@@ -20,7 +20,7 @@ export const MovieCardUpcoming = ({ movie }: Props) => {
             <div className={styles.movie_shadow}></div>
             <div className={styles.movie_dialog}>
                 <Link className={styles.movie_dialogMore} href={`/movies/${movie.id}`} title={movie.title}>
-                    <AddIcon className={styles.movie_dialogIcon} />
+                    <DetailsIcon className={styles.movie_dialogIcon} />
                 </Link>
             </div>
             <button className={styles.movie_fav}><FavoriteFullIcon className={styles.movie_favIcon} /> </button>

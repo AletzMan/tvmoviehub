@@ -6,7 +6,7 @@
     grid-column: 2 / 3;
     grid-row: 2 / 3;
     width: 100%;
-    height: calc(100svh - 5em);
+    height: var(--heightHeader);
 
     @media (width < 700px) {
         grid-column: 1 / span 2;
@@ -16,7 +16,6 @@
 .movies {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(10.5em, 1fr));
-    place-items: start start;
     gap: 0.5em;
 
 }

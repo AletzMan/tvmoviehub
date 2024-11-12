@@ -1,3 +1,8 @@
+import { ICredits } from "./credits"
+import { IImages } from "./image"
+import { IKeywords } from "./keyword"
+import { IRecommendationResponse } from "./responses"
+
 export interface IMovie {
 	adult: boolean
 	backdrop_path: string | null
@@ -42,6 +47,10 @@ export interface IMovieDetails {
 	video: boolean
 	vote_average: number
 	vote_count: number
+	credits: ICredits
+	images: IImages
+	keywords: IKeywords
+	recommendations: IRecommendationResponse
 }
 
 export interface BelongsToCollection {

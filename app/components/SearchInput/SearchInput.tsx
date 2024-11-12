@@ -47,7 +47,7 @@ export const SearchInput = ({ section }: Props) => {
             setSearch("")
         }
         let newStatusChecked: IOptions = selectOption
-        if (section) {
+        if (Object.keys(sectionType).includes(section)) {
             newStatusChecked = { ...defaultOptions, search: false, [section]: true }
             setPlaceholder(`Buscar ${sectionType[section as ("movies" | "series" | "people")]}`)
         } else {
@@ -106,7 +106,7 @@ export const SearchInput = ({ section }: Props) => {
     }
 
     return (
-        <>
+        <header className={styles.search_header}>
             <div className={styles.search}>
                 <SearchIcon className={styles.search_icon} />
                 <input className={styles.search_input} type="search" placeholder={placeholder} onChange={HandleSearch} onKeyDown={HandlekeyDown} value={search} />
@@ -118,6 +118,6 @@ export const SearchInput = ({ section }: Props) => {
                 <RadioButton checkBoxOnChange={HandleChange} label="Series" name="type_search" id="series" checked={selectOption.series} />
                 <RadioButton checkBoxOnChange={HandleChange} label="Personas" name="type_search" id="people" checked={selectOption.people} />
             </div>
-        </>
+        </header>
     )
 }

@@ -1,34 +1,257 @@
 .header {
-    display: grid;
-    grid-template-columns: 0.5fr 1fr 0.5fr;
-    align-items: center;
-    height: 5em;
-    grid-column: 2 / 3;
-    grid-row: 1 / 2;
+    height: 6em;
     border-radius: var(--terciaryColor);
-    background-color: var(--secondaryColor);
-    border-bottom: 1px solid var(--terciaryColor);
+    border-bottom: 1px solid var(--hover);
     z-index: 2;
 
-    @media (width < 700px) {
-        width: 100svw;
-        grid-column: 1 / span 2;
-        grid-row: 1 span 2;
+    &_container {
+        display: grid;
+        grid-template-columns: 0.5fr 1fr 0.5fr;
+        padding: 0 0.5em 0 1em;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+        background: radial-gradient(ellipse at top, var(--terciaryColor), var(--primaryColor)),
+            radial-gradient(ellipse at bottom, var(--primaryColor), var(--terciaryColor));
+
+    }
+}
+
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-self: flex-end;
+    width: 3em;
+    height: 3em;
+    border: 1px solid var(--terciaryColor);
+    background-color: var(--primaryColor);
+    border-radius: 1em;
+    cursor: pointer;
+    transition: all 0.25s ease-in-out;
+
+    &:hover {
+        background-color: var(--hover);
+    }
+
+    &_icon {
+        color: var(--fontColor);
+        width: 2em;
+        height: 2em;
+    }
+}
+
+.mobile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.15em 0;
+    justify-self: center;
+
+    &_logo {
+        color: var(--highlightColor);
+        height: 4em;
+        filter: drop-shadow(0 0 2px #000000);
+
+        @media (width <=700px) {
+            height: 3em;
+        }
     }
 
     &_pathname {
         display: flex;
-        gap: 0.5em;
-        font-size: 1.1em;
-        grid-column: 1 / 2;
-        grid-row: 1 / 2;
-        padding: 0 1.5em 0 0.5em;
+        align-items: flex-end;
+        justify-content: center;
+        gap: 0.25em;
         color: var(--fontColor);
+    }
+}
+
+.menu {
+    background-color: transparent;
+
+    @media (width >=700px) {
+        //display: none;
+    }
+
+    &_button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--fontColor);
+        border: none;
+        width: 3em;
+        height: 3em;
+        border-radius: 0.25em;
+        background-size: 200% 200%;
+        background: linear-gradient(-12deg, var(--primaryColor), var(--secondaryColor));
+        border: 1px solid var(--terciaryColor);
+        transition: all 0.3s ease-in-out;
+        cursor: pointer;
+
+        &:hover {
+            filter: brightness(140%);
+            background: linear-gradient(-12deg, var(--secondaryColor), var(--hover));
+        }
+    }
+
+    &_icon {
+        width: 2.5em;
+        height: 2.5em;
+    }
+
+    &_dialog {
+        position: absolute;
+        left: 0;
+        top: 6em;
+        border: none;
+        width: 100svw;
+        transform: translateX(-100%);
+        transition: all 0.5s ease-in-out;
+        background-color: transparent;
+        //backdrop-filter: blur(5px);
+        opacity: 0;
+
+        &Open {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+}
+
+.section {
+    position: relative;
+    display: flex;
+    gap: 1em;
+    justify-content: flex-end;
+    padding: 0 1em 0 0;
+}
+
+.login {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    padding: 0 0.25em 0 0.75em;
+    border-radius: 0.25em;
+    font-family: var(--font-family);
+    background-color: transparent;
+    border: none;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+
+    @media (width <=700px) {
+        display: none;
     }
 
 
-    &_search {
-        grid-row: 1 / 2;
-        grid-column: 2 / 3;
+    &:hover {
+        background-color: var(--hover);
+    }
+
+    &_user {
+        color: var(--fontColor);
+    }
+
+    &_arrow {
+        width: 1.5em;
+        height: 1.5em;
+        color: var(--fontColor);
+    }
+
+    &_menu {
+        position: absolute;
+        top: 0.5em;
+        right: 1.5em;
+        padding: 1em 0;
+        border-radius: 0.25em;
+        background-color: var(--terciaryColor);
+        //transition: all 0.3s ease-in-out 5s;
+        transform: translateY(-4.3em);
+        //transform-origin: top center;
+        animation: openAccount 0.25s ease-in-out both;
+
+        @keyframes openAccount {
+            to {
+                transform: translateY(0);
+
+            }
+        }
+
+        @media (width <=700px) {
+            display: none;
+        }
+
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: -0.5em;
+            right: 1em;
+            border-left: 12px solid transparent;
+            border-right: 12px solid transparent;
+            border-bottom: 10px solid var(--terciaryColor);
+        }
+
+
+        &Link {
+            display: flex;
+            align-items: center;
+            gap: 0.5em;
+            font-size: 0.9em;
+            padding: 0.25em 0.5em 0.25em 0.75em;
+            text-decoration: none;
+            color: var(--fontColor);
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+
+            &:hover {
+                background-color: var(--hover);
+            }
+        }
+
+        &Icon {
+            width: 1.5em;
+            height: 1.5em;
+        }
+    }
+
+    &_dialog {
+        display: none;
+        top: 4.3em;
+        left: 0;
+        width: 100svw;
+        height: calc(100svh - 4.25em);
+        border: none;
+        overflow: hidden;
+        background-color: transparent;
+
+        &Open {
+            display: flex;
+        }
+    }
+}
+
+.search {
+    position: absolute;
+    top: 0em;
+    right: 0;
+    width: 100svw;
+    height: calc(100svh - 6em);
+
+    border: none;
+    background-color: transparent;
+    transform: translateY(-1.2em);
+    transition: all 0.5s ease-in-out;
+    overflow: hidden;
+    pointer-events: none;
+    transform-origin: top center;
+    z-index: -1;
+
+
+    &_open {
+        transform: translateY(6em);
+        pointer-events: all;
     }
 }

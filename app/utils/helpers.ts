@@ -1,3 +1,5 @@
+import { IErrorLogin, IResponseLogin, ISessionID } from "../interfaces/authentication"
+import { CreateSession } from "../services/fetchData"
 import { SmallDateLocal } from "./const"
 
 export const ConvertMinutesToHours = (time: number) => {
@@ -59,4 +61,48 @@ export const GetLatestYears = (defaultValue?: boolean) => {
 interface IPropertiesCombobox {
 	option: string | number
 	value: string
+}
+
+export const ValidateLogin = async (username: string, password: string) => {
+	let errorName = ""
+	let errorPassword = ""
+	if (username === "" || password === "") {
+		errorName = username === "" ? "Campo obligatorio" : ""
+		errorPassword = password === "" ? "Campo obligatorio" : ""
+
+		const errors: IResponseLogin = {
+			success: false,
+			status_code: 1,
+			status_message: "Campo obligatorio",
+			session_id: "",
+			error_username: errorName,
+			error_password: errorPassword
+		}
+		return errors
+
+	} else {
+		const responseSession = await CreateSession(username, password)
+		if (responseSession.success) {
+			const sessionID = responseSession as ISessionID
+			const response: IResponseLogin = {
+				success: true,
+				status_code: 0,
+				status_message: "Inicio de sesión con éxito",
+				session_id: sessionID.session_id,
+				error_username: "",
+				error_password: ""
+			}
+			return response
+		}
+		const errorLogin = responseSession as IErrorLogin
+		const response: IResponseLogin = {
+			success: false,
+			status_code: errorLogin.status_code,
+			status_message: errorLogin.status_message,
+			session_id: "",
+			error_username: "",
+			error_password: ""
+		}
+		return response
+	}
 }

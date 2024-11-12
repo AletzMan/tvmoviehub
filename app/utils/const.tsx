@@ -1,6 +1,6 @@
 import { CSSProperties, MouseEventHandler } from "react"
 import { IPropertiesCombobox } from "../components/ComboBox/ComboBox"
-import { AccountIcon, ActionIcon, AdventureIcon, AnimationIcon, ArrowLeftIcon, ComedyIcon, CrimeIcon, DocumentaryIcon, DramaIcon, FamilyIcon, FantasyIcon, FavoriteEmptyIcon, HistoryIcon, HomeIcon, HorrorIcon, KidIcon, LogoutIcon, MovieIcon, MovieListIcon, MusicIcon, MysteryIcon, NewsIcon, PeopleIcon, RealityIcon, RomanceIcon, SCIFiIcon, SearchIcon, SerieIcon, SettingsIcon, SoapIcon, TVMovieIcon, TalkIcon, ThrillerIcon, WarIcon, WesternIcon } from "./svg"
+import { AccountIcon, ActionIcon, AdventureIcon, AnimationIcon, ArrowLeftIcon, ComedyIcon, CrimeIcon, DocumentaryIcon, DramaIcon, FamilyIcon, FantasyIcon, FavoriteEmptyIcon, HistoryIcon, HomeIcon, HorrorIcon, KidIcon, LogInIcon, LogoutIcon, MovieIcon, MovieListIcon, MusicIcon, MysteryIcon, NewsIcon, PeopleIcon, RealityIcon, RomanceIcon, SCIFiIcon, SearchIcon, SerieIcon, SettingsIcon, SoapIcon, TVMovieIcon, TalkIcon, ThrillerIcon, WarIcon, WesternIcon } from "./svg"
 
 export const MainMenu = [
     {
@@ -17,7 +17,7 @@ export const MainMenu = [
     },
     {
         id: 2,
-        name: "Peliculas",
+        name: "Películas",
         link: "movies",
         icon: <MovieIcon className="mainMenuLogo" />
     },
@@ -36,13 +36,13 @@ export const MainMenu = [
     {
         id: 5,
         name: "Favoritos",
-        link: "favorites",
+        link: "favorites?type=movies",
         icon: <FavoriteEmptyIcon className="mainMenuLogo" />
     },
     {
         id: 6,
         name: "Listas",
-        link: "lists",
+        link: "lists?page=1",
         icon: <MovieListIcon className="mainMenuLogo" />
     },
     {
@@ -62,6 +62,12 @@ export const MainMenu = [
         name: "Cerrar sesión",
         link: "logout",
         icon: <LogoutIcon className="mainMenuLogo" />
+    },
+    {
+        id: 10,
+        name: "Iniciar sesión",
+        link: "login",
+        icon: <LogInIcon className="mainMenuLogo" />
     }
 ]
 
@@ -2015,6 +2021,8 @@ export const GetRegions = (): IPropertiesCombobox[] => {
     })
     return options
 }
+
+
 
 export const OptionsDateLocal: Intl.DateTimeFormatOptions = {
     timeZone: "America/New_York",

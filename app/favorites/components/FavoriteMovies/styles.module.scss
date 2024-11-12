@@ -1,0 +1,35 @@
+.favorites {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5em 0.25em;
+
+    @media (width < 700px) {
+        padding: 0.25em 0.35em 0.25em 0;
+    }
+
+    &_section {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(10em, 1fr));
+        gap: 0.25em;
+        height: calc(100svh - 15em);
+    }
+}
+
+.message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4em 1em;
+    width: 100%;
+
+    &_title {
+        color: var(--titleColor);
+        font-size: 1.5em;
+        font-weight: 500;
+    }
+
+    &_text {
+        color: var(--fontColor);
+    }
+}

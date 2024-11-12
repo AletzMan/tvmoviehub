@@ -3,7 +3,7 @@
 import styles from "./movieslider.module.scss"
 import Image from "next/image"
 import { BASE_URL_IMG } from "@/app/utils/const"
-import { AddIcon, FavoriteFullIcon, MovieIcon, SerieIcon, StarIcon } from "@/app/utils/svg"
+import { AddIcon, DetailsIcon, FavoriteFullIcon, MovieIcon, SerieIcon, StarIcon } from "@/app/utils/svg"
 import Link from "next/link"
 import { IParticipationsCast, IParticipationsCrew, ISeriesCast } from "@/app/interfaces/credits"
 import Slider from "react-slick"
@@ -47,7 +47,7 @@ export const SeriesSliderCredits = ({ parts, title, type }: Props) => {
                                     <div className={styles.movie_shadow}></div>
                                     <div className={styles.movie_dialog}>
                                         <Link className={styles.movie_dialogMore} href={type === "movie" ? `/movies/${movie.id}` : `/series/${movie.id}`} title={movie.name}>
-                                            <AddIcon className={styles.movie_dialogIcon} />
+                                            <DetailsIcon className={styles.movie_dialogIcon} />
                                         </Link>
                                     </div>
                                     <span className={styles.movie_average}><StarIcon className={styles.movie_iconDate} />{movie.vote_average.toFixed(1)}</span>

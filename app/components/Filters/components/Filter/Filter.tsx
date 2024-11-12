@@ -32,9 +32,11 @@ export function Filter({ properties, nameParam, nameView }: Props) {
                 newValues.push(values.includes(properties[index].value))
             }
             setValuesActive(newValues)
+        } else {
+            setValuesActive([false, false])
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [properties])
+    }, [properties, searchParams])
 
 
     const HandleChangeFilter = (index: number) => {

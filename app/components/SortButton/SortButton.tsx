@@ -12,9 +12,13 @@ export function SortButton() {
 
     useEffect(() => {
         const newSort = searchParams.get("sort_by")
-        setSort(newSort?.split(".")[1] as "asc" | "desc")
+        if (newSort) {
+            setSort(newSort.split(".")[1] as "asc" | "desc")
+        } else {
+            setSort("asc")
+        }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [searchParams])
 
     const HandleChangeSort = () => {
         const currentSort = searchParams.get("sort_by")
@@ -31,6 +35,8 @@ export function SortButton() {
 
         }
     }
+
+    console.log(sort)
 
     return (
         <button className={styles.button} onClick={HandleChangeSort}>

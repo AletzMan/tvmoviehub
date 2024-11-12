@@ -7,7 +7,8 @@ import { GetDiscoverSeries } from "@/app/services/fetchData"
 import { IQueryParamasSeries } from "@/app/interfaces/serie"
 import { HeaderFilters } from "@/app/components/HeaderFilters/HeaderFilters"
 import { NotResultsView } from "@/app/components/NotResultsView/NotResultsView"
-import { SectionTags } from "@/app/movies/[id]/components/SectionTags/SectionTags"
+import { HeaderTags } from "@/app/components/HeaderTags/HeaderTags"
+import { ToastProvider } from "@/app/components/ToastProvider/ToastProvider"
 
 export default async function Page(params: { params: { lang: string }, searchParams: IQueryParamasSeries }) {
 
@@ -15,14 +16,18 @@ export default async function Page(params: { params: { lang: string }, searchPar
 
     return (
         <section className={`${styles.section}  `}>
+            <HeaderTags />
             <HeaderFilters />
-            {popularSeries.results.length > 0 ? <div className={`${styles.movies} scrollBarStyle`}>
-                {
-                    popularSeries.results.map((movie, index) => (
-                        <MovieCardDetails key={movie.id} movie={movie as IPartCollection} type="tv" />
-                    ))
-                }
-            </div>
+            {popularSeries.results.length > 0 ?
+                <ToastProvider>
+                    <div className={`${styles.movies} scrollBarStyle`}>
+                        {
+                            popularSeries.results.map((movie, index) => (
+                                <MovieCardDetails key={movie.id} movie={movie as IPartCollection} type="tv" />
+                            ))
+                        }
+                    </div>
+                </ToastProvider>
                 :
                 <NotResultsView />
             }

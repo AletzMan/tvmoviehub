@@ -1,6 +1,9 @@
+import { IErrorLogin, ILoginValidation, IRequestToken, ISessionID, IUser } from "../interfaces/authentication"
 import { ICredits, IMovieCredits, ISerieCredits } from "../interfaces/credits"
+import { IFavorites } from "../interfaces/favorite"
 import { IImages } from "../interfaces/image"
-import { IKeywords } from "../interfaces/keyword"
+import { IKeywords, IResult } from "../interfaces/keyword"
+import { IResponseCreateMovie, IResponseListMovie } from "../interfaces/list"
 import { ICollectionDetails, IMovie, IMovieDetails, IQueryParamasMovies } from "../interfaces/movie"
 import { IMultiResponse } from "../interfaces/multi"
 import { IPeopleDetails, IPeopleImages } from "../interfaces/people"
@@ -33,6 +36,14 @@ const optionsGET = {
 		Authorization: `Bearer ${API_KEY}`,
 	},
 	next: { revalidate: 1000 },
+}
+
+const optionsLogin = {
+	method: "POST",
+	headers: {
+		accept: "application/json",
+		Authorization: `Bearer ${API_KEY}`,
+	}
 }
 
 export const GetNowPlaying = async () => {
@@ -106,14 +117,15 @@ export const GetDiscoverMovies = async (queryParams: IQueryParamasMovies) => {
 		stringParams += `${"&"}${param[0]}=${param[1]}`
 	})
 
-	const url = `${API_URL_BASE}/discover/movie?language=${LANGUAGE_MX}&region=MX${stringParams}`
+	const url = `${API_URL_BASE}/discover/movie?language=${LANGUAGE_MX}&region=MX&certification_country=MX${stringParams}`
 	const response = await fetch(url, optionsGET)
 
 	let data: IMovieResponse = { page: 0, results: [], total_pages: 0, total_results: 0 }
-	if (response.status === 400) {
-		return data
-	} else {
+
+	if (response.status === 200) {
 		data = (await response.json()) as IMovieResponse
+	} else {
+		return data
 	}
 	return data
 }
@@ -222,9 +234,7 @@ export const GetSearchMulti = async (queryParams: IQueryParamasSeries) => {
 	const response = await fetch(url, optionsGET)
 
 	let data: IMultiResponse = { page: 0, results: [], total_pages: 0, total_results: 0 }
-	if (response.status === 400) {
-		return data
-	} else {
+	if (response.status === 200) {
 		data = (await response.json())
 	}
 
@@ -241,10 +251,10 @@ export const GetPeoplePopular = async (page: number) => {
 }
 
 export const GetMovieDetails = async (idMovie: string) => {
-	const url = `${API_URL_BASE}${DETAILS_MOVIES_PATH}${idMovie}?language=${LANGUAGE_MX}`
+	const url = `${API_URL_BASE}${DETAILS_MOVIES_PATH}${idMovie}?language=${LANGUAGE_MX}&append_to_response=credits,recommendations,images,keywords`
 	const response = await fetch(url, optionsGET)
 	let data: IMovieDetails | null = null
-	if (response.status !== 404) {
+	if (response.status === 200) {
 		return (await response.json()) as IMovieDetails
 	}
 
@@ -255,7 +265,7 @@ export const GetCredits = async (idMovie: string) => {
 	const url = `${API_URL_BASE}${DETAILS_MOVIES_PATH}${idMovie}/credits?language=${LANGUAGE_MX}`
 	const response = await fetch(url, optionsGET)
 	let data: ICredits | null = null
-	if (response.status !== 404) {
+	if (response.status === 200) {
 		return (await response.json()) as ICredits
 	}
 
@@ -266,7 +276,7 @@ export const GetMovieImages = async (idMovie: string) => {
 	const url = `${API_URL_BASE}/movie/${idMovie}/images?`
 	const response = await fetch(url, optionsGET)
 	let data: IImages | null = null
-	if (response.status !== 404) {
+	if (response.status === 200) {
 		return (await response.json()) as IImages
 	}
 
@@ -277,7 +287,7 @@ export const GetSeriesKeywords = async (idMovie: string) => {
 	const url = `${API_URL_BASE}/tv/${idMovie}/keywords?`
 	const response = await fetch(url, optionsGET)
 	let data: IKeywords | null = null
-	if (response.status !== 404) {
+	if (response.status === 200) {
 		return (await response.json()) as IKeywords
 	}
 
@@ -288,7 +298,7 @@ export const GetMovieKeywords = async (idMovie: string) => {
 	const url = `${API_URL_BASE}/movie/${idMovie}/keywords`
 	const response = await fetch(url, optionsGET)
 	let data: IKeywords | null = null
-	if (response.status !== 404) {
+	if (response.status === 200) {
 		return (await response.json()) as IKeywords
 	}
 
@@ -299,7 +309,7 @@ export const GetSeriesImages = async (idMovie: string) => {
 	const url = `${API_URL_BASE}/tv/${idMovie}/images?`
 	const response = await fetch(url, optionsGET)
 	let data: IImages | null = null
-	if (response.status !== 404) {
+	if (response.status === 200) {
 		return (await response.json()) as IImages
 	}
 
@@ -310,7 +320,7 @@ export const GetCollectionsDetails = async (idCollection: string) => {
 	const url = `${API_URL_BASE}${DETAILS_COLLECTION_PATH}${idCollection}?language=${LANGUAGE_MX}`
 	const response = await fetch(url, optionsGET)
 	let data: ICollectionDetails | null = null
-	if (response.status !== 404) {
+	if (response.status === 200) {
 		return (await response.json()) as ICollectionDetails
 	}
 
@@ -321,7 +331,7 @@ export const GetRecommendations = async (idMovie: string) => {
 	const url = `${API_URL_BASE}${DETAILS_MOVIES_PATH}${idMovie}/recommendations?language=${LANGUAGE_MX}`
 	const response = await fetch(url, optionsGET)
 	let data: IRecommendationResponse | null = null
-	if (response.status !== 404) {
+	if (response.status === 200) {
 		return (await response.json()) as IRecommendationResponse
 	}
 
@@ -333,7 +343,7 @@ export const GetSerieDetails = async (idSerie: string) => {
 	const url = `${API_URL_BASE}${DETAILS_SERIES_PATH}${idSerie}?language=${LANGUAGE_MX}`
 	const response = await fetch(url, optionsGET)
 	let data: ISerieDetails | null = null
-	if (response.status !== 404) {
+	if (response.status === 200) {
 		return (await response.json()) as ISerieDetails
 	}
 	return data
@@ -343,7 +353,7 @@ export const GetSerieCredits = async (idMovie: string) => {
 	const url = `${API_URL_BASE}${DETAILS_SERIES_PATH}${idMovie}/credits?language=${LANGUAGE_MX}`
 	const response = await fetch(url, optionsGET)
 	let data: ICredits | null = null
-	if (response.status !== 404) {
+	if (response.status === 200) {
 		return (await response.json()) as ICredits
 	}
 	return data
@@ -353,7 +363,7 @@ export const GetSerieRecommendations = async (idMovie: string) => {
 	const url = `${API_URL_BASE}${DETAILS_SERIES_PATH}${idMovie}/recommendations?language=${LANGUAGE_MX}`
 	const response = await fetch(url, optionsGET)
 	let data: IRecommendationResponse | null = null
-	if (response.status !== 404) {
+	if (response.status === 200) {
 		return (await response.json()) as IRecommendationResponse
 	}
 
@@ -372,7 +382,7 @@ export const GetPersonDetails = async (idPeople: string, language: 'ES' | 'EN') 
 	const url = `${API_URL_BASE}/person/${idPeople}?language=${LANGUAGE}&append_to_response=movie_credits%2Ctv_credits`
 	const response = await fetch(url, optionsGET)
 	let data: IPeopleDetails | null = null
-	if (response.status !== 404) {
+	if (response.status === 200) {
 		return (await response.json()) as IPeopleDetails
 	}
 
@@ -383,8 +393,19 @@ export const GetMoviesCredits = async (idPeople: string) => {
 	const url = `${API_URL_BASE}/person/${idPeople}/movie_credits?language=${LANGUAGE_MX}`
 	const response = await fetch(url, optionsGET)
 	let data: IMovieCredits | null = null
-	if (response.status !== 404) {
+	if (response.status === 200) {
 		return (await response.json()) as IMovieCredits
+	}
+
+	return data
+}
+
+export const GetKeywordName = async (id_tag: string) => {
+	const url = `${API_URL_BASE}/keyword/${id_tag}`
+	const response = await fetch(url, optionsGET)
+	let data: IResult | null = null
+	if (response.status === 200) {
+		return (await response.json()) as IResult
 	}
 
 	return data
@@ -394,7 +415,7 @@ export const GetSeriesCredits = async (idPeople: string) => {
 	const url = `${API_URL_BASE}/person/${idPeople}/tv_credits?language=${LANGUAGE_MX}`
 	const response = await fetch(url, optionsGET)
 	let data: ISerieCredits | null = null
-	if (response.status !== 404) {
+	if (response.status === 200) {
 		return (await response.json()) as ISerieCredits
 	}
 
@@ -405,5 +426,198 @@ export const GetPeopleImages = async (idPeople: string) => {
 	const url = `${API_URL_BASE}/person/${idPeople}/images`
 	const response = await fetch(url, optionsGET)
 	const data = (await response.json()) as IPeopleImages
+	return data
+}
+
+/////------ AUTHENTICATION FUNCTIONS ------- \\\\\\
+
+export const CreateRequestToken = async () => {
+	const url = `${API_URL_BASE}/authentication/token/new`
+	const response = await fetch(url, optionsGET)
+	if (response.ok) {
+		const data: IRequestToken = await response.json()
+		//console.log("Request Token: ", data)
+		return data
+	}
+
+
+	const data: IErrorLogin = await response.json()
+	return data
+
+}
+
+export const CreateSeassonID = async (request_token: string) => {
+
+	const url = `${API_URL_BASE}/authentication/session/new`
+	const response = await fetch(url, {
+		method: "POST",
+		headers: {
+			accept: "application/json",
+			'content-type': 'application/json',
+			Authorization: `Bearer ${API_KEY}`,
+		},
+		body: JSON.stringify({ request_token })
+	})
+	const data: ISessionID = await response.json()
+	//console.log("Session ID : ", data)
+
+	return data
+}
+
+export const CreateSession = async (username: string, password: string) => {
+
+	const responseToken = await CreateRequestToken()
+
+	if (responseToken.success) {
+		const successToke = responseToken as IRequestToken
+		const url = `${API_URL_BASE}/authentication/token/validate_with_login`
+		const response = await fetch(url, {
+			method: "POST",
+			headers: {
+				accept: "application/json",
+				'content-type': 'application/json',
+				Authorization: `Bearer ${API_KEY}`,
+			},
+			body: JSON.stringify({
+				username,
+				password,
+				request_token: successToke.request_token
+			})
+		})
+
+		const data: ILoginValidation | IErrorLogin = await response.json()
+
+		//console.log("Create Session : ", data)
+
+		if (data.success) {
+			const succesresponse: ILoginValidation = data as ILoginValidation
+			const responseValidate = await CreateSeassonID(succesresponse.request_token)
+
+			return responseValidate
+		}
+
+		return data as IErrorLogin
+	}
+
+	const errorResponse = responseToken as IErrorLogin
+
+	return errorResponse
+}
+
+export const GetDetailsAccount = async (session_id: string) => {
+	const url = `${API_URL_BASE}/account/18482247?session_id=${session_id}`
+	const response = await fetch(url, optionsGET)
+	let data: IUser | null = null
+	if (response.status === 200) {
+		return (await response.json()) as IUser
+	}
+	return data
+}
+
+export const GetFavoriteMovies = async (session_id: string) => {
+	const url = `${API_URL_BASE}/account/18482247/favorite/movies?language=${LANGUAGE_MX}&session_id=${session_id}`
+	const response = await fetch(url, {
+		method: "GET",
+		headers: {
+			accept: "application/json",
+			Authorization: `Bearer ${API_KEY}`,
+		},
+		next: { revalidate: 10000, tags: ['favoriteMovies'] },
+	})
+	let data: IMovieResponse | null = null
+	if (response.status === 200) {
+		return (await response.json()) as IMovieResponse
+	}
+	return data
+}
+
+export const GetFavoriteSeries = async (session_id: string) => {
+	const url = `${API_URL_BASE}/account/18482247/favorite/tv?language=${LANGUAGE_MX}&session_id=${session_id}`
+	const response = await fetch(url, {
+		method: "GET",
+		headers: {
+			accept: "application/json",
+			Authorization: `Bearer ${API_KEY}`,
+		},
+		next: { revalidate: 10000, tags: ['favoriteSeries'] },
+	})
+	let data: ISerieResponse | null = null
+	if (response.status === 200) {
+		return (await response.json()) as ISerieResponse
+	}
+
+	return data
+}
+
+export const AddRemoveFavorite = async (session_id: string, type: 'movie' | 'tv', id: number, isAdd: boolean): Promise<IFavorites | IErrorLogin> => {
+	const url = `${API_URL_BASE}/account/18482247/favorite?session_id=${session_id}`
+
+	const response = await fetch(url, {
+		method: "POST",
+		headers: {
+			accept: "application/json",
+			'content-type': 'application/json',
+			Authorization: `Bearer ${API_KEY}`,
+		},
+		body: JSON.stringify({
+			media_type: type,
+			media_id: id,
+			favorite: isAdd
+		})
+	})
+	if (response.status === 200) {
+		const data: IFavorites = await response.json()
+		return data
+	}
+
+	const data: IErrorLogin = await response.json()
+	return data
+}
+
+
+export const GetListMovies = async (session_id: string, queryParams: Object) => {
+	const params = Object.entries(queryParams)
+	let stringParams = ""
+	params.forEach((param, index) => {
+		stringParams += `${"&"}${param[0]}=${param[1]}`
+	})
+	const url = `${API_URL_BASE}/account/18482247/lists?session_id=${session_id}${stringParams}`
+	const response = await fetch(url, {
+		method: "GET",
+		headers: {
+			accept: "application/json",
+			Authorization: `Bearer ${API_KEY}`,
+		},
+		next: { revalidate: 1, tags: ['listMovies'] },
+	})
+	let data: IResponseListMovie | null = null
+	if (response.status === 200) {
+		return (await response.json()) as IResponseListMovie
+	}
+
+	return data
+}
+
+export const CreateLisMovie = async (session_id: string, name: string, description: string) => {
+	const url = `${API_URL_BASE}/list?session_id=${session_id}`
+	const response = await fetch(url, {
+		method: "POST",
+		headers: {
+			accept: "application/json",
+			'content-type': 'application/json',
+			Authorization: `Bearer ${API_KEY}`,
+		},
+		body: JSON.stringify({
+			name,
+			description,
+			language: 'es'
+		})
+	})
+	console.log(response.json())
+	let data: IResponseCreateMovie | null = null
+	if (response.status === 201) {
+		return (await response.json()) as IResponseCreateMovie
+	}
+
 	return data
 }

@@ -7,19 +7,19 @@
 .button {
     display: flex;
     align-items: center;
-    gap: 0.5em;
+    gap: 0em;
     padding: 0.38em 0.8em;
     border: none;
     border-radius: 0.15em;
     font-size: 0.9em;
     font-family: var(--font-family);
     color: var(--fontColor);
-    background-color: var(--highlightColorBasic);
+    background: linear-gradient(-12deg, var(--fourthColor), var(--highlightColor));
     transition: all 0.3s ease-in-out;
     cursor: pointer;
 
     &:hover {
-        background-color: var(--highlightColor);
+        filter: brightness(140%);
     }
 
     &_active {
@@ -31,6 +31,19 @@
         width: 1.5em;
         height: 1.5em;
     }
+
+    &_number {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 1.6em;
+        height: 1.6em;
+        margin: 0 0 0 1em;
+        color: var(--fontColor);
+        border-radius: 0.2em;
+        border: 1px solid var(--highlightColorBasic);
+        background-color: var(--fourthColor);
+    }
 }
 
 .filters {
@@ -41,7 +54,7 @@
     margin: 0.7em 0 0 0;
     padding: 0.5em;
     width: 19em;
-    max-height: calc(100svh - 10em);
+    max-height: calc(100svh - 13em);
     background-color: var(--terciaryColor);
     border: 1px solid var(--hover);
     border-radius: 0 0.15em 0.15em 0.15em;
