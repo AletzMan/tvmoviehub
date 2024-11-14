@@ -18,6 +18,8 @@ import { SectionImages } from "@/app/movies/[id]/components/SectionImages/Sectio
 import { IKeywords } from "@/app/interfaces/keyword"
 import Link from "next/link"
 import { SectionTags } from "@/app/movies/[id]/components/SectionTags/SectionTags"
+import { Button } from "@/app/components/Button/Button"
+import { FavoriteButton } from "@/app/components/FavoriteButton/FavoriteButton"
 
 export default async function Page(params: { params: { id: string }, searchParams: {} }) {
 
@@ -66,10 +68,10 @@ export default async function Page(params: { params: { id: string }, searchParam
                                     <p className={styles.movie_year}><DateIcon className={styles.movie_iconDate} />{new Date(details.first_air_date).getFullYear()}</p>
                                     {/*<Average average={details.vote_average} />*/}
                                 </div>
-                                <button className={styles.movie_play}>
-                                    <TrilerIcon className={styles.movie_playIcon} />
-                                    <span className={styles.movie_playText}>Ver tráiler</span>
-                                </button>
+                                <div className={styles.movie_buttons}>
+                                    <Button className={styles.movie_play} mode="button" text="Ver tráiler" icon={<TrilerIcon />} />
+                                    <FavoriteButton id={details.id} title={details.name} type="tv" />
+                                </div>
                             </div>
                         </div>
                     </article>

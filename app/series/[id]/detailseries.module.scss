@@ -134,33 +134,7 @@
 
 
     &_play {
-        display: flex;
-        flex-direction: row;
-        gap: 0.5em;
-        padding: 0.2em 0.5em;
-        width: max-content;
-        border-radius: 0.2em;
-        align-items: center;
-        background-color: var(--highlightColorBasic);
-        border: none;
-        color: var(--primaryColor);
-        transition: all 0.25s ease-in-out;
-        cursor: pointer;
-
-        &:hover {
-            background-color: var(--highlightColor);
-        }
-
-        &Icon {
-            width: 2em;
-            height: 2em;
-            color: var(--fontColor);
-        }
-
-        &Text {
-            color: var(--fontColor);
-            font-weight: 300;
-        }
+        font-size: 1em !important;
     }
 
     &_companies {
@@ -196,6 +170,17 @@
 
     &_overview {
         color: var(--fontColor);
+    }
+
+    &_buttons {
+        display: flex;
+        gap: 1em;
+
+        &>button {
+            display: flex;
+            z-index: 3;
+            position: relative;
+        }
     }
 }
 

@@ -13,6 +13,7 @@ import { IImages } from "@/app/interfaces/image"
 import { SectionImages } from "./components/SectionImages/SectionImages"
 import { SectionTags } from "./components/SectionTags/SectionTags"
 import { Button } from "@/app/components/Button/Button"
+import { FavoriteButton } from "@/app/components/FavoriteButton/FavoriteButton"
 
 export default async function Page(params: { params: { id: string }, searchParams: {} }) {
 
@@ -60,7 +61,10 @@ export default async function Page(params: { params: { id: string }, searchParam
                                     <p className={styles.movie_year}><DateIcon className={styles.movie_iconDate} />{new Date(data.release_date).getFullYear()}</p>
                                     <span className={styles.movie_average}><StarIcon className={styles.movie_iconDate} />{data.vote_average.toFixed(1)}</span>
                                 </div>
-                                <Button className={styles.movie_play} mode="button" text="Ver tráiler" icon={<TrilerIcon />} />
+                                <div className={styles.movie_buttons}>
+                                    <Button className={styles.movie_play} mode="button" text="Ver tráiler" icon={<TrilerIcon />} />
+                                    <FavoriteButton id={data.id} title={data.title} type="movie" />
+                                </div>
                             </div>
                         </div>
                     </article>

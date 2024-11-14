@@ -10,6 +10,7 @@ import Slider from "react-slick"
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 import { NextArrow, PrevArrow } from "../ArrowSlider/ArrowSlider"
+import { FavoriteButton } from "../FavoriteButton/FavoriteButton"
 
 interface Props {
     parts: IPartCollection[]
@@ -50,7 +51,7 @@ export const MovieSlider = ({ parts, title }: Props) => {
                                     </Link>
                                 </div>
                                 <span className={styles.movie_average}><StarIcon className={styles.movie_iconDate} />{movie.vote_average?.toFixed(1)}</span>
-                                <button className={styles.movie_fav}><FavoriteFullIcon className={styles.movie_favIcon} /> </button>
+                                <FavoriteButton id={movie.id} title={movie.title || movie.name || ""} type={movie.media_type as "movie" | "tv"} />
                                 <div className={styles.movie_description}>
                                     {movie.media_type && movie.media_type === "movie" && <span className={styles.movie_type}><MovieIcon className={styles.movie_typeIcon} />Película</span>}
                                     {movie.media_type && movie.media_type === "tv" && <span className={styles.movie_type}><SerieIcon className={styles.movie_typeIcon} />Serie</span>}
