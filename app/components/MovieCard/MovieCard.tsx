@@ -4,6 +4,7 @@ import styles from "./moviecard.module.scss"
 import { AddIcon, DetailsIcon, FavoriteFullIcon, MovieIcon, SerieIcon, StarIcon } from "@/app/utils/svg"
 import { BASE_URL_IMG, BASE_URL_IMG_CUSTOM } from "@/app/utils/const"
 import { IMovie } from "@/app/interfaces/movie"
+import { FavoriteButton } from "../FavoriteButton/FavoriteButton"
 
 interface Props {
     movie: IMovie
@@ -25,7 +26,7 @@ export const MovieCard = ({ movie, top }: Props) => {
             </div>
             {<span className={styles.movie_number}>{top}</span>}
             <span className={styles.movie_average}><StarIcon className={styles.movie_iconDate} />{movie.vote_average.toFixed(1)}</span>
-            <button className={styles.movie_fav}><FavoriteFullIcon className={styles.movie_favIcon} /> </button>
+            <FavoriteButton id={movie.id} title={movie.title} type="movie" />
             <div className={styles.movie_description}>
                 {/*<span className={styles.movie_type}><MovieIcon className={styles.movie_typeIcon} />Película</span>*/}
 
