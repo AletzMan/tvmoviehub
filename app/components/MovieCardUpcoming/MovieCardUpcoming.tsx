@@ -5,6 +5,7 @@ import { DetailsIcon, FavoriteFullIcon } from "@/app/utils/svg"
 import { BASE_URL_IMG, BASE_URL_IMG_CUSTOM } from "@/app/utils/const"
 import { IMovie } from "@/app/interfaces/movie"
 import { FormattedDateUpcoming } from "@/app/utils/helpers"
+import { FavoriteButton } from "../FavoriteButton/FavoriteButton"
 
 interface Props {
     movie: IMovie
@@ -23,7 +24,7 @@ export const MovieCardUpcoming = ({ movie }: Props) => {
                     <DetailsIcon className={styles.movie_dialogIcon} />
                 </Link>
             </div>
-            <button className={styles.movie_fav}><FavoriteFullIcon className={styles.movie_favIcon} /> </button>
+            <FavoriteButton id={movie.id} title={movie.title} type="movie" />
             <div className={styles.movie_description}>
                 {/*<span className={styles.movie_type}><MovieIcon className={styles.movie_typeIcon} />Película</span>*/}
 
