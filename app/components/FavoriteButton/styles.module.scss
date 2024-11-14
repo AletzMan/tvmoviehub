@@ -1,0 +1,24 @@
+.fav {
+    display: none;
+    position: absolute;
+    top: 0.25em;
+    left: 0.25em;
+    color: var(--fontColor);
+    background-color: transparent;
+    border: none;
+    transition: all 0.25s ease-in-out;
+    cursor: pointer;
+
+    &:hover {
+        color: #FF0000;
+    }
+
+    &Active {
+        color: #FF0000;
+    }
+
+    &Icon {
+        width: 2em;
+        height: 2em;
+    }
+}
