@@ -4,11 +4,11 @@ import { IFavorites } from "../interfaces/favorite"
 import { IImages } from "../interfaces/image"
 import { IKeywords, IResult } from "../interfaces/keyword"
 import { IResponseCreateMovie, IResponseListMovie } from "../interfaces/list"
-import { ICollectionDetails, IMovie, IMovieDetails, IQueryParamasMovies } from "../interfaces/movie"
+import { ICollectionDetails, IMovie, IMovieDetails, IMovieStates, IQueryParamasMovies } from "../interfaces/movie"
 import { IMultiResponse } from "../interfaces/multi"
 import { IPeopleDetails, IPeopleImages } from "../interfaces/people"
 import { IAiringTodayResponse, IMovieResponse, INowPlayingResponse, IPeopleResponse, IRecommendationResponse, ISerieResponse } from "../interfaces/responses"
-import { IQueryParamasSeries, ISeasonDetails, ISerie, ISerieDetails } from "../interfaces/serie"
+import { IQueryParamasSeries, ISeasonDetails, ISerie, ISerieDetails, ISerieStates } from "../interfaces/serie"
 
 const API_URL_BASE = "https://api.themoviedb.org/3"
 const TOP_RATING_SERIES_PATH = "/tv/top_rated?"
@@ -510,6 +510,26 @@ export const GetDetailsAccount = async (session_id: string) => {
 	let data: IUser | null = null
 	if (response.status === 200) {
 		return (await response.json()) as IUser
+	}
+	return data
+}
+
+export const GetStatesMovie = async (session_id: string, movie_id: number) => {
+	const url = `${API_URL_BASE}/movie/${movie_id}/account_states?session_id=${session_id}`
+	const response = await fetch(url, optionsGET)
+	let data: IMovieStates | null = null
+	if (response.status === 200) {
+		return (await response.json()) as IMovieStates
+	}
+	return data
+}
+
+export const GetStatesSerie = async (session_id: string, serie_id: number) => {
+	const url = `${API_URL_BASE}/tv/${serie_id}/account_states?session_id=${session_id}`
+	const response = await fetch(url, optionsGET)
+	let data: ISerieStates | null = null
+	if (response.status === 200) {
+		return (await response.json()) as ISerieStates
 	}
 	return data
 }
