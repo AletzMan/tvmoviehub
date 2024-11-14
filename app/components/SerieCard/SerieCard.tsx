@@ -1,9 +1,10 @@
 import Image from "next/image"
 import Link from "next/link"
 import styles from "./seriecard.module.scss"
-import { DetailsIcon, FavoriteFullIcon, StarIcon } from "@/app/utils/svg"
+import { DetailsIcon, StarIcon } from "@/app/utils/svg"
 import { BASE_URL_IMG } from "@/app/utils/const"
 import { ISerie } from "@/app/interfaces/serie"
+import { FavoriteButton } from "../FavoriteButton/FavoriteButton"
 
 interface Props {
     serie: ISerie
@@ -25,7 +26,7 @@ export const SerieCard = ({ serie, top }: Props) => {
             </div>
             {<span className={styles.movie_number}>{top}</span>}
             <span className={styles.movie_average}><StarIcon className={styles.movie_iconDate} />{serie.vote_average.toFixed(1)}</span>
-            <button className={styles.movie_fav}><FavoriteFullIcon className={styles.movie_favIcon} /> </button>
+            <FavoriteButton id={serie.id} title={serie.name} type="tv" />
             <div className={styles.movie_description}>
                 {/*<span className={styles.movie_type}><MovieIcon className={styles.movie_typeIcon} />Película</span>*/}
 
