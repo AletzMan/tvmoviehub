@@ -96,8 +96,9 @@
             transform: scale(1.04);
         }
 
-        &>.movie_fav {
+        &>button {
             display: block;
+            z-index: 3;
         }
 
         &>.movie_dialog {
@@ -132,6 +133,7 @@
         align-items: center;
         gap: 0.25em;
         top: 0.25em;
+        right: 0.25em;
         //width: 1.5em;
         //height: 1.5em;
         color: var(--fontColor);
