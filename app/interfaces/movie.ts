@@ -158,3 +158,10 @@ export interface IQueryParamasMovies {
 	"vote_count.gte"?: number
 	"vote_count.lte"?: number
 }
+
+export interface IMovieStates {
+	id: number
+	favorite: boolean
+	reted: boolean
+	watchlist: boolean
+}
