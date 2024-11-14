@@ -5,6 +5,7 @@ import { DetailsIcon, FavoriteFullIcon } from "@/app/utils/svg"
 import { BASE_URL_IMG } from "@/app/utils/const"
 import { FormattedDateUpcoming } from "@/app/utils/helpers"
 import { ISerie } from "@/app/interfaces/serie"
+import { FavoriteButton } from "../FavoriteButton/FavoriteButton"
 
 interface Props {
     serie: ISerie
@@ -23,7 +24,7 @@ export const SerieCardUpcoming = ({ serie }: Props) => {
                     <DetailsIcon className={styles.movie_dialogIcon} />
                 </Link>
             </div>
-            <button className={styles.movie_fav}><FavoriteFullIcon className={styles.movie_favIcon} /> </button>
+            <FavoriteButton id={serie.id} title={serie.name} type="tv" />
             <div className={styles.movie_description}>
                 {/*<span className={styles.movie_type}><MovieIcon className={styles.movie_typeIcon} />Película</span>*/}
 
