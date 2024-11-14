@@ -198,3 +198,12 @@ export interface IQueryParamasSeries {
 	"vote_count.gte"?: number
 	"vote_count.lte"?: number
 }
+
+export interface ISerieStates {
+	id: number
+	favorite: boolean
+	reted: {
+		value: number
+	}
+	watchlist: boolean
+}
