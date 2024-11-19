@@ -36,8 +36,6 @@ export function SortButton() {
         }
     }
 
-    console.log(sort)
-
     return (
         <button className={styles.button} onClick={HandleChangeSort}>
             {sort === "desc" && <SortDownIcon className={styles.button_icon} />}

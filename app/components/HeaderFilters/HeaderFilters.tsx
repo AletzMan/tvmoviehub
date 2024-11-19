@@ -31,7 +31,7 @@ export function HeaderFilters() {
 
     const HandleChangeSort = (e: ChangeEvent<HTMLSelectElement>) => {
         const value = e.currentTarget.value
-        console.log(value)
+
         const currentSort = searchParams.get("sort_by")
         const newSort = new URLSearchParams(searchParams)
         if (currentSort) {

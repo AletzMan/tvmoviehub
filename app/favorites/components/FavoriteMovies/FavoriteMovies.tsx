@@ -22,7 +22,7 @@ export default async function FavoriteMovies() {
                     }
                 </section>
             </ToastProvider>
-            {movies!.results.length > 0 && <Pagination currentPage={movies?.page || 1} totalPages={movies?.total_pages || 0} />}
+            {movies && movies.results.length > 0 && <Pagination currentPage={movies?.page || 1} totalPages={movies?.total_pages || 0} />}
             {movies && movies?.results?.length === 0 &&
                 <div className={styles.message}>
                     <p className={styles.message_title}>No has agregado favoritos</p>

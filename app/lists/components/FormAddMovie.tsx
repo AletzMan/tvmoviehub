@@ -28,7 +28,6 @@ export function FormAddMovie({ onClick }: Props) {
         setErrorList({ ...errorList, [name]: "" })
     }
 
-    console.log(list)
 
     const HandleSave = async (e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
@@ -38,10 +37,8 @@ export function FormAddMovie({ onClick }: Props) {
             setErrorList({ name: errorName, description: errorDescription })
         } else {
             const response = await CreateLisMovie(session_id, list.name, list.description)
-            console.log(response)
             if (response) {
                 RevalidateURL("listMovies")
-                console.log("CREADA LISTA")
             }
         }
     }
