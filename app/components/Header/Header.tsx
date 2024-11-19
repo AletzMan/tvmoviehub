@@ -25,8 +25,6 @@ export default function Header() {
     const searchParams = useSearchParams()
     const router = useRouter()
 
-    useEffect(() => {
-    }, [pathname, searchParams])
 
     const HandleSetOpen = (type: 'menu' | 'search' | 'account') => {
         const newState: IOpen = { account: false, menu: false, search: false }
