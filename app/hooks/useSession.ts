@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+"use client"
 import { useEffect, useState } from "react"
 import { IUserSession } from "../interfaces/authentication"
 import { usePathname } from "next/navigation"
@@ -8,17 +10,22 @@ export function useSession() {
     const [session, setSession] = useState<IUserSession>({ session_id: "", country: "", include_adult: false, language: "", name: "", username: "" })
 
     useEffect(() => {
-        const responseSession = localStorage.getItem("tvmoviehub_sessionid")
-        if (responseSession) {
-            const session: IUserSession = JSON.parse(responseSession)
-            if (session.session_id) {
-                setSession(session)
+        if (typeof window !== 'undefined' && localStorage) {
+            const storedSession = localStorage.getItem('tvmoviehub_sessionid')
+            if (storedSession) {
+                setSession(JSON.parse(storedSession))
+            } else {
+                setSession({
+                    session_id: "",
+                    country: "",
+                    include_adult: false,
+                    language: "",
+                    name: "",
+                    username: "",
+                })
             }
-        } else {
-            setSession({ session_id: "", country: "", include_adult: false, language: "", name: "", username: "" })
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [pathname, localStorage.length])
+    }, [pathname])
 
     return session
 }
