@@ -10,7 +10,7 @@ export const SideMenu = () => {
     const pathname = usePathname()
     const section = pathname.split("/")[1]
     const router = useRouter()
-
+    console.log(section)
     const HandleSession = () => {
         if (session.session_id) {
             localStorage.removeItem("tvmoviehub_sessionid")
@@ -38,7 +38,7 @@ export const SideMenu = () => {
                             {<h2 className={styles.menu_title}>Usuario</h2>}
                             {
                                 MainMenu.filter((_, index) => index > 4 && index < 8).map(menu => (
-                                    <Link key={menu.id} className={`${styles.menu_item} ${menu.link === section && styles.menu_itemCurrent}  ${menu.name}`} href={`/${menu.link}`} title={`Ir a ${menu.name}`}>{menu.icon}{menu.name}</Link>
+                                    <Link key={menu.id} className={`${styles.menu_item} ${menu.link.split("?")[0] === section && styles.menu_itemCurrent}  ${menu.name}`} href={`/${menu.link}`} title={`Ir a ${menu.name}`}>{menu.icon}{menu.name}</Link>
                                 ))
                             }
                         </div>
