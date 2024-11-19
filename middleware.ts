@@ -7,13 +7,17 @@ export function middleware(request: NextRequest) {
 
     const { pathname } = request.nextUrl
 
-    // AL INGRESAR DIRECTAMENTE AL DASHBOARD SI NO ESTA LOGEADO REDIRIGIR AL LOGIN
-    // SI ESTA LOGEADO SEGUIR AL DASHBOARD
+
+
     if (pathname.endsWith("/favorites")) {
+        console.log("ENTRA")
+        console.log(myTokenLogin)
         if (myTokenLogin === undefined) {
             request.nextUrl.pathname = "/"
+            console.log("SALE")
             return NextResponse.redirect(request.nextUrl)
         } else {
+            console.log("SIGUE")
             return NextResponse.next()
         }
     }
@@ -26,4 +30,5 @@ export function middleware(request: NextRequest) {
             return NextResponse.next()
         }
     }
+
 }
