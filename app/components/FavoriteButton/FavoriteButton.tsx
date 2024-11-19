@@ -58,6 +58,6 @@ export function FavoriteButton({ id, title, type, isFavorites }: Props) {
     }
 
     return (
-        <button className={styles.fav} onClick={HandleAddRemoveFavorite}><FavoriteFullIcon className={`${styles.favIcon} ${isFavorite && styles.favActive}`} /> </button>
+        <button className={styles.fav} onClick={HandleAddRemoveFavorite} title={!isFavorite ? "Agregar a favoritos" : "Eliminar de favoritos"}><FavoriteFullIcon className={`${styles.favIcon} ${isFavorite && styles.favActive}`} /> </button>
     )
 }
