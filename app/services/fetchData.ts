@@ -436,7 +436,6 @@ export const CreateRequestToken = async () => {
 	const response = await fetch(url, optionsGET)
 	if (response.ok) {
 		const data: IRequestToken = await response.json()
-		//console.log("Request Token: ", data)
 		return data
 	}
 
@@ -459,7 +458,6 @@ export const CreateSeassonID = async (request_token: string) => {
 		body: JSON.stringify({ request_token })
 	})
 	const data: ISessionID = await response.json()
-	//console.log("Session ID : ", data)
 
 	return data
 }
@@ -487,7 +485,6 @@ export const CreateSession = async (username: string, password: string) => {
 
 		const data: ILoginValidation | IErrorLogin = await response.json()
 
-		//console.log("Create Session : ", data)
 
 		if (data.success) {
 			const succesresponse: ILoginValidation = data as ILoginValidation
@@ -633,7 +630,7 @@ export const CreateLisMovie = async (session_id: string, name: string, descripti
 			language: 'es'
 		})
 	})
-	console.log(response.json())
+
 	let data: IResponseCreateMovie | null = null
 	if (response.status === 201) {
 		return (await response.json()) as IResponseCreateMovie

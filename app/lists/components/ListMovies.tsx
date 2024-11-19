@@ -15,7 +15,7 @@ export default async function ListMovies(params: { searchParams: { type: string,
 
     return (
         <div className={styles.lists}>
-            {lists!.results.length > 0 &&
+            {lists && lists.results.length > 0 &&
                 <ToastProvider>
                     <section className={`${styles.lists_section} scrollBarStyle`}>
                         {lists?.results.map(list => (
@@ -25,7 +25,7 @@ export default async function ListMovies(params: { searchParams: { type: string,
                     </section>
                 </ToastProvider>
             }
-            {lists!.results.length > 0 && <Pagination currentPage={lists?.page || 1} totalPages={lists?.total_pages || 0} />}
+            {lists && lists.results.length > 0 && <Pagination currentPage={lists?.page || 1} totalPages={lists?.total_pages || 0} />}
             {lists && lists?.results?.length === 0 &&
                 <div className={styles.message}>
                     <p className={styles.message_title}>Aún no has creado ninguna lista</p>

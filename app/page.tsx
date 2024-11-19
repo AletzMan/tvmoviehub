@@ -12,7 +12,6 @@ export default async function Home(params: { params: { lang: string }, searchPar
   const data: IMovie[] = await GetNowPlaying()
   const dataSeries: ISerie[] = await GetSeriesAiringToday()
   const dataPeople: IPeopleResponse = await GetPeoplePopular(1)
-  console.log(data)
 
   return (
     <section className={`${styles.home} scrollBarStyle`}>
