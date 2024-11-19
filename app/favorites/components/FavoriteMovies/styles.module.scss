@@ -10,6 +10,8 @@
     &_section {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(10em, 1fr));
+        grid-template-rows: max-content;
+        place-items: start start;
         gap: 0.25em;
         height: calc(100svh - 15em);
     }

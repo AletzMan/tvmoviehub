@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client"
 import { useEffect, useState } from "react"
 import styles from "./styles.module.scss"
@@ -13,7 +14,6 @@ export default function SelectFavorite() {
         if (paramType && paramType === "series") {
             setOption(true)
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const HandleSetOption = () => {
@@ -23,9 +23,9 @@ export default function SelectFavorite() {
 
     return (
         <div className={styles.favorite}>
-            <div className={styles.favorite_container}>
+            <div className={styles.favorite_container} onClick={HandleSetOption}>
                 <span className={`${styles.favorite_arrow} ${option && styles.favorite_arrowActive}`} >{option ? "Películas" : "Series"}</span>
-                <button className={`${styles.favorite_button} ${option && styles.favorite_buttonActive}`} onClick={HandleSetOption}>{!option ? "Películas" : "Series"}</button>
+                <span className={`${styles.favorite_button} ${option && styles.favorite_buttonActive}`} >{!option ? "Películas" : "Series"}</span>
             </div>
         </div>
     )
