@@ -10,7 +10,7 @@ export default async function Page(params: { searchParams: { type: string, page:
         <section>
             <HeaderSection title="Mis favoritos" icon={<FavoriteFullIcon />} />
             <SelectFavorite />
-            {params.searchParams?.type === "movies" ? <FavoriteMovies /> : <FavoriteSeries />}
+            {params.searchParams?.type === "movies" ? <FavoriteMovies page={params.searchParams?.page || "1"} /> : <FavoriteSeries page={params.searchParams?.page || "1"} />}
         </section>
     )
 }

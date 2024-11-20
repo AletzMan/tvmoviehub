@@ -7,10 +7,14 @@ import { IPartCollection } from "@/app/interfaces/movie"
 import { ToastProvider } from "@/app/components/ToastProvider/ToastProvider"
 import { Pagination } from "@/app/components/Pagination/Pagination"
 
-export default async function FavoriteSeries() {
+interface Props {
+    page: string
+}
+
+export default async function FavoriteSeries({ page }: Props) {
     const cookie = cookies().get("session_tvmoviehub")?.value
 
-    const movies: ISerieResponse | null = await GetFavoriteSeries(cookie as string)
+    const movies: ISerieResponse | null = await GetFavoriteSeries(cookie as string, page)
 
     return (
         <div className={styles.favorites}>
