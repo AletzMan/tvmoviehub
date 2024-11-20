@@ -29,6 +29,7 @@
     border-radius: 1em;
     cursor: pointer;
     transition: all 0.25s ease-in-out;
+    z-index: 2;
 
     &:hover {
         background-color: var(--hover);
@@ -103,18 +104,23 @@
     &_dialog {
         position: absolute;
         left: 0;
-        top: 6em;
+        top: 0em;
         border: none;
         width: 100svw;
         transform: translateX(-100%);
         transition: all 0.5s ease-in-out;
         background-color: transparent;
-        //backdrop-filter: blur(5px);
+        //backdrop-filter: blur(2px);
         opacity: 0;
+        z-index: 2;
 
         &Open {
             opacity: 1;
             transform: translateX(0);
+        }
+
+        @media (width <=700px) {
+            top: 6em;
         }
     }
 }
@@ -138,6 +144,7 @@
     border: none;
     transition: all 0.3s ease-in-out;
     cursor: pointer;
+    z-index: 2;
 
     @media (width <=700px) {
         display: none;
@@ -145,6 +152,10 @@
 
 
     &:hover {
+        background-color: var(--hover);
+    }
+
+    &_open {
         background-color: var(--hover);
     }
 
@@ -160,19 +171,21 @@
 
     &_menu {
         position: absolute;
-        top: 0.5em;
+        //top: 4.5em;
         right: 1.5em;
         padding: 1em 0;
         border-radius: 0.25em;
         background-color: var(--terciaryColor);
         //transition: all 0.3s ease-in-out 5s;
-        transform: translateY(-4.3em);
+        transform: translateY(3em);
         //transform-origin: top center;
-        animation: openAccount 0.25s ease-in-out both;
+        opacity: 0;
+        animation: openAccount 0.3s ease-in-out both;
 
         @keyframes openAccount {
             to {
-                transform: translateY(0);
+                transform: translateY(5em);
+                opacity: 1;
 
             }
         }
@@ -219,7 +232,7 @@
 
     &_dialog {
         display: none;
-        top: 4.3em;
+        top: 0;
         left: 0;
         width: 100svw;
         height: calc(100svh - 4.25em);
@@ -234,24 +247,37 @@
 }
 
 .search {
+    //display: none;
     position: absolute;
     top: 0em;
     right: 0;
     width: 100svw;
-    height: calc(100svh - 6em);
-
+    height: 100svh;
     border: none;
-    background-color: transparent;
-    transform: translateY(-1.2em);
-    transition: all 0.5s ease-in-out;
+    background-color: #ffffff00;
+    backdrop-filter: blur(0);
     overflow: hidden;
     pointer-events: none;
-    transform-origin: top center;
-    z-index: -1;
+    z-index: 1;
 
+
+    &>header {
+        transform: translateY(0);
+        transform-origin: top center;
+        transition: all 0.5s ease-in-out;
+        opacity: 0;
+
+    }
 
     &_open {
-        transform: translateY(6em);
+        //display: block;
         pointer-events: all;
+        backdrop-filter: blur(2px);
+
+        &>header {
+            transform: translateY(6em);
+            opacity: 1;
+        }
+
     }
 }

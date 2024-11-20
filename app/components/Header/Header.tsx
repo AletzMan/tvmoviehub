@@ -5,7 +5,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { SearchInput } from "../SearchInput/SearchInput"
 import { ArrowDownIcon, LogInIcon, LogoIcon, LogoutIcon, MenuIcon, SearchIcon } from "@/app/utils/svg"
 import { SideMenu } from "../SideMenu/SideMenu"
-import { useEffect, useState } from "react"
+import { MouseEvent, useEffect, useState } from "react"
 import Link from "next/link"
 import { useSession } from "@/app/hooks/useSession"
 import { DeleteCookie } from "@/app/utils/serveractions"
@@ -43,6 +43,12 @@ export default function Header() {
         }
     }
 
+    const HandleClickDialog = (e: MouseEvent<HTMLDialogElement>) => {
+        if ((e.target as HTMLElement).tagName === "DIALOG") {
+            HandleSetOpen("search")
+        }
+    }
+
     return (
         <SnackbarProvider anchorOrigin={{ vertical: "top", horizontal: "center" }} autoHideDuration={3000}>
             <header className={styles.header}>
@@ -58,7 +64,9 @@ export default function Header() {
                         }
                     </div>
                     <div className={styles.mobile}>
-                        <LogoIcon className={styles.mobile_logo} />
+                        <Link href="/">
+                            <LogoIcon className={styles.mobile_logo} />
+                        </Link>
                         <div className={styles.mobile_pathname}>
                             {MainMenu.find(menu => menu.link === section)?.icon}
                             {MainMenu.find(menu => menu.link === section)?.name}
@@ -68,7 +76,7 @@ export default function Header() {
                         <button className={styles.button} onClick={() => HandleSetOpen("search")}>
                             <SearchIcon className={styles.button_icon} />
                         </button>
-                        <button className={styles.login} onClick={() => HandleSetOpen("account")}>
+                        <button className={`${styles.login} ${open.account && styles.login_open}`} onClick={() => HandleSetOpen("account")}>
                             <span className={styles.login_user}>{`${session.session_id ? session.username : "Invitado"}`}</span>
                             <ArrowDownIcon className={styles.login_arrow} />
                         </button>
@@ -76,8 +84,8 @@ export default function Header() {
                     </div>
                 </div>
                 {
-                    <dialog open className={`${styles.search} ${open.search && styles.search_open}`} >
-                        <SearchInput section={section} />
+                    <dialog open className={`${styles.search} ${open.search && styles.search_open}`} onClick={HandleClickDialog}>
+                        <SearchInput section={section} onSearch={() => HandleSetOpen("search")} />
                     </dialog>
                 }
                 <dialog open className={`${styles.login_dialog} ${open.account && styles.login_dialogOpen}`} onClick={() => HandleSetOpen("account")}>
