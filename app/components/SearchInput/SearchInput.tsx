@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client"
 import { SearchIcon } from "@/app/utils/svg"
 import styles from "./searchinput.module.scss"
@@ -28,9 +29,10 @@ const sectionType = {
 
 type Props = {
     section: string
+    onSearch: () => void
 
 }
-export const SearchInput = ({ section }: Props) => {
+export const SearchInput = ({ section, onSearch }: Props) => {
     const searchParams = useSearchParams()
     const [selectOption, setSelectOption] = useState<IOptions>(defaultOptions)
     const [placeholder, setPlaceholder] = useState("Buscar en películas, series y personas")
@@ -55,7 +57,7 @@ export const SearchInput = ({ section }: Props) => {
             setPlaceholder("Buscar en películas, series y personas")
         }
         setSelectOption(newStatusChecked)
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+
     }, [section, pathname])
 
     const HandleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -103,6 +105,7 @@ export const SearchInput = ({ section }: Props) => {
         } else if (selectOption.search) {
             router.push(`/search?query=${search}&page=1`)
         }
+        onSearch()
     }
 
     return (
