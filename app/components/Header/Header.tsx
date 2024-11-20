@@ -76,7 +76,7 @@ export default function Header() {
                     </div>
                 </div>
                 {
-                    <dialog open className={`${styles.search} ${open.search && styles.search_open}`} onClick={() => HandleSetOpen("search")}>
+                    <dialog open className={`${styles.search} ${open.search && styles.search_open}`} >
                         <SearchInput section={section} />
                     </dialog>
                 }

@@ -531,8 +531,8 @@ export const GetStatesSerie = async (session_id: string, serie_id: number) => {
 	return data
 }
 
-export const GetFavoriteMovies = async (session_id: string) => {
-	const url = `${API_URL_BASE}/account/18482247/favorite/movies?language=${LANGUAGE_MX}&session_id=${session_id}`
+export const GetFavoriteMovies = async (session_id: string, page: string) => {
+	const url = `${API_URL_BASE}/account/18482247/favorite/movies?language=${LANGUAGE_MX}&session_id=${session_id}&page=${page}`
 	const response = await fetch(url, {
 		method: "GET",
 		headers: {
@@ -548,8 +548,8 @@ export const GetFavoriteMovies = async (session_id: string) => {
 	return data
 }
 
-export const GetFavoriteSeries = async (session_id: string) => {
-	const url = `${API_URL_BASE}/account/18482247/favorite/tv?language=${LANGUAGE_MX}&session_id=${session_id}`
+export const GetFavoriteSeries = async (session_id: string, page: string) => {
+	const url = `${API_URL_BASE}/account/18482247/favorite/tv?language=${LANGUAGE_MX}&session_id=${session_id}&page=${page}`
 	const response = await fetch(url, {
 		method: "GET",
 		headers: {

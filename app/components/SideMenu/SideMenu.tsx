@@ -10,7 +10,7 @@ export const SideMenu = () => {
     const pathname = usePathname()
     const section = pathname.split("/")[1]
     const router = useRouter()
-    console.log(section)
+
     const HandleSession = () => {
         if (session.session_id) {
             localStorage.removeItem("tvmoviehub_sessionid")
