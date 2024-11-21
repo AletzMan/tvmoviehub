@@ -3,13 +3,14 @@ import { IMovie } from "@/app/interfaces/movie"
 import styles from "./mainslider.module.scss"
 import Image from "next/image"
 import { BASE_URL_IMG_CUSTOM } from "@/app/utils/const"
-import { useEffect, useState } from "react"
-import { AddIcon, StarIcon } from "@/app/utils/svg"
+import { useEffect, useState, MouseEvent } from "react"
+import { AddIcon, LoadingIcon, StarIcon } from "@/app/utils/svg"
 import Link from "next/link"
 import Slider from "react-slick"
 import { NextArrow, PrevArrow } from "../ArrowSlider/ArrowSlider"
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
+import { LoadingPage } from "../LoadingPage/LoadingPage"
 
 interface Props {
     movies: IMovie[];
@@ -17,6 +18,7 @@ interface Props {
 
 export const MainSlider = ({ movies }: Props) => {
     const [carouselMovies, setCarouselMovies] = useState<IMovie[]>([])
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         if (movies.length > 0) {
@@ -31,6 +33,10 @@ export const MainSlider = ({ movies }: Props) => {
 
 
 
+    function HandleLoading(event: MouseEvent<HTMLAnchorElement>): void {
+        setLoading(true)
+    }
+
     return (
         <article className={styles.article} >
             <Slider  {...settings} >
@@ -42,7 +48,7 @@ export const MainSlider = ({ movies }: Props) => {
                                 <h4 className={styles.movie_subtitle}>{`(${movie.original_title})`}</h4>
                                 <div className={styles.movie_details}>
                                     <p className={styles.movie_average}><StarIcon className={styles.movie_icon} />{movie.vote_average.toFixed(1)}</p>
-                                    <Link className={styles.movie_info} href={`/movies/${movie.id}`}><AddIcon className={styles.movie_icon} /> MÁS INFORMACIÓN</Link>
+                                    <Link className={styles.movie_info} onClick={HandleLoading} href={`/movies/${movie.id}`}><AddIcon className={styles.movie_icon} /> MÁS INFORMACIÓN</Link>
                                 </div>
                             </div>
                         </div>
@@ -57,6 +63,9 @@ export const MainSlider = ({ movies }: Props) => {
                 ))}
                 {/*<div className={styles.timebar} style={{ position: "absolute", bottom: "0", height: "0.15em", backgroundColor: "var(--highlightColorBasic)", width: `${timeSlider}%`, transition: "all ease-in-out" }}></div>*/}
             </Slider>
+            {loading &&
+                <LoadingPage />
+            }
         </article>
     )
 }

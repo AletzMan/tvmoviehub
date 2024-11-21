@@ -1,0 +1,38 @@
+.dialog {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    backdrop-filter: blur(2px);
+    border: none;
+    top: 0;
+    z-index: 5;
+    width: 100svw;
+    height: 100svh;
+
+    &_container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 1em;
+    }
+
+    &_icon {
+        width: 5em;
+        height: 5em;
+        color: var(--highlightColor);
+        animation: animationLoading 1s ease-in-out infinite;
+
+        @keyframes animationLoading {
+            to {
+                transform: rotate(359deg);
+            }
+        }
+    }
+
+    &_text {
+        font-weight: 600;
+        color: var(--fontColor);
+    }
+}
