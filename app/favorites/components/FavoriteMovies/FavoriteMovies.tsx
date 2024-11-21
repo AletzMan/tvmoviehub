@@ -16,7 +16,6 @@ export default async function FavoriteMovies({ page }: Props) {
 
 
     const movies: IMovieResponse | null = await GetFavoriteMovies(cookie as string, page)
-    console.log(page)
     return (
         <div className={styles.favorites}>
             <ToastProvider>
