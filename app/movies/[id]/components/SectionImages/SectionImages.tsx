@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client"
 import { IBackdrop, IImages } from "@/app/interfaces/image"
 import styles from "./section.module.scss"
@@ -7,20 +8,34 @@ import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 import { BASE_URL_IMG, BASE_URL_IMG_CUSTOM } from "@/app/utils/const"
 import Slider from "react-slick"
-import { useState } from "react"
-import { CloseIcon, LoadingIcon } from "@/app/utils/svg"
+import { useEffect, useState } from "react"
+import { CloseIcon, FacebookIcon, InstagramIcon, LoadingIcon, XIcon } from "@/app/utils/svg"
+import Link from "next/link"
+import { IExternalIDs } from "@/app/interfaces/movie"
+import { GetExternalIDs } from "@/app/services/fetchData"
 
 interface IImageDialog { status: boolean, type: 'backdrops' | 'logos' | 'posters', size: { width: number, height: number } }
 const ImagesEmpty: IImageDialog = { status: false, type: 'backdrops', size: { width: 240, height: 150 } }
 
 interface Props {
+    id: number
     images: IImages
 }
 
-export function SectionImages({ images }: Props) {
+export function SectionImages({ images, id }: Props) {
     const [openDialog, setOpenDialog] = useState<IImageDialog>(ImagesEmpty)
     const [currentImages, setCurrentImages] = useState<IBackdrop>(images.backdrops[0])
     const [loadImage, setLoadImage] = useState(true)
+    const [externalIDs, setExternalIDs] = useState<IExternalIDs>()
+
+    useEffect(() => {
+        const GetExternalInfo = async () => {
+            const response = await GetExternalIDs(id)
+            if (response)
+                setExternalIDs(response)
+        }
+        GetExternalInfo()
+    }, [])
 
     const HandleSetImage = (image: IBackdrop) => {
         if (currentImages.file_path !== image.file_path) {
@@ -41,9 +56,31 @@ export function SectionImages({ images }: Props) {
 
     return (
         <article className={styles.section}>
-            {images.backdrops.length > 0 && <Button onClick={() => HandleOpen("backdrops", true, { width: 240, height: 135 })} text="Ver Wallpapers" mode="button" />}
-            {images.posters.length > 0 && <Button onClick={() => HandleOpen("posters", true, { width: 130, height: 190 })} text="Ver Posters" mode="button" />}
-            {images.logos.length > 0 && <Button onClick={() => HandleOpen("logos", true, { width: 240, height: 150 })} text="Ver Logos" mode="button" />}
+            <div className={styles.images}>
+                {images.backdrops.length > 0 && <Button className={styles.button_large} onClick={() => HandleOpen("backdrops", true, { width: 240, height: 135 })} text="Wallpapers" mode="button" />}
+                {images.posters.length > 0 && <Button className={styles.button_large} onClick={() => HandleOpen("posters", true, { width: 130, height: 190 })} text="Posters" mode="button" />}
+                {images.logos.length > 0 && <Button className={styles.button_large} onClick={() => HandleOpen("logos", true, { width: 240, height: 150 })} text="Logos" mode="button" />}
+            </div>
+            <div className={styles.social}>
+                {externalIDs?.instagram_id &&
+                    <Link href={`https://www.instagram.com/${externalIDs.instagram_id}`} className={styles.social_link} target="_blank">
+                        <InstagramIcon className={styles.social_icon} />
+                        <span className={styles.social_name}>Instagram</span>
+                    </Link>
+                }
+                {externalIDs?.twitter_id &&
+                    <Link href={`https://www.x.com/${externalIDs.twitter_id}`} className={styles.social_link} target="_blank">
+                        <XIcon className={styles.social_icon} />
+                        <span className={styles.social_name}>X</span>
+                    </Link>
+                }
+                {externalIDs?.facebook_id &&
+                    <Link href={`https://www.facebook.com/${externalIDs.facebook_id}`} className={styles.social_link} target="_blank">
+                        <FacebookIcon className={styles.social_icon} />
+                        <span className={styles.social_name}>Facebook</span>
+                    </Link>
+                }
+            </div>
             {openDialog.status &&
                 <dialog className={`${styles.dialog} scrollBarStyle`} open>
                     <Button className={styles.dialog_close} mode="button" text="" icon={<CloseIcon />} onClick={() => HandleOpen("backdrops", false, { width: 220, height: 150 })} />

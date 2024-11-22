@@ -1,6 +1,76 @@
 .section {
     display: flex;
+    justify-content: space-between;
     gap: 0.5em;
+
+    @media (width < 400px) {
+        flex-direction: column;
+    }
+}
+
+.images {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5em;
+}
+
+
+.social {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5em;
+    padding: 0 1em 0 0;
+
+    &_link {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.25em;
+        border-radius: 0.5em;
+        transition: all 0.3s ease-in-out;
+        background-color: transparent;
+
+        &:hover {
+            background-color: var(--terciaryColor);
+
+            &>.social_name {
+                display: block;
+            }
+        }
+    }
+
+    &_icon {
+        width: 2em;
+        height: 2em;
+        color: var(--fontColor);
+    }
+
+    &_name {
+        display: none;
+        position: absolute;
+        top: -1.9em;
+        background-color: var(--highlightColor);
+        padding: 0 0.5em;
+        font-size: 0.85em;
+        border-radius: 0.25em;
+        color: var(--fontColor);
+
+
+        &::before {
+            position: absolute;
+            bottom: -0.3em;
+            right: calc(50% - 5px);
+            content: "";
+            width: 0;
+            height: 0;
+            border-left: 5px solid transparent;
+            border-right: 5px solid transparent;
+            border-top: 5px solid #28A745;
+        }
+
+    }
+
 }
 
 .dialog {
@@ -98,5 +168,10 @@
         object-fit: contain;
         transition: all 0.25s ease-in-out;
         background-color: var(--hover);
+    }
+
+    &_large {
+        width: 6em !important;
+        max-width: 6em !important;
     }
 }
