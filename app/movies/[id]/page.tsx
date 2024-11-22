@@ -78,7 +78,7 @@ export default async function Page(params: { params: { id: string }, searchParam
                             ))
                         }
                     </div>
-                    {images && <SectionImages images={images} />}
+                    {images && <SectionImages images={images} id={data.id} />}
                     {data.keywords && <SectionTags keywords={data.keywords} />}
                     <h4 className={styles.details_title}>SINOPSIS</h4>
                     <article className={styles.details}>
