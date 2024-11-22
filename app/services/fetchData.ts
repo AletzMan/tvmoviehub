@@ -4,7 +4,7 @@ import { IFavorites } from "../interfaces/favorite"
 import { IImages } from "../interfaces/image"
 import { IKeywords, IResult } from "../interfaces/keyword"
 import { IResponseCreateMovie, IResponseListMovie } from "../interfaces/list"
-import { ICollectionDetails, IMovie, IMovieDetails, IMovieStates, IQueryParamasMovies } from "../interfaces/movie"
+import { ICollectionDetails, IExternalIDs, IMovie, IMovieDetails, IMovieStates, IQueryParamasMovies } from "../interfaces/movie"
 import { IMultiResponse } from "../interfaces/multi"
 import { IPeopleDetails, IPeopleImages } from "../interfaces/people"
 import { IAiringTodayResponse, IMovieResponse, INowPlayingResponse, IPeopleResponse, IRecommendationResponse, ISerieResponse } from "../interfaces/responses"
@@ -636,5 +636,26 @@ export const CreateLisMovie = async (session_id: string, name: string, descripti
 		return (await response.json()) as IResponseCreateMovie
 	}
 
+	return data
+}
+
+
+export const GetExternalIDs = async (movie_id: number) => {
+	const url = `${API_URL_BASE}/movie/${movie_id}/external_ids`
+	console.log(url)
+	const response = await fetch(url, {
+		method: "GET",
+		headers: {
+			accept: "application/json",
+			Authorization: `Bearer ${API_KEY}`,
+		}
+	})
+	console.log(response)
+	let data: IExternalIDs | null = null
+	if (response.status === 200) {
+		const result = (await response.json()) as IExternalIDs
+		console.log(result)
+		return result
+	}
 	return data
 }
