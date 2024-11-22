@@ -13,6 +13,11 @@
     background-size: 200% 200%;
     color: var(--fontColor);
     background: linear-gradient(-12deg, var(--fourthColor), var(--highlightColor));
+    border: 1px solid;
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-bottom-color: var(--highlightColorBasic);
+    border-left-color: var(--highlightColorBasic);
     transition: all 0.3s ease-in-out;
     text-decoration: none;
     cursor: pointer;
