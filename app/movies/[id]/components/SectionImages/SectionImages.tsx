@@ -12,17 +12,18 @@ import { useEffect, useState } from "react"
 import { CloseIcon, FacebookIcon, InstagramIcon, LoadingIcon, XIcon } from "@/app/utils/svg"
 import Link from "next/link"
 import { IExternalIDs } from "@/app/interfaces/movie"
-import { GetExternalIDs } from "@/app/services/fetchData"
+import { GetExternalIDs, GetExternalIDsSerie } from "@/app/services/fetchData"
 
 interface IImageDialog { status: boolean, type: 'backdrops' | 'logos' | 'posters', size: { width: number, height: number } }
 const ImagesEmpty: IImageDialog = { status: false, type: 'backdrops', size: { width: 240, height: 150 } }
 
 interface Props {
     id: number
+    type: 'movie' | 'tv'
     images: IImages
 }
 
-export function SectionImages({ images, id }: Props) {
+export function SectionImages({ images, id, type }: Props) {
     const [openDialog, setOpenDialog] = useState<IImageDialog>(ImagesEmpty)
     const [currentImages, setCurrentImages] = useState<IBackdrop>(images.backdrops[0])
     const [loadImage, setLoadImage] = useState(true)
@@ -30,7 +31,12 @@ export function SectionImages({ images, id }: Props) {
 
     useEffect(() => {
         const GetExternalInfo = async () => {
-            const response = await GetExternalIDs(id)
+            let response: IExternalIDs | null
+            if (type === "movie") {
+                response = await GetExternalIDs(id)
+            } else {
+                response = await GetExternalIDsSerie(id)
+            }
             if (response)
                 setExternalIDs(response)
         }

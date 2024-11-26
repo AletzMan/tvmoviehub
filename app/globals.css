@@ -21,6 +21,7 @@
 	--hover: #83808012;
 
 	--maxWidth: 1920px;
+	--maxWidthContent: 1550px;
 	--maxWidthSlider: 1920px;
 	--heightHeader: calc(100svh - 6em);
 }

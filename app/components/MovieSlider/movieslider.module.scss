@@ -1,9 +1,9 @@
 .slider {
     display: flex;
     flex-direction: column;
-    background-color: var(--hover);
+    //background-color: var(--hover);
     height: max-content;
-    width: calc(100svw - 1.5em);
+    //width: calc(100svw - 1.5em); 
 
     @media (width < 750px) {
         width: 100%;
