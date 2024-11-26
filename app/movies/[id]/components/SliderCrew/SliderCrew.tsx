@@ -7,6 +7,7 @@ import { ArrowLeftIcon } from "@/app/utils/svg"
 import { useEffect, useRef, useState } from "react"
 import { ICreatedBy } from "@/app/interfaces/serie"
 import Link from "next/link"
+import { useLoadingState } from "@/app/services/store"
 
 interface Props {
     credits?: ICredits
@@ -18,6 +19,7 @@ interface Props {
 export const SliderCrew = ({ credits, created_by, type, title }: Props) => {
     const refContainer = useRef<null | HTMLDivElement>(null)
     const [scrollLeft, setScrollLeft] = useState(0)
+    const { setLoadingState } = useLoadingState()
 
     useEffect(() => {
 
@@ -73,7 +75,7 @@ export const SliderCrew = ({ credits, created_by, type, title }: Props) => {
                 <div className={`${styles.cast_container} scrollBarStyleX`} ref={refContainer}>
                     {credits &&
                         credits[type].map(actor => (
-                            <Link key={actor.credit_id} className={styles.actor} href={`/people/${actor.id}`} title={`Ver biografía de ${actor.name}`}>
+                            <Link key={actor.credit_id} className={styles.actor} href={`/people/${actor.id}`} title={`Ver biografía de ${actor.name}`} onClick={() => setLoadingState(true)}>
                                 <Image className={styles.actor_photo} src={actor.profile_path ? BASE_URL_IMG.concat(actor.profile_path || '') : "/not_photo.png"} width={80} height={80} alt={`Foto de ${actor.name}`} />
                                 <div className={styles.actor_description}>
                                     <span className={styles.actor_name}>{actor.name}</span>
@@ -85,7 +87,7 @@ export const SliderCrew = ({ credits, created_by, type, title }: Props) => {
                     }
                     {created_by &&
                         created_by.map(actor => (
-                            <Link key={actor.credit_id} className={styles.actor} href={`/people/${actor.id}`} title={`Ver biografía de ${actor.name}`}>
+                            <Link key={actor.credit_id} className={styles.actor} href={`/people/${actor.id}`} title={`Ver biografía de ${actor.name}`} onClick={() => setLoadingState(true)}>
                                 <Image className={styles.actor_photo} src={actor.profile_path ? BASE_URL_IMG.concat(actor.profile_path || '') : "/not_photo.png"} width={80} height={80} alt={`Foto de ${actor.name}`} />
                                 <div className={styles.actor_description}>
                                     <span className={styles.actor_name}>{actor.name}</span>

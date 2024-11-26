@@ -7,6 +7,7 @@ import { DetailsIcon, LoadingIcon, MovieIcon, SerieIcon, StarIcon } from "@/app/
 import { IPartCollection } from "@/app/interfaces/movie"
 import { useState } from "react"
 import { FavoriteButton } from "../FavoriteButton/FavoriteButton"
+import { useLoadingState } from "@/app/services/store"
 
 interface Props {
     movie: IPartCollection
@@ -16,6 +17,7 @@ interface Props {
 
 export function MovieCardDetails({ movie, type, isFavorites }: Props) {
     const [load, setLoad] = useState(true)
+    const { setLoadingState } = useLoadingState()
 
     const HandleLoadImage = () => {
         setLoad(false)
@@ -35,7 +37,7 @@ export function MovieCardDetails({ movie, type, isFavorites }: Props) {
             </div>
             <div className={styles.movie_shadow}></div>
             <div className={styles.movie_dialog}>
-                <Link className={styles.movie_dialogMore} href={type === "movie" ? `/movies/${movie.id}` : `/series/${movie.id}`} title={movie.title}>
+                <Link className={styles.movie_dialogMore} href={type === "movie" ? `/movies/${movie.id}` : `/series/${movie.id}`} title={movie.title} onClick={() => setLoadingState(true)}>
                     <DetailsIcon className={styles.movie_dialogIcon} />
                 </Link>
             </div>
