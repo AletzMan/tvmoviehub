@@ -47,7 +47,11 @@
 
 .articleThree {
 	flex: 1 1 100%;
-	padding: 0 0.5em 0.5em 0.5em;
+	padding: 1em 1.5em;
+	max-width: 1450px;
+	margin: 0 auto;
+	background-color: var(--primaryColor);
+	border: 1px solid var(--secondaryColor);
 }
 
 .section_title {

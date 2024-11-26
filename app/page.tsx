@@ -25,8 +25,8 @@ export default async function Home(params: { params: { lang: string }, searchPar
           <MainSliderSeries movies={dataSeries} />
   </article>*/}
       </section>
+      <div className="separator"></div>
       <article className={styles.articleThree}>
-        <div className="separator"></div>
         <h3 className={styles.section_title}>TOP 20 ACTORES POPULARES</h3>
         <PopularPeople people={dataPeople.results} />
       </article>
