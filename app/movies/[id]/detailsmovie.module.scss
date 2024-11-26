@@ -252,7 +252,7 @@
 
 .description {
     display: grid;
-    grid-template-columns: 1fr 20em;
+    grid-template-columns: 1fr 25em;
     gap: 0.5em;
 
     @media (width <=975px) {

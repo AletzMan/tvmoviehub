@@ -94,7 +94,6 @@ export default async function Page(params: { params: { id: string }, searchParam
                             </Season>
 
                             {(credits && credits?.cast?.length > 0) && <SliderCrew credits={credits} type="cast" title="REPARTO" />}
-                            {credits && <Crew credits={credits} />}
                             <div className={`${styles.description_data} ${styles.description_dataMobile}`}>
                                 <div className={styles.movie_companies}>
                                     {
@@ -107,6 +106,7 @@ export default async function Page(params: { params: { id: string }, searchParam
                                     }
                                 </div>
                                 {details?.created_by?.length > 0 && <SliderCrew created_by={details.created_by} type="cast" title="CREADA POR" />}
+                                {credits && <Crew credits={credits} />}
                                 <hr className="separator" />
                                 {keywords && <SectionTags keywords={keywords} />}
                             </div>
@@ -125,6 +125,7 @@ export default async function Page(params: { params: { id: string }, searchParam
                                 }
                             </div>
                             {details?.created_by?.length > 0 && <SliderCrew created_by={details.created_by} type="cast" title="CREADA POR" />}
+                            {credits && <Crew credits={credits} />}
                             <hr className="separator" />
                             {keywords && <SectionTags keywords={keywords} />}
                         </div>
