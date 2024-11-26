@@ -49,24 +49,25 @@
     &_name {
         display: none;
         position: absolute;
-        top: -1.9em;
+        top: 3.25em;
         background-color: var(--highlightColor);
         padding: 0 0.5em;
         font-size: 0.85em;
         border-radius: 0.25em;
         color: var(--fontColor);
+        z-index: 30;
 
 
         &::before {
             position: absolute;
-            bottom: -0.3em;
+            top: -0.3em;
             right: calc(50% - 5px);
             content: "";
             width: 0;
             height: 0;
             border-left: 5px solid transparent;
             border-right: 5px solid transparent;
-            border-top: 5px solid var(--highlightColor);
+            border-bottom: 5px solid var(--highlightColor);
         }
 
     }
