@@ -1,15 +1,13 @@
 .main {
 	display: flex;
 	flex-direction: column;
-	/*display: grid;*/
-	/*grid-template-columns: 17em 1fr;*/
-	/*grid-template-rows: 5em 1fr;*/
 	min-height: 100svh;
 	max-width: var(--maxWidth);
 	margin: 0 auto;
-	background: radial-gradient(ellipse at top, var(--primaryColor), var(--secondaryColor)),
-		radial-gradient(ellipse at bottom, var(--terciaryColor), var(--terciaryColor));
-	;
+
+	&>section {
+		margin: 0em 0 0 0;
+	}
 }
 
 

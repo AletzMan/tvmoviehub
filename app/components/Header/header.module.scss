@@ -1,19 +1,17 @@
 .header {
     height: 6em;
     border-radius: var(--terciaryColor);
-    border-bottom: 1px solid var(--hover);
     z-index: 2;
+    background: linear-gradient(#000000ee 40%, transparent 100%);
 
     &_container {
         display: grid;
         grid-template-columns: 0.5fr 1fr 0.5fr;
         padding: 0 0.5em 0 1em;
-        align-items: center;
+        place-items: center center;
         height: 100%;
         width: 100%;
-        background: radial-gradient(ellipse at top, var(--terciaryColor), var(--primaryColor)),
-            radial-gradient(ellipse at bottom, var(--primaryColor), var(--terciaryColor));
-
+        background: transparent;
     }
 }
 
@@ -47,7 +45,7 @@
     flex-direction: column;
     align-items: center;
     padding: 0.15em 0;
-    justify-self: center;
+    justify-self: flex-start;
 
     &_logo {
         color: var(--highlightColor);
@@ -71,8 +69,8 @@
 .menu {
     background-color: transparent;
 
-    @media (width >=700px) {
-        //display: none;
+    @media (width >=820px) {
+        display: none;
     }
 
     &_button {
@@ -119,7 +117,7 @@
             transform: translateX(0);
         }
 
-        @media (width <=700px) {
+        @media (width <=820px) {
             top: 6em;
         }
     }
@@ -130,7 +128,56 @@
     display: flex;
     gap: 1em;
     justify-content: flex-end;
+    justify-self: flex-end;
     padding: 0 1em 0 0;
+}
+
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    background-color: #010101;
+    padding: 0.5em 0.5em;
+    border-radius: 0.5em;
+    max-width: 30em;
+    min-width: 30em;
+    border: 1px solid var(--terciaryColor);
+
+    @media (width < 820px) {
+        display: none;
+    }
+
+    &_item {
+        position: relative;
+        color: var(--fontSecondColor);
+        border-radius: 0.4em;
+        text-decoration: none;
+        padding: 0.5em 1.5em;
+        transition: 0.25s ease-in-out;
+        overflow: hidden;
+
+        &:hover:not(.navigation_itemCurrent) {
+            background: var(--hover);
+        }
+
+        &Current {
+            //background-color: var(--secondaryColor);
+            background-color: var(--primaryColor);
+            color: var(--highlightColor);
+            font-weight: 600;
+            pointer-events: none;
+        }
+
+        &>svg {
+            position: absolute;
+            top: calc(50% - 1.25em);
+            right: calc(50% - 1.25em);
+            width: 2.5em;
+            height: 2.5em;
+            opacity: 0.08;
+            color: var(--fontColor);
+        }
+    }
+
 }
 
 .login {
@@ -146,7 +193,7 @@
     cursor: pointer;
     z-index: 2;
 
-    @media (width <=700px) {
+    @media (width <=820px) {
         display: none;
     }
 
@@ -190,7 +237,7 @@
             }
         }
 
-        @media (width <=700px) {
+        @media (width <=750px) {
             display: none;
         }
 
@@ -214,13 +261,19 @@
             padding: 0.25em 0.5em 0.25em 0.75em;
             text-decoration: none;
             color: var(--fontColor);
+            font-family: var(--font-family);
             background-color: transparent;
             border: none;
             cursor: pointer;
             transition: all 0.3s ease-in-out;
 
-            &:hover {
-                background-color: var(--hover);
+            &Current {
+                background-color: var(--highlightColor);
+                pointer-events: none;
+            }
+
+            &:hover:not(.login_menuLinkCurrent) {
+                background-color: var(--fourthColor);
             }
         }
 
@@ -280,4 +333,9 @@
         }
 
     }
+}
+
+.separator {
+    margin: 0.35em 0;
+    border: 1px outset #e2dddd50;
 }

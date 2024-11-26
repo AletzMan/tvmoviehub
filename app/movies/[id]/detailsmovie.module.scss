@@ -235,3 +235,19 @@
         background-color: var(--fontColor);
     }
 }
+
+.financial {
+    display: flex;
+    flex-direction: column;
+    padding: 0.5em;
+    background-color: var(--highlightHoverColor);
+
+    &_label {
+        color: var(--fontSecondColor);
+    }
+
+    &_number {
+        color: var(--fontColor);
+        padding: 0 0 0 0.5em;
+    }
+}

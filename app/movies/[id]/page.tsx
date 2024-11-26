@@ -2,7 +2,7 @@ import { ICollectionDetails, IMovieDetails } from "@/app/interfaces/movie"
 import styles from "./detailsmovie.module.scss"
 import Image from "next/image"
 import { BASE_URL_IMG, countryFlags } from "@/app/utils/const"
-import { ConvertMinutesToHours } from "@/app/utils/helpers"
+import { ConvertMinutesToHours, currencyFormatter } from "@/app/utils/helpers"
 import { DateIcon, StarIcon, TimeIcon, TrilerIcon } from "@/app/utils/svg"
 import { SliderCrew } from "./components/SliderCrew/SliderCrew"
 import { MovieSlider } from "@/app/components/MovieSlider/MovieSlider"
@@ -86,6 +86,14 @@ export default async function Page(params: { params: { id: string }, searchParam
                     </article>
                     {data.credits && <SliderCrew credits={data.credits} type="cast" title="REPARTO" />}
                     {data.credits && <Crew credits={data.credits} />}
+
+                    <hr className="separator" />
+                    <div className={styles.financial}>
+                        <label className={styles.financial_label}>Presupuesto:</label>
+                        <span className={styles.financial_number}>{currencyFormatter.format(data.budget)}</span>
+                        <label className={styles.financial_label}>Ingresos:</label>
+                        <span className={styles.financial_number}>{currencyFormatter.format(data.revenue)}</span>
+                    </div>
                     <hr className="separator" />
                     {(collections && collections?.parts) && <MovieSlider parts={collections?.parts?.filter(movie => movie.id.toString() !== params.params.id)} title="DE LA MISMA COLECCIÓN" />}
                     {(data.recommendations && data.recommendations.results.length > 0) && <MovieSlider parts={data.recommendations.results} title="RECOMENDACIONES" />}
