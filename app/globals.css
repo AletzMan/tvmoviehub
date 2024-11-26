@@ -1,17 +1,24 @@
 :root {
-	--primaryColor: #040F0F;
+	/*--primaryColor: #040F0F;
 	--secondaryColor: #061818;
 	--terciaryColor: #2D3A3A;
 	--fourthColor: #0b2b0f;
 	--highlightColorBasic: #248232;
 	--highlightColor: #2BA84A;
-	--highlightHoverColor: #23bb4915;
+	--highlightHoverColor: #23bb4915;*/
+	--primaryColor: #0F0F0F;
+	--secondaryColor: #1d1c1c;
+	--terciaryColor: #2a2a2a;
+	--fourthColor: #404040;
+	--highlightColorBasic: #9e2020;
+	--highlightColor: #b00d0d;
+	--highlightHoverColor: #bb232315;
 	--fontColor: #ffffff;
 	--fontSecondColor: #acacac;
 	--titleColor: #e96d30;
 	--averageColor: #d4a526;
 	--subtitleColor: #1283e0;
-	--hover: #2BA84A12;
+	--hover: #83808012;
 
 	--maxWidth: 1920px;
 	--maxWidthSlider: 1920px;
@@ -32,7 +39,7 @@ body {
 }
 
 body {
-	background: radial-gradient(circle, var(--fourthColor), var(--primaryColor));
+	background: radial-gradient(circle, var(--primaryColor), var(--primaryColor));
 }
 
 .mainMenuLogo {
@@ -40,12 +47,12 @@ body {
 	height: 1.5em;
 }
 
-.separator{
+.separator {
 	margin: 0.35em 0;
 	border: 2px outset #57575750;
 }
 
-.logo_category{
+.logo_category {
 	position: relative;
 	width: 3em;
 	height: 3em;
@@ -85,7 +92,7 @@ body {
 
 .scrollBarStyleX::-webkit-scrollbar-thumb {
 	border-radius: 1em;
-	background-color: var(--highlightColorBasic); 
+	background-color: var(--highlightColorBasic);
 }
 
 .scrollBarStyleX::-webkit-scrollbar-track {
@@ -96,24 +103,24 @@ body {
 	background-color: var(--secondaryColor) !important;
 }
 
-.slick-dots li{
+.slick-dots li {
 	margin: 0.5em 0.35em 0.35em 0.35em !important;
 	background: radial-gradient(circle, var(--highlightColorBasic), var(--fourthColor));
 	border-radius: 1em;
 	width: 0.8em !important;
 	height: 0.8em !important;
-	color: transparent;	
+	color: transparent;
 	transition: all 0.25s ease-in-out;
 
-	&:hover{
+	&:hover {
 		background: radial-gradient(circle, var(--highlightColor), var(--highlightColorBasic));
 	}
-	
+
 }
 
-.slick-dots .slick-active{
+.slick-dots .slick-active {
 	background: radial-gradient(circle, var(--highlightColor), var(--highlightColorBasic));
 	box-shadow: 0 0 3px 2px var(--highlightColor);
-	color: transparent;	
+	color: transparent;
 	width: 1.6em !important;
 }

@@ -10,6 +10,7 @@ import Link from "next/link"
 import { useSession } from "@/app/hooks/useSession"
 import { DeleteCookie } from "@/app/utils/serveractions"
 import { SnackbarProvider } from "notistack"
+import { useLoadingState } from "@/app/services/store"
 
 interface IOpen {
     menu: boolean
@@ -21,6 +22,7 @@ export default function Header() {
     const session = useSession()
     const [open, setOpen] = useState<IOpen>({ account: false, menu: false, search: false })
     const pathname = usePathname()
+    const { loadingState, setLoadingState } = useLoadingState()
     const section = pathname.split("/")[1]
     const searchParams = useSearchParams()
     const router = useRouter()
@@ -67,11 +69,18 @@ export default function Header() {
                         <Link href="/">
                             <LogoIcon className={styles.mobile_logo} />
                         </Link>
-                        <div className={styles.mobile_pathname}>
+                        {/*<div className={styles.mobile_pathname}>
                             {MainMenu.find(menu => menu.link === section)?.icon}
                             {MainMenu.find(menu => menu.link === section)?.name}
-                        </div>
+                    </div>*/}
                     </div>
+                    <nav className={styles.navigation}>
+                        {
+                            MainMenu.filter((_, index) => index < 5 && index > 0).map((menu, index) => (
+                                <Link key={menu.id} className={`${styles.navigation_item} ${menu.link === section && styles.navigation_itemCurrent} ${menu.name}`} onClick={() => setLoadingState(true)} href={`/${menu.link}${index > 0 ? "?page=1" : ""}`} title={`Ir a ${menu.name}`}> {menu.name}</Link>
+                            ))
+                        }
+                    </nav>
                     <div className={styles.section}>
                         <button className={styles.button} onClick={() => HandleSetOpen("search")}>
                             <SearchIcon className={styles.button_icon} />
@@ -90,6 +99,12 @@ export default function Header() {
                 }
                 <dialog open className={`${styles.login_dialog} ${open.account && styles.login_dialogOpen}`} onClick={() => HandleSetOpen("account")}>
                     <nav className={`${styles.login_menu} ${open.account && styles.login_menuOpen}`}>
+                        {
+                            MainMenu.filter((_, index) => index > 4 && index < 8).map(menu => (
+                                <Link key={menu.id} className={`${styles.login_menuLink} ${menu.link.split("?")[0] === section && styles.login_menuLinkCurrent}  ${menu.name}`} onClick={() => setLoadingState(true)} href={`/${menu.link}`} title={`Ir a ${menu.name}`}>{menu.icon}{menu.name}</Link>
+                            ))
+                        }
+                        <hr className={styles.separator} />
                         <button className={styles.login_menuLink} title="Iniciar sesión" onClick={HandleSession}>
                             {session.session_id ?
                                 <LogoutIcon className={styles.login_menuIcon} />

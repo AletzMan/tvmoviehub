@@ -17,7 +17,7 @@ export default async function Home(params: { params: { lang: string }, searchPar
     <section className={`${styles.home} scrollBarStyle`}>
       <section className={`${styles.section} `}>
         <article className={styles.article}>
-          <h3 className={styles.section_title}>PELÍCULAS EN CARTELERA</h3>
+          {/*<h3 className={styles.section_title}>PELÍCULAS EN CARTELERA</h3>*/}
           <MainSlider movies={data} />
         </article>
         {/*<article className={styles.article}>

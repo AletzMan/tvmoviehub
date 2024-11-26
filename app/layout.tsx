@@ -24,9 +24,6 @@ export default function RootLayout({
     <html lang="en">
       <body className={jost.className}>
         <main className={`${styles.main} `} >
-          <div className={styles.menu}>
-            {/* <SideMenu />*/}
-          </div>
           <Header />
           {children}
         </main>

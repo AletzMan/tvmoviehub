@@ -2,6 +2,12 @@ import { IErrorLogin, IResponseLogin, ISessionID } from "../interfaces/authentic
 import { CreateSession } from "../services/fetchData"
 import { SmallDateLocal } from "./const"
 
+export const currencyFormatter = new Intl.NumberFormat("en-US", {
+	style: "currency",
+	currency: "USD",
+	minimumFractionDigits: 2,
+})
+
 export const ConvertMinutesToHours = (time: number) => {
 	const hours = Math.floor(time / 60)
 	const minutes = time - hours * 60
