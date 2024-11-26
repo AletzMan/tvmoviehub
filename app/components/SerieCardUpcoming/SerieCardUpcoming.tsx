@@ -1,3 +1,4 @@
+"use client"
 import Image from "next/image"
 import Link from "next/link"
 import styles from "./moviecard.module.scss"
@@ -6,12 +7,14 @@ import { BASE_URL_IMG } from "@/app/utils/const"
 import { FormattedDateUpcoming } from "@/app/utils/helpers"
 import { ISerie } from "@/app/interfaces/serie"
 import { FavoriteButton } from "../FavoriteButton/FavoriteButton"
+import { useLoadingState } from "@/app/services/store"
 
 interface Props {
     serie: ISerie
 }
 
 export const SerieCardUpcoming = ({ serie }: Props) => {
+    const { setLoadingState } = useLoadingState()
     return (
         <div key={serie.id} className={styles.movie}>
             <Image className={styles.movie_backdrop} src={serie.poster_path ? BASE_URL_IMG.concat(serie.backdrop_path || '') : "/not_photo.png"} width={150} height={230} alt={`Poster de ${serie.name}`} />
@@ -20,7 +23,7 @@ export const SerieCardUpcoming = ({ serie }: Props) => {
             </div>
             <div className={styles.movie_shadow}></div>
             <div className={styles.movie_dialog}>
-                <Link className={styles.movie_dialogMore} href={`/series/${serie.id}`} title={serie.name}>
+                <Link className={styles.movie_dialogMore} href={`/series/${serie.id}`} title={serie.name} onClick={() => setLoadingState(true)}>
                     <DetailsIcon className={styles.movie_dialogIcon} />
                 </Link>
             </div>

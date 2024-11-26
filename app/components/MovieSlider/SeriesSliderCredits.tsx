@@ -11,6 +11,7 @@ import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 import { NextArrow, PrevArrow } from "../ArrowSlider/ArrowSlider"
 import { FavoriteButton } from "../FavoriteButton/FavoriteButton"
+import { useLoadingState } from "@/app/services/store"
 
 interface Props {
     parts: ISeriesCast[]
@@ -19,6 +20,7 @@ interface Props {
 }
 
 export const SeriesSliderCredits = ({ parts, title, type }: Props) => {
+    const { setLoadingState } = useLoadingState()
 
     const settings = {
         infinite: false,
@@ -47,7 +49,7 @@ export const SeriesSliderCredits = ({ parts, title, type }: Props) => {
                                     </div>
                                     <div className={styles.movie_shadow}></div>
                                     <div className={styles.movie_dialog}>
-                                        <Link className={styles.movie_dialogMore} href={type === "movie" ? `/movies/${movie.id}` : `/series/${movie.id}`} title={movie.name}>
+                                        <Link className={styles.movie_dialogMore} href={type === "movie" ? `/movies/${movie.id}` : `/series/${movie.id}`} title={movie.name} onClick={() => setLoadingState(true)}>
                                             <DetailsIcon className={styles.movie_dialogIcon} />
                                         </Link>
                                     </div>
