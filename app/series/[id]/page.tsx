@@ -75,35 +75,60 @@ export default async function Page(params: { params: { id: string }, searchParam
                             </div>
                         </div>
                     </article>
-                    <div className={styles.movie_companies}>
-                        {
-                            details?.production_companies?.filter(company => company.logo_path !== null).map(company => (
-                                <div className={styles.movie_company} key={company.id} >
-                                    <Image className={styles.movie_companyLogo} src={BASE_URL_IMG.concat(company.logo_path || "")} width={60} height={40} alt={company.name} />
-                                    <span className={styles.movie_companyName}>{company.name}</span>
-                                </div>
-                            ))
-                        }
-                    </div>
-                    {images && <SectionImages images={images} />}
-                    {keywords && <SectionTags keywords={keywords} />}
-                    <Season seasons={details.seasons} idSerie={details.id} >
-                        <>
-                            {details.overview !== "" &&
+                    <div className={styles.description}>
+                        <div className={styles.description_crew}>
+
+                            {images && <SectionImages images={images} id={details.id} type="tv" />}
+
+                            <Season seasons={details.seasons} idSerie={details.id} >
                                 <>
-                                    <h4 className={styles.details_title}>SINOPSIS</h4>
-                                    <article className={styles.details}>
-                                        <p className={styles.details_overview}>{details.overview}</p>
-                                    </article>
+                                    {details.overview !== "" &&
+                                        <>
+                                            <h4 className={styles.details_title}>SINOPSIS</h4>
+                                            <article className={styles.details}>
+                                                <p className={styles.details_overview}>{details.overview}</p>
+                                            </article>
+                                        </>
+                                    }
                                 </>
-                            }
-                        </>
-                    </Season>
-                    {details?.created_by?.length > 0 && <SliderCrew created_by={details.created_by} type="cast" title="CREADA POR" />}
-                    {(credits && credits?.cast?.length > 0) && <SliderCrew credits={credits} type="cast" title="REPARTO" />}
-                    {credits && <Crew credits={credits} />}
-                    <hr className="separator" />
-                    {recommendation && <MovieSlider parts={recommendation.results} title="RECOMENDACIONES" />}
+                            </Season>
+
+                            {(credits && credits?.cast?.length > 0) && <SliderCrew credits={credits} type="cast" title="REPARTO" />}
+                            {credits && <Crew credits={credits} />}
+                            <div className={`${styles.description_data} ${styles.description_dataMobile}`}>
+                                <div className={styles.movie_companies}>
+                                    {
+                                        details?.production_companies?.filter(company => company.logo_path !== null).map(company => (
+                                            <div className={styles.movie_company} key={company.id} >
+                                                <Image className={styles.movie_companyLogo} src={BASE_URL_IMG.concat(company.logo_path || "")} width={60} height={40} alt={company.name} />
+                                                <span className={styles.movie_companyName}>{company.name}</span>
+                                            </div>
+                                        ))
+                                    }
+                                </div>
+                                {details?.created_by?.length > 0 && <SliderCrew created_by={details.created_by} type="cast" title="CREADA POR" />}
+                                <hr className="separator" />
+                                {keywords && <SectionTags keywords={keywords} />}
+                            </div>
+                            <hr className="separator" />
+                            {recommendation && <MovieSlider parts={recommendation.results} title="RECOMENDACIONES" />}
+                        </div>
+                        <div className={`${styles.description_data} ${styles.description_dataDesktop}`}>
+                            <div className={styles.movie_companies}>
+                                {
+                                    details?.production_companies?.filter(company => company.logo_path !== null).map(company => (
+                                        <div className={styles.movie_company} key={company.id} >
+                                            <Image className={styles.movie_companyLogo} src={BASE_URL_IMG.concat(company.logo_path || "")} width={60} height={40} alt={company.name} />
+                                            <span className={styles.movie_companyName}>{company.name}</span>
+                                        </div>
+                                    ))
+                                }
+                            </div>
+                            {details?.created_by?.length > 0 && <SliderCrew created_by={details.created_by} type="cast" title="CREADA POR" />}
+                            <hr className="separator" />
+                            {keywords && <SectionTags keywords={keywords} />}
+                        </div>
+                    </div>
                 </>
                 :
                 <NotResults type="tv" id={params.params.id} />

@@ -68,35 +68,61 @@ export default async function Page(params: { params: { id: string }, searchParam
                             </div>
                         </div>
                     </article>
-                    <div className={styles.movie_companies}>
-                        {
-                            data.production_companies.filter(company => company.logo_path !== null).map(company => (
-                                <div className={styles.movie_company} key={company.id} >
-                                    <Image className={styles.movie_companyLogo} src={BASE_URL_IMG.concat(company.logo_path || "")} width={60} height={30} alt={company.name} />
-                                    <span className={styles.movie_companyName}>{company.name}</span>
+                    <div className={styles.description}>
+                        <div className={styles.description_crew}>
+                            {images && <SectionImages images={images} id={data.id} type="movie" />}
+                            <h4 className={styles.details_title}>SINOPSIS</h4>
+                            <article className={styles.details}>
+                                <p className={styles.details_overview}>{data.overview}</p>
+                            </article>
+                            {data.credits && <SliderCrew credits={data.credits} type="cast" title="REPARTO" />}
+                            <div className={`${styles.description_data} ${styles.description_dataMobile}`}>
+                                <div className={styles.movie_companies}>
+                                    {
+                                        data.production_companies.filter(company => company.logo_path !== null).map(company => (
+                                            <div className={styles.movie_company} key={company.id} >
+                                                <Image className={styles.movie_companyLogo} src={BASE_URL_IMG.concat(company.logo_path || "")} width={60} height={30} alt={company.name} />
+                                                <span className={styles.movie_companyName}>{company.name}</span>
+                                            </div>
+                                        ))
+                                    }
                                 </div>
-                            ))
-                        }
+                                {data.credits && <Crew credits={data.credits} />}
+                                <hr className="separator" />
+                                <div className={styles.financial}>
+                                    <label className={styles.financial_label}>Presupuesto:</label>
+                                    <span className={styles.financial_number}>{currencyFormatter.format(data.budget)}</span>
+                                    <label className={styles.financial_label}>Ingresos:</label>
+                                    <span className={styles.financial_number}>{currencyFormatter.format(data.revenue)}</span>
+                                </div>
+                                {data.keywords && <SectionTags keywords={data.keywords} />}
+                            </div>
+                            <hr className="separator" />
+                            {(collections && collections?.parts) && <MovieSlider parts={collections?.parts?.filter(movie => movie.id.toString() !== params.params.id)} title="DE LA MISMA COLECCIÓN" />}
+                            {(data.recommendations && data.recommendations.results.length > 0) && <MovieSlider parts={data.recommendations.results} title="RECOMENDACIONES" />}
+                        </div>
+                        <div className={`${styles.description_data} ${styles.description_dataDesktop}`}>
+                            <div className={styles.movie_companies}>
+                                {
+                                    data.production_companies.filter(company => company.logo_path !== null).map(company => (
+                                        <div className={styles.movie_company} key={company.id} >
+                                            <Image className={styles.movie_companyLogo} src={BASE_URL_IMG.concat(company.logo_path || "")} width={60} height={30} alt={company.name} />
+                                            <span className={styles.movie_companyName}>{company.name}</span>
+                                        </div>
+                                    ))
+                                }
+                            </div>
+                            {data.credits && <Crew credits={data.credits} />}
+                            <hr className="separator" />
+                            <div className={styles.financial}>
+                                <label className={styles.financial_label}>Presupuesto:</label>
+                                <span className={styles.financial_number}>{currencyFormatter.format(data.budget)}</span>
+                                <label className={styles.financial_label}>Ingresos:</label>
+                                <span className={styles.financial_number}>{currencyFormatter.format(data.revenue)}</span>
+                            </div>
+                            {data.keywords && <SectionTags keywords={data.keywords} />}
+                        </div>
                     </div>
-                    {images && <SectionImages images={images} id={data.id} />}
-                    {data.keywords && <SectionTags keywords={data.keywords} />}
-                    <h4 className={styles.details_title}>SINOPSIS</h4>
-                    <article className={styles.details}>
-                        <p className={styles.details_overview}>{data.overview}</p>
-                    </article>
-                    {data.credits && <SliderCrew credits={data.credits} type="cast" title="REPARTO" />}
-                    {data.credits && <Crew credits={data.credits} />}
-
-                    <hr className="separator" />
-                    <div className={styles.financial}>
-                        <label className={styles.financial_label}>Presupuesto:</label>
-                        <span className={styles.financial_number}>{currencyFormatter.format(data.budget)}</span>
-                        <label className={styles.financial_label}>Ingresos:</label>
-                        <span className={styles.financial_number}>{currencyFormatter.format(data.revenue)}</span>
-                    </div>
-                    <hr className="separator" />
-                    {(collections && collections?.parts) && <MovieSlider parts={collections?.parts?.filter(movie => movie.id.toString() !== params.params.id)} title="DE LA MISMA COLECCIÓN" />}
-                    {(data.recommendations && data.recommendations.results.length > 0) && <MovieSlider parts={data.recommendations.results} title="RECOMENDACIONES" />}
                 </>
                 :
                 <NotResults id={params.params.id} type="movie" />

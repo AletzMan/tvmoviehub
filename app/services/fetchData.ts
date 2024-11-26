@@ -659,3 +659,23 @@ export const GetExternalIDs = async (movie_id: number) => {
 	}
 	return data
 }
+
+export const GetExternalIDsSerie = async (serie_id: number) => {
+	const url = `${API_URL_BASE}/tv/${serie_id}/external_ids`
+	console.log(url)
+	const response = await fetch(url, {
+		method: "GET",
+		headers: {
+			accept: "application/json",
+			Authorization: `Bearer ${API_KEY}`,
+		}
+	})
+	console.log(response)
+	let data: IExternalIDs | null = null
+	if (response.status === 200) {
+		const result = (await response.json()) as IExternalIDs
+		console.log(result)
+		return result
+	}
+	return data
+}
