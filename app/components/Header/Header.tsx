@@ -22,7 +22,7 @@ export default function Header() {
     const session = useSession()
     const [open, setOpen] = useState<IOpen>({ account: false, menu: false, search: false })
     const pathname = usePathname()
-    const { loadingState, setLoadingState } = useLoadingState()
+    const { setLoadingState } = useLoadingState()
     const section = pathname.split("/")[1]
     const searchParams = useSearchParams()
     const router = useRouter()
@@ -36,11 +36,13 @@ export default function Header() {
 
     const HandleSession = async () => {
         if (session.session_id) {
+            console.log("LOGIN")
             localStorage.removeItem("tvmoviehub_sessionid")
             await DeleteCookie()
             HandleSetOpen("account")
             router.refresh()
         } else {
+            console.log("LOGOUT")
             router.push(`/login`)
         }
     }
@@ -99,12 +101,12 @@ export default function Header() {
                 }
                 <dialog open className={`${styles.login_dialog} ${open.account && styles.login_dialogOpen}`} onClick={() => HandleSetOpen("account")}>
                     <nav className={`${styles.login_menu} ${open.account && styles.login_menuOpen}`}>
-                        {
+                        {session.session_id &&
                             MainMenu.filter((_, index) => index > 4 && index < 8).map(menu => (
                                 <Link key={menu.id} className={`${styles.login_menuLink} ${menu.link.split("?")[0] === section && styles.login_menuLinkCurrent}  ${menu.name}`} onClick={() => setLoadingState(true)} href={`/${menu.link}`} title={`Ir a ${menu.name}`}>{menu.icon}{menu.name}</Link>
                             ))
                         }
-                        <hr className={styles.separator} />
+                        {session.session_id && <hr className={styles.separator} />}
                         <button className={styles.login_menuLink} title="Iniciar sesión" onClick={HandleSession}>
                             {session.session_id ?
                                 <LogoutIcon className={styles.login_menuIcon} />
