@@ -8,6 +8,10 @@
     }
 
     &_peoples {
+        display: flex;
+        flex-flow: row wrap;
+        gap: 0.25em;
+
         &>:last-child {
             border-right: none;
         }
@@ -20,6 +24,7 @@
         border-right: 1px solid var(--fontSecondColor);
         transition: all 0.3s ease-in-out;
         cursor: pointer;
+        min-width: max-content;
 
         &:hover {
             color: var(--fontColor);
