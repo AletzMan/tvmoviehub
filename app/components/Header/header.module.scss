@@ -157,6 +157,7 @@
 
         &:hover:not(.navigation_itemCurrent) {
             background: var(--hover);
+            color: var(--fontColor);
         }
 
         &Current {
