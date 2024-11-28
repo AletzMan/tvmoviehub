@@ -14,6 +14,7 @@ import { SectionImages } from "./components/SectionImages/SectionImages"
 import { SectionTags } from "./components/SectionTags/SectionTags"
 import { Button } from "@/app/components/Button/Button"
 import { FavoriteButton } from "@/app/components/FavoriteButton/FavoriteButton"
+import { ButtonTrailer } from "@/app/components/ButtonTrailer/ButtonTrailer"
 
 export default async function Page(params: { params: { id: string }, searchParams: {} }) {
 
@@ -62,7 +63,7 @@ export default async function Page(params: { params: { id: string }, searchParam
                                     <span className={styles.movie_average}><StarIcon className={styles.movie_iconDate} />{data.vote_average.toFixed(1)}</span>
                                 </div>
                                 <div className={styles.movie_buttons}>
-                                    <Button className={styles.movie_play} mode="button" text="Ver tráiler" icon={<TrilerIcon />} />
+                                    <ButtonTrailer id={data.id} type="movie" />
                                     <FavoriteButton id={data.id} title={data.title} type="movie" />
                                 </div>
                             </div>
@@ -127,6 +128,7 @@ export default async function Page(params: { params: { id: string }, searchParam
                 :
                 <NotResults id={params.params.id} type="movie" />
             }
+
         </section>
     )
 }

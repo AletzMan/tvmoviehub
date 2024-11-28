@@ -20,6 +20,7 @@ import Link from "next/link"
 import { SectionTags } from "@/app/movies/[id]/components/SectionTags/SectionTags"
 import { Button } from "@/app/components/Button/Button"
 import { FavoriteButton } from "@/app/components/FavoriteButton/FavoriteButton"
+import { ButtonTrailer } from "@/app/components/ButtonTrailer/ButtonTrailer"
 
 export default async function Page(params: { params: { id: string }, searchParams: {} }) {
 
@@ -69,7 +70,7 @@ export default async function Page(params: { params: { id: string }, searchParam
                                     {/*<Average average={details.vote_average} />*/}
                                 </div>
                                 <div className={styles.movie_buttons}>
-                                    <Button className={styles.movie_play} mode="button" text="Ver tráiler" icon={<TrilerIcon />} />
+                                    <ButtonTrailer id={details.id} type="tv" />
                                     <FavoriteButton id={details.id} title={details.name} type="tv" />
                                 </div>
                             </div>

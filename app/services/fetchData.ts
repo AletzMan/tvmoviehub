@@ -4,7 +4,7 @@ import { IFavorites } from "../interfaces/favorite"
 import { IImages } from "../interfaces/image"
 import { IKeywords, IResult } from "../interfaces/keyword"
 import { IResponseCreateMovie, IResponseListMovie } from "../interfaces/list"
-import { ICollectionDetails, IExternalIDs, IMovie, IMovieDetails, IMovieStates, IQueryParamasMovies } from "../interfaces/movie"
+import { ICollectionDetails, IExternalIDs, IMovie, IMovieDetails, IMovieStates, IMovieVideos, IQueryParamasMovies } from "../interfaces/movie"
 import { IMultiResponse } from "../interfaces/multi"
 import { IPeopleDetails, IPeopleImages } from "../interfaces/people"
 import { IAiringTodayResponse, IMovieResponse, INowPlayingResponse, IPeopleResponse, IRecommendationResponse, ISerieResponse } from "../interfaces/responses"
@@ -676,6 +676,48 @@ export const GetExternalIDsSerie = async (serie_id: number) => {
 		const result = (await response.json()) as IExternalIDs
 		console.log(result)
 		return result
+	}
+	return data
+}
+
+export const GetVideosMovie = async (movie_id: number, language: "es-MX" | "en-US") => {
+	const url = `${API_URL_BASE}/movie/${movie_id}/videos?language=${language}`
+	console.log(url)
+	const response = await fetch(url, {
+		method: "GET",
+		headers: {
+			accept: "application/json",
+			Authorization: `Bearer ${API_KEY}`,
+		}
+	})
+	console.log(response)
+	let data: IMovieVideos | null = null
+	if (response.status === 200) {
+		const result = (await response.json()) as IMovieVideos
+		console.log(result)
+		return result
+	}
+	return data
+}
+
+export const GetVideosSerie = async (serie_id: number, language: "es-MX" | "en-US") => {
+	const url = `${API_URL_BASE}/tv/${serie_id}/videos?language=${language}`
+	console.log(url)
+	const response = await fetch(url, {
+		method: "GET",
+		headers: {
+			accept: "application/json",
+			Authorization: `Bearer ${API_KEY}`,
+		}
+	})
+	console.log(response)
+	let data: IMovieVideos | null = null
+	if (response.status === 200) {
+		const result = (await response.json()) as IMovieVideos
+		console.log(result)
+		if (result.results.length > 0)
+			return result
+
 	}
 	return data
 }
