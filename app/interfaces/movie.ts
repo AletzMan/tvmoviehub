@@ -174,3 +174,21 @@ export interface IExternalIDs {
 	instagram_id: string
 	twitter_id: string
 }
+
+export interface IMovieVideos {
+	id: number
+	results: IMovieVideo[]
+}
+
+export interface IMovieVideo {
+	iso_639_1: string,
+	iso_3166_1: string,
+	name: string,
+	key: string,
+	site: string,
+	size: number,
+	type: string,
+	official: boolean,
+	published_at: string,
+	id: string
+}

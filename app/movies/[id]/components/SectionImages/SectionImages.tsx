@@ -9,7 +9,7 @@ import "slick-carousel/slick/slick-theme.css"
 import { BASE_URL_IMG, BASE_URL_IMG_CUSTOM } from "@/app/utils/const"
 import Slider from "react-slick"
 import { useEffect, useState } from "react"
-import { CloseIcon, FacebookIcon, InstagramIcon, LoadingIcon, XIcon } from "@/app/utils/svg"
+import { CloseIcon, FacebookIcon, ImageIcon, InstagramIcon, LoadingIcon, XIcon } from "@/app/utils/svg"
 import Link from "next/link"
 import { IExternalIDs } from "@/app/interfaces/movie"
 import { GetExternalIDs, GetExternalIDsSerie } from "@/app/services/fetchData"
@@ -63,9 +63,9 @@ export function SectionImages({ images, id, type }: Props) {
     return (
         <article className={styles.section}>
             <div className={styles.images}>
-                {images.backdrops.length > 0 && <Button className={styles.button_large} onClick={() => HandleOpen("backdrops", true, { width: 240, height: 135 })} text="Wallpapers" mode="button" />}
-                {images.posters.length > 0 && <Button className={styles.button_large} onClick={() => HandleOpen("posters", true, { width: 130, height: 190 })} text="Posters" mode="button" />}
-                {images.logos.length > 0 && <Button className={styles.button_large} onClick={() => HandleOpen("logos", true, { width: 240, height: 150 })} text="Logos" mode="button" />}
+                {images.backdrops.length > 0 && <Button className={styles.button_large} onClick={() => HandleOpen("backdrops", true, { width: 240, height: 135 })} text="Wallpapers" mode="button" icon={<ImageIcon />} />}
+                {images.posters.length > 0 && <Button className={styles.button_large} onClick={() => HandleOpen("posters", true, { width: 130, height: 190 })} text="Posters" mode="button" icon={<ImageIcon />} />}
+                {images.logos.length > 0 && <Button className={styles.button_large} onClick={() => HandleOpen("logos", true, { width: 240, height: 150 })} text="Logos" mode="button" icon={<ImageIcon />} />}
             </div>
             <div className={styles.social}>
                 {externalIDs?.instagram_id &&

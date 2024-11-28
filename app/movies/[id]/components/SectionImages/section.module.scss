@@ -163,6 +163,8 @@
         border: 2px solid var(--highlightColor);
     }
 
+
+
     &_image {
         border: 2px solid transparent;
         border-radius: 0.35em;
@@ -172,7 +174,12 @@
     }
 
     &_large {
-        width: 6em !important;
-        max-width: 6em !important;
+        width: 8.5em !important;
+        max-width: 8.5em !important;
+
+        &>svg {
+            width: 1.5em !important;
+            height: 1.5em !important;
+        }
     }
 }

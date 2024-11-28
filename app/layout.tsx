@@ -6,6 +6,7 @@ import { SideMenu } from "./components/SideMenu/SideMenu"
 import Header from "./components/Header/Header"
 import styles from "./page.module.css"
 import { LoadingPage } from "./components/LoadingPage/LoadingPage"
+import { TrailerPage } from "./components/TrailerPage/TrailerPage"
 
 const jost = Jost({ subsets: ["latin"] })
 
@@ -28,6 +29,7 @@ export default function RootLayout({
           {children}
         </main>
         {<LoadingPage />}
+        {<TrailerPage />}
       </body>
     </html>
   )
