@@ -19,8 +19,8 @@ export const useLoadingState = create<ILoadingState>(
 interface IVideoState {
     videoState: boolean
     setVideoState: (value: boolean) => void
-    videoType: string
-    setVideoType: (value: string) => void
+    videoType: 'movie' | 'tv'
+    setVideoType: (value: 'movie' | 'tv') => void
     video: string
     setVideo: (value: string) => void
     id: number
@@ -34,8 +34,8 @@ export const useVideo = create<IVideoState>(
             set((state) => ({
                 videoState: value,
             })),
-        videoType: "",
-        setVideoType: (value: string) =>
+        videoType: 'movie',
+        setVideoType: (value: 'movie' | 'tv') =>
             set((state) => ({
                 videoType: value,
             })),
