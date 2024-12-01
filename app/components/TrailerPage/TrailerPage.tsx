@@ -5,7 +5,7 @@ import styles from "./styles.module.scss"
 import { useEffect, useState, MouseEvent } from "react"
 import { Button } from "../Button/Button"
 import Image from "next/image"
-import { GetVideosMovie, GetVideosSerie } from "@/app/services/fetchData"
+import { GetVideos } from "@/app/services/fetchData"
 import { IMovieVideo, IMovieVideos } from "@/app/interfaces/movie"
 import { Video } from "./components/Video"
 
@@ -25,14 +25,9 @@ export function TrailerPage() {
     }, [typeVideo, id, language])
 
     const GetVideo = async () => {
-        let response: IMovieVideos | null
-        if (videoType === "movie") {
-            response = await GetVideosMovie(id, language)
+        const response = await GetVideos(id, language, videoType)
 
-        } else {
-            response = await GetVideosSerie(id, language)
 
-        }
         if (response) {
             const result = response.results.filter(movie => movie.type === typeVideo)
             setVideos(result)
