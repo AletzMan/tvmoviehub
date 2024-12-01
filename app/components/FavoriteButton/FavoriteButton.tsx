@@ -4,12 +4,11 @@
 import { FavoriteFullIcon } from "@/app/utils/svg"
 import styles from "./styles.module.scss"
 import { RevalidateURL } from "@/app/utils/serveractions"
-import { AddRemoveFavorite, GetStatesMovie, GetStatesSerie } from "@/app/services/fetchData"
+import { AddRemoveFavorite, GetStates } from "@/app/services/fetchData"
 import { enqueueSnackbar } from "notistack"
-import { IMovieStates } from "@/app/interfaces/movie"
+import { IAccountStates, } from "@/app/interfaces/movie"
 import { useSession } from "@/app/hooks/useSession"
 import { useEffect, useState } from "react"
-import { ISerieStates } from "@/app/interfaces/serie"
 
 interface Props {
     id: number
@@ -25,11 +24,11 @@ export function FavoriteButton({ id, title, type, isFavorites }: Props) {
     useEffect(() => {
 
         const GetData = async () => {
-            let stateData: IMovieStates | ISerieStates | null
+            let stateData: IAccountStates | null
             if (type === "movie") {
-                stateData = await GetStatesMovie(session_id, id)
+                stateData = await GetStates(session_id, id, type)
             } else {
-                stateData = await GetStatesSerie(session_id, id)
+                stateData = await GetStates(session_id, id, type)
             }
             setIsFavorite(stateData?.favorite || false)
         }

@@ -50,3 +50,11 @@ export interface IAiringTodayResponse {
 	total_pages: number
 	total_results: number
 }
+
+
+export interface IResponseRating {
+
+	status_code: number,
+	status_message: string
+
+}

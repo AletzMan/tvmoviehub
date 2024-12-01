@@ -4,11 +4,11 @@ import { IFavorites } from "../interfaces/favorite"
 import { IImages } from "../interfaces/image"
 import { IKeywords, IResult } from "../interfaces/keyword"
 import { IResponseCreateMovie, IResponseListMovie } from "../interfaces/list"
-import { ICollectionDetails, IExternalIDs, IMovie, IMovieDetails, IMovieStates, IMovieVideos, IQueryParamasMovies } from "../interfaces/movie"
+import { IAccountStates, ICollectionDetails, IExternalIDs, IMovie, IMovieDetails, IMovieVideos, IQueryParamasMovies } from "../interfaces/movie"
 import { IMultiResponse } from "../interfaces/multi"
 import { IPeopleDetails, IPeopleImages } from "../interfaces/people"
-import { IAiringTodayResponse, IMovieResponse, INowPlayingResponse, IPeopleResponse, IRecommendationResponse, ISerieResponse } from "../interfaces/responses"
-import { IQueryParamasSeries, ISeasonDetails, ISerie, ISerieDetails, ISerieStates } from "../interfaces/serie"
+import { IAiringTodayResponse, IMovieResponse, INowPlayingResponse, IPeopleResponse, IRecommendationResponse, IResponseRating, ISerieResponse } from "../interfaces/responses"
+import { IQueryParamasSeries, ISeasonDetails, ISerie, ISerieDetails } from "../interfaces/serie"
 
 const API_URL_BASE = "https://api.themoviedb.org/3"
 const TOP_RATING_SERIES_PATH = "/tv/top_rated?"
@@ -38,8 +38,16 @@ const optionsGET = {
 	next: { revalidate: 1000 },
 }
 
-const optionsLogin = {
+const optionsPOST = {
 	method: "POST",
+	headers: {
+		accept: "application/json",
+		Authorization: `Bearer ${API_KEY}`,
+	}
+}
+
+const optionsDELETE = {
+	method: "DELETE",
 	headers: {
 		accept: "application/json",
 		Authorization: `Bearer ${API_KEY}`,
@@ -511,25 +519,48 @@ export const GetDetailsAccount = async (session_id: string) => {
 	return data
 }
 
-export const GetStatesMovie = async (session_id: string, movie_id: number) => {
-	const url = `${API_URL_BASE}/movie/${movie_id}/account_states?session_id=${session_id}`
+export const GetStates = async (session_id: string, movie_id: number, type: 'movie' | 'tv') => {
+	const url = `${API_URL_BASE}/${type}/${movie_id}/account_states?session_id=${session_id}`
 	const response = await fetch(url, optionsGET)
-	let data: IMovieStates | null = null
+	let data: IAccountStates | null = null
 	if (response.status === 200) {
-		return (await response.json()) as IMovieStates
+		return (await response.json()) as IAccountStates
 	}
 	return data
 }
 
-export const GetStatesSerie = async (session_id: string, serie_id: number) => {
-	const url = `${API_URL_BASE}/tv/${serie_id}/account_states?session_id=${session_id}`
-	const response = await fetch(url, optionsGET)
-	let data: ISerieStates | null = null
-	if (response.status === 200) {
-		return (await response.json()) as ISerieStates
+
+export const AddRating = async (session_id: string, serie_id: number, value: number, type: 'movie' | 'tv') => {
+	const url = `${API_URL_BASE}/${type}/${serie_id}/rating?session_id=${session_id}`
+	const response = await fetch(url,
+		{
+			method: "POST",
+			headers: {
+				accept: "application/json",
+				'Content-Type': 'application/json;charset=utf-8',
+				Authorization: `Bearer ${API_KEY}`,
+			},
+			body: JSON.stringify({ value: value })
+		})
+	let data: IResponseRating | null = null
+	const result = (await response.json()) as IResponseRating
+	if (response.status === 201) {
+		return result
 	}
 	return data
 }
+
+
+export const DeleteRating = async (session_id: string, serie_id: number, type: 'movie' | 'tv') => {
+	const url = `${API_URL_BASE}/${type}/${serie_id}/rating?session_id=${session_id}`
+	const response = await fetch(url, optionsDELETE)
+	let data: IResponseRating | null = null
+	if (response.status === 200) {
+		return (await response.json()) as IResponseRating
+	}
+	return data
+}
+
 
 export const GetFavoriteMovies = async (session_id: string, page: string) => {
 	const url = `${API_URL_BASE}/account/18482247/favorite/movies?language=${LANGUAGE_MX}&session_id=${session_id}&page=${page}`

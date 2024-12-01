@@ -8,22 +8,25 @@
     height: 17em;
     border-radius: 0.2em;
     margin: 0 0.25em;
-    overflow: hidden;
-    border: 1px solid var(--hover);
+    //overflow: hidden;
+    border: 1px solid transparent;
     transition: all ease-in-out 0.25s;
     scroll-snap-align: start;
-    opacity: 0.8;
+    opacity: 1;
     text-decoration: none;
     background-color: var(--hover);
 
     &:hover {
         //border-color: var(--hover);
         filter: opacity(1) brightness(110%);
-        background: linear-gradient(0deg, #FFFFFF15, transparent);
+        //background: linear-gradient(0deg, #FFFFFF15, transparent);
         //box-shadow: 0 0 4px 2px var(--highlightColor);
-        border: 1px solid var(--highlightColor);
+        //border: 1px solid var(--highlightColor);
+        z-index: 15;
 
-
+        &>.movie_frame {
+            border-color: var(--highlightColor);
+        }
 
         &>.movie_picture>.movie_photo {
             transform: scale(1.04);
@@ -38,24 +41,38 @@
         }
     }
 
+    &_frame {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 0.2em;
+        border: 1px solid var(--terciaryColor);
+        z-index: 2;
+        overflow: hidden;
+        pointer-events: none;
+    }
+
     &_backdrop {
         position: absolute;
+        left: 0.1px;
         object-fit: cover;
         z-index: -1;
-        opacity: 0.3ala;
+        opacity: 0.2;
     }
 
     &_picture {
+        display: flex;
+        justify-content: flex-end;
+        padding: 0 0em 0 0;
         height: 14em;
-        width: 15em;
+        width: 13.75em;
         overflow: hidden;
         //background-color: red;
     }
 
     &_photo {
         object-fit: cover;
-        width: 10em;
-        margin: 0 0 0 3.75em;
+        margin: 0 0 0 0;
         object-position: center top;
         transition: all 0.3s ease-in-out;
         //border: 2px solid var(--highlightColor);
@@ -68,6 +85,19 @@
         height: 14em;
         width: 3.75em;
         background: linear-gradient(0deg, #000000, transparent, #000000BB);
+
+        &Top {
+            position: absolute;
+            height: 3em;
+            width: 100%;
+            background: linear-gradient(0deg, transparent, #000000DD);
+        }
+
+        &Blur {
+            height: 100%;
+            backdrop-filter: blur(3px);
+            z-index: 1;
+        }
     }
 
     &_description {
@@ -78,6 +108,7 @@
         padding: 0.15em 0.25em;
         background-color: var(--terciaryColor);
         min-height: 2.9em;
+        width: 100%;
     }
 
     &_number {

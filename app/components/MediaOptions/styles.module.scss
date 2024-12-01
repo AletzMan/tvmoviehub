@@ -1,0 +1,204 @@
+.options {
+    position: absolute;
+    right: 0.35em;
+    top: 0.35em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &_button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 2em;
+        height: 2em;
+        border: none;
+        border-radius: 0.5em;
+        background-color: #FFFFFF45;
+        color: var(--fontColor);
+        z-index: 2;
+        transition: all 0.25s ease-in-out;
+        cursor: pointer;
+
+        &:hover {
+            background-color: #FFFFFF60;
+        }
+
+        &>svg {
+            width: 1.5em;
+            height: 1.5em;
+        }
+    }
+
+    &_li {
+        list-style: none;
+    }
+
+}
+
+.menu {
+    position: absolute;
+    top: 2.2em;
+    right: 0;
+    z-index: 10;
+    padding: 0.25em;
+    background: linear-gradient(0deg, var(--secondaryColor), var(--primaryColor));
+    border-radius: 0.25em;
+    border: 1px solid var(--fourthColor);
+    width: 12em;
+
+    &::after {
+        position: absolute;
+        top: -0.5em;
+        right: 0.25em;
+        content: "";
+        width: 0;
+        height: 0;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-bottom: 8px solid var(--primaryColor);
+    }
+
+    &::before {
+        position: absolute;
+        top: -0.55em;
+        right: 0.24em;
+        content: "";
+        width: 0;
+        height: 0;
+        border-left: 9px solid transparent;
+        border-right: 9px solid transparent;
+        border-bottom: 9px solid var(--fourthColor);
+    }
+
+    &_close {
+        opacity: 0;
+        display: none;
+    }
+
+    &_open {
+        display: block;
+        opacity: 1;
+    }
+
+    &_option {
+        display: flex;
+        align-items: center;
+        gap: 0.5em;
+        padding: 0.25em 0.5em;
+        border: none;
+        background-color: transparent;
+        color: var(--fontColor);
+        font-family: var(--font-family);
+        transition: all ease-in-out 0.25s;
+        width: 100%;
+        cursor: pointer;
+
+        &:hover {
+            background-color: var(--fourthColor);
+        }
+    }
+
+    &_separator {
+        height: 1px;
+        border: 1px solid var(--terciaryColor);
+        margin: 0.25em 0;
+    }
+
+    &_icon {
+        width: 1.75em;
+        height: 1.75em;
+    }
+
+}
+
+.favorite {
+    color: #ff1160;
+}
+
+.watchlist {
+    color: #ffbc11;
+}
+
+.rating {
+    color: #11ff68;
+}
+
+.rated {
+    position: relative;
+
+    &_rating {
+        position: absolute;
+        left: -2em;
+        top: 1.9em;
+        display: grid;
+        grid-template-rows: 2em 1.5em;
+        border: 1px solid var(--fourthColor);
+        background-color: var(--primaryColor);
+        padding: 0.25em;
+        width: 15.5em;
+        z-index: 4;
+        border-radius: 0.25em;
+        box-shadow: 0 0 2px 2px #51505060;
+    }
+
+    &_stars {
+        position: relative;
+        display: grid;
+        grid-template-columns: repeat(10, 1fr);
+        width: 100%;
+        height: 1.5em;
+    }
+
+    &_star {
+        position: relative;
+        border: 1px solid var(--terciaryColor);
+        border-left: none;
+        z-index: 2;
+        color: var(--fontColor);
+        font-weight: 100;
+        font-size: 0.6em;
+        background-color: var(--secondaryColor);
+        cursor: pointer;
+
+        &:nth-child(1) {
+            border-left: 1px solid var(--terciaryColor);
+            border-radius: 0.6em 0 0 0.65em;
+        }
+
+        &:nth-child(11) {
+            border-radius: 0 0.6em 0.6em 0;
+        }
+
+        &Active {
+            background-color: transparent;
+        }
+
+        &:hover::before {
+            position: absolute;
+            top: -2.5em;
+            left: calc(50% - 3.5em);
+            width: 7em;
+            font-size: 1.25em;
+            font-weight: 600;
+            content: attr(attr-tag);
+            color: var(--primaryColor);
+            border-radius: 0.25em;
+            background-color: var(--fontColor);
+            padding: 0.3em 0.4em;
+        }
+    }
+
+    &_delete {
+        justify-self: end;
+    }
+
+    &_color {
+        position: absolute;
+        width: 100%;
+        height: 1.5em;
+        border-radius: 0.6em;
+        background: linear-gradient(90deg, rgb(218, 13, 13), rgb(183, 168, 5)35%, rgb(183, 168, 5)65%, rgb(9, 189, 5));
+
+    }
+}
