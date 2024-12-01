@@ -7,8 +7,6 @@ import { Button } from "../Button/Button"
 import Image from "next/image"
 import { GetVideosMovie, GetVideosSerie } from "@/app/services/fetchData"
 import { IMovieVideo, IMovieVideos } from "@/app/interfaces/movie"
-import { FormattedDate, FormattedDateSearch, FormattedDateUpcoming } from "@/app/utils/helpers"
-import { DateIcon, LoadingIcon, PlayIcon } from "@/app/utils/svg"
 import { Video } from "./components/Video"
 
 
@@ -22,7 +20,8 @@ export function TrailerPage() {
 
 
     useEffect(() => {
-        GetVideo()
+        if (videoState)
+            GetVideo()
     }, [typeVideo, id, language])
 
     const GetVideo = async () => {

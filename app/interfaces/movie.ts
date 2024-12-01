@@ -159,10 +159,12 @@ export interface IQueryParamasMovies {
 	"vote_count.lte"?: number
 }
 
-export interface IMovieStates {
+export interface IAccountStates {
 	id: number
 	favorite: boolean
-	reted: boolean
+	rated: {
+		value: number
+	}
 	watchlist: boolean
 }
 

@@ -30,6 +30,23 @@ export function PlayIcon({ className }: Props) {
     )
 }
 
+export function BookmarkIcon({ className }: Props) {
+    return (
+        <svg className={className} width="1em" height="1em" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M17 3H7c-1.1 0-2 .9-2 2v16l7-3l7 3V5c0-1.1-.9-2-2-2">
+            </path></svg>
+    )
+}
+
+export function OptionsIcon({ className }: Props) {
+    return (
+        <svg className={className} width="1em" height="1em" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0-4 0m0-6a2 2 0 1 0 4 0a2 2 0 0 0-4 0m0 12a2 2 0 1 0 4 0a2 2 0 0 0-4 0">
+            </path>
+        </svg>
+    )
+}
+
 export function ImageIcon({ className }: Props) {
     return (
         <svg className={className} width="1em" height="1em" viewBox="0 0 56 56">
@@ -51,7 +68,7 @@ export function InstagramIcon({ className }: Props) {
 export function FavoriteFullIcon({ className }: Props) {
     return (
         <svg className={className} width="1em" height="1em" viewBox="0 0 24 24">
-            <path fill="currentColor" fillOpacity="0.75" stroke="currentColor" d="m4.45 13.908l6.953 6.531c.24.225.36.338.5.366a.5.5 0 0 0 .193 0c.142-.028.261-.14.5-.366l6.953-6.53a5.203 5.203 0 0 0 .549-6.983l-.31-.399c-1.968-2.536-5.918-2.111-7.301.787a.54.54 0 0 1-.974 0C10.13 4.416 6.18 3.99 4.212 6.527l-.31.4a5.203 5.203 0 0 0 .549 6.981Z" />
+            <path fill="currentColor" fillOpacity="1" stroke="currentColor" d="m4.45 13.908l6.953 6.531c.24.225.36.338.5.366a.5.5 0 0 0 .193 0c.142-.028.261-.14.5-.366l6.953-6.53a5.203 5.203 0 0 0 .549-6.983l-.31-.399c-1.968-2.536-5.918-2.111-7.301.787a.54.54 0 0 1-.974 0C10.13 4.416 6.18 3.99 4.212 6.527l-.31.4a5.203 5.203 0 0 0 .549 6.981Z" />
         </svg>
     )
 }
@@ -620,7 +637,7 @@ export function ArrowRightIcon({ className }: Props) {
 export function ListIcon({ className }: Props) {
     return (
         <svg className={className} width="1em" height="1em" viewBox="0 0 24 24">
-            <g fill="none" stroke="currentColor" stroke-dasharray="14" stroke-dashoffset="14" stroke-linecap="round" stroke-width="2">
+            <g fill="none" stroke="currentColor" strokeDasharray="14" strokeDashoffset="14" strokeLinecap="round" strokeWidth="2">
                 <path d="M8 5H20">
                     <animate fill="freeze" attributeName="stroke-dashoffset" begin="0.1s" dur="0.2s" values="14;0" />
                 </path>
@@ -634,7 +651,7 @@ export function ListIcon({ className }: Props) {
                     <animate fill="freeze" attributeName="stroke-dashoffset" begin="1s" dur="0.2s" values="14;0" />
                 </path>
             </g>
-            <g fill="currentColor" fill-opacity="0">
+            <g fill="currentColor" fillOpacity="0">
                 <circle cx="4" cy="5" r="1">
                     <animate fill="freeze" attributeName="fill-opacity" dur="0.2s" values="0;1" />
                 </circle><circle cx="4" cy="10" r="1">
