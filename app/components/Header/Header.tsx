@@ -102,7 +102,7 @@ export default function Header() {
                 <dialog open className={`${styles.login_dialog} ${open.account && styles.login_dialogOpen}`} onClick={() => HandleSetOpen("account")}>
                     <nav className={`${styles.login_menu} ${open.account && styles.login_menuOpen}`}>
                         {session.session_id &&
-                            MainMenu.filter((_, index) => index > 4 && index < 8).map(menu => (
+                            MainMenu.filter((_, index) => index > 4 && index < 9).map(menu => (
                                 <Link key={menu.id} className={`${styles.login_menuLink} ${menu.link.split("?")[0] === section && styles.login_menuLinkCurrent}  ${menu.name}`} onClick={() => setLoadingState(true)} href={`/${menu.link}`} title={`Ir a ${menu.name}`}>{menu.icon}{menu.name}</Link>
                             ))
                         }

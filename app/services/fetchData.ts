@@ -3,7 +3,7 @@ import { ICredits, IMovieCredits, ISerieCredits } from "../interfaces/credits"
 import { IFavorites } from "../interfaces/favorite"
 import { IImages } from "../interfaces/image"
 import { IKeywords, IResult } from "../interfaces/keyword"
-import { IResponseCreateMovie, IResponseListMovie } from "../interfaces/list"
+import { IResponseList, IResponseCreateMovie, IResponseListMovie } from "../interfaces/list"
 import { IAccountStates, ICollectionDetails, IExternalIDs, IMovie, IMovieDetails, IMovieVideos, IQueryParamasMovies } from "../interfaces/movie"
 import { IMultiResponse } from "../interfaces/multi"
 import { IPeopleDetails, IPeopleImages } from "../interfaces/people"
@@ -623,7 +623,7 @@ export const AddRemoveFavorite = async (session_id: string, type: 'movie' | 'tv'
 }
 
 
-export const GetListMovies = async (session_id: string, queryParams: Object) => {
+export const GetLists = async (session_id: string, queryParams: Object) => {
 	const params = Object.entries(queryParams)
 	let stringParams = ""
 	params.forEach((param, index) => {
@@ -646,7 +646,7 @@ export const GetListMovies = async (session_id: string, queryParams: Object) => 
 	return data
 }
 
-export const CreateLisMovie = async (session_id: string, name: string, description: string) => {
+export const CreateList = async (session_id: string, name: string, description: string) => {
 	const url = `${API_URL_BASE}/list?session_id=${session_id}`
 	const response = await fetch(url, {
 		method: "POST",
@@ -670,9 +670,119 @@ export const CreateLisMovie = async (session_id: string, name: string, descripti
 	return data
 }
 
+export const ClearList = async (session_id: string, list_id: number) => {
+	const url = `${API_URL_BASE}/list/${list_id}/clear?session_id=${session_id}?confirm=true`
+	const response = await fetch(url, {
+		method: "POST",
+		headers: {
+			accept: "application/json",
+			'content-type': 'application/json',
+			Authorization: `Bearer ${API_KEY}`,
+		}
+	})
 
-export const GetExternalIDs = async (movie_id: number) => {
-	const url = `${API_URL_BASE}/movie/${movie_id}/external_ids`
+	let data: IResponseList | null = null
+	if (response.status === 200) {
+		return (await response.json()) as IResponseList
+	}
+
+	return data
+}
+
+export const DeleteList = async (session_id: string, list_id: number) => {
+	const url = `${API_URL_BASE}/list/${list_id}?session_id=${session_id}`
+	const response = await fetch(url, optionsDELETE)
+
+	let data: IResponseList | null = null
+	if (response.status === 200) {
+		return (await response.json()) as IResponseList
+	}
+
+	return data
+}
+
+export const AddItemToList = async (session_id: string, list_id: number, id: number) => {
+	const url = `${API_URL_BASE}/list/${list_id}/add_item?session_id=${session_id}?confirm=true`
+	const response = await fetch(url, {
+		method: "POST",
+		headers: {
+			accept: "application/json",
+			'content-type': 'application/json',
+			Authorization: `Bearer ${API_KEY}`,
+		},
+		body: JSON.stringify({
+			media_id: id
+		})
+	})
+
+	let data: IResponseList | null = null
+	if (response.status === 201) {
+		return (await response.json()) as IResponseList
+	}
+	return data
+}
+
+export const RemoveItemFromList = async (session_id: string, list_id: number, id: number) => {
+	const url = `${API_URL_BASE}/list/${list_id}/remove_item?session_id=${session_id}?confirm=true`
+	const response = await fetch(url, {
+		method: "POST",
+		headers: {
+			accept: "application/json",
+			'content-type': 'application/json',
+			Authorization: `Bearer ${API_KEY}`,
+		},
+		body: JSON.stringify({
+			media_id: id
+		})
+	})
+
+	let data: IResponseList | null = null
+	if (response.status === 200) {
+		return (await response.json()) as IResponseList
+	}
+	return data
+}
+
+export const AddToWatchList = async (session_id: string, media_type: 'movie' | 'tv', id: number, isWatchlist: boolean) => {
+	const url = `${API_URL_BASE}/account/18482247/watchlist?session_id=${session_id}`
+	const response = await fetch(url, {
+		method: "POST",
+		headers: {
+			accept: "application/json",
+			'content-type': 'application/json',
+			Authorization: `Bearer ${API_KEY}`,
+		},
+		body: JSON.stringify({
+			media_type: media_type,
+			media_id: id,
+			watchlist: isWatchlist
+		})
+	})
+
+	let data: IResponseList | null = null
+
+	if (response.status === 200 || response.status === 201) {
+		const result = (await response.json()) as IResponseList
+		console.log(result)
+		return result
+	}
+	return data
+}
+
+export const GetWatchList = async (session_id: string, media_type: 'movies' | 'tv') => {
+	const url = `${API_URL_BASE}/account/18482247/watchlist/${media_type}?session_id=${session_id}&language=es-MX`
+	const response = await fetch(url, optionsGET)
+
+
+	let data: IMultiResponse | null = null
+	if (response.status === 200) {
+		return (await response.json()) as IMultiResponse
+	}
+	return data
+}
+
+export const GetExternalIDs = async (movie_id: number, type: 'movie' | 'tv') => {
+	const url = `${API_URL_BASE}/${type}/${movie_id}/external_ids`
 	console.log(url)
 	const response = await fetch(url, {
 		method: "GET",
@@ -691,28 +801,8 @@ export const GetExternalIDs = async (movie_id: number) => {
 	return data
 }
 
-export const GetExternalIDsSerie = async (serie_id: number) => {
-	const url = `${API_URL_BASE}/tv/${serie_id}/external_ids`
-	console.log(url)
-	const response = await fetch(url, {
-		method: "GET",
-		headers: {
-			accept: "application/json",
-			Authorization: `Bearer ${API_KEY}`,
-		}
-	})
-	console.log(response)
-	let data: IExternalIDs | null = null
-	if (response.status === 200) {
-		const result = (await response.json()) as IExternalIDs
-		console.log(result)
-		return result
-	}
-	return data
-}
-
-export const GetVideosMovie = async (movie_id: number, language: "es-MX" | "en-US") => {
-	const url = `${API_URL_BASE}/movie/${movie_id}/videos?language=${language}`
+export const GetVideos = async (movie_id: number, language: "es-MX" | "en-US", type: 'movie' | 'tv') => {
+	const url = `${API_URL_BASE}/${type}/${movie_id}/videos?language=${language}`
 	console.log(url)
 	const response = await fetch(url, {
 		method: "GET",
@@ -727,28 +817,6 @@ export const GetVideosMovie = async (movie_id: number, language: "es-MX" | "en-U
 		const result = (await response.json()) as IMovieVideos
 		console.log(result)
 		return result
-	}
-	return data
-}
-
-export const GetVideosSerie = async (serie_id: number, language: "es-MX" | "en-US") => {
-	const url = `${API_URL_BASE}/tv/${serie_id}/videos?language=${language}`
-	console.log(url)
-	const response = await fetch(url, {
-		method: "GET",
-		headers: {
-			accept: "application/json",
-			Authorization: `Bearer ${API_KEY}`,
-		}
-	})
-	console.log(response)
-	let data: IMovieVideos | null = null
-	if (response.status === 200) {
-		const result = (await response.json()) as IMovieVideos
-		console.log(result)
-		if (result.results.length > 0)
-			return result
-
 	}
 	return data
 }

@@ -12,7 +12,7 @@ import { useEffect, useState } from "react"
 import { CloseIcon, FacebookIcon, ImageIcon, InstagramIcon, LoadingIcon, XIcon } from "@/app/utils/svg"
 import Link from "next/link"
 import { IExternalIDs } from "@/app/interfaces/movie"
-import { GetExternalIDs, GetExternalIDsSerie } from "@/app/services/fetchData"
+import { GetExternalIDs } from "@/app/services/fetchData"
 
 interface IImageDialog { status: boolean, type: 'backdrops' | 'logos' | 'posters', size: { width: number, height: number } }
 const ImagesEmpty: IImageDialog = { status: false, type: 'backdrops', size: { width: 240, height: 150 } }
@@ -31,12 +31,8 @@ export function SectionImages({ images, id, type }: Props) {
 
     useEffect(() => {
         const GetExternalInfo = async () => {
-            let response: IExternalIDs | null
-            if (type === "movie") {
-                response = await GetExternalIDs(id)
-            } else {
-                response = await GetExternalIDsSerie(id)
-            }
+            const response = await GetExternalIDs(id, type)
+
             if (response)
                 setExternalIDs(response)
         }

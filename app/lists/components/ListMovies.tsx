@@ -1,5 +1,5 @@
 import styles from "./styles.module.scss"
-import { GetListMovies } from "@/app/services/fetchData"
+import { GetLists } from "@/app/services/fetchData"
 import { cookies } from "next/headers"
 import { ToastProvider } from "@/app/components/ToastProvider/ToastProvider"
 import { Pagination } from "@/app/components/Pagination/Pagination"
@@ -11,7 +11,7 @@ import { AddMovie } from "./AddMovie"
 export default async function ListMovies(params: { searchParams: { type: string, page: string } }) {
     const cookie = cookies().get("session_tvmoviehub")?.value
 
-    const lists: IResponseListMovie | null = await GetListMovies(cookie as string, params.searchParams)
+    const lists: IResponseListMovie | null = await GetLists(cookie as string, params.searchParams)
 
     return (
         <div className={styles.lists}>

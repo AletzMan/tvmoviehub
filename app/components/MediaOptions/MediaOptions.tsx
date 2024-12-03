@@ -5,7 +5,7 @@ import styles from "./styles.module.scss"
 import { useState, MouseEvent, KeyboardEvent, useRef, useEffect, Dispatch, SetStateAction } from "react"
 import { useSession } from "@/app/hooks/useSession"
 import { IAccountStates } from "@/app/interfaces/movie"
-import { AddRating, AddRemoveFavorite, DeleteRating, GetStates } from "@/app/services/fetchData"
+import { AddRating, AddRemoveFavorite, AddToWatchList, DeleteRating, GetStates } from "@/app/services/fetchData"
 import { RevalidateURL } from "@/app/utils/serveractions"
 import { enqueueSnackbar } from "notistack"
 import { Button } from "../Button/Button"
@@ -19,6 +19,11 @@ interface Props {
     viewMenu: boolean
     setViewMenu: Dispatch<SetStateAction<boolean>>
 }
+
+
+type Inventory = Array<
+    { name: string, quantity: number, category: string }
+>
 
 export function MediaOptions({ id, type, title, viewMenu, setViewMenu }: Props) {
     const { session_id } = useSession()
@@ -137,6 +142,20 @@ export function MediaOptions({ id, type, title, viewMenu, setViewMenu }: Props) 
         setViewRating(prev => !prev)
     }
 
+    const HandleAddWatchList = async () => {
+        const response = await AddToWatchList(session_id, type, id, !accountState?.watchlist)
+        if (response?.status_code === 1) {
+            GetData()
+            enqueueSnackbar(`¡${title} agregada a lista de seguimiento! `, { variant: "success" })
+        } else if (response?.status_code === 13) {
+            GetData()
+            enqueueSnackbar(`¡${title} eliminada de la lista de seguimiento! `, { variant: "success" })
+        } else {
+            enqueueSnackbar(`No pudimos procesar tu solicitud. Por favor, inténtalo de nuevo más tarde.'`, { variant: "error" })
+        }
+    }
+
+
     return (
         <div className={`${styles.options} `} onKeyUp={keyHandler}>
             <button className={styles.options_button} onClick={HandleViewMenu}  ><OptionsIcon /></button>
@@ -151,7 +170,7 @@ export function MediaOptions({ id, type, title, viewMenu, setViewMenu }: Props) 
                     </li>
                     <hr className={styles.menu_separator} />
                     <li className={styles.options_li}>
-                        <button className={`${styles.menu_option}  `} onClick={() => console.log("WATCH")} onMouseOver={() => setViewRating(false)}><BookmarkIcon className={`${styles.menu_icon} ${accountState?.watchlist ? styles.watchlist : ""}`} />Lista de seguimiento</button>
+                        <button className={`${styles.menu_option}  `} onClick={HandleAddWatchList} onMouseOver={() => setViewRating(false)}><BookmarkIcon className={`${styles.menu_icon} ${accountState?.watchlist ? styles.watchlist : ""}`} />Lista de seguimiento</button>
                     </li>
                     <hr className={styles.menu_separator} />
                     <li className={`${styles.options_li} ${styles.rated}`}>

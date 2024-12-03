@@ -3,7 +3,7 @@ import { ChangeEvent, MouseEventHandler, useState, MouseEvent } from "react"
 import styles from "./styles.module.scss"
 import { TextBox } from "@/app/components/TextBox/TextBox"
 import { Button } from "@/app/components/Button/Button"
-import { CreateLisMovie } from "@/app/services/fetchData"
+import { CreateList } from "@/app/services/fetchData"
 import { useSession } from "@/app/hooks/useSession"
 import { RevalidateURL } from "@/app/utils/serveractions"
 
@@ -36,7 +36,7 @@ export function FormAddMovie({ onClick }: Props) {
             const errorDescription = list.description === "" ? "Campo requerido" : ""
             setErrorList({ name: errorName, description: errorDescription })
         } else {
-            const response = await CreateLisMovie(session_id, list.name, list.description)
+            const response = await CreateList(session_id, list.name, list.description)
             if (response) {
                 RevalidateURL("listMovies")
             }
