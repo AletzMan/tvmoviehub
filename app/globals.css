@@ -10,7 +10,7 @@
 	--secondaryColor: #1d1c1c;
 	--terciaryColor: #2a2a2a;
 	--fourthColor: #404040;
-	--highlightColorBasic: #9e2020;
+	--highlightColorBasic: #6f0f0f;
 	--highlightColor: #b00d0d;
 	--highlightHoverColor: #bb232315;
 	--fontColor: #ffffff;
@@ -106,7 +106,8 @@ body {
 
 .slick-dots li {
 	margin: 0.5em 0.35em 0.35em 0.35em !important;
-	background: radial-gradient(circle, var(--highlightColorBasic), var(--fourthColor));
+	background: radial-gradient(circle, var(--fontSecondColor), var(--fourthColor));
+	opacity: 0.4;
 	border-radius: 1em;
 	width: 0.8em !important;
 	height: 0.8em !important;
@@ -115,6 +116,7 @@ body {
 
 	&:hover {
 		background: radial-gradient(circle, var(--highlightColor), var(--highlightColorBasic));
+		opacity: 1;
 	}
 
 }
@@ -123,5 +125,6 @@ body {
 	background: radial-gradient(circle, var(--highlightColor), var(--highlightColorBasic));
 	box-shadow: 0 0 3px 2px var(--highlightColor);
 	color: transparent;
-	width: 1.6em !important;
+	width: 2.4em !important;
+	opacity: 1;
 }
