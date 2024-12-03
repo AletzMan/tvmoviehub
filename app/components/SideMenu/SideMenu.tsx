@@ -41,7 +41,7 @@ export const SideMenu = () => {
                             <div className={styles.menu_section}>
                                 {<h2 className={styles.menu_title}>Usuario</h2>}
                                 {
-                                    MainMenu.filter((_, index) => index > 4 && index < 8).map(menu => (
+                                    MainMenu.filter((_, index) => index > 4 && index < 9).map(menu => (
                                         <Link key={menu.id} className={`${styles.menu_item} ${menu.link.split("?")[0] === section && styles.menu_itemCurrent}  ${menu.name}`} onClick={() => setLoadingState(true)} href={`/${menu.link}`} title={`Ir a ${menu.name}`}>{menu.icon}{menu.name}</Link>
                                     ))
                                 }
