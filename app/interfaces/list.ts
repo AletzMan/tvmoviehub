@@ -22,3 +22,9 @@ export interface IResponseCreateMovie {
     status_code: number,
     list_id: number
 }
+
+export interface IResponseList {
+    status_code: number,
+    status_message: string,
+    success: boolean,
+}

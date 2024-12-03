@@ -1,6 +1,6 @@
 import { CSSProperties, MouseEventHandler } from "react"
 import { IPropertiesCombobox } from "../components/ComboBox/ComboBox"
-import { AccountIcon, ActionIcon, AdventureIcon, AnimationIcon, ArrowLeftIcon, ComedyIcon, CrimeIcon, DocumentaryIcon, DramaIcon, FamilyIcon, FantasyIcon, FavoriteEmptyIcon, HistoryIcon, HomeIcon, HorrorIcon, KidIcon, LogInIcon, LogoutIcon, MovieIcon, MovieListIcon, MusicIcon, MysteryIcon, NewsIcon, PeopleIcon, RealityIcon, RomanceIcon, SCIFiIcon, SearchIcon, SerieIcon, SettingsIcon, SoapIcon, TVMovieIcon, TalkIcon, ThrillerIcon, WarIcon, WesternIcon } from "./svg"
+import { AccountIcon, ActionIcon, AdventureIcon, AnimationIcon, ArrowLeftIcon, BookmarkIcon, ComedyIcon, CrimeIcon, DocumentaryIcon, DramaIcon, FamilyIcon, FantasyIcon, FavoriteEmptyIcon, HistoryIcon, HomeIcon, HorrorIcon, KidIcon, LogInIcon, LogoutIcon, MovieIcon, MovieListIcon, MusicIcon, MysteryIcon, NewsIcon, PeopleIcon, RealityIcon, RomanceIcon, SCIFiIcon, SearchIcon, SerieIcon, SettingsIcon, SoapIcon, TVMovieIcon, TalkIcon, ThrillerIcon, WarIcon, WesternIcon } from "./svg"
 
 export const MainMenu = [
     {
@@ -47,24 +47,30 @@ export const MainMenu = [
     },
     {
         id: 7,
+        name: "Lista de seguimiento",
+        link: "watchlist?page=1",
+        icon: <BookmarkIcon className="mainMenuLogo" />
+    },
+    {
+        id: 8,
         name: "Cuenta",
         link: "account",
         icon: <AccountIcon className="mainMenuLogo" />
     },
     {
-        id: 8,
+        id: 9,
         name: "Configuración",
         link: "settings",
         icon: <SettingsIcon className="mainMenuLogo" />
     },
     {
-        id: 9,
+        id: 10,
         name: "Cerrar sesión",
         link: "logout",
         icon: <LogoutIcon className="mainMenuLogo" />
     },
     {
-        id: 10,
+        id: 11,
         name: "Iniciar sesión",
         link: "login",
         icon: <LogInIcon className="mainMenuLogo" />
