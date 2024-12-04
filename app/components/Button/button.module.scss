@@ -10,7 +10,6 @@
     max-width: max-content;
     font-weight: 300;
     font-family: var(--font-family);
-    background-size: 200% 200%;
     color: var(--fontColor);
     background: linear-gradient(-12deg, var(--highlightColor), var(--highlightColor));
     border: 1px solid transparent;
@@ -27,10 +26,9 @@
     }
 
     &_secondary {
-        background: linear-gradient(-12deg, var(--fourthColor), var(--fourthColor)20%);
-        background-size: 200% 200%;
-        color: var(--fontColor);
-        font-weight: 300;
+        background: linear-gradient(-12deg, var(--fontColor), var(--fontSecondColor)0%);
+        color: var(--primaryColor);
+        font-weight: 400;
 
         &:disabled {
             //pointer-events: none;

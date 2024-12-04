@@ -11,9 +11,10 @@ interface Props {
     className?: string
     mode: 'button' | 'link'
     href?: string
+    target?: '_blank' | '_parent' | '_self' | '_top'
 }
 
-export function Button({ text, icon, isSecondary, onClick, disabled, className, mode, href }: Props) {
+export function Button({ text, icon, isSecondary, onClick, disabled, className, mode, href, target }: Props) {
 
     return (
         <>
@@ -24,7 +25,7 @@ export function Button({ text, icon, isSecondary, onClick, disabled, className, 
                 </button>
             }
             {mode === "link" &&
-                <Link className={`${styles.button} ${isSecondary && styles.button_secondary} ${className}`} href={href || ""} aria-disabled={disabled} target="_blank">
+                <Link className={`${styles.button} ${isSecondary && styles.button_secondary} ${className}`} href={href || ""} aria-disabled={disabled} target={target}>
                     {icon}
                     {text}
                 </Link>
