@@ -5,9 +5,10 @@ import styles from "./styles.module.scss"
 interface Props {
     title: string
     icon?: JSX.Element
+    children?: JSX.Element
 }
 
-export function HeaderSection({ title, icon }: Props) {
+export function HeaderSection({ title, icon, children }: Props) {
     const searchParams = useSearchParams()
 
     return (
@@ -17,6 +18,7 @@ export function HeaderSection({ title, icon }: Props) {
                 {searchParams.get("query") && <span className={styles.header_search}>{`"${searchParams.get("query")}"`}</span>}
             </div>
             <span className={styles.header_icon}>
+                {children}
                 {icon}
             </span>
         </header>
