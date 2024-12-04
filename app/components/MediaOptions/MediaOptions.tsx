@@ -1,16 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client"
-import { BookmarkIcon, FavoriteFullIcon, ListIcon, OptionsIcon, StarIcon } from "@/app/utils/svg"
+import { AddIcon, BookmarkIcon, FavoriteFullIcon, ListIcon, OptionsIcon, StarIcon } from "@/app/utils/svg"
 import styles from "./styles.module.scss"
-import { useState, MouseEvent, KeyboardEvent, useRef, useEffect, Dispatch, SetStateAction } from "react"
+import { useState, MouseEvent, KeyboardEvent, useRef, useEffect, Dispatch, SetStateAction, SyntheticEvent, ChangeEvent } from "react"
 import { useSession } from "@/app/hooks/useSession"
 import { IAccountStates } from "@/app/interfaces/movie"
-import { AddRating, AddRemoveFavorite, AddToWatchList, DeleteRating, GetStates } from "@/app/services/fetchData"
+import { AddItemToList, AddRating, AddRemoveFavorite, AddToWatchList, CheckItemStatus, DeleteRating, GetLists, GetStates } from "@/app/services/fetchData"
 import { RevalidateURL } from "@/app/utils/serveractions"
 import { enqueueSnackbar } from "notistack"
 import { Button } from "../Button/Button"
-import { clearInterval, setInterval } from "timers"
-import { IResponseRating } from "@/app/interfaces/responses"
+import { IListMovie, IResponseListMovie } from "@/app/interfaces/list"
+import { useSearchParams } from "next/navigation"
+import { FormAddMovie } from "@/app/lists/components/FormAddMovie"
+import Link from "next/link"
 
 interface Props {
     id: number
@@ -21,17 +23,16 @@ interface Props {
 }
 
 
-type Inventory = Array<
-    { name: string, quantity: number, category: string }
->
-
 export function MediaOptions({ id, type, title, viewMenu, setViewMenu }: Props) {
     const { session_id } = useSession()
     const activatorRef = useRef<HTMLElement | null>(null)
     const dropdownListRef = useRef<HTMLUListElement | null>(null)
     const [accountState, setAccountState] = useState<IAccountStates | null>(null)
+    const [lists, setLists] = useState<IResponseListMovie | null>(null)
     const [currentRated, setCurrentRated] = useState(0)
     const [viewRating, setViewRating] = useState(false)
+    const [viewLists, setViewLists] = useState(false)
+    const searchParams = useSearchParams()
 
     useEffect(() => {
         if (session_id && viewMenu)
@@ -57,6 +58,7 @@ export function MediaOptions({ id, type, title, viewMenu, setViewMenu }: Props) 
 
     function HandleViewMenu(event: MouseEvent<HTMLButtonElement>): void {
         setViewMenu(prev => !prev)
+        setViewLists(false)
     }
 
     const keyHandler = (event: KeyboardEvent<HTMLDivElement>) => {
@@ -155,6 +157,33 @@ export function MediaOptions({ id, type, title, viewMenu, setViewMenu }: Props) 
         }
     }
 
+    const HandleViewMenuList = async () => {
+        const response = await GetLists(session_id, searchParams)
+        setLists(response)
+        setViewLists(true)
+    }
+
+    const HandleMouseOver = () => {
+        setViewRating(false)
+        setViewLists(false)
+    }
+
+
+    const HandleSelectList = async (event: ChangeEvent<HTMLSelectElement>) => {
+        const value = event.currentTarget.value
+        const name = event.currentTarget.name
+        const status = await CheckItemStatus(value, id)
+        if (!status?.item_present) {
+            const response = await AddItemToList(session_id, value, id)
+            if (response?.status_code === 12) {
+                enqueueSnackbar(`¡${title} se ha agregado a lista ${name}! `, { variant: "success" })
+            } else if (response?.status_code === 8) {
+                enqueueSnackbar(`El elemento ya había sido añadido previamente.'`, { variant: "error" })
+            }
+        } else {
+            enqueueSnackbar(`El elemento ya había sido añadido previamente.'`, { variant: "error" })
+        }
+    }
 
     return (
         <div className={`${styles.options} `} onKeyUp={keyHandler}>
@@ -162,7 +191,22 @@ export function MediaOptions({ id, type, title, viewMenu, setViewMenu }: Props) 
             {viewMenu &&
                 <ul className={`${styles.menu} ${viewMenu ? styles.menu_open : styles.menu_close}`} ref={dropdownListRef} >
                     <li className={styles.options_li}>
-                        <button className={`${styles.menu_option} `} onClick={() => console.log("LIST")} onMouseOver={() => setViewRating(false)}><ListIcon className={styles.menu_icon} />Añadir a lista</button>
+                        <button className={`${styles.menu_option} `} onClick={HandleViewMenuList} onMouseOver={HandleMouseOver}><ListIcon className={styles.menu_icon} />Añadir a lista</button>
+                        {viewLists &&
+                            <div className={styles.list} onMouseLeave={() => setViewLists(false)} >
+                                <Link className={styles.list_add} href="/lists/new" ><AddIcon />Crear nueva lista</Link>
+                                <div className={styles.lists}>
+                                    <label className={styles.lists_label}>
+                                        Añadir a:</label>
+                                    <select className={styles.lists_select} onChange={HandleSelectList}>
+                                        {lists?.results.map(list => (
+                                            <option key={list.id} className={styles.lists_option} value={list.id}>{list.name}</option>
+                                        ))}
+                                    </select>
+
+                                </div>
+                            </div>
+                        }
                     </li>
                     <hr className={styles.menu_separator} />
                     <li className={styles.options_li}>
