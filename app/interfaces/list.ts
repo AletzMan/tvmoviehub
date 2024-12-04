@@ -28,3 +28,7 @@ export interface IResponseList {
     status_message: string,
     success: boolean,
 }
+export interface IItemStatus {
+    id: string,
+    item_present: boolean,
+}

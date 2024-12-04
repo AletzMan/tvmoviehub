@@ -3,7 +3,7 @@ import { ICredits, IMovieCredits, ISerieCredits } from "../interfaces/credits"
 import { IFavorites } from "../interfaces/favorite"
 import { IImages } from "../interfaces/image"
 import { IKeywords, IResult } from "../interfaces/keyword"
-import { IResponseList, IResponseCreateMovie, IResponseListMovie } from "../interfaces/list"
+import { IResponseList, IResponseCreateMovie, IResponseListMovie, IItemStatus } from "../interfaces/list"
 import { IAccountStates, ICollectionDetails, IExternalIDs, IMovie, IMovieDetails, IMovieVideos, IQueryParamasMovies } from "../interfaces/movie"
 import { IMultiResponse } from "../interfaces/multi"
 import { IPeopleDetails, IPeopleImages } from "../interfaces/people"
@@ -701,8 +701,8 @@ export const DeleteList = async (session_id: string, list_id: number) => {
 	return data
 }
 
-export const AddItemToList = async (session_id: string, list_id: number, id: number) => {
-	const url = `${API_URL_BASE}/list/${list_id}/add_item?session_id=${session_id}?confirm=true`
+export const AddItemToList = async (session_id: string, list_id: string, id: number) => {
+	const url = `${API_URL_BASE}/list/${list_id}/add_item?session_id=${session_id}&confirm=true`
 	const response = await fetch(url, {
 		method: "POST",
 		headers: {
@@ -742,6 +742,18 @@ export const RemoveItemFromList = async (session_id: string, list_id: number, id
 	}
 	return data
 }
+
+
+export const CheckItemStatus = async (list_id: string, movie_id: number) => {
+	const url = `${API_URL_BASE}/list/${list_id}/item_status?movie_id=${movie_id}`
+	const response = await fetch(url, optionsGET)
+	let data: IItemStatus | null = null
+	if (response.status === 200) {
+		return (await response.json()) as IItemStatus
+	}
+	return data
+}
+
 
 export const AddToWatchList = async (session_id: string, media_type: 'movie' | 'tv', id: number, isWatchlist: boolean) => {
 	const url = `${API_URL_BASE}/account/18482247/watchlist?session_id=${session_id}`

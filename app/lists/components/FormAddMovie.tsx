@@ -6,17 +6,15 @@ import { Button } from "@/app/components/Button/Button"
 import { CreateList } from "@/app/services/fetchData"
 import { useSession } from "@/app/hooks/useSession"
 import { RevalidateURL } from "@/app/utils/serveractions"
+import { CloseIcon, SaveIcon } from "@/app/utils/svg"
 
-interface Props {
-    onClick: MouseEventHandler<HTMLButtonElement>
-}
 
 interface IList {
     name: string
     description: string
 }
 
-export function FormAddMovie({ onClick }: Props) {
+export function FormAddMovie() {
     const { session_id } = useSession()
     const [list, setList] = useState<IList>({ name: "", description: "" })
     const [errorList, setErrorList] = useState<IList>({ name: "", description: "" })
@@ -44,35 +42,29 @@ export function FormAddMovie({ onClick }: Props) {
     }
 
     return (
-        <dialog open className={styles.dialog}  >
-            <form className={styles.dialog_form} >
-                <h3 className={styles.dialog_title}>Crear lista</h3>
-                <TextBox
-                    error={errorList.name}
-                    type="text"
-                    name="name"
-                    label="Nombre"
-                    value={list.name}
-                    onChange={HandleChange} />
-                <TextBox
-                    error={errorList.description}
-                    type="text"
-                    name="description"
-                    label="Descripción"
-                    value={list.description}
-                    onChange={HandleChange} />
-                <fieldset className={styles.dialog_buttons}>
-                    <Button
-                        mode="button"
-                        text="Guardad"
-                        onClick={HandleSave} />
-                    <Button
-                        mode="button"
-                        text="Cancelar"
-                        onClick={onClick}
-                        isSecondary />
-                </fieldset>
-            </form>
-        </dialog>
+        <form className={styles.dialog_form} >
+            <h3 className={styles.dialog_title}>Crear lista</h3>
+            <TextBox
+                error={errorList.name}
+                type="text"
+                name="name"
+                label="Nombre"
+                value={list.name}
+                onChange={HandleChange} />
+            <TextBox
+                error={errorList.description}
+                type="text"
+                name="description"
+                label="Descripción"
+                value={list.description}
+                onChange={HandleChange} />
+            <fieldset className={styles.dialog_buttons}>
+                <Button
+                    mode="button"
+                    text="Guardar"
+                    icon={<SaveIcon />}
+                    onClick={HandleSave} />
+            </fieldset>
+        </form>
     )
 }

@@ -32,6 +32,7 @@
 
     &_li {
         list-style: none;
+        position: relative;
     }
 
 }
@@ -133,13 +134,14 @@
         top: 1.9em;
         display: grid;
         grid-template-rows: 2em 1.5em;
+        gap: 0.5em;
         border: 1px solid var(--fourthColor);
         background-color: var(--primaryColor);
+        box-shadow: 0 0 2px 2px #51505060;
+        border-radius: 0.25em;
         padding: 0.25em;
         width: 15.5em;
         z-index: 4;
-        border-radius: 0.25em;
-        box-shadow: 0 0 2px 2px #51505060;
     }
 
     &_stars {
@@ -200,5 +202,68 @@
         border-radius: 0.6em;
         background: linear-gradient(90deg, rgb(218, 13, 13), rgb(183, 168, 5)35%, rgb(183, 168, 5)65%, rgb(9, 189, 5));
 
+    }
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    border: 1px solid var(--fourthColor);
+    background-color: var(--primaryColor);
+    box-shadow: 0 0 2px 2px #51505060;
+    border-radius: 0.25em;
+    padding: 0.25em;
+    width: 15.5em;
+    z-index: 4;
+
+    &_add {
+
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 0.75em;
+        padding: 0.38em 0.8em;
+        border: none;
+        border-radius: 0.25em;
+        font-size: 0.8em;
+        max-width: max-content;
+        font-weight: 300;
+        font-family: var(--font-family);
+        background-size: 200% 200%;
+        color: var(--fontColor);
+        background: linear-gradient(-12deg, var(--highlightColor), var(--highlightColor));
+        border: 1px solid transparent;
+        transition: all 0.3s ease-in-out;
+        text-decoration: none;
+        cursor: pointer;
+
+
+        &:hover {
+            filter: brightness(140%);
+            //background-position: -200% -100%;
+        }
+
+        &>svg {
+            width: 1.5em;
+            height: 1.5em;
+        }
+    }
+}
+
+.lists {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25em;
+
+    &_label {
+        color: var(--fontSecondColor);
+    }
+
+    &_select {
+        background-color: var(--secondaryColor);
+        color: var(--fontColor);
+        padding: 0.25em 0.5em;
+        border-radius: 0.25em;
     }
 }
