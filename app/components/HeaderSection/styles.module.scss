@@ -3,8 +3,9 @@
     justify-content: space-between;
     padding: 0.15em 0.5em;
     border-radius: 0.15em;
+    margin: 0 0.25em;
     align-items: center;
-    background: linear-gradient(15deg, var(--highlightColorBasic), var(--fourthColor));
+    background: linear-gradient(15deg, #FFFFFF15, #FFFFFF15);
 
     &_div {
         display: flex;
@@ -27,6 +28,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        gap: 0.5em;
         color: var(--fontSecondColor);
 
         &>svg {
