@@ -4,7 +4,7 @@
     justify-content: space-between;
     border-radius: 0.15em;
     padding: 0.5em;
-    background: linear-gradient(90deg, var(--highlightHoverColor), var(--highlightHoverColor));
+    background-color: var(--hover);
 
     &_order {
         display: flex;
