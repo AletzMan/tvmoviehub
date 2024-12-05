@@ -164,11 +164,27 @@ export const GetSeriesAiringToday = async () => {
 }
 
 export const GetTopRatedSeries = async (page: number) => {
-	const url = `${API_URL_BASE}/movie/top_rated?language=${LANGUAGE_MX}&region=MX&page=${page}`
+	const url = `${API_URL_BASE}/tv/top_rated?language=${LANGUAGE_MX}&region=MX&page=${page}`
 	const response = await fetch(url, optionsGET)
-	const data = (await response.json()) as IMovieResponse
+	const data = (await response.json()) as ISerieResponse
 	return data
 }
+
+export const GetPopularSeries = async (page: number) => {
+	const url = `${API_URL_BASE}/tv/popular?language=${LANGUAGE_MX}&region=MX&page=${page}`
+	const response = await fetch(url, optionsGET)
+	const data = (await response.json()) as ISerieResponse
+	return data
+}
+
+
+export const GetOnTheAirSeries = async (page: number) => {
+	const url = `${API_URL_BASE}/tv/on_the_air?language=${LANGUAGE_MX}&region=MX&page=${page}`
+	const response = await fetch(url, optionsGET)
+	const data = (await response.json()) as ISerieResponse
+	return data
+}
+
 
 export const GetDiscoverSeries = async (queryParams: IQueryParamasSeries) => {
 	const params = Object.entries(queryParams)
