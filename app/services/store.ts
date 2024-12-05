@@ -52,3 +52,32 @@ export const useVideo = create<IVideoState>(
     })
 )
 
+interface IDialogAlert {
+    viewDialog: boolean
+    setViewDialog: (value: boolean) => void
+    itemToDelete: { list_id: number, id: number, name_list: string, name_item: string }
+    setItemToDelete: (value: { list_id: number, id: number, name_list: string, name_item: string }) => void
+    typeDialog: 'item' | 'list'
+    setTypeDialog: (value: 'item' | 'list') => void
+}
+
+export const useDialogAlert = create<IDialogAlert>(
+    (set) => ({
+        viewDialog: false,
+        setViewDialog: (value: boolean) =>
+            set((state) => ({
+                viewDialog: value,
+            })),
+        itemToDelete: { list_id: 0, id: 0, name_item: "", name_list: "" },
+        setItemToDelete: (value: { list_id: number, id: number, name_list: string, name_item: string }) =>
+            set((state) => ({
+                itemToDelete: value,
+            })),
+        typeDialog: 'item',
+        setTypeDialog: (value: 'item' | 'list') =>
+            set((state) => ({
+                typeDialog: value,
+            })),
+    })
+)
+

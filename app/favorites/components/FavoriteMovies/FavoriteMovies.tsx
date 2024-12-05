@@ -4,7 +4,6 @@ import { GetFavoriteMovies } from "@/app/services/fetchData"
 import { cookies } from "next/headers"
 import { MovieCardDetails } from "@/app/components/MovieCardDetails/MovieCardDetails"
 import { IPartCollection } from "@/app/interfaces/movie"
-import { ToastProvider } from "@/app/components/ToastProvider/ToastProvider"
 import { Pagination } from "@/app/components/Pagination/Pagination"
 
 interface Props {
@@ -18,14 +17,12 @@ export default async function FavoriteMovies({ page }: Props) {
     const movies: IMovieResponse | null = await GetFavoriteMovies(cookie as string, page)
     return (
         <div className={styles.favorites}>
-            <ToastProvider>
-                <section className={`${styles.favorites_section} scrollBarStyle`}>
-                    {movies?.results.map(movie => (
-                        <MovieCardDetails key={movie.id} movie={movie as IPartCollection} type="movie" isFavorites />
-                    ))
-                    }
-                </section>
-            </ToastProvider>
+            <section className={`${styles.favorites_section} scrollBarStyle`}>
+                {movies?.results.map(movie => (
+                    <MovieCardDetails key={movie.id} movie={movie as IPartCollection} type="movie" isFavorites />
+                ))
+                }
+            </section>
             {movies && movies.results.length > 0 && <Pagination currentPage={movies?.page || 1} totalPages={movies?.total_pages || 0} />}
             {movies && movies?.results?.length === 0 &&
                 <div className={styles.message}>

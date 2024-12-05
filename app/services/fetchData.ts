@@ -3,7 +3,7 @@ import { ICredits, IMovieCredits, ISerieCredits } from "../interfaces/credits"
 import { IFavorites } from "../interfaces/favorite"
 import { IImages } from "../interfaces/image"
 import { IKeywords, IResult } from "../interfaces/keyword"
-import { IResponseList, IResponseCreateMovie, IResponseListMovie, IItemStatus } from "../interfaces/list"
+import { IResponseList, IResponseCreateMovie, IResponseListMovie, IItemStatus, IListDetails } from "../interfaces/list"
 import { IAccountStates, ICollectionDetails, IExternalIDs, IMovie, IMovieDetails, IMovieVideos, IQueryParamasMovies } from "../interfaces/movie"
 import { IMultiResponse } from "../interfaces/multi"
 import { IPeopleDetails, IPeopleImages } from "../interfaces/people"
@@ -636,7 +636,7 @@ export const GetLists = async (session_id: string, queryParams: Object) => {
 			accept: "application/json",
 			Authorization: `Bearer ${API_KEY}`,
 		},
-		next: { revalidate: 1, tags: ['listMovies'] },
+		next: { revalidate: 10000, tags: ['listMovies'] },
 	})
 	let data: IResponseListMovie | null = null
 	if (response.status === 200) {
@@ -723,7 +723,7 @@ export const AddItemToList = async (session_id: string, list_id: string, id: num
 }
 
 export const RemoveItemFromList = async (session_id: string, list_id: number, id: number) => {
-	const url = `${API_URL_BASE}/list/${list_id}/remove_item?session_id=${session_id}?confirm=true`
+	const url = `${API_URL_BASE}/list/${list_id}/remove_item?session_id=${session_id}`
 	const response = await fetch(url, {
 		method: "POST",
 		headers: {
@@ -753,6 +753,22 @@ export const CheckItemStatus = async (list_id: string, movie_id: number) => {
 	}
 	return data
 }
+
+
+
+export const GetDetailsList = async (list_id: string, page: number) => {
+	const url = `${API_URL_BASE}/list/${list_id}?page=${page}`
+	const response = await fetch(url, { ...optionsGET, next: { revalidate: 10000, tags: ['lists'] }, })
+	let data: IListDetails | null = null
+	console.log(response)
+	if (response.status === 200) {
+		const result = (await response.json()) as IListDetails
+		console.log(result)
+		return result
+	}
+	return data
+}
+
 
 
 export const AddToWatchList = async (session_id: string, media_type: 'movie' | 'tv', id: number, isWatchlist: boolean) => {

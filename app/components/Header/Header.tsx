@@ -3,7 +3,7 @@ import styles from "./header.module.scss"
 import { MainMenu } from "@/app/utils/const"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { SearchInput } from "../SearchInput/SearchInput"
-import { ArrowDownIcon, LogInIcon, LogoIcon, LogoutIcon, MenuIcon, SearchIcon } from "@/app/utils/svg"
+import { ArrowDownIcon, CloseIcon, LogInIcon, LogoIcon, LogoutIcon, MenuIcon, SearchIcon } from "@/app/utils/svg"
 import { SideMenu } from "../SideMenu/SideMenu"
 import { MouseEvent, useEffect, useState } from "react"
 import Link from "next/link"
@@ -54,7 +54,8 @@ export default function Header() {
     }
 
     return (
-        <SnackbarProvider anchorOrigin={{ vertical: "top", horizontal: "center" }} autoHideDuration={3000}>
+        <>
+            <SnackbarProvider anchorOrigin={{ vertical: "top", horizontal: "center" }} autoHideDuration={3500} />
             <header className={styles.header}>
                 <div className={styles.header_container}>
                     <div className={styles.menu}>
@@ -74,7 +75,7 @@ export default function Header() {
                         {/*<div className={styles.mobile_pathname}>
                             {MainMenu.find(menu => menu.link === section)?.icon}
                             {MainMenu.find(menu => menu.link === section)?.name}
-                    </div>*/}
+                        </div>*/}
                     </div>
                     <nav className={styles.navigation}>
                         {
@@ -118,6 +119,6 @@ export default function Header() {
                     </nav>
                 </dialog>
             </header>
-        </SnackbarProvider>
+        </>
     )
 }

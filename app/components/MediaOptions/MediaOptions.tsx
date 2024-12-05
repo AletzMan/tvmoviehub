@@ -7,7 +7,7 @@ import { useSession } from "@/app/hooks/useSession"
 import { IAccountStates } from "@/app/interfaces/movie"
 import { AddItemToList, AddRating, AddRemoveFavorite, AddToWatchList, CheckItemStatus, DeleteRating, GetLists, GetStates } from "@/app/services/fetchData"
 import { RevalidateURL } from "@/app/utils/serveractions"
-import { enqueueSnackbar } from "notistack"
+import { enqueueSnackbar, } from "notistack"
 import { Button } from "../Button/Button"
 import { IListMovie, IResponseListMovie } from "@/app/interfaces/list"
 import { useSearchParams } from "next/navigation"
@@ -175,13 +175,19 @@ export function MediaOptions({ id, type, title, viewMenu, setViewMenu }: Props) 
         const status = await CheckItemStatus(value, id)
         if (!status?.item_present) {
             const response = await AddItemToList(session_id, value, id)
+            console.log(response)
             if (response?.status_code === 12) {
+                await RevalidateURL("lists")
+                await RevalidateURL("listMovies")
+                console.log(response?.status_code)
                 enqueueSnackbar(`¡${title} se ha agregado a lista ${name}! `, { variant: "success" })
             } else if (response?.status_code === 8) {
-                enqueueSnackbar(`El elemento ya había sido añadido previamente.'`, { variant: "error" })
+                enqueueSnackbar(`El elemento ya había sido añadido previamente.`, { variant: "error" })
+                console.log(response?.status_code)
             }
         } else {
-            enqueueSnackbar(`El elemento ya había sido añadido previamente.'`, { variant: "error" })
+            console.log(status)
+            enqueueSnackbar(`El elemento ya había sido añadido previamente.`, { variant: "error" })
         }
     }
 

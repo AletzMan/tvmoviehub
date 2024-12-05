@@ -7,6 +7,7 @@ import Header from "./components/Header/Header"
 import styles from "./page.module.css"
 import { LoadingPage } from "./components/LoadingPage/LoadingPage"
 import { TrailerPage } from "./components/TrailerPage/TrailerPage"
+import { DialogAlert } from "./components/DialogAlert/DialogAlert"
 
 const jost = Jost({ subsets: ["latin"] })
 
@@ -30,6 +31,7 @@ export default function RootLayout({
         </main>
         {<LoadingPage />}
         {<TrailerPage />}
+        {<DialogAlert />}
       </body>
     </html>
   )
