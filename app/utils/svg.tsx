@@ -643,6 +643,23 @@ export function ArrowRightIcon({ className }: Props) {
     )
 }
 
+export function ListAddIcon({ className }: Props) {
+    return (
+        <svg className={className} width={20} height={20} viewBox="0 0 20 20">
+            <path fill="currentColor" d="M3.25 6a1.25 1.25 0 1 0 0-2.5a1.25 1.25 0 0 0 0 2.5M7 4.75A.75.75 0 0 1 7.75 4h9.5a.75.75 0 0 1 0 1.5h-9.5A.75.75 0 0 1 7 4.75M7.75 9a.75.75 0 0 0 0 1.5h5.456A5.5 5.5 0 0 1 15.5 10c.743 0 1.452.147 2.098.414A.75.75 0 0 0 17.25 9zm0 5h2.457A5.5 5.5 0 0 0 10 15.5H7.75a.75.75 0 0 1 0-1.5M4.5 9.75a1.25 1.25 0 1 1-2.5 0a1.25 1.25 0 0 1 2.5 0M3.25 16a1.25 1.25 0 1 0 0-2.5a1.25 1.25 0 0 0 0 2.5M20 15.5a4.5 4.5 0 1 1-9 0a4.5 4.5 0 0 1 9 0m-4-2a.5.5 0 0 0-1 0V15h-1.5a.5.5 0 0 0 0 1H15v1.5a.5.5 0 0 0 1 0V16h1.5a.5.5 0 0 0 0-1H16z">
+            </path></svg>
+    )
+}
+
+export function FolderMovieIcon({ className }: Props) {
+    return (
+        <svg className={className} width={24} height={24} viewBox="0 0 24 24">
+            <path fill="currentColor" d="M5 22q-.825 0-1.412-.587T3 20V7.625Q3 7 3.338 6.488t.912-.738l8-3.2q1-.4 1.875.2T15 4.425V6q.825 0 1.413.588T17 8v2q-2.925 0-4.962 2.038T10 17q0 1.425.55 2.725T12.125 22zM9 6h4V4.45zm8 16q-2.075 0-3.537-1.463T12 17t1.463-3.537T17 12t3.538 1.463T22 17t-1.463 3.538T17 22m-.475-2.975l2.55-1.6q.25-.15.25-.425t-.25-.425l-2.55-1.6q-.25-.15-.513-.013t-.262.438v3.2q0 .3.263.438t.512-.013">
+            </path>
+        </svg>
+    )
+}
+
 export function ListIcon({ className }: Props) {
     return (
         <svg className={className} width="1em" height="1em" viewBox="0 0 24 24">
