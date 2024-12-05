@@ -2,10 +2,9 @@
 import Image from "next/image"
 import Link from "next/link"
 import styles from "./moviecard.module.scss"
-import { AddIcon, DetailsIcon, FavoriteFullIcon, MovieIcon, SerieIcon, StarIcon } from "@/app/utils/svg"
+import { DetailsIcon, StarIcon } from "@/app/utils/svg"
 import { BASE_URL_IMG, BASE_URL_IMG_CUSTOM } from "@/app/utils/const"
 import { IMovie } from "@/app/interfaces/movie"
-import { FavoriteButton } from "../FavoriteButton/FavoriteButton"
 import { useLoadingState } from "@/app/services/store"
 import { MediaOptions } from "../MediaOptions/MediaOptions"
 import { useState } from "react"
@@ -35,10 +34,7 @@ export const MovieCard = ({ movie, top }: Props) => {
             </div>
             {<span className={styles.movie_number}>{top}</span>}
             <span className={styles.movie_average}><StarIcon className={styles.movie_iconDate} />{movie.vote_average.toFixed(1)}</span>
-            {/*<FavoriteButton id={movie.id} title={movie.title} type="movie" />*/}
             <div className={styles.movie_description}>
-                {/*<span className={styles.movie_type}><MovieIcon className={styles.movie_typeIcon} />Película</span>*/}
-
                 <span className={styles.movie_name}>{movie.title}</span>
                 <span className={styles.movie_age}>{new Date(movie.release_date).getFullYear()}</span>
             </div>

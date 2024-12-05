@@ -1,0 +1,17 @@
+.section {
+    display: flex;
+    flex-direction: column;
+
+    &_items {
+        padding: 0.25em;
+    }
+
+    &_media {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(10.5em, 1fr));
+        height: calc(100svh - 11.25em);
+        gap: 0.5em;
+        padding: 0.25em 0 0.5em 0;
+        background-color: var(--secondaryColor);
+    }
+}

@@ -8,7 +8,6 @@ import { IQueryParamasSeries } from "@/app/interfaces/serie"
 import { HeaderFilters } from "@/app/components/HeaderFilters/HeaderFilters"
 import { NotResultsView } from "@/app/components/NotResultsView/NotResultsView"
 import { HeaderTags } from "@/app/components/HeaderTags/HeaderTags"
-import { ToastProvider } from "@/app/components/ToastProvider/ToastProvider"
 
 export default async function Page(params: { params: { lang: string }, searchParams: IQueryParamasSeries }) {
 
@@ -19,15 +18,13 @@ export default async function Page(params: { params: { lang: string }, searchPar
             <HeaderTags />
             <HeaderFilters />
             {popularSeries.results.length > 0 ?
-                <ToastProvider>
-                    <div className={`${styles.movies} scrollBarStyle`}>
-                        {
-                            popularSeries.results.map((movie, index) => (
-                                <MovieCardDetails key={movie.id} movie={movie as IPartCollection} type="tv" />
-                            ))
-                        }
-                    </div>
-                </ToastProvider>
+                <div className={`${styles.movies} scrollBarStyle`}>
+                    {
+                        popularSeries.results.map((movie, index) => (
+                            <MovieCardDetails key={movie.id} movie={movie as IPartCollection} type="tv" />
+                        ))
+                    }
+                </div>
                 :
                 <NotResultsView />
             }

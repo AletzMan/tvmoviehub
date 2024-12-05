@@ -43,7 +43,7 @@ export function FormAddMovie() {
 
     return (
         <form className={styles.dialog_form} >
-            <h3 className={styles.dialog_title}>Crear lista</h3>
+            <h3 className={styles.dialog_title}>Nueva lista</h3>
             <TextBox
                 error={errorList.name}
                 type="text"

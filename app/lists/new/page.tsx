@@ -1,5 +1,5 @@
 import { HeaderSection } from "../../components/HeaderSection/HeaderSection"
-import { ListIcon } from "../../utils/svg"
+import { ListAddIcon, ListIcon } from "../../utils/svg"
 import { FormAddMovie } from "../components/FormAddMovie"
 import ListMovies from "../components/ListMovies"
 import styles from "./styles.module.scss"
@@ -8,7 +8,7 @@ export default async function Page(params: { searchParams: { type: string, page:
 
     return (
         <section >
-            <HeaderSection title="Mis listas" icon={<ListIcon />} />
+            <HeaderSection title="Crear lista" icon={<ListAddIcon />} />
             <div className={styles.section}>
                 <FormAddMovie />
             </div>

@@ -32,3 +32,35 @@ export interface IItemStatus {
     id: string,
     item_present: boolean,
 }
+
+export interface IListDetails {
+    created_by: string
+    description: string
+    favorite_count: number
+    id: number
+    iso_639_1: string
+    item_count: number
+    items: IListItem[]
+    name: string
+    poster_path?: string | null
+    page: number
+    total_pages: number
+    total_results: number
+}
+
+export interface IListItem {
+    id: number,
+    media_type: string,
+    original_language: string,
+    original_title: string,
+    overview: string,
+    popularity: number,
+    poster_path: string,
+    release_date: string,
+    first_air_date: string,
+    title: string,
+    name: string,
+    video: boolean,
+    vote_average: number,
+    vote_count: number
+}
