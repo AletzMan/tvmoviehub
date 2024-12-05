@@ -14,7 +14,7 @@
     font-size: 0.9em;
     font-family: var(--font-family);
     color: var(--fontColor);
-    background: linear-gradient(-12deg, var(--fourthColor), var(--highlightColor));
+    background: linear-gradient(-12deg, var(--highlightColor), var(--highlightColor));
     transition: all 0.3s ease-in-out;
     cursor: pointer;
 
@@ -41,8 +41,8 @@
         margin: 0 0 0 1em;
         color: var(--fontColor);
         border-radius: 0.2em;
-        border: 1px solid var(--highlightColorBasic);
-        background-color: var(--fourthColor);
+        border: 1px solid var(--fontSecondColor);
+        background-color: var(--highlightColorBasic);
     }
 }
 
