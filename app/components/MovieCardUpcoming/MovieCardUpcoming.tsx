@@ -8,6 +8,8 @@ import { IMovie } from "@/app/interfaces/movie"
 import { FormattedDateUpcoming } from "@/app/utils/helpers"
 import { FavoriteButton } from "../FavoriteButton/FavoriteButton"
 import { useLoadingState } from "@/app/services/store"
+import { MediaOptions } from "../MediaOptions/MediaOptions"
+import { useState } from "react"
 
 interface Props {
     movie: IMovie
@@ -15,11 +17,11 @@ interface Props {
 
 export const MovieCardUpcoming = ({ movie }: Props) => {
     const { setLoadingState } = useLoadingState()
+    const [viewMenu, setViewMenu] = useState(false)
     return (
         <div key={movie.id} className={styles.movie}>
-            <Image className={styles.movie_backdrop} src={movie.poster_path ? BASE_URL_IMG_CUSTOM.concat(`/w342`.concat(movie.poster_path)) : "/not_photo.png"} width={150} height={230} alt={`Poster de ${movie.title}`} />
             <div className={styles.movie_picture}>
-                <Image className={styles.movie_photo} src={movie.poster_path ? BASE_URL_IMG.concat(movie.poster_path || '') : "/not_photo.png"} width={150} height={230} alt={`Poster de ${movie.title}`} />
+                <Image className={styles.movie_photo} src={movie.poster_path ? BASE_URL_IMG.concat(movie.poster_path || '') : "/not_photo.png"} width={195} height={245} alt={`Poster de ${movie.title}`} />
             </div>
             <div className={styles.movie_shadow}></div>
             <div className={styles.movie_dialog}>
@@ -27,10 +29,8 @@ export const MovieCardUpcoming = ({ movie }: Props) => {
                     <DetailsIcon className={styles.movie_dialogIcon} />
                 </Link>
             </div>
-            <FavoriteButton id={movie.id} title={movie.title} type="movie" />
+            <MediaOptions id={movie.id} viewMenu={viewMenu} setViewMenu={setViewMenu} title={movie.title} type="movie" />
             <div className={styles.movie_description}>
-                {/*<span className={styles.movie_type}><MovieIcon className={styles.movie_typeIcon} />Película</span>*/}
-
                 <span className={styles.movie_name}>{movie.title}</span>
                 <span className={styles.movie_age}>{FormattedDateUpcoming(movie.release_date)}</span>
             </div>
