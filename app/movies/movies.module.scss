@@ -10,13 +10,20 @@
 
     @media (width < 700px) {
         grid-column: 1 / span 2;
+        padding: 0;
     }
 }
 
 .content {
+    width: calc(100% - 2em);
     max-width: var(--maxWidthContent);
     background-color: var(--primaryColor);
     border: 1px solid var(--secondaryColor);
     padding: 0.5em;
     margin: 0 auto;
+
+    @media (width < 700px) {
+        grid-column: 1 / span 2;
+        padding: 0;
+    }
 }

@@ -3,17 +3,21 @@
     flex-direction: column;
     //background-color: var(--hover);
     height: max-content;
-    width: calc(100svw - 1.5em);
+    width: calc(100svw - 0.5em);
+    max-width: var(--maxWidthContent);
 
-    @media (width < 750px) {
-        width: 100%;
-    }
+
 
     &_header {
         display: flex;
         justify-content: space-between;
         padding: 0.25em 0.5em;
+        width: calc(100% - 4em);
         background: linear-gradient(90deg, var(--hover), transparent);
+
+        @media (width < 700px) {
+            width: calc(100% - 2em);
+        }
     }
 
     &_title {
@@ -24,6 +28,12 @@
 
     &_container {
         margin: 0.5em 1.75em 0em 1.75em;
+        width: calc(100% - 7.5em);
+
+
+        @media (width < 700px) {
+            width: calc(100% - 5.5em);
+        }
     }
 
     &_view {
