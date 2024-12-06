@@ -18,7 +18,10 @@ export default function SelectFavorite() {
 
     const HandleSetOption = () => {
         setOption(prev => !prev)
-        router.push(option ? "?type=movies" : "?type=series")
+        const paramPage = searchParams.get("page")
+        if (paramPage) {
+            router.push(option ? `?type=movies&page=${paramPage}` : `?type=series&page=${paramPage}`)
+        }
     }
 
     return (

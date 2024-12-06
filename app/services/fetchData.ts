@@ -816,7 +816,7 @@ export const AddToWatchList = async (session_id: string, media_type: 'movie' | '
 
 export const GetWatchList = async (session_id: string, media_type: 'movies' | 'tv') => {
 	const url = `${API_URL_BASE}/account/18482247/watchlist/${media_type}?session_id=${session_id}&language=es-MX`
-	const response = await fetch(url, optionsGET)
+	const response = await fetch(url, { ...optionsGET, next: { revalidate: 10000, tags: ['watchList'] }, })
 
 
 	let data: IMultiResponse | null = null
