@@ -42,7 +42,7 @@ export function MovieCardList({ movie, list_id }: Props) {
             </div>
             <div className={styles.movie_shadow}></div>
             <div className={styles.movie_dialog}>
-                <Link className={styles.movie_dialogMore} href={`/lists/details/${movie.id}`} title={movie.title} onClick={() => setLoadingState(true)}>
+                <Link className={styles.movie_dialogMore} href={`/movies/${movie.id}`} title={movie.title} onClick={() => setLoadingState(true)}>
                     <DetailsIcon className={styles.movie_dialogIcon} />
                 </Link>
             </div>
