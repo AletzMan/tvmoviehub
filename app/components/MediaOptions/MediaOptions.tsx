@@ -204,8 +204,9 @@ export function MediaOptions({ id, type, title, viewMenu, setViewMenu }: Props) 
                                 <div className={styles.lists}>
                                     <label className={styles.lists_label}>
                                         Añadir a:</label>
-                                    <select className={styles.lists_select} onChange={HandleSelectList}>
-                                        {lists?.results.map(list => (
+                                    <select className={styles.lists_select} onChange={HandleSelectList} >
+                                        <option className={styles.lists_optionDefault}>Seleccione una lista</option>
+                                        {lists?.results.map((list, index) => (
                                             <option key={list.id} className={styles.lists_option} value={list.id}>{list.name}</option>
                                         ))}
                                     </select>

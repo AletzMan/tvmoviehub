@@ -9,21 +9,22 @@
     height: 15.7em;
     border-radius: 0.2em;
     margin: 0 0.25em;
-    overflow: hidden;
-    border: 1px solid var(--hover);
+    border: 1px solid transparent;
     transition: all ease-in-out 0.25s;
     scroll-snap-align: start;
-    opacity: 0.8;
     text-decoration: none;
 
     &:hover {
         //border-color: var(--hover);
         filter: opacity(1) brightness(110%);
-        background: linear-gradient(0deg, #FFFFFF15, transparent);
+        //background: linear-gradient(0deg, #FFFFFF15, transparent);
         //box-shadow: 0 0 4px 2px var(--highlightColor);
-        border: 1px solid var(--highlightColor);
+        //border: 1px solid var(--highlightColor);
+        z-index: 15;
 
-
+        &>.movie_frame {
+            border-color: var(--highlightColor);
+        }
 
         &>.movie_picture>.movie_photo {
             transform: scale(1.04);
@@ -37,6 +38,18 @@
             display: flex;
         }
     }
+
+    &_frame {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border-radius: 0.2em;
+        border: 1px solid var(--terciaryColor);
+        z-index: 2;
+        overflow: hidden;
+        pointer-events: none;
+    }
+
 
     &_picture {
         height: 12.5em;

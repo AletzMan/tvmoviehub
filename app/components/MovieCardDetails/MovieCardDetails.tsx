@@ -8,6 +8,7 @@ import { IPartCollection } from "@/app/interfaces/movie"
 import { useState } from "react"
 import { FavoriteButton } from "../FavoriteButton/FavoriteButton"
 import { useLoadingState } from "@/app/services/store"
+import { MediaOptions } from "../MediaOptions/MediaOptions"
 
 interface Props {
     movie: IPartCollection
@@ -18,6 +19,7 @@ interface Props {
 export function MovieCardDetails({ movie, type, isFavorites }: Props) {
     const [load, setLoad] = useState(true)
     const { setLoadingState } = useLoadingState()
+    const [viewMenu, setViewMenu] = useState(false)
 
     const HandleLoadImage = () => {
         setLoad(false)
@@ -27,6 +29,7 @@ export function MovieCardDetails({ movie, type, isFavorites }: Props) {
 
     return (
         <div key={movie.id} className={styles.movie}>
+            <div className={styles.movie_frame}></div>
             <div className={styles.movie_picture}>
                 {movie.poster_path
                     ?
@@ -36,13 +39,14 @@ export function MovieCardDetails({ movie, type, isFavorites }: Props) {
                 }
             </div>
             <div className={styles.movie_shadow}></div>
+            <div className={`${styles.movie_shadowTop} ${viewMenu ? styles.movie_shadowBlur : ""}`}></div>
             <div className={styles.movie_dialog}>
                 <Link className={styles.movie_dialogMore} href={type === "movie" ? `/movies/${movie.id}` : `/series/${movie.id}`} title={movie.title} onClick={() => setLoadingState(true)}>
                     <DetailsIcon className={styles.movie_dialogIcon} />
                 </Link>
             </div>
             <span className={styles.movie_average}><StarIcon className={styles.movie_iconDate} />{movie?.vote_average?.toFixed(1)}</span>
-            <FavoriteButton id={movie.id} title={movie.name || movie.title || ""} type={type} isFavorites={isFavorites} />
+            <MediaOptions id={movie.id} title={movie.name || movie.title || ""} type={type} viewMenu={viewMenu} setViewMenu={setViewMenu} />
             <div className={styles.movie_description}>
                 {movie.media_type && movie.media_type === "movie" && <span className={styles.movie_type}><MovieIcon className={styles.movie_typeIcon} />Película</span>}
                 {movie.media_type && movie.media_type === "tv" && <span className={styles.movie_type}><SerieIcon className={styles.movie_typeIcon} />Serie</span>}
