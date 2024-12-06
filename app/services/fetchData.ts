@@ -11,6 +11,7 @@ import { IAiringTodayResponse, IMovieResponse, INowPlayingResponse, IPeopleRespo
 import { IQueryParamasSeries, ISeasonDetails, ISerie, ISerieDetails } from "../interfaces/serie"
 
 const API_URL_BASE = "https://api.themoviedb.org/3"
+const API_URL_BASE_V4 = "https://api.themoviedb.org/4"
 const TOP_RATING_SERIES_PATH = "/tv/top_rated?"
 const TOP_POPULAR_SERIES_PATH = "/tv/popular?"
 const TOP_TRENDING_SERIES_PATH = "/trending/tv/day?"
@@ -687,7 +688,7 @@ export const CreateList = async (session_id: string, name: string, description: 
 }
 
 export const ClearList = async (session_id: string, list_id: number) => {
-	const url = `${API_URL_BASE}/list/${list_id}/clear?session_id=${session_id}?confirm=true`
+	const url = `${API_URL_BASE}/list/${list_id}/clear?session_id=${session_id}&confirm=true`
 	const response = await fetch(url, {
 		method: "POST",
 		headers: {
@@ -698,7 +699,7 @@ export const ClearList = async (session_id: string, list_id: number) => {
 	})
 
 	let data: IResponseList | null = null
-	if (response.status === 200) {
+	if (response.status === 201) {
 		return (await response.json()) as IResponseList
 	}
 

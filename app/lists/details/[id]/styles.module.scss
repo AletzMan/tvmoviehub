@@ -9,7 +9,7 @@
     &_media {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(10.5em, 1fr));
-        height: calc(100svh - 11.25em);
+        height: calc(100svh - 13.75em);
         gap: 0.5em;
         padding: 0.25em 0 0.5em 0;
         background-color: var(--secondaryColor);
@@ -17,6 +17,9 @@
 }
 
 .header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     background-color: var(--hover);
     margin: 0 0.25em;
     border-radius: 0.25em;

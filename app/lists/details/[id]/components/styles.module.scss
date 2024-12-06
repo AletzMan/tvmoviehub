@@ -1,0 +1,11 @@
+.buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5em;
+    max-height: 2em;
+
+    @media (width < 700px) {
+        flex-direction: column;
+        max-height: max-content;
+    }
+}
