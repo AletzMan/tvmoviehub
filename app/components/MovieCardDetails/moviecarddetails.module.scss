@@ -73,6 +73,19 @@
         width: 100%;
         height: 12.5em;
         background: linear-gradient(0deg, #00000090, transparent, #000000 95%);
+
+        &Top {
+            position: absolute;
+            height: 3em;
+            width: 100%;
+            background: linear-gradient(0deg, transparent, #000000DD);
+        }
+
+        &Blur {
+            height: 100%;
+            backdrop-filter: blur(3px);
+            z-index: 1;
+        }
     }
 
     &_type {
