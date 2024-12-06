@@ -28,6 +28,7 @@ export default async function ListMovies(params: { searchParams: { type: string,
                     <p className={styles.message_text}>Empieza a organizar tus películas creando una lista ahora!</p>
                 </div>
             }
+
         </div>
     )
 }
