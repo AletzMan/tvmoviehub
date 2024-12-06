@@ -155,6 +155,7 @@ export function MediaOptions({ id, type, title, viewMenu, setViewMenu }: Props) 
         } else {
             enqueueSnackbar(`No pudimos procesar tu solicitud. Por favor, inténtalo de nuevo más tarde.'`, { variant: "error" })
         }
+        await RevalidateURL("watchList")
     }
 
     const HandleViewMenuList = async () => {

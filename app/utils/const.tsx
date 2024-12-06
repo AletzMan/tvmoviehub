@@ -36,7 +36,7 @@ export const MainMenu = [
     {
         id: 5,
         name: "Favoritos",
-        link: "favorites?type=movies",
+        link: "favorites?type=movies&page=1",
         icon: <FavoriteEmptyIcon className="mainMenuLogo" />
     },
     {
@@ -48,7 +48,7 @@ export const MainMenu = [
     {
         id: 7,
         name: "Lista de seguimiento",
-        link: "watchlist?page=1",
+        link: "watchlist?type=movies&page=1",
         icon: <BookmarkIcon className="mainMenuLogo" />
     },
     {

@@ -1,19 +1,21 @@
 import { ISerieResponse } from "@/app/interfaces/responses"
 import styles from "../FavoriteMovies/styles.module.scss"
-import { GetFavoriteSeries } from "@/app/services/fetchData"
+import { GetFavoriteSeries, GetWatchList } from "@/app/services/fetchData"
 import { cookies } from "next/headers"
 import { MovieCardDetails } from "@/app/components/MovieCardDetails/MovieCardDetails"
 import { IPartCollection } from "@/app/interfaces/movie"
 import { Pagination } from "@/app/components/Pagination/Pagination"
+import { IMultiResponse } from "@/app/interfaces/multi"
 
 interface Props {
     page: string
+    type: "favorites" | "watchlist"
 }
 
-export default async function FavoriteSeries({ page }: Props) {
+export default async function FavoriteSeries({ page, type }: Props) {
     const cookie = cookies().get("session_tvmoviehub")?.value
 
-    const movies: ISerieResponse | null = await GetFavoriteSeries(cookie as string, page)
+    const movies: ISerieResponse | IMultiResponse | null = type === "favorites" ? await GetFavoriteSeries(cookie as string, page) : await GetWatchList(cookie as string, "tv")
 
     return (
         <div className={styles.favorites}>
