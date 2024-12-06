@@ -11,7 +11,10 @@ export default async function Page(params: { params: { id: string }, searchParam
 
     return (
         <section className={styles.section}>
-            <h1>TITLE</h1>
+            <header className={styles.header}>
+                <h1 className={styles.header_title}>{response?.name}</h1>
+                <p className={styles.header_description}>{response?.description}</p>
+            </header>
             <div className={`${styles.section_items}`}>
                 <div className={`${styles.section_media} scrollBarStyle`}>
                     {response?.items.map(item => (

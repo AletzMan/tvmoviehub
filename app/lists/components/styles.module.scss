@@ -26,16 +26,17 @@
     justify-content: center;
     gap: 0.25em;
     background: linear-gradient(-25deg, var(--hover), var(--hover));
-    border: 1px solid var(--terciaryColor);
+    border: 1px solid var(--fourthColor);
     height: 10em;
     width: 100%;
     padding: 0.5em;
     border-radius: 0.25em;
     text-decoration: none;
+    overflow: hidden;
 
 
     &:hover {
-        filter: brightness(120%);
+        filter: brightness(140%);
         border: 1px solid var(--fourthColor);
     }
 
@@ -61,7 +62,8 @@
         max-width: max-content;
         color: var(--averageColor);
         border: 1px solid var(--hover);
-        background-color: var(--hover);
+        background-color: #FFFFFF15;
+        backdrop-filter: blur(10px);
 
         &Text {
             color: var(--subtitleColor);
@@ -75,6 +77,12 @@
         width: 2em;
         height: 2em;
         color: #FFFFFF12;
+    }
+
+    &_image {
+        position: absolute;
+        opacity: 0.15;
+        z-index: -1;
     }
 }
 

@@ -56,6 +56,7 @@ export interface IListItem {
     overview: string,
     popularity: number,
     poster_path: string,
+    backdrop_path: string
     release_date: string,
     first_air_date: string,
     title: string,
