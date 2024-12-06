@@ -27,7 +27,7 @@ export function MovieCardList({ movie, list_id }: Props) {
     const HandleDeleteItem = async () => {
         setViewDialog(true)
         setTypeDialog("item")
-        setItemToDelete({ id: movie.id, list_id, name_item: movie.name || movie.title, name_list: "" })
+        setItemToDelete({ id: movie.id, list_id, name_item: movie.name || movie.title, name_list: "", text: ["¿Desea eliminar el elemento de la lista?", ""] })
     }
 
     return (

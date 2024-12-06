@@ -147,6 +147,23 @@ export function MovieIcon({ className }: Props) {
     )
 }
 
+export function ClearIcon({ className }: Props) {
+    return (
+        <svg className={className} width={48} height={48} viewBox="0 0 48 48">
+            <defs>
+                <mask id="ipSClear0">
+                    <g fill="none" strokeLinejoin="round" strokeWidth={4}>
+                        <path stroke="#fff" strokeLinecap="round" d="M20 5.914h8v8h15v8H5v-8h15z" clipRule="evenodd">
+                        </path>
+                        <path fill="#fff" stroke="#fff" d="M8 40h32V22H8z">
+                        </path>
+                        <path stroke="#000" strokeLinecap="round" d="M16 39.898v-5.984m8 5.984v-6m8 6v-5.984">
+                        </path><path stroke="#fff" strokeLinecap="round" d="M12 40h24">
+                        </path></g></mask></defs><path fill="currentColor" d="M0 0h48v48H0z" mask="url(#ipSClear0)">
+            </path></svg>
+    )
+}
+
 export function SerieIcon({ className }: Props) {
     return (
         <svg className={className} width="1em" height="1em" viewBox="0 0 256 256">

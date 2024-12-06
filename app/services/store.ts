@@ -55,10 +55,10 @@ export const useVideo = create<IVideoState>(
 interface IDialogAlert {
     viewDialog: boolean
     setViewDialog: (value: boolean) => void
-    itemToDelete: { list_id: number, id: number, name_list: string, name_item: string }
-    setItemToDelete: (value: { list_id: number, id: number, name_list: string, name_item: string }) => void
-    typeDialog: 'item' | 'list'
-    setTypeDialog: (value: 'item' | 'list') => void
+    itemToDelete: { list_id: number, id: number, name_list: string, name_item: string, text: string[] }
+    setItemToDelete: (value: { list_id: number, id: number, name_list: string, name_item: string, text: string[] }) => void
+    typeDialog: 'item' | 'list' | 'clearlist'
+    setTypeDialog: (value: 'item' | 'list' | 'clearlist') => void
 }
 
 export const useDialogAlert = create<IDialogAlert>(
@@ -68,13 +68,13 @@ export const useDialogAlert = create<IDialogAlert>(
             set((state) => ({
                 viewDialog: value,
             })),
-        itemToDelete: { list_id: 0, id: 0, name_item: "", name_list: "" },
-        setItemToDelete: (value: { list_id: number, id: number, name_list: string, name_item: string }) =>
+        itemToDelete: { list_id: 0, id: 0, name_item: "", name_list: "", text: ["", ""] },
+        setItemToDelete: (value: { list_id: number, id: number, name_list: string, name_item: string, text: string[] }) =>
             set((state) => ({
                 itemToDelete: value,
             })),
         typeDialog: 'item',
-        setTypeDialog: (value: 'item' | 'list') =>
+        setTypeDialog: (value: 'item' | 'list' | 'clearlist') =>
             set((state) => ({
                 typeDialog: value,
             })),
