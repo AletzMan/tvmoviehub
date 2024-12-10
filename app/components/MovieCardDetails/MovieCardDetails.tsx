@@ -2,7 +2,7 @@
 import styles from "./moviecarddetails.module.scss"
 import Link from "next/link"
 import Image from "next/image"
-import { BASE_URL_IMG_CUSTOM } from "@/app/utils/const"
+import { BASE_URL_IMG_CUSTOM, URL_IMAGE_NOTCOVER } from "@/app/utils/const"
 import { DetailsIcon, LoadingIcon, MovieIcon, SerieIcon, StarIcon } from "@/app/utils/svg"
 import { IPartCollection } from "@/app/interfaces/movie"
 import { useState } from "react"
@@ -33,9 +33,9 @@ export function MovieCardDetails({ movie, type, isFavorites }: Props) {
             <div className={styles.movie_picture}>
                 {movie.poster_path
                     ?
-                    <Image className={styles.movie_photo} onLoad={HandleLoadImage} src={movie.poster_path ? BASE_URL_IMG_CUSTOM.concat(`/w342`.concat(movie.poster_path) || '') : "/not_photo.png"} width={180} height={210} alt={`Poster de ${movie.title}`} />
+                    <Image className={styles.movie_photo} onLoad={HandleLoadImage} src={movie.poster_path ? BASE_URL_IMG_CUSTOM.concat(`/w342`.concat(movie.poster_path) || '') : URL_IMAGE_NOTCOVER} width={180} height={210} alt={`Poster de ${movie.title}`} />
                     :
-                    <Image className={styles.movie_photo} onLoad={HandleLoadImage} src={"/not_photo.png"} width={180} height={210} alt={`Poster de ${movie.title}`} />
+                    <Image className={styles.movie_photo} onLoad={HandleLoadImage} src={URL_IMAGE_NOTCOVER} width={180} height={210} alt={`Poster de ${movie.title}`} />
                 }
             </div>
             <div className={styles.movie_shadow}></div>

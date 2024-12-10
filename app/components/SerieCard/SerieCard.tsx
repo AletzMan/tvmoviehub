@@ -3,7 +3,7 @@ import Image from "next/image"
 import Link from "next/link"
 import styles from "./seriecard.module.scss"
 import { DetailsIcon, StarIcon } from "@/app/utils/svg"
-import { BASE_URL_IMG } from "@/app/utils/const"
+import { BASE_URL_IMG, URL_IMAGE_NOTCOVER } from "@/app/utils/const"
 import { ISerie } from "@/app/interfaces/serie"
 import { FavoriteButton } from "../FavoriteButton/FavoriteButton"
 import { useLoadingState } from "@/app/services/store"
@@ -21,9 +21,9 @@ export const SerieCard = ({ serie, top }: Props) => {
     return (
         <div key={serie.id} className={styles.movie}>
             <div className={styles.movie_frame}></div>
-            <Image className={styles.movie_backdrop} src={serie.poster_path ? BASE_URL_IMG.concat(serie.backdrop_path || '') : "/not_photo.png"} width={150} height={230} alt={`Poster de ${serie.name}`} />
+            <Image className={styles.movie_backdrop} src={serie.poster_path ? BASE_URL_IMG.concat(serie.backdrop_path || '') : URL_IMAGE_NOTCOVER} width={150} height={230} alt={`Poster de ${serie.name}`} />
             <div className={styles.movie_picture}>
-                <Image className={styles.movie_photo} src={serie.poster_path ? BASE_URL_IMG.concat(serie.poster_path || '') : "/not_photo.png"} width={160} height={230} alt={`Poster de ${serie.name}`} />
+                <Image className={styles.movie_photo} src={serie.poster_path ? BASE_URL_IMG.concat(serie.poster_path || '') : URL_IMAGE_NOTCOVER} width={160} height={230} alt={`Poster de ${serie.name}`} />
             </div>
             <div className={styles.movie_shadow}></div>
             <div className={`${styles.movie_shadowTop} ${viewMenu ? styles.movie_shadowBlur : ""}`}></div>

@@ -2,7 +2,7 @@
 
 import styles from "./movieslider.module.scss"
 import Image from "next/image"
-import { BASE_URL_IMG } from "@/app/utils/const"
+import { BASE_URL_IMG, URL_IMAGE_NOTCOVER } from "@/app/utils/const"
 import { AddIcon, DetailsIcon, FavoriteFullIcon, MovieIcon, SerieIcon, StarIcon } from "@/app/utils/svg"
 import { IPartCollection } from "@/app/interfaces/movie"
 import Link from "next/link"
@@ -43,7 +43,7 @@ export const MovieSlider = ({ parts, title }: Props) => {
                         parts.map(movie => (
                             <div key={movie.id} className={styles.movie}>
                                 <div className={styles.movie_picture}>
-                                    <Image className={styles.movie_photo} src={movie.poster_path ? BASE_URL_IMG.concat(movie.poster_path || '') : "/not_photo.png"} width={157} height={210} alt={`Poster de ${movie.title}`} />
+                                    <Image className={styles.movie_photo} src={movie.poster_path ? BASE_URL_IMG.concat(movie.poster_path || '') : URL_IMAGE_NOTCOVER} width={157} height={210} alt={`Poster de ${movie.title}`} />
                                 </div>
                                 <div className={styles.movie_shadow}></div>
                                 <div className={styles.movie_dialog}>

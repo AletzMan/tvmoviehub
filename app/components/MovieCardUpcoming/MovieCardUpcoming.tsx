@@ -3,7 +3,7 @@ import Image from "next/image"
 import Link from "next/link"
 import styles from "./moviecard.module.scss"
 import { DetailsIcon, FavoriteFullIcon } from "@/app/utils/svg"
-import { BASE_URL_IMG, BASE_URL_IMG_CUSTOM } from "@/app/utils/const"
+import { BASE_URL_IMG, BASE_URL_IMG_CUSTOM, URL_IMAGE_NOTCOVER } from "@/app/utils/const"
 import { IMovie } from "@/app/interfaces/movie"
 import { FormattedDateUpcoming } from "@/app/utils/helpers"
 import { FavoriteButton } from "../FavoriteButton/FavoriteButton"
@@ -21,7 +21,7 @@ export const MovieCardUpcoming = ({ movie }: Props) => {
     return (
         <div key={movie.id} className={styles.movie}>
             <div className={styles.movie_picture}>
-                <Image className={styles.movie_photo} src={movie.poster_path ? BASE_URL_IMG.concat(movie.poster_path || '') : "/not_photo.png"} width={195} height={245} alt={`Poster de ${movie.title}`} />
+                <Image className={styles.movie_photo} src={movie.poster_path ? BASE_URL_IMG.concat(movie.poster_path || '') : URL_IMAGE_NOTCOVER} width={195} height={245} alt={`Poster de ${movie.title}`} />
             </div>
             <div className={styles.movie_shadow}></div>
             <div className={styles.movie_dialog}>
