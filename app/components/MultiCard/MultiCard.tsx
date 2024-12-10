@@ -2,7 +2,7 @@
 import styles from "./multicard.module.scss"
 import Link from "next/link"
 import Image from "next/image"
-import { BASE_URL_IMG_CUSTOM } from "@/app/utils/const"
+import { BASE_URL_IMG_CUSTOM, URL_IMAGE_NOTCOVER } from "@/app/utils/const"
 import { DetailsIcon, FavoriteFullIcon, FemaleIcon, LoadingIcon, MaleIcon, MovieIcon, PeopleIcon, SerieIcon, StarIcon } from "@/app/utils/svg"
 import { IResult } from "@/app/interfaces/multi"
 import { useState } from "react"
@@ -21,7 +21,7 @@ export function MultiCard({ result }: Props) {
     return (
         <div key={result.id} className={styles.movie}>
             <div className={styles.movie_picture}>
-                <Image className={styles.movie_photo} onLoad={HandleLoadImage} src={result.poster_path ? BASE_URL_IMG_CUSTOM.concat(`/w342`.concat(result.poster_path)) : result.profile_path ? BASE_URL_IMG_CUSTOM.concat(`/w342`.concat(result.profile_path)) : "/not_photo.png"} width={185} height={260} alt={`Poster de ${result.title}`} />
+                <Image className={styles.movie_photo} onLoad={HandleLoadImage} src={result.poster_path ? BASE_URL_IMG_CUSTOM.concat(`/w342`.concat(result.poster_path)) : result.profile_path ? BASE_URL_IMG_CUSTOM.concat(`/w342`.concat(result.profile_path)) : URL_IMAGE_NOTCOVER} width={185} height={260} alt={`Poster de ${result.title}`} />
             </div>
             <div className={styles.movie_shadow}></div>
             <div className={styles.movie_dialog}>

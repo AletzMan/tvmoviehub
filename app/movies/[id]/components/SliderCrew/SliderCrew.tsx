@@ -2,7 +2,7 @@
 import { ICast, ICredits, ICrew } from "@/app/interfaces/credits"
 import styles from "./slidercrew.module.scss"
 import Image from "next/image"
-import { BASE_URL_IMG } from "@/app/utils/const"
+import { BASE_URL_IMG, URL_IMAGE_NOTCOVER } from "@/app/utils/const"
 import { ArrowLeftIcon } from "@/app/utils/svg"
 import { useEffect, useRef, useState } from "react"
 import { ICreatedBy } from "@/app/interfaces/serie"
@@ -76,7 +76,7 @@ export const SliderCrew = ({ credits, created_by, type, title }: Props) => {
                     {credits &&
                         credits[type].map(actor => (
                             <Link key={actor.credit_id} className={styles.actor} href={`/people/${actor.id}`} title={`Ver biografía de ${actor.name}`} onClick={() => setLoadingState(true)}>
-                                <Image className={styles.actor_photo} src={actor.profile_path ? BASE_URL_IMG.concat(actor.profile_path || '') : "/not_photo.png"} width={80} height={80} alt={`Foto de ${actor.name}`} />
+                                <Image className={styles.actor_photo} src={actor.profile_path ? BASE_URL_IMG.concat(actor.profile_path || '') : URL_IMAGE_NOTCOVER} width={80} height={80} alt={`Foto de ${actor.name}`} />
                                 <div className={styles.actor_description}>
                                     <span className={styles.actor_name}>{actor.name}</span>
                                     {actor as ICast && <span className={styles.actor_character}>{(actor as ICast).character}</span>}
@@ -88,7 +88,7 @@ export const SliderCrew = ({ credits, created_by, type, title }: Props) => {
                     {created_by &&
                         created_by.map(actor => (
                             <Link key={actor.credit_id} className={styles.actor} href={`/people/${actor.id}`} title={`Ver biografía de ${actor.name}`} onClick={() => setLoadingState(true)}>
-                                <Image className={styles.actor_photo} src={actor.profile_path ? BASE_URL_IMG.concat(actor.profile_path || '') : "/not_photo.png"} width={80} height={80} alt={`Foto de ${actor.name}`} />
+                                <Image className={styles.actor_photo} src={actor.profile_path ? BASE_URL_IMG.concat(actor.profile_path || '') : URL_IMAGE_NOTCOVER} width={80} height={80} alt={`Foto de ${actor.name}`} />
                                 <div className={styles.actor_description}>
                                     <span className={styles.actor_name}>{actor.name}</span>
                                     {actor as ICast && <span className={styles.actor_character}>{(actor as ICast).character}</span>}

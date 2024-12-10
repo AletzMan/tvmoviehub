@@ -3,7 +3,7 @@ import Image from "next/image"
 import Link from "next/link"
 import styles from "./moviecard.module.scss"
 import { DetailsIcon, StarIcon } from "@/app/utils/svg"
-import { BASE_URL_IMG, BASE_URL_IMG_CUSTOM } from "@/app/utils/const"
+import { BASE_URL_IMG, BASE_URL_IMG_CUSTOM, URL_IMAGE_NOTCOVER } from "@/app/utils/const"
 import { IMovie } from "@/app/interfaces/movie"
 import { useLoadingState } from "@/app/services/store"
 import { MediaOptions } from "../MediaOptions/MediaOptions"
@@ -21,9 +21,9 @@ export const MovieCard = ({ movie, top }: Props) => {
         <div key={movie.id} className={styles.movie}>
             <div className={styles.movie_frame}></div>
             <MediaOptions id={movie.id} type="movie" title={movie.title} viewMenu={viewMenu} setViewMenu={setViewMenu} />
-            <Image className={styles.movie_backdrop} src={movie.poster_path ? BASE_URL_IMG.concat(movie.backdrop_path || '') : "/not_photo.png"} width={150} height={230} alt={`Poster de ${movie.title}`} />
+            <Image className={styles.movie_backdrop} src={movie.poster_path ? BASE_URL_IMG.concat(movie.backdrop_path || '') : URL_IMAGE_NOTCOVER} width={150} height={230} alt={`Poster de ${movie.title}`} />
             <div className={styles.movie_picture}>
-                <Image className={styles.movie_photo} src={movie.poster_path ? BASE_URL_IMG_CUSTOM.concat(`/w342`.concat(movie.poster_path)) : "/not_photo.png"} width={160} height={230} alt={`Poster de ${movie.title}`} />
+                <Image className={styles.movie_photo} src={movie.poster_path ? BASE_URL_IMG_CUSTOM.concat(`/w342`.concat(movie.poster_path)) : URL_IMAGE_NOTCOVER} width={160} height={230} alt={`Poster de ${movie.title}`} />
             </div>
             <div className={styles.movie_shadow}></div>
             <div className={`${styles.movie_shadowTop} ${viewMenu ? styles.movie_shadowBlur : ""}`}></div>

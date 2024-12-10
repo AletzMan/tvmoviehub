@@ -1,7 +1,7 @@
 import { ICollectionDetails, IMovieDetails } from "@/app/interfaces/movie"
 import styles from "./detailsmovie.module.scss"
 import Image from "next/image"
-import { BASE_URL_IMG, countryFlags } from "@/app/utils/const"
+import { BASE_URL_IMG, URL_IMAGE_NOTCOVER, countryFlags } from "@/app/utils/const"
 import { ConvertMinutesToHours, currencyFormatter } from "@/app/utils/helpers"
 import { DateIcon, StarIcon, TimeIcon, TrilerIcon } from "@/app/utils/svg"
 import { SliderCrew } from "./components/SliderCrew/SliderCrew"
@@ -35,7 +35,7 @@ export default async function Page(params: { params: { id: string }, searchParam
             {data ?
                 <>
                     <article className={styles.movie}>
-                        <Image className={styles.movie_image} overrideSrc="/not_photo.png" src={BASE_URL_IMG.concat(data.backdrop_path || "")} alt={`Imagen de fondo de ${data.title}`} width={1150} height={700} />
+                        <Image className={styles.movie_image} overrideSrc={URL_IMAGE_NOTCOVER} src={BASE_URL_IMG.concat(data.backdrop_path || "")} alt={`Imagen de fondo de ${data.title}`} width={1150} height={700} />
                         <div className={styles.movie_shadow}></div>
                         <div className={styles.movie_header}>
                             <h2 className={styles.movie_title}>{data.title}</h2>
