@@ -1,7 +1,7 @@
 "use client"
 import styles from "./header.module.scss"
 import { MainMenu } from "@/app/utils/const"
-import { usePathname, useRouter, useSearchParams } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { SearchInput } from "../SearchInput/SearchInput"
 import { ArrowDownIcon, CloseIcon, LogInIcon, LogoIcon, LogoutIcon, MenuIcon, SearchIcon } from "@/app/utils/svg"
 import { SideMenu } from "../SideMenu/SideMenu"
@@ -24,7 +24,6 @@ export default function Header() {
     const pathname = usePathname()
     const { setLoadingState } = useLoadingState()
     const section = pathname.split("/")[1]
-    const searchParams = useSearchParams()
     const router = useRouter()
 
 
