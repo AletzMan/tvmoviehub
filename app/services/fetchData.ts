@@ -663,6 +663,30 @@ export const GetLists = async (session_id: string, queryParams: Object) => {
 	return data
 }
 
+
+export const GetRated = async (session_id: string, queryParams: Object, media_type: 'movies' | 'tv') => {
+	const params = Object.entries(queryParams)
+	let stringParams = ""
+	params.forEach((param, index) => {
+		stringParams += `${"&"}${param[0]}=${param[1]}`
+	})
+	const url = `${API_URL_BASE}/account/18482247/rated/${media_type}?session_id=${session_id}${stringParams}`
+	const response = await fetch(url, {
+		method: "GET",
+		headers: {
+			accept: "application/json",
+			Authorization: `Bearer ${API_KEY}`,
+		},
+		next: { revalidate: 10000, tags: ['listMovies'] },
+	})
+	let data: IMultiResponse | null = null
+	if (response.status === 200) {
+		return (await response.json()) as IMultiResponse
+	}
+
+	return data
+}
+
 export const CreateList = async (session_id: string, name: string, description: string) => {
 	const url = `${API_URL_BASE}/list?session_id=${session_id}`
 	const response = await fetch(url, {

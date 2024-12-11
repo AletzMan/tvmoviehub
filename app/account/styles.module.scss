@@ -1,0 +1,111 @@
+.section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    padding: 0.5em;
+    height: calc(100svh - 6.5em);
+}
+
+.account {
+    display: flex;
+    flex-direction: row;
+    gap: 1.5em;
+    padding: 0.5em;
+    margin: 0 0.25em;
+    border-radius: 0.25em;
+    color: var(--fontColor);
+    align-items: center;
+    background-color: var(--terciaryColor);
+
+    &_info {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &_picture {
+        width: 7.5em;
+        height: 7.5em;
+        overflow: hidden;
+        border-radius: 5em;
+        border: 2px solid var(--titleColor);
+    }
+
+    &_photo {
+        text-align: center;
+    }
+
+    &_label {
+        color: var(--fontSecondColor);
+        font-size: 0.85em;
+    }
+}
+
+.data {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(13em, 1fr));
+    gap: 1.5em;
+    padding: 0.5em;
+    margin: 0 0.25em;
+    border-radius: 0.25em;
+    color: var(--fontColor);
+    align-items: center;
+    background-color: var(--terciaryColor);
+
+    &_section {
+        display: flex;
+        flex-direction: column;
+        align-self: flex-start;
+        gap: 0.25em;
+        padding: 0;
+        border-radius: 0.25em;
+        border: 1px solid var(--fourthColor);
+    }
+
+    &_link {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0.5em;
+        text-decoration: none;
+        padding: 0.15em 0.25em;
+        border-bottom: 1px solid var(--fourthColor);
+
+        &:hover>.data_icon {
+            color: var(--fontColor);
+        }
+    }
+
+    &_icon {
+        width: 1.5em;
+        height: 1.5em;
+        color: var(--fontSecondColor);
+        background-color: var(--hover);
+    }
+
+    &_title {
+        display: flex;
+        gap: 0.5em;
+        align-items: center;
+        color: var(--subtitleColor);
+        font-weight: 600;
+        padding: 0 0.25em 0.25em 0.5em;
+    }
+
+    &_item {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &_label {
+        color: var(--fontSecondColor);
+        font-size: 0.85em;
+        background-color: var(--hover);
+        padding: 0.15em 0.5em;
+    }
+
+    &_count {
+        color: var(--titleColor);
+        font-weight: 500;
+        padding: 0 0 0 0.75em;
+    }
+}
