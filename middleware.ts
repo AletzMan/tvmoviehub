@@ -27,6 +27,25 @@ export function middleware(request: NextRequest) {
             return NextResponse.next()
         }
     }
+
+    if (pathname.endsWith("/account")) {
+        if (myTokenLogin === undefined) {
+            request.nextUrl.pathname = "/"
+            return NextResponse.redirect(request.nextUrl)
+        } else {
+            return NextResponse.next()
+        }
+    }
+
+    if (pathname.endsWith("/watchlist")) {
+        if (myTokenLogin === undefined) {
+            request.nextUrl.pathname = "/"
+            return NextResponse.redirect(request.nextUrl)
+        } else {
+            return NextResponse.next()
+        }
+    }
+
     if (pathname.endsWith("/login")) {
         if (myTokenLogin !== undefined) {
             request.nextUrl.pathname = "/"
