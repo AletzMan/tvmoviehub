@@ -24,9 +24,6 @@ export default async function Page(params: { searchParams: { type: string, page:
     const listMovies = await GetLists(cookie || "", { page: 1 })
 
 
-    const handleCalculate = () => {
-    }
-
     return (
         <section className={`${styles.section} scrollBarStyle`}>
             <HeaderSection title="Mi cuenta" icon={<AccountIcon />} />
