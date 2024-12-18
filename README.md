@@ -1,5 +1,5 @@
 # TVMovieHub
-
+<img src="https://raw.githubusercontent.com/AletzMan/ImagesStorage/refs/heads/main/film_data_hub/gitimage.png"/>
 TVMovieHub es una aplicación que te permite explorar, buscar y descubrir películas y series de TV de manera sencilla y atractiva. Mantente al día con tus películas y programas favoritos, consulta sus detalles y descubre nuevas recomendaciones.
 
 ## Características principales
