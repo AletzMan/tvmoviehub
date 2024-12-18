@@ -1,36 +1,40 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# TVMovieHub
 
-## Getting Started
+TVMovieHub es una aplicación que te permite explorar, buscar y descubrir películas y series de TV de manera sencilla y atractiva. Mantente al día con tus películas y programas favoritos, consulta sus detalles y descubre nuevas recomendaciones.
 
-First, run the development server:
+## Características principales
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Búsqueda avanzada:** Encuentra películas y series de TV por título, género o palabra clave.
+- **Detalles completos:** Consulta información detallada como sinopsis, reparto, calificación y más.
+- **Recomendaciones personalizadas:** Descubre contenido similar según tus búsquedas y favoritos.
+- **Interfaz amigable:** Diseño intuitivo y fácil de usar para mejorar tu experiencia de navegación.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Tecnologías utilizadas
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Frontend:** Next.js, TypeScript, CSS Modules.
+- **Backend:** API de películas y series (themoviedb).
+- **Gestión de estado:** Zustand.
+- **Control de versiones:** Git y GitHub.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Instalación y configuración
 
-## Learn More
+1. **Clonar el repositorio:**
+   ```bash
+   git clone https://github.com/usuario/tvmoviehub.git
 
-To learn more about Next.js, take a look at the following resources:
+## Instalar dependencias:
+   ```bash
+   npm install
+   ```
+## Configurar variables de entorno: Crea un archivo .env en la raíz del proyecto y agrega tu clave de la API.
+   ```bash
+  NEXT_PUBLIC_ACCESS_TOKEN_AUTH= Token de acceso de lectura a la API themoviedb
+  NEXT_PUBLIC_API_KEY_AUTH= Llave API themoviedb
+   ```
+## Ejecutar la aplicación:
+   ```bash
+    npm start
+   ```
+## Contribución
+- ** ¡Las contribuciones son bienvenidas! Abre un issue para reportar errores o envía un pull request con tus mejoras.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
