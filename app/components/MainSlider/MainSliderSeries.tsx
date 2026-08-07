@@ -1,4 +1,5 @@
 "use client"
+
 import styles from "./mainslider.module.scss"
 import Image from "next/image"
 import { BASE_URL_IMG } from "@/app/utils/const"

@@ -3,8 +3,7 @@
 import { CSSProperties, HTMLAttributes, MouseEventHandler, ReactNode } from "react"
 import styles from "./movieslider.module.scss"
 import Slider from "react-slick"
-import "slick-carousel/slick/slick.css"
-import "slick-carousel/slick/slick-theme.css"
+import "slick-carousel/slick/slick" 
 import Link from "next/link"
 import { ArrowLeftIcon } from "@/app/utils/svg"
 import { NextArrow, PrevArrow } from "../ArrowSlider/ArrowSlider"
@@ -14,7 +13,6 @@ interface Props {
     children: ReactNode
     list_link?: string
 }
-
 
 export const MovieSliderGeneral = ({ title, children, list_link }: Props) => {
 
@@ -29,7 +27,6 @@ export const MovieSliderGeneral = ({ title, children, list_link }: Props) => {
         rows: 1,
         nextArrow: <NextArrow />,
         prevArrow: <PrevArrow />
-
     }
 
     return (
