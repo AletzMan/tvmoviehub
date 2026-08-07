@@ -5,8 +5,9 @@ import styles from "./header.module.scss"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { GetLatestYears } from "@/app/utils/helpers"
 import { GetRegions } from "@/app/utils/const"
+import { Suspense } from "react"
 
-export function HeaderFiltersSearch() {
+function HeaderFiltersSearchContent() {
     const [currentYear, setCurrentYear] = useState("")
     const [currentRegion, setCurrentRegion] = useState("")
     const searchParams = useSearchParams()
@@ -53,6 +54,14 @@ export function HeaderFiltersSearch() {
                 {/*pathname.split("/")[1] === "movies" && <ComboBox properties={regions} label="Región" onChange={HandleChangeSort} defaultValue={currentRegion} name="region" />*/}
             </div>
         </header>
+    )
+}
+
+export function HeaderFiltersSearch() {
+    return (
+        <Suspense fallback={null}>
+            <HeaderFiltersSearchContent />
+        </Suspense>
     )
 }
 const years = GetLatestYears(true)

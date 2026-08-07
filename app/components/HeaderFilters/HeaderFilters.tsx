@@ -5,8 +5,9 @@ import { SortButton } from "../SortButton/SortButton"
 import styles from "./header.module.scss"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { Filters } from "../Filters/Filters"
+import { Suspense } from "react"
 
-export function HeaderFilters() {
+function HeaderFiltersContent() {
     const [defaultSort, setDefaultSort] = useState("")
     const [sortOptions, setSortOptions] = useState(sortMovies)
     const searchParams = useSearchParams()
@@ -51,6 +52,14 @@ export function HeaderFilters() {
                 <SortButton />
             </div>
         </header>
+    )
+}
+
+export function HeaderFilters() {
+    return (
+        <Suspense fallback={null}>
+            <HeaderFiltersContent />
+        </Suspense>
     )
 }
 

@@ -1,9 +1,10 @@
 "use client"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import styles from "./styles.module.scss"
-import { useEffect, useState } from "react"
+import { useEffect, useState, type JSX } from "react";
 import { GetKeywordName } from "@/app/services/fetchData"
 import { CloseIcon } from "@/app/utils/svg"
+import { Suspense } from "react"
 
 interface ITag { id: string, name: string }
 
@@ -11,7 +12,7 @@ interface Props {
     icon?: JSX.Element
 }
 
-export function HeaderTags({ icon }: Props) {
+function HeaderTagsContent({ icon }: Props) {
     const [tags, setTags] = useState<ITag[]>([])
     const searchParams = useSearchParams()
     const pathname = usePathname()
@@ -59,5 +60,13 @@ export function HeaderTags({ icon }: Props) {
                 </header>
             }
         </>
+    )
+}
+
+export function HeaderTags(props: Props) {
+    return (
+        <Suspense fallback={null}>
+            <HeaderTagsContent {...props} />
+        </Suspense>
     )
 }

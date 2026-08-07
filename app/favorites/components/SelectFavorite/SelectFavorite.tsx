@@ -3,8 +3,9 @@
 import { useEffect, useState } from "react"
 import styles from "./styles.module.scss"
 import { useRouter, useSearchParams } from "next/navigation"
+import { Suspense } from "react"
 
-export default function SelectFavorite() {
+function SelectFavoriteContent() {
     const [option, setOption] = useState(false)
     const searchParams = useSearchParams()
     const router = useRouter()
@@ -31,5 +32,13 @@ export default function SelectFavorite() {
                 <span className={`${styles.favorite_button} ${option && styles.favorite_buttonActive}`} >{!option ? "Películas" : "Series"}</span>
             </div>
         </div>
+    )
+}
+
+export default function SelectFavorite() {
+    return (
+        <Suspense fallback={null}>
+            <SelectFavoriteContent />
+        </Suspense>
     )
 }

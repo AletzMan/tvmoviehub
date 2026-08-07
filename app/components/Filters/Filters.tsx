@@ -1,8 +1,8 @@
 "use client"
+
+import { Suspense, useEffect, useState } from "react"
 import { FiltersIcon, ResetIcon } from "@/app/utils/svg"
-import styles from "./filters.module.scss"
-import { CheckBox } from "../CheckBox/CheckBox"
-import { ChangeEvent, useEffect, useState } from "react"
+import styles from "./filters.module.scss" 
 import { Filter } from "./components/Filter/Filter"
 import { Button } from "../Button/Button"
 import { FilterDate } from "./components/FilterDate/FilterDate"
@@ -15,7 +15,8 @@ interface Props {
     section: string
 }
 
-export function Filters({ section }: Props) {
+// 1. Componente interno con la lógica y hook useSearchParams
+function FiltersContent({ section }: Props) {
     const [categories, setCategories] = useState(categoriesMovies)
     const [open, setOpen] = useState(false)
     const [numberFilters, setNumberFilters] = useState(0)
@@ -46,7 +47,6 @@ export function Filters({ section }: Props) {
         setNumberFilters(0)
     }
 
-
     return (
         <>
             <section className={styles.section}>
@@ -67,17 +67,22 @@ export function Filters({ section }: Props) {
                     <footer className={styles.filters_footer}>
                         <Button text="Reestablecer todo" icon={<ResetIcon />} onClick={HandleAllResetFilter} mode="button" />
                     </footer>
-
                 </div>
             </section>
-            {open &&
-                <dialog className={styles.dialog} open onClick={HandleOpen}>
-                </dialog>
-            }
+            {open && (
+                <dialog className={styles.dialog} open onClick={HandleOpen}></dialog>
+            )}
         </>
     )
 }
-
+ 
+export function Filters(props: Props) {
+    return (
+        <Suspense fallback={null}>
+            <FiltersContent {...props} />
+        </Suspense>
+    )
+}
 const FilterNames = [
     "with_genres",
     "certification",

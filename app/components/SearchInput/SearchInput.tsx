@@ -6,6 +6,7 @@ import { ChangeEvent, KeyboardEvent, useEffect, useState } from "react"
 import { RadioButton } from "../RadioButton/RadioButton"
 import { Button } from "../Button/Button"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
+import { Suspense } from "react"
 
 interface IOptions {
     search: boolean
@@ -32,7 +33,7 @@ type Props = {
     onSearch: () => void
 
 }
-export const SearchInput = ({ section, onSearch }: Props) => {
+function SearchInputContent({ section, onSearch }: Props) {
     const searchParams = useSearchParams()
     const [selectOption, setSelectOption] = useState<IOptions>(defaultOptions)
     const [placeholder, setPlaceholder] = useState("Buscar en películas, series y personas")
@@ -122,5 +123,13 @@ export const SearchInput = ({ section, onSearch }: Props) => {
                 <RadioButton checkBoxOnChange={HandleChange} label="Personas" name="type_search" id="people" checked={selectOption.people} />
             </div>
         </header>
+    )
+}
+
+export const SearchInput = (props: Props) => {
+    return (
+        <Suspense fallback={null}>
+            <SearchInputContent {...props} />
+        </Suspense>
     )
 }

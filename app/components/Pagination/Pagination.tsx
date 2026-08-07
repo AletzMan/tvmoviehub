@@ -4,6 +4,7 @@ import Link from "next/link"
 import { usePathname, useSearchParams } from "next/navigation"
 import { Fragment, useEffect, useState } from "react"
 import styles from "./pagination.module.scss"
+import { Suspense } from "react"
 
 interface IButtonPag {
     id: string
@@ -17,7 +18,7 @@ interface Props {
     onClickPagination?: (page: number) => void
 }
 
-export function Pagination({ currentPage, totalPages, onClickPagination }: Props) {
+function PaginationContent({ currentPage, totalPages, onClickPagination }: Props) {
     const pathname = usePathname()
     const searchParamas = useSearchParams()
     const [buttons, setButtons] = useState<IButtonPag[]>()
@@ -108,5 +109,13 @@ export function Pagination({ currentPage, totalPages, onClickPagination }: Props
             {onClickPagination && <button className={`${styles.pagination_button} ${currentPage === totalPages && styles.pagination_buttonInactive}`} onClick={() => onClickPagination(currentPage + 1)}><NextPageIcon className="" /></button>}
             {/*<Link className={`${styles.pagination_button} ${currentPage === totalPages && styles.pagination_buttonInactive}`} href={`${pathname}?page=${totalPages}`}><LastPageIcon /></Link>*/}
         </nav>
+    )
+}
+
+export function Pagination(props: Props) {
+    return (
+        <Suspense fallback={null}>
+            <PaginationContent {...props} />
+        </Suspense>
     )
 }

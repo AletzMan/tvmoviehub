@@ -3,8 +3,9 @@ import { SortDownIcon, SortUpIcon } from "@/app/utils/svg"
 import styles from "./sortbutton.module.scss"
 import { useEffect, useState } from "react"
 import { usePathname, useSearchParams, useRouter } from "next/navigation"
+import { Suspense } from "react"
 
-export function SortButton() {
+function SortButtonContent() {
     const [sort, setSort] = useState<"asc" | "desc">("desc")
     const searchParams = useSearchParams()
     const pathname = usePathname()
@@ -41,5 +42,13 @@ export function SortButton() {
             {sort === "desc" && <SortDownIcon className={styles.button_icon} />}
             {sort === "asc" && <SortUpIcon className={styles.button_icon} />}
         </button>
+    )
+}
+
+export function SortButton() {
+    return (
+        <Suspense fallback={null}>
+            <SortButtonContent />
+        </Suspense>
     )
 }

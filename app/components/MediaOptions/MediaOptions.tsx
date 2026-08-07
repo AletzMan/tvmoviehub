@@ -13,6 +13,7 @@ import { IListMovie, IResponseListMovie } from "@/app/interfaces/list"
 import { useSearchParams } from "next/navigation"
 import { FormAddMovie } from "@/app/lists/components/FormAddMovie"
 import Link from "next/link"
+import { Suspense } from "react"
 
 interface Props {
     id: number
@@ -23,7 +24,7 @@ interface Props {
 }
 
 
-export function MediaOptions({ id, type, title, viewMenu, setViewMenu }: Props) {
+function MediaOptionsContent({ id, type, title, viewMenu, setViewMenu }: Props) {
     const { session_id } = useSession()
     const activatorRef = useRef<HTMLElement | null>(null)
     const dropdownListRef = useRef<HTMLUListElement | null>(null)
@@ -251,5 +252,13 @@ export function MediaOptions({ id, type, title, viewMenu, setViewMenu }: Props) 
                 </ul>
             }
         </div>
+    )
+}
+
+export function MediaOptions(props: Props) {
+    return (
+        <Suspense fallback={null}>
+            <MediaOptionsContent {...props} />
+        </Suspense>
     )
 }
