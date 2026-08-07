@@ -31,51 +31,41 @@ export function FilterComboBox({ nameParam, nameView, properties, section }: Pro
         }
     }, [searchParams, nameParam])
 
-
-    const HandleChangeFilter = (e: ChangeEvent<HTMLSelectElement>) => {
-        const newValue = e.currentTarget.value
-        setData(newValue)
-    }
-
-    const HandleApplyFilter = (e: MouseEvent<HTMLButtonElement>) => {
+    const HandleChangeFilter = (option: string) => {
         const newSearchParams = new URLSearchParams(searchParams)
-        if (data) {
-            newSearchParams.set(`${nameParam}`, data as string)
-            const filterYears = section === "movies" ? "primary_release_date" : "first_air_date"
-            newSearchParams.set("sort_by", "primary_release_date.asc")
-            newSearchParams.delete(`${filterYears}.gte`)
-            newSearchParams.delete(`${filterYears}.lte`)
-        } else {
-            newSearchParams.delete(`${nameParam}`)
-        }
+        newSearchParams.set(nameParam, option)
         router.push(`${pathname}?${newSearchParams.toString()}`)
     }
 
     const HandleResetFilter = () => {
         setData("")
+        const newSearchParams = new URLSearchParams(searchParams)
+        newSearchParams.delete(nameParam)
+        router.push(`${pathname}?${newSearchParams.toString()}`)
     }
 
     return (
         <details className={styles.details} name="d">
             <summary className={styles.summary}>
                 <h3 className={styles.summary_title}>{nameView}</h3>
-                {data && <div className={styles.summary_count}>{1}</div>}
                 <ArrowDownSolidIcon className={styles.summary_icon} />
             </summary>
             <div className={styles.options}>
-                <label className={styles.options_label}>
-                    <select className={styles.options_select} value={data || ""} onChange={HandleChangeFilter}>
-                        <option value={0}>-- Seleccione un año --</option>
+                <div className={styles.combobox}>
+                    <button className={styles.combobox_button}>
+                        {data}
+                        <ArrowDownSolidIcon className={styles.combobox_icon} />
+                    </button>
+                    <div className={styles.combobox_options}>
                         {properties.map(property => (
-                            <option key={property.value} value={property.value}>{property.option}</option>
-                        ))
-
-                        }
-                    </select>
-                </label>
+                            <button key={property.value} className={styles.combobox_option} onClick={() => HandleChangeFilter(property.option.toString())}>
+                                {property.option}
+                            </button>
+                        ))}
+                    </div>
+                </div>
             </div>
             <footer className={styles.footer}>
-                <Button text="Aplicar" icon={<SuccessIcon />} onClick={HandleApplyFilter} mode="button" />
                 <Button text="Reestablecer" isSecondary icon={<ResetIcon />} onClick={HandleResetFilter} mode="button" />
             </footer>
         </details>
