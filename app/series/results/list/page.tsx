@@ -9,9 +9,10 @@ import { HeaderFilters } from "@/app/components/HeaderFilters/HeaderFilters"
 import { NotResultsView } from "@/app/components/NotResultsView/NotResultsView"
 import { HeaderTags } from "@/app/components/HeaderTags/HeaderTags"
 
-export default async function Page(params: { params: { lang: string }, searchParams: IQueryParamasSeries }) {
+export default async function Page({ searchParams }: { searchParams: Promise<IQueryParamasSeries> }) {
 
-    const popularSeries: ISerieResponse = await GetDiscoverSeries(params.searchParams)
+    const params = await searchParams
+    const popularSeries: ISerieResponse = await GetDiscoverSeries(params)
 
     return (
         <section className={`${styles.section}  `}>

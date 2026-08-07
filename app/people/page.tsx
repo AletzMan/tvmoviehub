@@ -6,10 +6,13 @@ import { PopularIcon } from "../utils/svg"
 import { PersonCard } from "./components/PersonCard/PersonCard"
 import styles from "./people.module.scss"
 
-export default async function Page(params: { params: { lang: string }, searchParams: { page: number } }) {
+export default async function Page({ searchParams }: { searchParams: Promise<{ page: number }> }) {
 
 
-    const popularPeople: IPeopleResponse = await GetPeoplePopular(params.searchParams.page)
+    const params = await searchParams
+    const page = params.page || 1
+
+    const popularPeople: IPeopleResponse = await GetPeoplePopular(page)
 
     return (
         <section className={`${styles.section} `}>

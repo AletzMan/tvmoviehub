@@ -8,9 +8,11 @@ import { ClearIcon, DeleteIcon } from "@/app/utils/svg"
 import { ButtonsList } from "./components/ButtonsList/ButtonsList"
 
 
-export default async function Page(params: { params: { id: string }, searchParams: { page: number } }) {
+export default async function Page({ params, searchParams }: { params: Promise<{ id: string }>, searchParams: Promise<{ page: number }> }) {
 
-    const response = await GetDetailsList(params.params.id, params.searchParams.page)
+    const resolvedParams = await params
+    const resolvedSearchParams = await searchParams
+    const response = await GetDetailsList(resolvedParams.id, resolvedSearchParams.page)
 
     return (
         <section className={styles.section}>

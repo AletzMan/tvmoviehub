@@ -8,10 +8,11 @@ import { HeaderSection } from "@/app/components/HeaderSection/HeaderSection"
 import { SearchIcon } from "@/app/utils/svg"
 import { NotResultsView } from "@/app/components/NotResultsView/NotResultsView"
 
-export default async function Page(params: { params: { lang: string }, searchParams: { page: number } }) {
+export default async function Page({ searchParams }: { searchParams: Promise<{ page: number }> }) {
 
 
-    const popularPeople: IPeopleResponse = await GetSearchPeople(params.searchParams)
+    const params = await searchParams
+    const popularPeople: IPeopleResponse = await GetSearchPeople(params)
 
     return (
         <section className={`${styles.section}`}>

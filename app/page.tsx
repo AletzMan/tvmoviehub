@@ -8,7 +8,7 @@ import styles from "./page.module.css"
 import { GetNowPlaying, GetSeriesAiringToday, GetPeoplePopular } from "./services/fetchData"
 
 
-export default async function Home(params: { params: { lang: string }, searchParams: {} }) {
+export default async function Home() {
   const data: IMovie[] = await GetNowPlaying()
   const dataSeries: ISerie[] = await GetSeriesAiringToday()
   const dataPeople: IPeopleResponse = await GetPeoplePopular(1)
@@ -18,7 +18,7 @@ export default async function Home(params: { params: { lang: string }, searchPar
       <section className={`${styles.section} `}>
         <article className={styles.article}>
           {/*<h3 className={styles.section_title}>PELÍCULAS EN CARTELERA</h3>*/}
-          <MainSlider movies={data} />
+          <MainSlider movies={data || []} />
         </article>
         {/*<article className={styles.article}>
           <h3 className={styles.section_title}>SERIES EMITIDAS HOY</h3>
@@ -28,7 +28,7 @@ export default async function Home(params: { params: { lang: string }, searchPar
       <div className="separator"></div>
       <article className={styles.articleThree}>
         <h3 className={styles.section_title}>TOP 20 ACTORES POPULARES</h3>
-        <PopularPeople people={dataPeople.results} />
+        <PopularPeople people={dataPeople?.results || []} />
       </article>
     </section>
   )

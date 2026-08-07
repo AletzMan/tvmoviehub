@@ -4,7 +4,7 @@ import { FormAddMovie } from "../components/FormAddMovie"
 import ListMovies from "../components/ListMovies"
 import styles from "./styles.module.scss"
 
-export default async function Page(params: { searchParams: { type: string, page: string } }) {
+export default async function Page(params: { searchParams: Promise<{ type: string, page: string }> }) {
 
     return (
         <section >

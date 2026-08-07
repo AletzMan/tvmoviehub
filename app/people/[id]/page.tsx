@@ -20,8 +20,8 @@ const GetDetails = async (id: string): Promise<IPeopleDetails | null> => {
     }
 }
 
-export default async function Page(params: { params: { id: string }, searchParams: {} }) {
-    const details: IPeopleDetails | null = await GetDetails(params.params.id)
+export default async function Page(params: { params: Promise<{ id: string }>, searchParams: Promise<{}> }) {
+    const details: IPeopleDetails | null = await GetDetails((await params.params).id)
 
     return (
         <section className={`${styles.section} scrollBarStyle`}>
@@ -41,7 +41,7 @@ export default async function Page(params: { params: { id: string }, searchParam
                             }
                         </div>
                     </article>
-                    <SliderPhotos id_people={params.params.id} name_people={details.name} />
+                    <SliderPhotos id_people={(await params.params).id} name_people={details.name} />
                     <div className="separator"></div>
                     {(details.movie_credits && (details.movie_credits.cast.length > 0 || details.movie_credits.crew.length > 0)) &&
                         <div className={styles.header}>
@@ -62,9 +62,9 @@ export default async function Page(params: { params: { id: string }, searchParam
                     {(details.tv_credits && details.tv_credits?.crew.length > 0) && <SeriesSliderCredits parts={details.tv_credits.crew} type="tv" title="Detrás de cámaras" />}
                 </>
                 :
-                <NotResults type="people" id={params.params.id} />
+                <NotResults type="people" id={(await params.params).id} />
             }
         </section>
-    )
+    );
 }
 

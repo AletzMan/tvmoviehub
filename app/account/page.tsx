@@ -12,15 +12,16 @@ import Link from "next/link"
 
 
 
-export default async function Page(params: { searchParams: { type: string, page: string } }) {
-    const cookie = cookies().get("session_tvmoviehub")?.value
+export default async function Page({ searchParams }: { searchParams: Promise<{ type: string, page: string }> }) {
+    const cookie = (await cookies()).get("session_tvmoviehub")?.value
     const account = await GetDetailsAccount(cookie || "")
     const favoritesMovies = await GetFavoriteMovies(cookie || "", "1")
     const favoritesSeries = await GetFavoriteSeries(cookie || "", "1")
     const watchListMovies = await GetWatchList(cookie || "", "movies")
     const watchListSeries = await GetWatchList(cookie || "", "tv")
-    const ratedMovies = await GetRated(cookie || "", params.searchParams, "movies")
-    const ratedSeries = await GetRated(cookie || "", params.searchParams, "tv")
+    const params = await searchParams
+    const ratedMovies = await GetRated(cookie || "", params, "movies")
+    const ratedSeries = await GetRated(cookie || "", params, "tv")
     const listMovies = await GetLists(cookie || "", { page: 1 })
 
 

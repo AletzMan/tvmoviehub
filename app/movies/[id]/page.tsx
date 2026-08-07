@@ -16,9 +16,9 @@ import { Button } from "@/app/components/Button/Button"
 import { FavoriteButton } from "@/app/components/FavoriteButton/FavoriteButton"
 import { ButtonTrailer } from "@/app/components/ButtonTrailer/ButtonTrailer"
 
-export default async function Page(params: { params: { id: string }, searchParams: {} }) {
+export default async function Page(params: { params: Promise<{ id: string }>, searchParams: Promise<{}> }) {
 
-    const data: IMovieDetails | null = await GetMovieDetails(params.params.id)
+    const data: IMovieDetails | null = await GetMovieDetails((await params.params).id)
 
     //const credits: ICredits | null = await GetCredits(params.params.id)
 
@@ -26,9 +26,11 @@ export default async function Page(params: { params: { id: string }, searchParam
 
     //const recommendation: IRecommendationResponse | null = await GetRecommendations(params.params.id)
 
-    const images: IImages | null = await GetMovieImages(params.params.id)
+    const images: IImages | null = await GetMovieImages((await params.params).id)
 
     //const keywords: IKeywords | null = await GetMovieKeywords(params.params.id)
+
+    const id = await params.params
 
     return (
         <section className={`${styles.section} scrollBarStyle`}>
@@ -99,7 +101,7 @@ export default async function Page(params: { params: { id: string }, searchParam
                                 {data.keywords && <SectionTags keywords={data.keywords} />}
                             </div>
                             <hr className="separator" />
-                            {(collections && collections?.parts) && <MovieSlider parts={collections?.parts?.filter(movie => movie.id.toString() !== params.params.id)} title="DE LA MISMA COLECCIÓN" />}
+                            {(collections && collections?.parts) && <MovieSlider parts={collections?.parts?.filter(movie => movie.id.toString() !== id.id)} title="DE LA MISMA COLECCIÓN" />}
                             {(data.recommendations && data.recommendations.results.length > 0) && <MovieSlider parts={data.recommendations.results} title="RECOMENDACIONES" />}
                         </div>
                         <div className={`${styles.description_data} ${styles.description_dataDesktop}`}>
@@ -126,11 +128,11 @@ export default async function Page(params: { params: { id: string }, searchParam
                     </div>
                 </>
                 :
-                <NotResults id={params.params.id} type="movie" />
+                <NotResults id={(await params.params).id} type="movie" />
             }
 
         </section>
-    )
+    );
 }
 
 

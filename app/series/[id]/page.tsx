@@ -22,17 +22,17 @@ import { Button } from "@/app/components/Button/Button"
 import { FavoriteButton } from "@/app/components/FavoriteButton/FavoriteButton"
 import { ButtonTrailer } from "@/app/components/ButtonTrailer/ButtonTrailer"
 
-export default async function Page(params: { params: { id: string }, searchParams: {} }) {
+export default async function Page(params: { params: Promise<{ id: string }>, searchParams: Promise<{}> }) {
 
-    const details: ISerieDetails | null = await GetSerieDetails(params.params.id)
+    const details: ISerieDetails | null = await GetSerieDetails((await params.params).id)
 
-    const credits: ICredits | null = await GetSerieCredits(params.params.id)
+    const credits: ICredits | null = await GetSerieCredits((await params.params).id)
 
-    const recommendation: IRecommendationResponse | null = await GetSerieRecommendations(params.params.id)
+    const recommendation: IRecommendationResponse | null = await GetSerieRecommendations((await params.params).id)
 
-    const images: IImages | null = await GetSeriesImages(params.params.id)
+    const images: IImages | null = await GetSeriesImages((await params.params).id)
 
-    const keywords: IKeywords | null = await GetSeriesKeywords(params.params.id)
+    const keywords: IKeywords | null = await GetSeriesKeywords((await params.params).id)
 
 
 
@@ -133,8 +133,8 @@ export default async function Page(params: { params: { id: string }, searchParam
                     </div>
                 </>
                 :
-                <NotResults type="tv" id={params.params.id} />
+                <NotResults type="tv" id={(await params.params).id} />
             }
         </section>
-    )
+    );
 }

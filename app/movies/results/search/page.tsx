@@ -9,9 +9,10 @@ import { HeaderFiltersSearch } from "@/app/components/HeaderFiltersSearch/Header
 import { HeaderSection } from "@/app/components/HeaderSection/HeaderSection"
 import { SearchIcon } from "@/app/utils/svg"
 
-export default async function Page(params: { searchParams: IQueryParamasMovies }) {
+export default async function Page({ searchParams }: { searchParams: Promise<IQueryParamasMovies> }) {
 
-    const popularMovies: IMovieResponse = await GetSearchMovies("movie", params.searchParams)
+    const params = await searchParams
+    const popularMovies: IMovieResponse = await GetSearchMovies("movie", params)
 
     return (
         <section className={`${styles.section} `}>

@@ -8,14 +8,15 @@ import { HeaderSection } from "../components/HeaderSection/HeaderSection"
 import { SearchIcon } from "../utils/svg"
 import { NotResultsView } from "../components/NotResultsView/NotResultsView"
 
-export default async function Page(params: { params: { lang: string }, searchParams: { page: number, query: string } }) {
+export default async function Page({ searchParams }: { searchParams: Promise<{ page: number, query: string }> }) {
 
 
-    const results: IMultiResponse = await GetSearchMulti(params.searchParams)
+    const params = await searchParams
+    const results: IMultiResponse = await GetSearchMulti(params)
 
     return (
         <section className={`${styles.section}`}>
-            <HeaderSection title="Resultados para: " icon={<SearchIcon />} query={params.searchParams.query} />
+            <HeaderSection title="Resultados para: " icon={<SearchIcon />} query={params.query} />
             {results.results.length > 0 ?
                 <div className={`${styles.people} scrollBarStyle`}>
                     {
@@ -29,5 +30,5 @@ export default async function Page(params: { params: { lang: string }, searchPar
             }
             {results.results.length > 0 && <Pagination currentPage={results.page} totalPages={results.total_pages > 500 ? 500 : results.total_pages} />}
         </section>
-    )
+    );
 }
