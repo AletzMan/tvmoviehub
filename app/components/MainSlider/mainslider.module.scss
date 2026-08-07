@@ -19,7 +19,7 @@
         max-height: 32em;
         object-fit: cover;
         object-position: center center;
-        border-radius: 0.4em;
+         border-radius:  var(--radius-sm);
         max-width: calc(100svw - 1.5em);
 
         @media (width < 700px) {
@@ -105,13 +105,13 @@
         border: none;
         padding: 0.25em 0.75em;
         color: var(--text);
-        background-color: var(--primary-600);
+        background-color:  color-mix(in srgb, var(--info) 60%, var(--surface-base) 10%); 
         text-decoration: none;
         transition: all 0.35s ease-in-out;
         cursor: pointer;
 
         &:hover {
-            background-color: var(--primary-500);
+            background-color:  color-mix(in srgb, var(--info) 75%, var(--surface-base) 10%); 
         }
     }
 

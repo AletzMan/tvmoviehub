@@ -13,6 +13,7 @@ type Props = {
 }
 export const PopularPeople = ({ people }: Props) => {
     const { setLoadingState } = useLoadingState()
+    console.log("PopularPeople -> people", people)
 
     return (
         <section className={styles.section}>
@@ -23,7 +24,7 @@ export const PopularPeople = ({ people }: Props) => {
                             <Image className={styles.person_image} src={person.profile_path ? BASE_URL_IMG.concat(person.profile_path || "") : URL_IMAGE_NOTPHOTO} alt={`Foto de ${person.name}`} width={90} height={120} />
                         </picture>
                         <span className={styles.person_name}>{person.name}</span>
-                        {<div className={styles.person_position}><StarIcon className={styles.person_positionIcon} /> <span className={styles.person_positionNumber}>{index + 1}</span></div>}
+                        {/*<div className={styles.person_position}><StarIcon className={styles.person_positionIcon} /> <span className={styles.person_positionNumber}>{index + 1}</span></div>*/}
                     </Link>
                 ))
             }
