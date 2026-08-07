@@ -3,19 +3,19 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint ."
   },
   "dependencies": {
     "@formatjs/intl-localematcher": "^0.5.4",
     "@types/negotiator": "^0.6.3",
     "negotiator": "^0.6.3",
-    "next": "14.2.3",
+    "next": "15.5.23",
     "notistack": "^3.0.1",
-    "react": "^18",
-    "react-dom": "^18",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
     "react-slick": "^0.30.2",
     "sass": "^1.77.2",
     "slick-carousel": "^1.8.1",
@@ -23,11 +23,15 @@
   },
   "devDependencies": {
     "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
+    "@types/react": "19.2.18",
+    "@types/react-dom": "19.2.4",
     "@types/react-slick": "^0.23.13",
-    "eslint": "^8",
-    "eslint-config-next": "14.2.3",
+    "eslint": "9.39.5",
+    "eslint-config-next": "15.5.23",
     "typescript": "^5"
+  },
+  "overrides": {
+    "@types/react": "19.2.18",
+    "@types/react-dom": "19.2.4"
   }
 }
