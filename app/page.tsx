@@ -10,7 +10,7 @@ import { GetNowPlaying, GetSeriesAiringToday, GetPeoplePopular } from "./service
 
 export default async function Home() {
   const data: IMovie[] = await GetNowPlaying()
-  const dataSeries: ISerie[] = await GetSeriesAiringToday()
+  //const dataSeries: ISerie[] = await GetSeriesAiringToday()
   const dataPeople: IPeopleResponse = await GetPeoplePopular(1)
 
   return (
@@ -27,7 +27,7 @@ export default async function Home() {
       </section>
       <div className="separator"></div>
       <article className={styles.articleThree}>
-        <h3 className={styles.section_title}>TOP 20 ACTORES POPULARES</h3>
+        <h3 className={styles.section_title}>TOP 20 ACTORES DEL MOMENTO</h3>
         <PopularPeople people={dataPeople?.results || []} />
       </article>
     </section>

@@ -39,10 +39,13 @@
     --danger: #EF4444;
 
 	/* Hover */
-	--hover: rgba(50, 95, 220, 0.08);
+	--hover: rgba(50, 95, 220, 0.1);
 
 	/* Borders */
 	--border: #323744;
+
+	/* Radius */
+	--radius-sm: 0.25em;
 
 	--maxWidth: 1920px;
 	--maxWidthContent: 1550px;
