@@ -1,6 +1,7 @@
-"use client"
-
+"use client";
 import { SnackbarProvider } from "notistack"
+
+import type { JSX } from "react";
 
 interface Props {
     children: JSX.Element

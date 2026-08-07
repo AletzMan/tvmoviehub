@@ -5,11 +5,11 @@ import { revalidateTag } from "next/cache"
 
 
 export async function CreateCookie(IUserSession: string) {
-    cookies().set("session_tvmoviehub", IUserSession)
+    (await cookies()).set("session_tvmoviehub", IUserSession)
 }
 
 export async function DeleteCookie() {
-    cookies().delete("session_tvmoviehub")
+    (await cookies()).delete("session_tvmoviehub")
 }
 
 

@@ -1,4 +1,4 @@
-import { MouseEventHandler } from "react"
+import { MouseEventHandler, type JSX } from "react";
 import styles from "./button.module.scss"
 import Link from "next/link"
 

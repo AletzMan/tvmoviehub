@@ -1,10 +1,9 @@
 
 import type { Metadata } from "next"
-import { Jost } from "next/font/google"
-import "./globals.css"
-import { SideMenu } from "./components/SideMenu/SideMenu"
+import { Jost } from "next/font/google" 
 import Header from "./components/Header/Header"
 import styles from "./page.module.css"
+import "./globals.css"
 import { LoadingPage } from "./components/LoadingPage/LoadingPage"
 import { TrailerPage } from "./components/TrailerPage/TrailerPage"
 import { DialogAlert } from "./components/DialogAlert/DialogAlert"

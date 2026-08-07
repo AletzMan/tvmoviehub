@@ -13,7 +13,7 @@ interface Props {
 }
 
 export default async function FavoriteSeries({ page, type }: Props) {
-    const cookie = cookies().get("session_tvmoviehub")?.value
+    const cookie = (await cookies()).get("session_tvmoviehub")?.value
 
     const movies: ISerieResponse | IMultiResponse | null = type === "favorites" ? await GetFavoriteSeries(cookie as string, page) : await GetWatchList(cookie as string, "tv")
 

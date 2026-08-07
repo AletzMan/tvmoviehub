@@ -14,7 +14,7 @@ import { Average } from "@/app/components/Average/Average"
 interface Props {
     seasons: ISeason[]
     idSerie: number
-    children: React.ReactElement
+    children: React.ReactElement<any>
 }
 
 export const Season = ({ seasons, idSerie, children }: Props) => {

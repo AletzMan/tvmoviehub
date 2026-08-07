@@ -6,10 +6,10 @@ import { IResponseListMovie } from "@/app/interfaces/list"
 import { ListCard } from "./ListCard"
 
 
-export default async function ListMovies(params: { searchParams: { type: string, page: string } }) {
-    const cookie = cookies().get("session_tvmoviehub")?.value
+export default async function ListMovies({ searchParams }: { searchParams: { type: string, page: string } }) {
+    const cookie = (await cookies()).get("session_tvmoviehub")?.value
 
-    const lists: IResponseListMovie | null = await GetLists(cookie as string, params.searchParams)
+    const lists: IResponseListMovie | null = await GetLists(cookie as string, searchParams)
 
     return (
         <div className={styles.lists}>

@@ -1,5 +1,7 @@
-"use client"
+"use client";
 import styles from "./styles.module.scss"
+
+import type { JSX } from "react";
 
 interface Props {
     title: string

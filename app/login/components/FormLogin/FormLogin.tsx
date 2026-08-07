@@ -10,6 +10,7 @@ import { GetDetailsAccount } from "@/app/services/fetchData"
 import { IUserSession } from "@/app/interfaces/authentication"
 import { useRouter } from "next/navigation"
 import { CreateCookie } from "@/app/utils/serveractions"
+import { FormEvent } from "react"
 
 interface IUserData {
     username: string
@@ -34,7 +35,7 @@ export function FormLogin() {
         setErrorLogin({ ...errorLogin, [name]: false })
     }
 
-    const HandleSubmit = async (e: MouseEvent<HTMLFormElement>) => {
+    const HandleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         setLoading(true)
         const data = e.currentTarget.elements
