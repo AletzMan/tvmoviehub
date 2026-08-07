@@ -21,7 +21,7 @@
     &_icon {
         width: 5em;
         height: 5em;
-        color: var(--highlightColor);
+        color: var(--primary-500);
         animation: animationLoading 1s ease-in-out infinite;
 
         @keyframes animationLoading {
@@ -33,6 +33,6 @@
 
     &_text {
         font-weight: 600;
-        color: var(--fontColor);
+        color: var(--text);
     }
 }

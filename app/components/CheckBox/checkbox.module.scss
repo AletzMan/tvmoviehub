@@ -3,7 +3,7 @@
     left: 0;
     height: 2em;
     width: 100%;
-    background-color: var(--fontSecondColor);
+    background-color: var(--text-secondary);
     border: none;
     opacity: 1;
 
@@ -16,15 +16,15 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: var(--fontColor);
-        border: 1px solid var(--terciaryColor);
+        background-color: var(--text);
+        border: 1px solid var(--surface-b);
         border-radius: 0.25em;
         overflow: hidden;
         transition: all 0.2s ease-in-out;
         pointer-events: none;
 
         &Active {
-            background-color: var(--highlightColor);
+            background-color: var(--primary-500);
         }
 
 
@@ -35,7 +35,7 @@
             color: transparent;
 
             &Active {
-                color: var(--fontColor);
+                color: var(--text);
                 animation: iconCheck 0.15s cubic-bezier(.75, .06, .2, 1.18);
 
                 @keyframes iconCheck {
@@ -75,7 +75,7 @@
         transition: all 0.2s ease-in-out;
         font-family: var(--font-family);
         border: none;
-        color: var(--primaryColor);
+        color: var(--surface-base);
         background-color: transparent;
         cursor: pointer;
 
@@ -83,7 +83,7 @@
         &:hover {
 
             @media(hover: hover) and (pointer: fine) {
-                background-color: var(--fontSecondColor);
+                background-color: var(--text-secondary);
 
             }
         }

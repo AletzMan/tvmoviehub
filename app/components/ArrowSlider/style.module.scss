@@ -28,18 +28,18 @@
     }
 
     &:hover {
-        border-color: var(--highlightColorBasic);
-        background-color: var(--highlightHoverColor);
+        border-color: var(--primary-600);
+        background-color: var(--primary-900);
 
         &>svg {
-            color: var(--highlightColor);
+            color: var(--primary-500);
         }
     }
 
     &_icon {
         width: 2em;
         height: 2em;
-        color: var(--fontSecondColor);
+        color: var(--text-secondary);
         transition: color 0.2s ease-in-out;
 
         &Right {

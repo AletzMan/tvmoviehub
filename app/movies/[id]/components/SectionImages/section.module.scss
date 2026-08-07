@@ -32,7 +32,7 @@
         background-color: transparent;
 
         &:hover {
-            background-color: var(--terciaryColor);
+            background-color: var(--surface-b);
 
             &>.social_name {
                 display: block;
@@ -43,18 +43,18 @@
     &_icon {
         width: 2em;
         height: 2em;
-        color: var(--fontColor);
+        color: var(--text);
     }
 
     &_name {
         display: none;
         position: absolute;
         top: 3.25em;
-        background-color: var(--highlightColor);
+        background-color: var(--primary-500);
         padding: 0 0.5em;
         font-size: 0.85em;
         border-radius: 0.25em;
-        color: var(--fontColor);
+        color: var(--text);
         z-index: 30;
 
 
@@ -67,7 +67,7 @@
             height: 0;
             border-left: 5px solid transparent;
             border-right: 5px solid transparent;
-            border-bottom: 5px solid var(--highlightColor);
+            border-bottom: 5px solid var(--primary-500);
         }
 
     }
@@ -107,7 +107,7 @@
         top: calc(50% - 10em);
         width: 8em;
         height: 8em;
-        color: var(--fontColor);
+        color: var(--text);
         animation: loading 1s ease-in-out infinite;
 
         @keyframes loading {
@@ -129,21 +129,21 @@
         max-width: 90svw;
         object-fit: contain;
         justify-self: center;
-        //border: 2px solid var(--terciaryColor);
+        //border: 2px solid var(--surface-b);
     }
 
     &_sizes {
         font-size: 0.85em;
-        color: var(--fontSecondColor);
+        color: var(--text-secondary);
         padding: 0.1em 0.25em;
-        background-color: var(--terciaryColor);
+        background-color: var(--surface-b);
     }
 
     &_download {
         padding: 0.2em 0.5em;
         border-radius: 0.25em;
-        color: var(--fontColor);
-        background-color: var(--highlightColor);
+        color: var(--text);
+        background-color: var(--primary-500);
     }
 
     &_close {
@@ -160,7 +160,7 @@
     background-color: transparent;
 
     &>.button_image:hover {
-        border: 2px solid var(--highlightColor);
+        border: 2px solid var(--primary-500);
     }
 
 

@@ -19,8 +19,8 @@
 .content {
     width: calc(100% - 2em);
     max-width: var(--maxWidthContent);
-    background-color: var(--primaryColor);
-    border: 1px solid var(--secondaryColor);
+    background-color: var(--surface-base);
+    border: 1px solid var(--surface-a);
     padding: 0.5em;
     margin: 0 auto;
 

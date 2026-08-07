@@ -11,7 +11,7 @@
         width: 8em;
         height: 8em;
         opacity: 0.7;
-        color: var(--highlightColor);
+        color: var(--primary-500);
 
         &Type {
             position: absolute;
@@ -20,18 +20,18 @@
             width: 5em;
             height: 5em;
             opacity: 0.3;
-            color: var(--fontSecondColor);
+            color: var(--text-secondary);
         }
     }
 
     &_message {
-        color: var(--titleColor);
+        color: var(--primary-200);
         font-size: 1.3em;
         text-align: center;
         text-wrap: balance;
 
         &Two {
-            color: var(--fontSecondColor);
+            color: var(--text-secondary);
             text-align: center;
             text-wrap: balance;
             margin: 2em 0;
@@ -39,7 +39,7 @@
     }
 
     &_id {
-        color: var(--subtitleColor);
+        color: var(--info);
         font-weight: 500;
     }
 }

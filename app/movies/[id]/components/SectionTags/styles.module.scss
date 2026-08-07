@@ -2,12 +2,12 @@
     display: flex;
     flex-direction: column;
     gap: 0.5em;
-    //    background-color: var(--secondaryColor);
+    //    background-color: var(--surface-a);
     border: 1px solid var(--Color);
     padding: 0.5em;
 
     &_title {
-        color: var(--fontColor);
+        color: var(--text);
     }
 }
 
@@ -21,11 +21,11 @@
         font-size: 0.8em;
         font-weight: 500;
         border-radius: 0.25em;
-        border: 1px solid var(--terciaryColor);
+        border: 1px solid var(--surface-b);
         text-decoration: none;
         text-transform: capitalize;
-        color: var(--primaryColor);
-        background: linear-gradient(-12deg, var(--fontColor), var(--fontSecondColor)30%);
+        color: var(--surface-base);
+        background: linear-gradient(-12deg, var(--text), var(--text-secondary)30%);
         transition: all 0.3s ease-in-out;
 
         &:hover {

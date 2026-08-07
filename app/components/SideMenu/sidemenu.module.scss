@@ -5,7 +5,7 @@
     max-width: 20em;
     transition: all 0.3s ease-in-out;
     border-right: 1px solid var(--hover);
-    background: linear-gradient(var(--secondaryColor), var(--primaryColor));
+    background: linear-gradient(var(--surface-a), var(--surface-base));
 
 
     @media (width < 700px) {
@@ -17,7 +17,7 @@
     height: 5em;
     padding: 0.7em 0;
     align-self: center;
-    color: var(--highlightColor);
+    color: var(--primary-500);
     filter: drop-shadow(0 0 2px #1c1c1c);
 
     @media (width < 700px) {
@@ -28,7 +28,7 @@
 .separator {
     height: 2px;
     margin: 0;
-    background: linear-gradient(90deg, var(--terciaryColor), transparent);
+    background: linear-gradient(90deg, var(--surface-b), transparent);
 
     &_first {
         margin: 0 1em;
@@ -54,7 +54,7 @@
     row-gap: 2.5em;
 
     &_title {
-        color: var(--fontColor);
+        color: var(--text);
         font-size: 1.2em;
         font-weight: 600;
     }
@@ -76,7 +76,7 @@
         display: flex;
         column-gap: 0.7em;
         align-items: center;
-        color: var(--fontSecondColor);
+        color: var(--text-secondary);
         font-size: 1.1em;
         text-decoration: none;
         font-weight: 400;
@@ -89,14 +89,14 @@
         cursor: pointer;
 
         &:hover {
-            background: linear-gradient(90deg, var(--highlightColor) 0%, var(--highlightHoverColor) 100%);
-            color: var(--fontColor);
+            background: linear-gradient(90deg, var(--primary-500) 0%, var(--primary-900) 100%);
+            color: var(--text);
         }
 
         &Current {
-            background: linear-gradient(90deg, var(--highlightColor) 0%, var(--highlightHoverColor) 100%);
-            border-color: var(--highlightColor);
-            color: var(--fontColor);
+            background: linear-gradient(90deg, var(--primary-500) 0%, var(--primary-900) 100%);
+            border-color: var(--primary-500);
+            color: var(--text);
         }
     }
 }

@@ -4,7 +4,7 @@
     justify-content: space-between;
     border-radius: 0.15em;
     padding: 0.5em;
-    background: linear-gradient(90deg, var(--highlightHoverColor), var(--highlightHoverColor));
+    background: linear-gradient(90deg, var(--primary-900), var(--primary-900));
 
     &_order {
         display: flex;
@@ -13,13 +13,13 @@
     }
 
     &_title {
-        color: var(--fontColor);
+        color: var(--text);
     }
 
     &_icon {
         width: 2.5em;
         height: 2.5em;
-        color: var(--fontSecondColor);
+        color: var(--text-secondary);
         animation: animation;
     }
 

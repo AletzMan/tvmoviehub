@@ -59,7 +59,7 @@ export const MainSlider = ({ movies }: Props) => {
                         />
                     </div>
                 ))}
-                {/*<div className={styles.timebar} style={{ position: "absolute", bottom: "0", height: "0.15em", backgroundColor: "var(--highlightColorBasic)", width: `${timeSlider}%`, transition: "all ease-in-out" }}></div>*/}
+                {/*<div className={styles.timebar} style={{ position: "absolute", bottom: "0", height: "0.15em", backgroundColor: "var(--primary-600)", width: `${timeSlider}%`, transition: "all ease-in-out" }}></div>*/}
             </Slider>
         </article>
     )

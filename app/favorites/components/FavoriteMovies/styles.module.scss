@@ -14,7 +14,7 @@
         place-items: start start;
         gap: 0.25em;
         height: calc(100svh - 16em);
-        background-color: var(--highlightHoverColor);
+        background-color: var(--primary-900);
         padding: 0.25em 0.5em 0.25em 0;
     }
 }
@@ -28,12 +28,12 @@
     width: 100%;
 
     &_title {
-        color: var(--titleColor);
+        color: var(--primary-200);
         font-size: 1.5em;
         font-weight: 500;
     }
 
     &_text {
-        color: var(--fontColor);
+        color: var(--text);
     }
 }

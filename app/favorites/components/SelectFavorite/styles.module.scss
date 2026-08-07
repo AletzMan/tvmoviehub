@@ -2,16 +2,16 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: var(--highlightHoverColor);
+    background-color: var(--primary-900);
     height: 3em;
 
     &_container {
         position: relative;
-        background-color: var(--primaryColor);
+        background-color: var(--surface-base);
         width: 12em;
         height: 2em;
         border-radius: 0.15em;
-        border: 1px solid var(--terciaryColor);
+        border: 1px solid var(--surface-b);
         cursor: pointer;
 
         &:hover {
@@ -19,7 +19,7 @@
 
             .favorite_arrow {
                 filter: brightness(120%);
-                color: var(--fontColor);
+                color: var(--text);
             }
         }
     }
@@ -32,8 +32,8 @@
         width: 50%;
         height: 100%;
         border: none;
-        background: linear-gradient(20deg, var(--highlightColorBasic), var(--highlightColor));
-        color: var(--fontColor);
+        background: linear-gradient(20deg, var(--primary-600), var(--primary-500));
+        color: var(--text);
         transition: all 0.3s ease-in-out;
 
 
@@ -53,7 +53,7 @@
         width: 1.5em;
         height: 1.5em;
         opacity: 0.6;
-        color: var(--highlightColor);
+        color: var(--primary-500);
         transition: all 0.3s ease-in-out;
 
         &Active {

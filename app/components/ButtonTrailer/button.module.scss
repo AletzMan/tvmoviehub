@@ -10,13 +10,13 @@
     max-width: max-content;
     font-weight: 300;
     font-family: var(--font-family);
-    color: var(--fontColor);
-    background: linear-gradient(-12deg, var(--highlightColor), var(--highlightColor));
+    color: var(--text);
+    background: linear-gradient(-12deg, var(--primary-500), var(--primary-500));
     border: 1px solid;
     border-top-color: transparent;
     border-right-color: transparent;
-    border-bottom-color: var(--highlightColorBasic);
-    border-left-color: var(--highlightColorBasic);
+    border-bottom-color: var(--primary-600);
+    border-left-color: var(--primary-600);
     transition: all 0.3s ease-in-out;
     text-decoration: none;
     cursor: pointer;

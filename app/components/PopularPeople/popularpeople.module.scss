@@ -14,16 +14,16 @@
     gap: 0.25em;
     border-radius: 0.5em;
     padding: 0.5em;
-    border: 1px solid var(--highlightHoverColor);
+    border: 1px solid var(--primary-900);
     transition: all 0.25s ease-in-out;
-    background-color: var(--secondaryColor);
+    background-color: var(--surface-a);
     text-decoration: none;
 
     &:hover {
-        border-color: var(--highlightColorBasic);
+        border-color: var(--primary-600);
 
         &>.person_name {
-            color: var(--highlightColor);
+            color: var(--primary-500);
         }
 
         &>.person_picture>.person_image {
@@ -40,7 +40,7 @@
         height: 5.5em;
         border-radius: 5em;
         overflow: hidden;
-        border: 2px solid var(--highlightColor);
+        border: 2px solid var(--primary-500);
     }
 
     &_image {
@@ -50,7 +50,7 @@
     }
 
     &_name {
-        color: var(--fontColor);
+        color: var(--text);
         transition: color 0.3s ease-in-out;
     }
 
@@ -69,11 +69,11 @@
             position: absolute;
             width: 2.75em;
             height: 2.75em;
-            color: var(--titleColor);
+            color: var(--primary-200);
         }
 
         &Number {
-            color: var(--secondaryColor);
+            color: var(--surface-a);
             font-size: 0.8em;
             font-weight: 600;
             width: 3em;

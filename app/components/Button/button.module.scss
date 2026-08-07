@@ -10,8 +10,8 @@
     max-width: max-content;
     font-weight: 300;
     font-family: var(--font-family);
-    color: var(--fontColor);
-    background: linear-gradient(-12deg, var(--highlightColor), var(--highlightColor));
+    color: var(--text);
+    background: linear-gradient(-12deg, var(--primary-500), var(--primary-500));
     border: 1px solid transparent;
     transition: all 0.3s ease-in-out;
     text-decoration: none;
@@ -20,14 +20,14 @@
     &:disabled {
         //pointer-events: none;
         cursor: not-allowed;
-        background: var(--secondaryColor);
+        background: var(--surface-a);
         border: 1px solid var(--hover);
         filter: grayscale(1) brightness(150%);
     }
 
     &_secondary {
-        background: linear-gradient(-12deg, var(--fontColor), var(--fontSecondColor)0%);
-        color: var(--primaryColor);
+        background: linear-gradient(-12deg, var(--text), var(--text-secondary)0%);
+        color: var(--surface-base);
         font-weight: 400;
 
         &:disabled {

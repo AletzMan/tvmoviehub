@@ -30,18 +30,18 @@
         background-color: var(--hover);
 
         &>.summary_title {
-            color: var(--highlightColor);
+            color: var(--primary-500);
         }
 
         &>.summary_icon {
-            color: var(--highlightColor);
+            color: var(--primary-500);
         }
     }
 
     &_title {
         font-weight: 500;
         font-size: 0.95em;
-        color: var(--primaryColor);
+        color: var(--surface-base);
         transition: color 0.25s ease-in-out;
     }
 
@@ -54,9 +54,9 @@
         font-size: 0.85em;
         font-weight: 500;
         border-radius: 0.2em;
-        color: var(--fontColor);
+        color: var(--text);
         border: 1px solid var(--hover);
-        background-color: var(--highlightColor);
+        background-color: var(--primary-500);
     }
 
     &_icon {
@@ -65,7 +65,7 @@
         width: 1.25em;
         height: 1.25em;
         transition: all 0.2s ease-in-out;
-        color: var(--primaryColor);
+        color: var(--surface-base);
     }
 }
 
@@ -77,22 +77,22 @@
 
     &_label {
         font-size: 0.8em;
-        color: var(--terciaryColor);
+        color: var(--surface-b);
     }
 
     &_select {
         padding: 0.2em 0.5em 0.2em 0.5em;
         font-family: var(--font-family);
-        color: var(--primaryColor);
+        color: var(--surface-base);
         min-width: 20em;
         border-radius: 0.2em;
-        border: 1px solid var(--secondaryColor);
-        background-color: var(--fontColor);
+        border: 1px solid var(--surface-a);
+        background-color: var(--text);
 
         &:disabled {
             cursor: not-allowed;
-            border: 1px solid var(--fontSecondColor);
-            color: var(--fontSecondColor);
+            border: 1px solid var(--text-secondary);
+            color: var(--text-secondary);
         }
     }
 }

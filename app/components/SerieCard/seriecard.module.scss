@@ -18,13 +18,13 @@
         //border-color: var(--hover);
         filter: opacity(1) brightness(110%);
         //background: linear-gradient(0deg, #FFFFFF15, transparent);
-        //box-shadow: 0 0 4px 2px var(--highlightColor);
-        //border: 1px solid var(--highlightColor);
+        //box-shadow: 0 0 4px 2px var(--primary-500);
+        //border: 1px solid var(--primary-500);
         z-index: 15;
 
 
         &>.movie_frame {
-            border-color: var(--highlightColor);
+            border-color: var(--primary-500);
         }
 
         &>.movie_picture>.movie_photo {
@@ -45,7 +45,7 @@
         width: 100%;
         height: 100%;
         border-radius: 0.2em;
-        border: 1px solid var(--terciaryColor);
+        border: 1px solid var(--surface-b);
         z-index: 2;
         overflow: hidden;
         pointer-events: none;
@@ -75,7 +75,7 @@
         margin: 0 0 0 0;
         object-position: center top;
         transition: all 0.3s ease-in-out;
-        //border: 2px solid var(--highlightColor);
+        //border: 2px solid var(--primary-500);
     }
 
     &_shadow {
@@ -108,7 +108,7 @@
         width: 100%;
         justify-content: flex-start;
         padding: 0.15em 0.25em;
-        background-color: var(--terciaryColor);
+        background-color: var(--surface-b);
         min-height: 2.9em;
     }
 
@@ -120,14 +120,14 @@
         font-size: 3.5em;
         //z-index: -1;
         font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-        color: var(--highlightColor);
+        color: var(--primary-500);
         background-color: #FFFFFF00;
         border-radius: 0.15em;
         width: 1.07em;
     }
 
     &_name {
-        color: var(--fontColor);
+        color: var(--text);
         font-size: 0.8em;
         max-lines: 1;
         overflow-wrap: break-word;
@@ -136,7 +136,7 @@
     }
 
     &_age {
-        color: var(--fontSecondColor);
+        color: var(--text-secondary);
         font-size: 0.8em;
     }
 
@@ -153,8 +153,8 @@
         font-weight: 500;
         font-size: 0.8em;
         border-radius: 0.25em;
-        color: var(--primaryColor);
-        background-color: var(--averageColor);
+        color: var(--surface-base);
+        background-color: var(--warning);
     }
 
     &_fav {
@@ -162,7 +162,7 @@
         position: absolute;
         top: 0.25em;
         left: 0.25em;
-        color: var(--fontColor);
+        color: var(--text);
         background-color: transparent;
         border: none;
         transition: all 0.25s ease-in-out;
@@ -197,11 +197,11 @@
             height: 3em;
             border-radius: 3em;
             overflow: hidden;
-            background-color: var(--highlightColorBasic);
+            background-color: var(--primary-600);
             transition: all 0.3s ease-in-out;
 
             &:hover {
-                background-color: var(--highlightColor);
+                background-color: var(--primary-500);
             }
         }
 

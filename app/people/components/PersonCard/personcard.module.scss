@@ -2,7 +2,7 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    border: 2px solid var(--terciaryColor);
+    border: 2px solid var(--surface-b);
     height: 18em;
     max-width: 12em;
     border-radius: 0.25em;
@@ -12,7 +12,7 @@
     text-decoration: none;
 
     &:hover {
-        border-color: var(--highlightColor);
+        border-color: var(--primary-500);
         filter: brightness(110%);
         opacity: 1;
     }
@@ -30,11 +30,11 @@
         justify-content: space-between;
         padding: 0.25em;
         height: 15%;
-        background-color: var(--secondaryColor);
+        background-color: var(--surface-a);
     }
 
     &_name {
-        color: var(--fontColor);
+        color: var(--text);
     }
 
     &_gender {
@@ -57,7 +57,7 @@
     left: calc(50% - 2.5em);
     width: 5em;
     height: 5em;
-    color: var(--fontColor);
+    color: var(--text);
     animation: loading 1s ease-in-out infinite;
     z-index: 100;
 

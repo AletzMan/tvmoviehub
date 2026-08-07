@@ -6,18 +6,18 @@
     height: 2.475em;
     border-radius: 0.25em;
     border: none;
-    background-color: var(--highlightColorBasic);
+    background-color: var(--primary-600);
     transition: all 0.3s ease-in-out;
 
     &:hover {
-        background-color: var(--highlightColor);
+        background-color: var(--primary-500);
     }
 
     &_icon {
         width: 1.7em;
         height: 1.7em;
         opacity: 0;
-        color: var(--fontColor);
+        color: var(--text);
         transform: scale(0);
         animation: appearAnimation 0.2s ease-in-out both;
     }

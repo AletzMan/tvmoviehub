@@ -9,7 +9,7 @@
     border-radius: 0.2em;
     margin: 0 0.25em;
     overflow: hidden;
-    border: 1px solid var(--fourthColor);
+    border: 1px solid var(--surface-c);
     transition: all ease-in-out 0.25s;
     scroll-snap-align: start;
     opacity: 0.8;
@@ -19,8 +19,8 @@
         //border-color: var(--hover);
         filter: opacity(1) brightness(110%);
         background: linear-gradient(0deg, #FFFFFF15, transparent);
-        //box-shadow: 0 0 4px 2px var(--highlightColor);
-        border: 1px solid var(--highlightColor);
+        //box-shadow: 0 0 4px 2px var(--primary-500);
+        border: 1px solid var(--primary-500);
 
 
 
@@ -39,7 +39,7 @@
         width: 100%;
         //max-width: 12em;
         overflow: hidden;
-        //border: 2px solid var(--highlightColor);
+        //border: 2px solid var(--primary-500);
     }
 
     &_photo {
@@ -47,7 +47,7 @@
         //min-width: 100%;
         object-position: center top;
         transition: all 0.3s ease-in-out;
-        //border: 2px solid var(--highlightColor);
+        //border: 2px solid var(--primary-500);
     }
 
     &_shadow {
@@ -66,7 +66,7 @@
         top: 0.25em;
         //width: 1.5em;
         //height: 1.5em;
-        color: var(--fontColor);
+        color: var(--text);
         font-size: 0.8em;
         border-radius: 1em;
         background-color: #FFFFFF15;
@@ -86,12 +86,12 @@
         justify-content: flex-start;
         width: 100%;
         padding: 0.15em 0.25em;
-        background-color: var(--terciaryColor);
+        background-color: var(--surface-b);
         min-height: 3em;
     }
 
     &_name {
-        color: var(--fontColor);
+        color: var(--text);
         font-size: 0.8em;
         max-lines: 1;
         overflow-wrap: break-word;
@@ -100,13 +100,13 @@
     }
 
     &_age {
-        color: var(--fontSecondColor);
+        color: var(--text-secondary);
         font-size: 0.8em;
     }
 
     &_job {
         position: absolute;
-        color: var(--fontColor);
+        color: var(--text);
         padding: 0.1em 0.35em;
         font-size: 0.9em;
         background-color: var(--hover);
@@ -126,8 +126,8 @@
         font-weight: 500;
         font-size: 0.8em;
         border-radius: 0.25em;
-        color: var(--primaryColor);
-        background-color: var(--averageColor);
+        color: var(--surface-base);
+        background-color: var(--warning);
     }
 
     &_fav {
@@ -135,7 +135,7 @@
         position: absolute;
         top: 0.25em;
         left: 0.25em;
-        color: var(--fontColor);
+        color: var(--text);
         background-color: transparent;
         border: none;
         transition: all 0.25s ease-in-out;
@@ -174,11 +174,11 @@
             height: 3em;
             border-radius: 3em;
             overflow: hidden;
-            background-color: var(--highlightColorBasic);
+            background-color: var(--primary-600);
             transition: all 0.3s ease-in-out;
 
             &:hover {
-                background-color: var(--highlightColor);
+                background-color: var(--primary-500);
             }
         }
 
@@ -195,7 +195,7 @@
     top: calc(50% - 4.5em);
     width: 5em;
     height: 5em;
-    color: var(--fontColor);
+    color: var(--text);
     animation: loading 1s ease-in-out infinite;
     z-index: 100;
 
@@ -221,11 +221,11 @@
     cursor: pointer;
 
     &:hover>.delete_icon {
-        color: var(--highlightColor);
+        color: var(--primary-500);
     }
 
     &_icon {
-        color: var(--fontColor);
+        color: var(--text);
         transition: all 0.15s ease-in-out;
     }
 }

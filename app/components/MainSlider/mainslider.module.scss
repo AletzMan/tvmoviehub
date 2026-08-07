@@ -50,7 +50,7 @@
 
     &_title {
         font-size: 2em;
-        color: var(--titleColor);
+        color: var(--primary-200);
         margin: 0 0 -0.25em 0;
         text-wrap: pretty;
 
@@ -66,7 +66,7 @@
     &_subtitle {
         font-size: 1.5em;
         font-weight: 400;
-        color: var(--fontColor);
+        color: var(--text);
 
         @media (width < 700px) {
             font-size: 1.1em;
@@ -91,8 +91,8 @@
         font-weight: 600;
         text-align: center;
         border-radius: 0.15em;
-        color: var(--primaryColor);
-        background-color: var(--averageColor);
+        color: var(--surface-base);
+        background-color: var(--warning);
     }
 
     &_info {
@@ -104,14 +104,14 @@
         border-radius: 0.15em;
         border: none;
         padding: 0.25em 0.75em;
-        color: var(--fontColor);
-        background-color: var(--highlightColorBasic);
+        color: var(--text);
+        background-color: var(--primary-600);
         text-decoration: none;
         transition: all 0.35s ease-in-out;
         cursor: pointer;
 
         &:hover {
-            background-color: var(--highlightColor);
+            background-color: var(--primary-500);
         }
     }
 
@@ -129,8 +129,8 @@
     justify-content: center;
     height: 100%;
     min-height: 20em;
-    color: var(--fontColor);
-    color: var(--titleColor);
+    color: var(--text);
+    color: var(--primary-200);
 
     &_icon {
         width: 5em;

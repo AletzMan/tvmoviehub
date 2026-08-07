@@ -14,13 +14,13 @@
     }
 
     &_search {
-        color: var(--averageColor);
+        color: var(--warning);
         font-size: 1.2em;
         font-weight: 500;
     }
 
     &_title {
-        color: var(--fontColor);
+        color: var(--text);
         font-size: 1.2em;
     }
 
@@ -29,7 +29,7 @@
         align-items: center;
         justify-content: center;
         gap: 0.5em;
-        color: var(--fontSecondColor);
+        color: var(--text-secondary);
 
         &>svg {
             width: 2.5em;

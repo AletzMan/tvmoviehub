@@ -30,18 +30,18 @@
         background-color: var(--hover);
 
         &>.summary_title {
-            color: var(--highlightColor);
+            color: var(--primary-500);
         }
 
         &>.summary_icon {
-            color: var(--highlightColor);
+            color: var(--primary-500);
         }
     }
 
     &_title {
         font-weight: 500;
         font-size: 0.95em;
-        color: var(--primaryColor);
+        color: var(--surface-base);
         transition: color 0.25s ease-in-out;
     }
 
@@ -54,9 +54,9 @@
         font-size: 0.85em;
         font-weight: 500;
         border-radius: 0.2em;
-        color: var(--fontColor);
+        color: var(--text);
         border: 1px solid var(--hover);
-        background-color: var(--highlightColor);
+        background-color: var(--primary-500);
     }
 
     &_icon {
@@ -65,7 +65,7 @@
         width: 1.25em;
         height: 1.25em;
         transition: all 0.2s ease-in-out;
-        color: var(--primaryColor);
+        color: var(--surface-base);
     }
 }
 

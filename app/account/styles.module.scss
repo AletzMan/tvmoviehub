@@ -13,9 +13,9 @@
     padding: 0.5em;
     margin: 0 0.25em;
     border-radius: 0.25em;
-    color: var(--fontColor);
+    color: var(--text);
     align-items: center;
-    background-color: var(--terciaryColor);
+    background-color: var(--surface-b);
 
     &_info {
         display: flex;
@@ -27,7 +27,7 @@
         height: 7.5em;
         overflow: hidden;
         border-radius: 5em;
-        border: 2px solid var(--titleColor);
+        border: 2px solid var(--primary-200);
     }
 
     &_photo {
@@ -35,7 +35,7 @@
     }
 
     &_label {
-        color: var(--fontSecondColor);
+        color: var(--text-secondary);
         font-size: 0.85em;
     }
 }
@@ -47,9 +47,9 @@
     padding: 0.5em;
     margin: 0 0.25em;
     border-radius: 0.25em;
-    color: var(--fontColor);
+    color: var(--text);
     align-items: center;
-    background-color: var(--terciaryColor);
+    background-color: var(--surface-b);
 
     &_section {
         display: flex;
@@ -58,7 +58,7 @@
         gap: 0.25em;
         padding: 0;
         border-radius: 0.25em;
-        border: 1px solid var(--fourthColor);
+        border: 1px solid var(--surface-c);
     }
 
     &_link {
@@ -68,17 +68,17 @@
         gap: 0.5em;
         text-decoration: none;
         padding: 0.15em 0.25em;
-        border-bottom: 1px solid var(--fourthColor);
+        border-bottom: 1px solid var(--surface-c);
 
         &:hover>.data_icon {
-            color: var(--fontColor);
+            color: var(--text);
         }
     }
 
     &_icon {
         width: 1.5em;
         height: 1.5em;
-        color: var(--fontSecondColor);
+        color: var(--text-secondary);
         background-color: var(--hover);
     }
 
@@ -86,7 +86,7 @@
         display: flex;
         gap: 0.5em;
         align-items: center;
-        color: var(--subtitleColor);
+        color: var(--info);
         font-weight: 600;
         padding: 0 0.25em 0.25em 0.5em;
     }
@@ -97,14 +97,14 @@
     }
 
     &_label {
-        color: var(--fontSecondColor);
+        color: var(--text-secondary);
         font-size: 0.85em;
         background-color: var(--hover);
         padding: 0.15em 0.5em;
     }
 
     &_count {
-        color: var(--titleColor);
+        color: var(--primary-200);
         font-weight: 500;
         padding: 0 0 0 0.75em;
     }

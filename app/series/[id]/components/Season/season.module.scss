@@ -23,7 +23,7 @@
         box-shadow: 0 0 2px 1px #000000;
 
         &:hover {
-            border-color: var(--highlightColor);
+            border-color: var(--primary-500);
 
             &>.section_picture>.section_overview {
                 opacity: 1;
@@ -37,11 +37,11 @@
         flex-direction: column;
         padding: 0.25em;
         height: 3.75em;
-        background-color: var(--secondaryColor);
+        background-color: var(--surface-a);
 
         &Name {
             font-size: 0.85em;
-            color: var(--fontColor);
+            color: var(--text);
         }
 
         &Time {
@@ -49,7 +49,7 @@
             align-items: center;
             gap: 0.25em;
             font-size: 0.85em;
-            color: var(--fontSecondColor);
+            color: var(--text-secondary);
         }
 
         &Average {
@@ -76,7 +76,7 @@
             font-size: 0.85em;
             line-height: 1.2em;
             font-weight: 300;
-            color: var(--fontColor);
+            color: var(--text);
         }
     }
 

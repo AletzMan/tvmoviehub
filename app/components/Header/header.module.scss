@@ -1,6 +1,6 @@
 .header {
     height: 6em;
-    border-radius: var(--terciaryColor);
+    border-radius: var(--surface-b);
     z-index: 2;
     background: linear-gradient(#000000ee 40%, transparent 100%);
 
@@ -22,8 +22,8 @@
     justify-self: flex-end;
     width: 3em;
     height: 3em;
-    border: 1px solid var(--terciaryColor);
-    background-color: var(--primaryColor);
+    border: 1px solid var(--surface-b);
+    background-color: var(--surface-base);
     border-radius: 1em;
     cursor: pointer;
     transition: all 0.25s ease-in-out;
@@ -34,7 +34,7 @@
     }
 
     &_icon {
-        color: var(--fontColor);
+        color: var(--text);
         width: 2em;
         height: 2em;
     }
@@ -48,7 +48,7 @@
     justify-self: flex-start;
 
     &_logo {
-        color: var(--highlightColor);
+        color: var(--primary-500);
         height: 4em;
         filter: drop-shadow(0 0 2px #000000);
 
@@ -62,7 +62,7 @@
         align-items: flex-end;
         justify-content: center;
         gap: 0.25em;
-        color: var(--fontColor);
+        color: var(--text);
     }
 }
 
@@ -77,20 +77,20 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        color: var(--fontColor);
+        color: var(--text);
         border: none;
         width: 3em;
         height: 3em;
         border-radius: 0.25em;
         background-size: 200% 200%;
-        background: linear-gradient(-12deg, var(--primaryColor), var(--secondaryColor));
-        border: 1px solid var(--terciaryColor);
+        background: linear-gradient(-12deg, var(--surface-base), var(--surface-a));
+        border: 1px solid var(--surface-b);
         transition: all 0.3s ease-in-out;
         cursor: pointer;
 
         &:hover {
             filter: brightness(140%);
-            background: linear-gradient(-12deg, var(--secondaryColor), var(--hover));
+            background: linear-gradient(-12deg, var(--surface-a), var(--hover));
         }
     }
 
@@ -140,7 +140,7 @@
     border-radius: 0.5em;
     max-width: 30em;
     min-width: 30em;
-    border: 1px solid var(--terciaryColor);
+    border: 1px solid var(--surface-b);
 
     @media (width < 820px) {
         display: none;
@@ -148,7 +148,7 @@
 
     &_item {
         position: relative;
-        color: var(--fontSecondColor);
+        color: var(--text-secondary);
         border-radius: 0.4em;
         text-decoration: none;
         padding: 0.5em 1.5em;
@@ -157,13 +157,13 @@
 
         &:hover:not(.navigation_itemCurrent) {
             background: var(--hover);
-            color: var(--fontColor);
+            color: var(--text);
         }
 
         &Current {
-            //background-color: var(--secondaryColor);
-            background-color: var(--primaryColor);
-            color: var(--highlightColor);
+            //background-color: var(--surface-a);
+            background-color: var(--surface-base);
+            color: var(--primary-500);
             font-weight: 600;
             pointer-events: none;
         }
@@ -175,7 +175,7 @@
             width: 2.5em;
             height: 2.5em;
             opacity: 0.08;
-            color: var(--fontColor);
+            color: var(--text);
         }
     }
 
@@ -208,13 +208,13 @@
     }
 
     &_user {
-        color: var(--fontColor);
+        color: var(--text);
     }
 
     &_arrow {
         width: 1.5em;
         height: 1.5em;
-        color: var(--fontColor);
+        color: var(--text);
     }
 
     &_menu {
@@ -223,7 +223,7 @@
         right: 1.5em;
         padding: 1em 0;
         border-radius: 0.25em;
-        background-color: var(--terciaryColor);
+        background-color: var(--surface-b);
         //transition: all 0.3s ease-in-out 5s;
         transform: translateY(3em);
         //transform-origin: top center;
@@ -250,7 +250,7 @@
             right: 1em;
             border-left: 12px solid transparent;
             border-right: 12px solid transparent;
-            border-bottom: 10px solid var(--terciaryColor);
+            border-bottom: 10px solid var(--surface-b);
         }
 
 
@@ -261,7 +261,7 @@
             font-size: 0.9em;
             padding: 0.25em 0.5em 0.25em 0.75em;
             text-decoration: none;
-            color: var(--fontColor);
+            color: var(--text);
             font-family: var(--font-family);
             background-color: transparent;
             border: none;
@@ -269,12 +269,12 @@
             transition: all 0.3s ease-in-out;
 
             &Current {
-                background-color: var(--highlightColor);
+                background-color: var(--primary-500);
                 pointer-events: none;
             }
 
             &:hover:not(.login_menuLinkCurrent) {
-                background-color: var(--fourthColor);
+                background-color: var(--surface-c);
             }
         }
 

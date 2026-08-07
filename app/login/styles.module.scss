@@ -14,14 +14,14 @@
     width: 100%;
     max-width: 20em;
     border-radius: 0.25em;
-    box-shadow: 0 0 3px 6px var(--primaryColor);
-    background-color: var(--secondaryColor);
+    box-shadow: 0 0 3px 6px var(--surface-base);
+    background-color: var(--surface-a);
 
     &_icon {
         align-self: center;
         width: 4em;
         height: 4em;
-        color: var(--fontSecondColor);
+        color: var(--text-secondary);
         opacity: 0.5;
     }
 
@@ -33,7 +33,7 @@
     &_link {
         align-self: flex-end;
         font-size: 0.75em;
-        color: var(--subtitleColor);
+        color: var(--info);
     }
 
     &_button {
@@ -48,11 +48,11 @@
 
     &_text {
         font-size: 0.75em;
-        color: var(--fontSecondColor);
+        color: var(--text-secondary);
     }
 
     &_link {
         padding: 0 0 0 0.25em;
-        color: var(--subtitleColor);
+        color: var(--info);
     }
 }

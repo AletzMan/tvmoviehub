@@ -20,8 +20,8 @@
         //border-color: var(--hover);
         filter: opacity(1) brightness(110%);
         background: linear-gradient(0deg, #FFFFFF15, transparent);
-        //box-shadow: 0 0 4px 2px var(--highlightColor);
-        border: 1px solid var(--highlightColor);
+        //box-shadow: 0 0 4px 2px var(--primary-500);
+        border: 1px solid var(--primary-500);
 
 
 
@@ -58,7 +58,7 @@
         height: 15em;
         object-position: center top;
         transition: all 0.3s ease-in-out;
-        //border: 2px solid var(--highlightColor);
+        //border: 2px solid var(--primary-500);
     }
 
     &_shadow {
@@ -77,12 +77,12 @@
         justify-content: flex-start;
         padding: 0.15em 0.25em;
         width: 100%;
-        background-color: var(--terciaryColor);
+        background-color: var(--surface-b);
         min-height: 2.9em;
     }
 
     &_name {
-        color: var(--fontColor);
+        color: var(--text);
         font-size: 0.8em;
         max-lines: 1;
         overflow-wrap: break-word;
@@ -91,7 +91,7 @@
     }
 
     &_age {
-        color: var(--fontSecondColor);
+        color: var(--text-secondary);
         font-size: 0.8em;
     }
 
@@ -100,7 +100,7 @@
         position: absolute;
         top: 0.25em;
         left: 0.25em;
-        color: var(--fontColor);
+        color: var(--text);
         background-color: transparent;
         border: none;
         transition: all 0.25s ease-in-out;
@@ -135,11 +135,11 @@
             height: 3em;
             border-radius: 3em;
             overflow: hidden;
-            background-color: var(--highlightColorBasic);
+            background-color: var(--primary-600);
             transition: all 0.3s ease-in-out;
 
             &:hover {
-                background-color: var(--highlightColor);
+                background-color: var(--primary-500);
             }
         }
 

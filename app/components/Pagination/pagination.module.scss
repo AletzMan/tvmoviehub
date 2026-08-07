@@ -4,7 +4,7 @@
     justify-content: center;
     column-gap: 0.25em;
     padding: 0.25em;
-    border: 1px solid var(--terciaryColor);
+    border: 1px solid var(--surface-b);
     background-color: var(--hover);
 
     &_button {
@@ -21,18 +21,18 @@
         border-radius: 0.25em;
         border: none;
         transition: all 0.25s ease-in-out;
-        color: var(--fontColor);
-        background-color: var(--terciaryColor);
+        color: var(--text);
+        background-color: var(--surface-b);
         cursor: pointer;
 
         &:hover {
-            color: var(--fontColor);
-            background-color: var(--highlightColor);
+            color: var(--text);
+            background-color: var(--primary-500);
         }
 
         &Current {
-            color: var(--fontColor);
-            background-color: var(--highlightColor);
+            color: var(--text);
+            background-color: var(--primary-500);
             pointer-events: none;
         }
 

@@ -28,8 +28,8 @@
         max-height: 15em;
         height: 100%;
         border-radius: 0.25em;
-        background-color: var(--primaryColor);
-        border: 1px solid var(--fourthColor);
+        background-color: var(--surface-base);
+        border: 1px solid var(--surface-c);
     }
 
     &_text {
@@ -39,7 +39,7 @@
         justify-content: center;
         text-align: center;
         padding: 1em;
-        color: var(--fontColor);
+        color: var(--text);
         height: 100%;
         width: 100%;
     }
@@ -47,7 +47,7 @@
     &_p {}
 
     &_pc {
-        color: var(--subtitleColor);
+        color: var(--info);
     }
 
     &_footer {

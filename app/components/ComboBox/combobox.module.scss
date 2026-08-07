@@ -6,8 +6,8 @@
     min-width: 8em;
     border-radius: 0.25em;
     font-family: var(--font-family);
-    color: var(--fontColor);
-    background-color: var(--highlightColorBasic);
+    color: var(--text);
+    background-color: var(--primary-600);
     font-family: var(--font-family);
 }
 
@@ -22,6 +22,6 @@
     &_label {
         font-size: 0.85em;
         padding: 0 0 0 0.5em;
-        color: var(--fontSecondColor);
+        color: var(--text-secondary);
     }
 }

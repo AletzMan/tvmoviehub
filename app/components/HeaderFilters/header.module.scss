@@ -13,13 +13,13 @@
     }
 
     &_title {
-        color: var(--fontColor);
+        color: var(--text);
     }
 
     &_icon {
         width: 2.5em;
         height: 2.5em;
-        color: var(--fontSecondColor);
+        color: var(--text-secondary);
         animation: animation;
     }
 

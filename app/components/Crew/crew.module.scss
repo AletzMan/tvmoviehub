@@ -2,8 +2,8 @@
     padding: 0.5em;
 
     &_title {
-        color: var(--highlightColor);
-        border-bottom: 1px solid var(--highlightColor);
+        color: var(--primary-500);
+        border-bottom: 1px solid var(--primary-500);
         margin: 0.25em 0 0.5em 0;
     }
 
@@ -19,15 +19,15 @@
     }
 
     &_people {
-        color: var(--fontSecondColor);
+        color: var(--text-secondary);
         padding: 0 0.75em;
-        border-right: 1px solid var(--fontSecondColor);
+        border-right: 1px solid var(--text-secondary);
         transition: all 0.3s ease-in-out;
         cursor: pointer;
         min-width: max-content;
 
         &:hover {
-            color: var(--fontColor);
+            color: var(--text);
         }
     }
 }

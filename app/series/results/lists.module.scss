@@ -26,15 +26,15 @@
     justify-content: space-between;
     border-radius: 0.15em;
     padding: 0.15em 0.5em;
-    background: linear-gradient(90deg, var(--highlightColorBasic), var(--highlightHoverColor));
+    background: linear-gradient(90deg, var(--primary-600), var(--primary-900));
 
     &_title {
-        color: var(--fontColor);
+        color: var(--text);
     }
 
     &_icon {
         width: 2.5em;
         height: 2.5em;
-        color: var(--fontSecondColor);
+        color: var(--text-secondary);
     }
 }

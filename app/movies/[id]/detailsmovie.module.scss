@@ -32,7 +32,7 @@
     }
 
     &_title {
-        color: var(--titleColor);
+        color: var(--primary-200);
         text-wrap: pretty;
     }
 
@@ -66,7 +66,7 @@
     }
 
     &_tagline {
-        color: var(--fontColor);
+        color: var(--text);
     }
 
     &_genres {
@@ -81,7 +81,7 @@
         padding: 0.1em 0.5em;
         background-color: #13161b;
         border: 1px solid #FFFFFF28;
-        color: var(--fontColor);
+        color: var(--text);
     }
 
     &_country {
@@ -103,7 +103,7 @@
         &Name {
             font-size: 0.8em;
             font-weight: 500;
-            color: var(--fontColor);
+            color: var(--text);
         }
 
     }
@@ -139,8 +139,8 @@
         padding: 0.1em 0.25em;
         border-radius: 0.25em;
         font-weight: 500;
-        color: var(--primaryColor);
-        background-color: var(--averageColor);
+        color: var(--surface-base);
+        background-color: var(--warning);
     }
 
     &_play {
@@ -163,11 +163,11 @@
         height: 5.5em;
         padding: 0.5em;
         border-radius: 0.25em;
-        background: radial-gradient(circle, var(--terciaryColor), var(--secondaryColor));
-        //border: 1px solid var(--fontColor);
+        background: radial-gradient(circle, var(--surface-b), var(--surface-a));
+        //border: 1px solid var(--text);
 
         &Name {
-            color: var(--fontColor);
+            color: var(--text);
             font-size: 0.7em;
             font-weight: 300;
             text-align: center;
@@ -188,7 +188,7 @@
     }
 
     &_overview {
-        color: var(--fontColor);
+        color: var(--text);
     }
 
     &_buttons {
@@ -212,14 +212,14 @@
     background-color: var(--hover);
 
     &_title {
-        color: var(--fontColor);
+        color: var(--text);
         margin: 0 0 0 0;
         padding: 0.15em 0.5em;
         background: linear-gradient(90deg, var(--hover), transparent);
     }
 
     &_overview {
-        color: var(--fontColor);
+        color: var(--text);
         font-weight: 300;
         font-size: 0.85em;
         max-width: 800px;
@@ -231,7 +231,7 @@
     display: flex;
 
     &_word {
-        background-color: var(--fontColor);
+        background-color: var(--text);
     }
 }
 
@@ -241,11 +241,11 @@
     padding: 0.5em;
 
     &_label {
-        color: var(--fontSecondColor);
+        color: var(--text-secondary);
     }
 
     &_number {
-        color: var(--fontColor);
+        color: var(--text);
         padding: 0 0 0 0.5em;
     }
 }
@@ -274,7 +274,7 @@
         gap: 0.75em;
         padding: 0.5em;
         border-radius: 0.25em;
-        background-color: var(--secondaryColor);
+        background-color: var(--surface-a);
 
         &Mobile {
             @media (width >=975px) {

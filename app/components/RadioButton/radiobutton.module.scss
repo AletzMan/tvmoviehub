@@ -3,7 +3,7 @@
     left: 0;
     height: 2em;
     width: 100%;
-    background-color: var(--terciaryColor);
+    background-color: var(--surface-b);
     border: none;
     opacity: 0;
 
@@ -16,7 +16,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background-color: var(--terciaryColor);
+        background-color: var(--surface-b);
         border: 1px solid var(--hover);
         border-radius: 0.25em;
         overflow: hidden;
@@ -24,7 +24,7 @@
         pointer-events: none;
 
         &Active {
-            background-color: var(--highlightColor);
+            background-color: var(--primary-500);
         }
 
 
@@ -35,7 +35,7 @@
             color: transparent;
 
             &Active {
-                color: var(--fontColor);
+                color: var(--text);
                 animation: iconCheck 0.15s cubic-bezier(.75, .06, .2, 1.18);
 
                 @keyframes iconCheck {
@@ -73,12 +73,12 @@
         column-gap: 0.25em;
         padding: 0.15em 0.25em 0.15em 2em;
         transition: all 0.2s ease-in-out;
-        color: var(--fontColor);
+        color: var(--text);
         font-weight: 500;
         cursor: pointer;
 
         &:hover>.checkbox_check {
-            border-color: var(--highlightColorBasic);
+            border-color: var(--primary-600);
         }
 
         /*&:hover {
