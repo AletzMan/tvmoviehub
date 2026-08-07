@@ -70,6 +70,7 @@ export default function Header() {
                     <div className={styles.mobile}>
                         <Link href="/">
                             <LogoIcon className={styles.mobile_logo} />
+                            <span>MOVIEDECK</span>
                         </Link>
                         {/*<div className={styles.mobile_pathname}>
                             {MainMenu.find(menu => menu.link === section)?.icon}
