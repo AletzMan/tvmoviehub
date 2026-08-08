@@ -35,16 +35,14 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ p
                             <MovieCard key={movie.id} movie={movie} top={index + 1} />
                         ))}
                     </>
-                </MovieSliderGeneral>
-                <div className="separator"></div>
+                </MovieSliderGeneral> 
                 <MovieSliderGeneral title="Populares" list_link="/movies/results/list?sort_by=popularity.desc">
                     <>
                         {popularMovies?.results?.map((movie, index) => (
                             <MovieCard key={movie.id} movie={movie} top={index + 1} />
                         ))}
                     </>
-                </MovieSliderGeneral>
-                <div className="separator"></div>
+                </MovieSliderGeneral> 
                 <MovieSliderGeneral title="Próximamente" list_link={`/movies/results/list?sort_by=popularity.desc&with_release_type=2,3&release_date.gte=${dateStart}&release_date.lte=${dateEnd}`}>
                     <>
                         {upcomingMovies?.results?.map((movie, index) => (
