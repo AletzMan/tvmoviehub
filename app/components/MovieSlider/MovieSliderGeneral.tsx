@@ -20,27 +20,30 @@ interface Props {
 }
 
 export const MovieSliderGeneral = ({ title, children, list_link }: Props) => {
-    const settings = {
+   const settings = {
         infinite: false,
         speed: 700,
-        slidesToScroll: 1,
+        slidesToShow: 5,     
+        slidesToScroll: 1,     // <--- Crucial: Permite que avance de 1 en 1 de forma fluida sin romper el cálculo de anchos
+        variableWidth: true, 
+        swipe: true,         
+        swipeToSlide: true,    // <--- Permite arrastrar de forma natural y libre hasta el límite
         autoplay: false,
-        autoplaySpeed: 500,
-        arrows: true,
-        dots: false,
-        rows: 1,
+        arrows: true, 
+        dots: false, 
+        rows: 1, 
         nextArrow: <NextArrow />,
         prevArrow: <PrevArrow />
     }
 
     return (
-        <div className={styles.slider} >
-            <header className={styles.slider_header} >
+        <div className={styles.slider}>
+            <header className={styles.slider_header}>
                 <h4 className={styles.slider_title}>{title}</h4>
                 {list_link && <Link className={styles.slider_view} href={`${list_link}&page=1`}>Ver todo</Link>}
             </header>
-            <div className={styles.slider_container}  >
-                <Slider {...settings} swipeToSlide swipe variableWidth>
+            <div className={styles.slider_container}>
+                <Slider {...settings}>
                     {children}
                 </Slider>
             </div>

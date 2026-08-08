@@ -1,19 +1,41 @@
 .slider {
     display: flex;
     flex-direction: column;
-    //background-color: var(--hover);
-    height: max-content;
-    width: calc(100svw - 0.5em);
+    //background-color: var(--hover); 
+    width: 100%;
     max-width: var(--maxWidthContent);
 
 
 
     &_header {
+        position: relative;
         display: flex;
         justify-content: space-between;
-        padding: 0.25em 0.5em;
-        width: calc(100% - 4em);
-        background: linear-gradient(90deg, var(--hover), transparent);
+        padding: 0.25em 1.25em; 
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 3px; 
+            border-radius: 0.25em;
+            background: var(--primary-500);
+            z-index: 15; 
+            pointer-events: none; 
+        }
+
+        &::after{
+            content: "";
+            position: absolute; 
+            right: 0;
+            bottom: 0;
+            height: 1px;
+            width: 100%;  
+            background: linear-gradient(to left, var(--surface-b), transparent);  
+            pointer-events: none;
+        }
 
         @media (width < 700px) {
             width: calc(100% - 2em);
@@ -23,16 +45,45 @@
     &_title {
         color: var(--text);
         margin: 0 0 0 0;
-        font-size: 1.2em;
+        font-size: 1.35em;
     }
 
     &_container {
-        margin: 0.5em 1.75em 0em 1.75em;
-        width: calc(100% - 7.5em);
+        position: relative;
+        margin: 0.5em 1.75em 0em 1.75em; 
+        /* width: calc(100% - 2.5em);*/
 
 
         @media (width < 700px) {
             width: calc(100% - 5.5em);
+        }
+
+        &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 1.5em;
+            /* Ancho del área difuminada */
+            background: linear-gradient(to right, var(--surface-base), transparent);
+            z-index: 15;
+            /* Por encima de las tarjetas pero debajo de las flechas */
+            pointer-events: none;
+            /* Permite hacer clic y scroll a través del difuminado */
+        }
+
+        /* Difuminado derecho */
+        &::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 3.5em;
+            background: linear-gradient(to left, var(--surface-base), transparent);
+            z-index: 15;
+            pointer-events: none;
         }
     }
 
@@ -43,9 +94,8 @@
         font-size: 0.8em;
         padding: 0.15em 0.75em;
         text-decoration: none;
-        border-radius:  var(--radius-sm);
-        color: var(--text-secondary);
-        background-color: var(--hover);
+        border-radius: var(--radius-sm);
+        color: var(--text-secondary); 
         transition: color 0.25s ease-in-out;
 
         &:hover {
