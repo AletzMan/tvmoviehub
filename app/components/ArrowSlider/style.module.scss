@@ -8,28 +8,25 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: all 0.2s ease-in-out;
-    border: 1px solid var(--hover);
+    transition: all 0.2s ease-in-out; 
+    z-index: 20; 
 
     &_right {
-        right: -25px;
-        border-radius: 0 0.25em 0.25em 0;
-        background-color: var(--hover);
+        right: -30px;
+        border-radius: 0 0.25em 0.25em 0; 
     }
 
     &_left {
-        left: -25px;
+        left: -30px;
         border-radius: 0.25em 0 0 0.25em;
-        background-color: var(--hover);
     }
 
     &::before {
         border-radius: 0;
     }
 
-    &:hover {
-        border-color: var(--primary-600);
-        background-color: var(--primary-900);
+    &:hover { 
+        background-color: color-mix(in srgb, var(--text) 3%, transparent 95%);
 
         &>svg {
             color: var(--primary-500);

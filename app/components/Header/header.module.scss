@@ -12,6 +12,7 @@
     background: color-mix(in srgb,  var(--surface-base) 90%, transparent 10%);
     backdrop-filter: blur(2px);
     border-bottom: 1px solid var(--surface-a);
+    z-index: 9999;
 
     &_container {
         display: grid;
