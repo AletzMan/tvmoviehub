@@ -1,8 +1,16 @@
 .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100svw;
     height: 4.5em;
     border-radius: var(--surface-b);
     z-index: 2;
-    background: linear-gradient(#000000ee 40%, transparent 100%);
+    background: color-mix(in srgb,  var(--surface-base) 90%, transparent 10%);
+    backdrop-filter: blur(2px);
     border-bottom: 1px solid var(--surface-a);
 
     &_container {
@@ -12,7 +20,7 @@
         place-items: center center;
         height: 100%;
         width: 100%;
-        background: transparent;
+        max-width: var(--maxWidth);
     }
 }
 
@@ -207,11 +215,12 @@
             }
         }
 
-        & > svg {
+        &>svg {
             display: none;
         }
     }
 }
+
 .login {
     display: flex;
     align-items: center;
