@@ -11,47 +11,49 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.25em;
-    border-radius:  var(--radius-sm); 
-    transition: all 0.25s ease-in-out;
+    gap: 0.5em;
+    border-radius: var(--radius-sm); 
     text-decoration: none;
 
     &:hover {
-
-        &>.person_picture {
+        .person_picture {
             border-color: var(--primary-300);
         }
 
-        &>.person_name {
+        .person_name {
             color: var(--primary-500);
         }
 
-        &>.person_picture>.person_image {
-            transform: scale(1.1);
+        .person_image {
+            transform: scale(1.08); // Zoom más fluido y elegante
         }
     }
 
-
     &_picture {
         display: flex;
-        align-items: flex-start;
+        align-items: center;
         justify-content: center;
         width: 7.5em;
         height: 7.5em;
-        border-radius: 5em;
+        border-radius: 50%; // Estándar robusto para avatares circulares
         overflow: hidden;
         border: 2px solid var(--surface-a);
+        transition: border-color 0.25s ease-in-out;
     }
 
     &_image {
-        object-fit: cover;
         width: 100%;
+        height: 100%;
+        object-fit: cover;
         object-position: center center;
-        transition: all 0.3s ease-in-out;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); // Curva de aceleración más natural
     }
 
     &_name {
         color: var(--text);
+        font-size: 0.95em;
+        font-weight: 500;
+        text-align: center;
         transition: color 0.3s ease-in-out;
     }
 
@@ -65,19 +67,20 @@
         align-items: center;
         justify-content: center;
         border-radius: 0.35em;
+        z-index: 2;
 
         &Icon {
             position: absolute;
             width: 2.75em;
             height: 2.75em;
             color: var(--primary-200);
+            pointer-events: none;
         }
 
         &Number {
             color: var(--surface-a);
             font-size: 0.8em;
             font-weight: 600;
-            width: 3em;
             text-align: center;
             z-index: 1;
         }

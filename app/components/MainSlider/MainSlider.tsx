@@ -70,7 +70,7 @@ const settings = {
     customPaging: function (i: number) {
         return (
             <a className={styles.slider_dots}>
-                {i}
+                {i}s
             </a>
         )
     },
