@@ -61,13 +61,9 @@
 	margin: 0;
 }
 
-html,
-body {
-	overflow-x: hidden;
-	overflow-y: hidden;
-}
+ 
 
-body {
+body { 
 	background: radial-gradient(circle, var(--surface-base), var(--surface-base));
 }
 
@@ -167,4 +163,10 @@ body {
 	color: transparent;
 	width: 3.2em !important;
 	opacity: 1;
+}
+
+.slick-track {
+	display: flex;
+	align-items: center;
+	gap: 0.5em !important;
 }
