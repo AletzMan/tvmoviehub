@@ -7,8 +7,8 @@ import { SerieCardUpcoming } from "../components/SerieCardUpcoming/SerieCardUpco
 import { ISerieResponse } from "../interfaces/responses"
 import styles from "./series.module.scss"
 import { ISerie } from "../interfaces/serie"
-import { FormattedDate, FormattedDateSearch } from "../utils/helpers"
-import { GetOnTheAirSeries, GetPopularSeries, GetSeriesAiringToday, GetTopRatedSeries } from "../services/fetchData"
+import {   FormattedDateSearch } from "../utils/helpers"
+import { GetOnTheAirSeries, GetPopularSeries, GetSeriesAiringToday, GetTopRatedSeries } from "../services/fetchData" 
 
 
 export default async function Page({ searchParams }: { searchParams: Promise<{ page: number }> }) {

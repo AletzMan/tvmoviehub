@@ -1,12 +1,17 @@
 "use client"
 
-import { CSSProperties, HTMLAttributes, MouseEventHandler, ReactNode } from "react"
+import { ReactNode } from "react"
 import styles from "./movieslider.module.scss"
-import Slider from "react-slick"
-import "slick-carousel/slick/slick" 
-import Link from "next/link"
-import { ArrowLeftIcon } from "@/app/utils/svg"
+import dynamic from "next/dynamic"
+import Link from "next/link" 
 import { NextArrow, PrevArrow } from "../ArrowSlider/ArrowSlider"
+
+// Importamos react-slick de forma dinámica para evitar problemas con SSR
+const Slider = dynamic(() => import("react-slick"), { ssr: false })
+
+// Importamos únicamente los estilos CSS necesarios para que funcione visualmente
+import "slick-carousel/slick/slick.css"
+import "slick-carousel/slick/slick-theme.css"
 
 interface Props {
     title: string
@@ -15,7 +20,6 @@ interface Props {
 }
 
 export const MovieSliderGeneral = ({ title, children, list_link }: Props) => {
-
     const settings = {
         infinite: false,
         speed: 700,

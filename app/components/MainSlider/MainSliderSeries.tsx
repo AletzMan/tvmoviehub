@@ -4,7 +4,7 @@ import styles from "./mainslider.module.scss"
 import Image from "next/image"
 import { BASE_URL_IMG } from "@/app/utils/const"
 import { useEffect, useState } from "react"
-import { AddIcon, StarIcon } from "@/app/utils/svg"
+import { AddIcon, PlayIcon, StarIcon } from "@/app/utils/svg"
 import { ISerie } from "@/app/interfaces/serie"
 import Link from "next/link"
 import { NextArrow, PrevArrow } from "../ArrowSlider/ArrowSlider"
@@ -32,32 +32,44 @@ export const MainSliderSeries = ({ movies }: Props) => {
 
 
     return (
-        <article className={styles.article}>
-            <Slider  {...settings} >
-                {carouselMovies.map((movie, index) => (
-                    <div key={`${movie.id}-${index}`} className={styles.movie} >
-                        <div className={styles.movie_cover}>
-                            <div className={styles.movie_description}>
-                                <h3 className={styles.movie_title}>{movie.name}</h3>
-                                <h4 className={styles.movie_subtitle}>{`(${movie.original_name})`}</h4>
-                                <div className={styles.movie_details}>
-                                    <p className={styles.movie_average}><StarIcon className={styles.movie_icon} />{movie.vote_average.toFixed(1)}</p>
-                                    <Link className={styles.movie_info} href={`/series/${movie.id}`}><AddIcon className={styles.movie_icon} /> MÁS INFORMACIÓN</Link>
-                                </div>
-
+       <article className={styles.article}>
+    <Slider {...settings}>
+        {carouselMovies.map((movie, index) => (
+            <div key={`${movie.id}-${index}`} className={styles.movie}>
+                <div className={styles.movie_cover}>
+                    <div className={styles.movie_description}>
+                        <div className={styles.movie_details}>
+                            <div className={styles.movie_average}>
+                                <StarIcon className={styles.movie_icon} />
+                                <span>{movie.vote_average.toFixed(1)}</span>
                             </div>
+                            {movie.first_air_date && (
+                                <span className={styles.movie_age}>
+                                    {movie.first_air_date.split("-")[0]}
+                                </span>
+                            )}
                         </div>
-                        <Image
-                            className={styles.movie_image}
-                            src={BASE_URL_IMG.concat(movie.backdrop_path)}
-                            width={1980}
-                            height={900}
-                            alt={`Cover de ${movie.name}`}
-                        />
+                        <h3 className={styles.movie_title}>{movie.name}</h3>
+                        <h4 className={styles.movie_subtitle}>{`(${movie.original_name})`}</h4>
+                        <div className={styles.movie_details}>
+                            <Link className={styles.movie_info} href={`/series/${movie.id}`}>
+                                <PlayIcon className={styles.movie_icon} /> VER DETALLES
+                            </Link>
+                        </div>
                     </div>
-                ))}
-            </Slider>
-        </article>
+                </div>
+                <Image
+                    className={styles.movie_image}
+                    src={BASE_URL_IMG.concat(movie.backdrop_path)}
+                    width={1980}
+                    height={900}
+                    priority
+                    alt={`Cover de ${movie.name}`}
+                />
+            </div>
+        ))}
+    </Slider>
+</article>
     )
 }
 

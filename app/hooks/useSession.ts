@@ -25,7 +25,7 @@ export function useSession() {
                 })
             }
         }
-    }, [pathname, localStorage.length])
+    }, [pathname])
 
     return session
 }
