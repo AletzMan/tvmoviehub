@@ -30,13 +30,13 @@
 	--text: #F8FAFC;
 	--text-secondary: #A4A8B3;
 	--text-muted: #737883;
- 
-	 
-	  /* Semantic */
-    --info: #38BDF8;
-    --success: #22C55E;
-    --warning: #F59E0B;
-    --danger: #EF4444;
+
+
+	/* Semantic */
+	--info: #38BDF8;
+	--success: #22C55E;
+	--warning: #F59E0B;
+	--danger: #EF4444;
 
 	/* Hover */
 	--hover: rgba(50, 95, 220, 0.1);
@@ -45,12 +45,14 @@
 	--border: #323744;
 
 	/* Radius */
+	--radius-xs: 0.125em;
 	--radius-sm: 0.25em;
+	--radius-md: 0.5em;
 
-	--maxWidth: 1920px;
-	--maxWidthContent: 1550px;
+	--maxWidth: 1420px;
+	--maxWidthContent: 1415px;
 	--maxWidthSlider: 1920px;
-	--heightHeader: calc(100svh - 6em);
+	--heightHeader: calc(100svh );
 }
 
 * {
@@ -61,7 +63,6 @@
 
 html,
 body {
-	max-width: 100svw;
 	overflow-x: hidden;
 	overflow-y: hidden;
 }
@@ -128,18 +129,31 @@ body {
 }
 
 .slick-dots {
-	background-color: var(--surface-a) !important;
+	position: absolute;
+	top: calc(100% - 2.5em);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: transparent;
+	backdrop-filter: blur(2px);
+	z-index: 10;
+
+	@media (width < 700px) {
+		display: none !important;
+	}
 }
 
 .slick-dots li {
 	margin: 0.5em 0.35em 0.35em 0.35em !important;
-	background: radial-gradient(circle, var(--text-secondary), var(--surface-c));
+	background-color: var(--surface-d);
 	opacity: 0.4;
-	border-radius: 1em;
-	width: 0.8em !important;
-	height: 0.8em !important;
+	border-radius: var(--radius-sm);
+	width: 1.4em !important;
+	height: 0.35em !important;
 	color: transparent;
 	transition: all 0.25s ease-in-out;
+
+
 
 	&:hover {
 		background: radial-gradient(circle, var(--primary-500), var(--primary-600));
@@ -149,9 +163,8 @@ body {
 }
 
 .slick-dots .slick-active {
-	background: radial-gradient(circle, var(--primary-500), var(--primary-600));
-	box-shadow: 0 0 3px 2px var(--primary-500);
+	background: var(--primary-500);
 	color: transparent;
-	width: 2.4em !important;
+	width: 3.2em !important;
 	opacity: 1;
 }
