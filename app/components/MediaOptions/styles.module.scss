@@ -5,7 +5,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
+    z-index: 5;
+    
+    
     &_button {
         display: flex;
         align-items: center;
@@ -13,25 +15,25 @@
         width: 2em;
         height: 2em;
         border: none;
-        border-radius:  var(--radius-sm);
-        background-color: #FFFFFF25;
-        color: var(--text);
-        z-index: 2;
-        transition: all 0.25s ease-in-out;
+        background-color: transparent; // Cero cajas o fondos pesados
+        color: #FFFFFF;
         cursor: pointer;
+        transition: transform 0.2s ease;
 
         &:hover {
-            background-color: #FFFFFF60;
+            transform: scale(1.1);
 
             &>svg {
-                color: #FFFFFFDD;
+                color: var(--primary-300); // Se ilumina con tu color dorado al pasar el cursor
             }
         }
 
         &>svg {
-            width: 1.5em;
-            height: 1.5em;
-            color: #FFFFFF60;
+            width: 1.4em;
+            height: 1.4em;
+            color: #FFFFFF;
+            // Sombra sutil alrededor del icono para que se lea perfecto con cualquier fondo de imagen
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.9)); 
         }
     }
 
@@ -39,7 +41,6 @@
         list-style: none;
         position: relative;
     }
-
 }
 
 .menu {

@@ -63,6 +63,8 @@ function MediaOptionsContent({ id, type, title, viewMenu, setViewMenu }: Props) 
     }
 
     const keyHandler = (event: KeyboardEvent<HTMLDivElement>) => {
+        event.preventDefault()
+        event.stopPropagation()
         if (event.key === "Escape" && viewMenu) {
             setViewMenu(false)
         }
