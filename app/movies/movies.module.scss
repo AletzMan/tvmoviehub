@@ -6,7 +6,8 @@
     grid-column: 2 / 3;
     grid-row: 2 / 3;
     width: 100%;
-    height: var(--heightHeader);
+    height: var(--heightHeader); 
+    margin: 4.5rem 0 0 0;
 
     @media (width < 700px) {
         grid-column: 1 / span 2;

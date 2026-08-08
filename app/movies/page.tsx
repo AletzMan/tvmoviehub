@@ -13,8 +13,7 @@ import { IMovie } from "../interfaces/movie"
 export const dynamic = "force-dynamic"
 
 export default async function Page({ searchParams }: { searchParams: Promise<{ page?: string }> }) {
-    const currentTheatres: IMovie[] = (await GetNowPlaying()) || []
-
+    const currentTheatres: IMovie[] = (await GetNowPlaying()) || [] 
     const params = await searchParams
     const page = Number(params.page) || 1
 
@@ -26,8 +25,8 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ p
     const dateEnd = FormattedDateSearch(new Date(Date.UTC(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() + 90)).toISOString())
 
     return (
-        <section className={`${styles.section} scrollBarStyle`}>
-            <MainSlider movies={currentTheatres?.filter((_, index) => index < 10) || []} />
+        <section className={`${styles.section} `}>
+            <MainSlider movies={currentTheatres?.filter((_, index) => index < 10) || []} />s
             <div className={styles.content}>
                 <CategorySlider type="movie" />
                 <MovieSliderGeneral title="Mejor Valoradas" list_link="/movies/results/list?sort_by=vote_average.desc&without_genres=99,10755&vote_count.gte=200">

@@ -29,7 +29,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ p
 
 
     return (
-        <section className={`${styles.section} scrollBarStyle`}>
+        <section className={`${styles.section}`}>
             <MainSliderSeries movies={airingToday?.filter((_, index) => index < 10) as ISerie[] || []} />
             <div className={styles.content}>
 

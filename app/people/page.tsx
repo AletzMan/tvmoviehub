@@ -7,11 +7,8 @@ import { PersonCard } from "./components/PersonCard/PersonCard"
 import styles from "./people.module.scss"
 
 export default async function Page({ searchParams }: { searchParams: Promise<{ page: number }> }) {
-
-
     const params = await searchParams
     const page = params.page || 1
-
     const popularPeople: IPeopleResponse = await GetPeoplePopular(page)
 
     return (

@@ -23,7 +23,7 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className={jost.className}>
+      <body className={`${jost.className} scrollBarStyle`}>
         <main className={`${styles.main} `} >
           <Header />
           {children}

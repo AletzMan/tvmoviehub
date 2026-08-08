@@ -14,7 +14,7 @@ export default async function Home() {
   const dataPeople: IPeopleResponse = await GetPeoplePopular(1)
 
   return (
-    <section className={`${styles.home} scrollBarStyle`}>
+    <section className={`${styles.home} `}>
       <section className={`${styles.section} `}>
         <article className={styles.article}>
           {/*<h3 className={styles.section_title}>PELÍCULAS EN CARTELERA</h3>*/}
