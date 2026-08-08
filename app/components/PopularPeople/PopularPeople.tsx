@@ -12,8 +12,7 @@ type Props = {
     people: IPeople[]
 }
 export const PopularPeople = ({ people }: Props) => {
-    const { setLoadingState } = useLoadingState()
-    console.log("PopularPeople -> people", people)
+    const { setLoadingState } = useLoadingState() 
 
     return (
         <section className={styles.section}>

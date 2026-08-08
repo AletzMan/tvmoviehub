@@ -34,14 +34,12 @@ export default function Header() {
 
 
     const HandleSession = async () => {
-        if (session.session_id) {
-            console.log("LOGIN")
+        if (session.session_id) { 
             localStorage.removeItem("tvmoviehub_sessionid")
             await DeleteCookie()
             HandleSetOpen("account")
             router.refresh()
-        } else {
-            console.log("LOGOUT")
+        } else { 
             router.push(`/login`)
         }
     }

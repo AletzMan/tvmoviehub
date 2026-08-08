@@ -176,19 +176,15 @@ function MediaOptionsContent({ id, type, title, viewMenu, setViewMenu }: Props) 
         const name = event.currentTarget.name
         const status = await CheckItemStatus(value, id)
         if (!status?.item_present) {
-            const response = await AddItemToList(session_id, value, id)
-            console.log(response)
+            const response = await AddItemToList(session_id, value, id) 
             if (response?.status_code === 12) {
                 await RevalidateURL("lists")
-                await RevalidateURL("listMovies")
-                console.log(response?.status_code)
+                await RevalidateURL("listMovies") 
                 enqueueSnackbar(`¡${title} se ha agregado a lista ${name}! `, { variant: "success" })
             } else if (response?.status_code === 8) {
-                enqueueSnackbar(`El elemento ya había sido añadido previamente.`, { variant: "error" })
-                console.log(response?.status_code)
+                enqueueSnackbar(`El elemento ya había sido añadido previamente.`, { variant: "error" }) 
             }
-        } else {
-            console.log(status)
+        } else { 
             enqueueSnackbar(`El elemento ya había sido añadido previamente.`, { variant: "error" })
         }
     }
