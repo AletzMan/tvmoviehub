@@ -9,7 +9,7 @@
     width: 100%;
     height: 32em;
     border-radius: var(--radius-sm);
-    overflow: hidden;
+    overflow: hidden; 
 
     @media (width < 700px) {
         height: 22em;
