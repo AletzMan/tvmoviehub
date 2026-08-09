@@ -26,6 +26,10 @@
         .movie_title {
             color: var(--primary-300);
         }
+
+        .movie_optionsContainer {
+            opacity: 1;
+        }
     }
 
     &_posterWrapper {
@@ -64,7 +68,6 @@
         width: 100%;
     }
 
-    /* Footer en columna limpia */
     &_footer {
         display: flex;
         flex-direction: column;
@@ -131,23 +134,23 @@
         opacity: 0;
         transition: opacity 0.3s ease;
     }
+}
 
-    &_gender {
-        display: flex;
-        align-items: center;
-        font-size: 0.75em;
-        color: var(--text-secondary);
+.gender {
+    display: flex;
+    align-items: center;
+    font-size: 0.75em;
+    color: var(--text-secondary);
 
-        &Female {
-            color: #e034b2;
-            width: 1.5em;
-            height: 1.5em;
-        }
+    &Female {
+        color: #e034b2;
+        width: 1.5em;
+        height: 1.5em;
+    }
 
-        &Male {
-            color: #0080ff;
-            width: 1.5em;
-            height: 1.5em;
-        }
+    &Male {
+        color: #0080ff;
+        width: 1.5em;
+        height: 1.5em;
     }
 }
