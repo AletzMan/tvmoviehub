@@ -1,0 +1,153 @@
+.mediaCard {
+    display: flex;
+    flex-direction: column;
+    min-width: 11em;
+    max-width: 11em;
+    text-decoration: none;
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    scroll-snap-align: start;
+    margin: 1em 0.5em;
+    cursor: pointer;
+    position: relative;
+
+    &:hover {
+        transform: translateY(-6px);
+        z-index: 10;
+
+        .mediaCard_poster {
+            filter: brightness(1.1);
+        }
+
+        .mediaCard_posterWrapper {
+            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.8);
+            border-color: var(--primary-400);
+        }
+
+        .mediaCard_title {
+            color: var(--primary-300);
+        }
+
+        .mediaCard_optionsContainer {
+            opacity: 1;
+        }
+    }
+
+    &_posterWrapper {
+        position: relative;
+        width: 100%;
+        height: 15.5em;
+        border-radius: 6px;
+        overflow: hidden;
+        background-color: var(--surface-a);
+        border: 1px solid var(--border);
+        transition: all 0.3s ease;
+    }
+
+    &_poster {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        transition: transform 0.4s ease;
+
+        .mediaCard:hover & {
+            transform: scale(1.05);
+        }
+    }
+
+    &_overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(0deg, rgba(0, 0, 0, 0.1) 0%, transparent 50%, rgba(3, 7, 18, 0.7) 100%);
+        pointer-events: none;
+    }
+
+    &_rankBadge {
+        position: absolute;
+        top: -0.4em;
+        left: -0.4em;
+        z-index: 5;
+        background-color: var(--primary-500);
+        color: var(--surface-base);
+        font-size: 0.75rem;
+        font-weight: 800;
+        padding: 0.3em 0.6em;
+        border-radius: 4px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+        pointer-events: none;
+    }
+
+    &_meta {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    /* Footer en columna limpia */
+    &_footer {
+        display: flex;
+        flex-direction: column;
+        padding: 0.5em 0.2em;
+        gap: 0.25em;
+    }
+
+    &_title {
+        color: var(--text);
+        font-size: 0.85em;
+        font-weight: 600;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        transition: color 0.2s ease;
+        margin: 0;
+        width: 100%;
+    }
+
+    &_subfooter {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+
+    &_year {
+        color: var(--text-secondary);
+        font-size: 0.75em;
+        font-weight: 400;
+    }
+
+    &_actions {
+        display: flex;
+        align-items: center;
+        gap: 0.5em;
+    }
+
+    &_average {
+        display: flex;
+        align-items: center;
+        gap: 0.2em;
+        font-weight: 700;
+        font-size: 0.75em;
+        color: var(--text);
+
+        span {
+            color: var(--warning);
+        }
+    }
+
+    &_icon {
+        width: 0.85em;
+        height: 0.85em;
+        color: var(--warning);
+    }
+
+    &_optionsContainer {
+        display: flex;
+        position: absolute;
+        align-items: center;
+        top: 0;
+        right: 0;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+}
