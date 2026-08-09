@@ -1,22 +1,29 @@
 .section {
     display: flex;
     flex-direction: column;
-    gap: 0.5em;
-    padding: 0.5em;
+    gap: 1rem;
+    padding: 1rem;
     grid-column: 2 / 3;
-    grid-row: 2 / 3; 
+    grid-row: 2 / 3;
     width: 100%;
-    height: calc(100svh - 4.5rem); 
+    height: calc(100svh - 4.5rem);
     margin: 4.5rem 0 0 0;
-
+    overflow-y: auto;
 
     @media (width < 700px) {
         grid-column: 1 / span 2;
     }
 }
 
-.people {
+// Cuadrícula estilo Bento dinámica
+.peopleBentoGrid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(10em, 1fr));
-    gap: 0.5em;
+    grid-template-columns: repeat(auto-fill, minmax(11em, 1fr));
+    gap: 1.25em;
+    padding-bottom: 2em;
+
+    // Hacemos que el primer elemento destaque ocupando más espacio si la pantalla lo permite
+    @media (min-width: 900px) {
+        grid-template-columns: repeat(8, 1fr);
+    }
 }

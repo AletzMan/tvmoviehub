@@ -14,11 +14,22 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ p
     return (
         <section className={`${styles.section} `}>
             <HeaderSection title="Top personas (Popularidad)" icon={<PopularIcon />} />
-            <div className={`${styles.people} scrollBarStyle`}>
+            <div className={`${styles.peopleBentoGrid} scrollBarStyle`}>
                 {
-                    popularPeople.results.map(person => (
-                        <PersonCard key={person.id} person={person} />
-                    ))
+                    popularPeople.results.map((person, index) => {
+                        const globalIndex = index + 1 + (page - 1) * 20;
+                        // El #1 de la primera página (o el primero de cualquier página) toma el rol principal
+                        const isFeatured = globalIndex === 1 || (page === 1 && index === 0);
+
+                        return (
+                            <PersonCard
+                                key={person.id}
+                                person={person}
+                                rank={globalIndex}
+                                isFeatured={isFeatured}
+                            />
+                        )
+                    })
                 }
             </div>
             <Pagination currentPage={popularPeople.page} totalPages={popularPeople.total_pages > 500 ? 500 : popularPeople.total_pages} />
