@@ -234,7 +234,7 @@ export const GetSearchPeople = async (queryParams: IQueryParamasSeries) => {
 		stringParams += `${"&"}${param[0]}=${param[1]}`
 	})
 
-	const url = `${API_URL_BASE}/search/person?language=${LANGUAGE_MX}&include_adult=true${stringParams}`
+	const url = `${API_URL_BASE}/search/person?language=${LANGUAGE_MX}&include_adult=false${stringParams}`
 	const response = await fetch(url, optionsGET)
 
 	let data: IPeopleResponse = { page: 0, results: [], total_pages: 0, total_results: 0 }
@@ -255,7 +255,7 @@ export const GetSearchMulti = async (queryParams: IQueryParamasSeries) => {
 		stringParams += `${"&"}${param[0]}=${param[1]}`
 	})
 
-	const url = `${API_URL_BASE}/search/multi?language=${LANGUAGE_MX}&include_adult=true${stringParams}`
+	const url = `${API_URL_BASE}/search/multi?language=${LANGUAGE_MX}&include_adult=false${stringParams}`
 	const response = await fetch(url, optionsGET)
 
 	let data: IMultiResponse = { page: 0, results: [], total_pages: 0, total_results: 0 }
@@ -800,9 +800,9 @@ export const CheckItemStatus = async (list_id: string, movie_id: number) => {
 export const GetDetailsList = async (list_id: string, page: number) => {
 	const url = `${API_URL_BASE}/list/${list_id}?page=${page}`
 	const response = await fetch(url, { ...optionsGET, next: { revalidate: 10000, tags: ['lists'] }, })
-	let data: IListDetails | null = null 
+	let data: IListDetails | null = null
 	if (response.status === 200) {
-		const result = (await response.json()) as IListDetails 
+		const result = (await response.json()) as IListDetails
 		return result
 	}
 	return data
@@ -829,7 +829,7 @@ export const AddToWatchList = async (session_id: string, media_type: 'movie' | '
 	let data: IResponseList | null = null
 
 	if (response.status === 200 || response.status === 201) {
-		const result = (await response.json()) as IResponseList 
+		const result = (await response.json()) as IResponseList
 		return result
 	}
 	return data
@@ -848,34 +848,34 @@ export const GetWatchList = async (session_id: string, media_type: 'movies' | 't
 }
 
 export const GetExternalIDs = async (movie_id: number, type: 'movie' | 'tv') => {
-	const url = `${API_URL_BASE}/${type}/${movie_id}/external_ids` 
+	const url = `${API_URL_BASE}/${type}/${movie_id}/external_ids`
 	const response = await fetch(url, {
 		method: "GET",
 		headers: {
 			accept: "application/json",
 			Authorization: `Bearer ${API_KEY}`,
 		}
-	}) 
+	})
 	let data: IExternalIDs | null = null
 	if (response.status === 200) {
-		const result = (await response.json()) as IExternalIDs 
+		const result = (await response.json()) as IExternalIDs
 		return result
 	}
 	return data
 }
 
 export const GetVideos = async (movie_id: number, language: "es-MX" | "en-US", type: 'movie' | 'tv') => {
-	const url = `${API_URL_BASE}/${type}/${movie_id}/videos?language=${language}` 
+	const url = `${API_URL_BASE}/${type}/${movie_id}/videos?language=${language}`
 	const response = await fetch(url, {
 		method: "GET",
 		headers: {
 			accept: "application/json",
 			Authorization: `Bearer ${API_KEY}`,
 		}
-	}) 
+	})
 	let data: IMovieVideos | null = null
 	if (response.status === 200) {
-		const result = (await response.json()) as IMovieVideos 
+		const result = (await response.json()) as IMovieVideos
 		return result
 	}
 	return data
