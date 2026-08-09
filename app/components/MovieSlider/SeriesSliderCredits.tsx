@@ -2,16 +2,17 @@
 
 import styles from "./movieslider.module.scss"
 import Image from "next/image"
-import { BASE_URL_IMG } from "@/app/utils/const"
-import { AddIcon, DetailsIcon, FavoriteFullIcon, MovieIcon, SerieIcon, StarIcon } from "@/app/utils/svg"
-import Link from "next/link"
-import { IParticipationsCast, IParticipationsCrew, ISeriesCast } from "@/app/interfaces/credits"
+import { useRouter } from "next/navigation"
+import { BASE_URL_IMG, URL_IMAGE_NOTCOVER } from "@/app/utils/const"
+import { StarIcon } from "@/app/utils/svg"
+import { ISeriesCast } from "@/app/interfaces/credits"
+import { useRef, PointerEvent, useState } from "react"
 import Slider from "react-slick"
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 import { NextArrow, PrevArrow } from "../ArrowSlider/ArrowSlider"
-import { FavoriteButton } from "../FavoriteButton/FavoriteButton"
 import { useLoadingState } from "@/app/services/store"
+import { MediaOptions } from "../MediaOptions/MediaOptions"
 
 interface Props {
     parts: ISeriesCast[]
@@ -20,6 +21,7 @@ interface Props {
 }
 
 export const SeriesSliderCredits = ({ parts, title, type }: Props) => {
+    const router = useRouter()
     const { setLoadingState } = useLoadingState()
 
     const settings = {
@@ -35,6 +37,12 @@ export const SeriesSliderCredits = ({ parts, title, type }: Props) => {
         prevArrow: <PrevArrow />
     }
 
+    const handleCardClick = (movie: ISeriesCast, isDragging: boolean) => {
+        if (isDragging) return
+        setLoadingState(true)
+        router.push(type === "movie" ? `/movies/${movie.id}` : `/series/${movie.id}`)
+    }
+
     return (
         <div className={styles.slider}>
             {title && <h4 className={styles.cast_title}>{title}</h4>}
@@ -42,28 +50,68 @@ export const SeriesSliderCredits = ({ parts, title, type }: Props) => {
                 {parts?.length > 0 &&
                     <Slider {...settings} variableWidth rows={1} swipeToSlide swipe >
                         {
-                            parts.map(movie => (
-                                <div key={movie.id} className={styles.movie}>
-                                    <div className={styles.movie_picture}>
-                                        {<Image className={styles.movie_photo} src={movie.poster_path ? BASE_URL_IMG.concat(movie.poster_path || '') : "https://raw.githubusercontent.com/AletzMan/ImagesStorage/main/streamin-movie-clone/Image_not_available.jpg"} width={150} height={200} alt={`Poster de ${movie.name}`} />}
+                            parts.map(movie => {
+                                const pointerPos = useRef({ x: 0, y: 0 })
+                                const isDraggingRef = useRef(false)
+                                const [viewMenu, setViewMenu] = useState(false)
+
+                                const handlePointerDown = (e: PointerEvent<HTMLDivElement>) => {
+                                    pointerPos.current = { x: e.clientX, y: e.clientY }
+                                    isDraggingRef.current = false
+                                }
+
+                                const handlePointerMove = (e: PointerEvent<HTMLDivElement>) => {
+                                    const dx = Math.abs(e.clientX - pointerPos.current.x)
+                                    const dy = Math.abs(e.clientY - pointerPos.current.y)
+                                    if (dx > 5 || dy > 5) {
+                                        isDraggingRef.current = true
+                                    }
+                                }
+
+                                return (
+                                    <div
+                                        key={movie.id}
+                                        className={styles.movie}
+                                        onPointerDown={handlePointerDown}
+                                        onPointerMove={handlePointerMove}
+                                        onClick={() => handleCardClick(movie, isDraggingRef.current)}
+                                    >
+                                        <div className={styles.movie_posterWrapper}>
+                                            <Image
+                                                className={styles.movie_poster}
+                                                src={movie.poster_path ? BASE_URL_IMG.concat(movie.poster_path) : URL_IMAGE_NOTCOVER}
+                                                width={200}
+                                                height={300}
+                                                alt={`Poster de ${movie.name}`}
+                                                draggable={false}
+                                            />
+                                            <div className={styles.movie_overlay}></div>
+                                        </div>
+
+                                        <div className={styles.movie_footer}>
+                                            <div>
+                                                <h4 className={styles.movie_title} title={movie.name}>{movie.name}</h4>
+                                                <div className={styles.movie_meta}>
+                                                    <span className={styles.movie_year}>
+                                                        {movie.first_air_date ? new Date(movie.first_air_date).getFullYear() : "N/A"}
+                                                    </span>
+                                                    <div className={styles.movie_average}>
+                                                        <StarIcon className={styles.movie_icon} />
+                                                        <span>{movie.vote_average.toFixed(1)}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div
+                                                onClick={(e) => e.stopPropagation()}
+                                                className={styles.movie_optionsContainer}
+                                            >
+                                                <MediaOptions id={movie.id} type={type} title={movie.name} viewMenu={viewMenu} setViewMenu={setViewMenu} />
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div className={styles.movie_shadow}></div>
-                                    <div className={styles.movie_dialog}>
-                                        <Link className={styles.movie_dialogMore} href={type === "movie" ? `/movies/${movie.id}` : `/series/${movie.id}`} title={movie.name} onClick={() => setLoadingState(true)}>
-                                            <DetailsIcon className={styles.movie_dialogIcon} />
-                                        </Link>
-                                    </div>
-                                    <span className={styles.movie_average}><StarIcon className={styles.movie_iconDate} />{movie.vote_average.toFixed(1)}</span>
-                                    <FavoriteButton id={movie.id} title={movie.name} type="movie" />
-                                    <div className={styles.movie_description}>
-                                        {type === "movie" && <span className={styles.movie_type}><MovieIcon className={styles.movie_typeIcon} />Película</span>}
-                                        {type === "tv" && <span className={styles.movie_type}><SerieIcon className={styles.movie_typeIcon} />Serie</span>}
-                                        <span className={styles.movie_name}>{movie?.name}</span>
-                                        <span className={styles.movie_age}>{movie?.first_air_date !== "" ? new Date(movie?.first_air_date).getFullYear() : "Sin registro"}</span>
-                                        <span className={styles.movie_job}>{movie.job}</span>
-                                    </div>
-                                </div>
-                            ))
+                                )
+                            })
                         }
                     </Slider>
                 }
