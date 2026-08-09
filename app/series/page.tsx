@@ -7,8 +7,8 @@ import { SerieCardUpcoming } from "../components/SerieCardUpcoming/SerieCardUpco
 import { ISerieResponse } from "../interfaces/responses"
 import styles from "./series.module.scss"
 import { ISerie } from "../interfaces/serie"
-import {   FormattedDateSearch } from "../utils/helpers"
-import { GetOnTheAirSeries, GetPopularSeries, GetSeriesAiringToday, GetTopRatedSeries } from "../services/fetchData" 
+import { FormattedDateSearch } from "../utils/helpers"
+import { GetOnTheAirSeries, GetPopularSeries, GetSeriesAiringToday, GetTopRatedSeries } from "../services/fetchData"
 
 
 export default async function Page({ searchParams }: { searchParams: Promise<{ page: number }> }) {
@@ -43,7 +43,6 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ p
                         }
                     </>
                 </MovieSliderGeneral>
-                <div className="separator"></div>
                 <MovieSliderGeneral title="Populares" list_link="/series/results/list?sort_by=popularity.desc">
                     <>
                         {
@@ -53,7 +52,6 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ p
                         }
                     </>
                 </MovieSliderGeneral>
-                <div className="separator"></div>
                 <MovieSliderGeneral title="Emitidas los próximos días" list_link={`/series/results/list?sort_by=popularity.desc&air_date.lte=${dateEnd.replace(" ", "")}&air_date.gte=${dateStart.replace(" ", "")}`}>
                     <>
                         {

@@ -4,11 +4,10 @@
     gap: 0.5em;
     padding: 0.5em;
     grid-column: 2 / 3;
-    grid-row: 2 / 3; 
+    grid-row: 2 / 3;
     width: 100%;
-    height: var(--heightHeader); 
-    margin: 4.5rem 0 0 0;
-
+    height: 100%;
+    padding: 5rem 0 0 0;
 
     @media (width < 700px) {
         grid-column: 1 / span 2;
@@ -19,10 +18,11 @@
 
 
 .content {
-    width: calc(100% - 2em);
+    display: flex;
+    flex-direction: column;
+    gap: 2.5em;
     max-width: var(--maxWidthContent);
     background-color: var(--surface-base);
-    border: 1px solid var(--surface-a);
     padding: 0.5em;
     margin: 0 auto;
 
