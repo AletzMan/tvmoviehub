@@ -1,7 +1,7 @@
 .slider {
     display: flex;
     flex-direction: column;
-    //background-color: var(--hover); 
+    //background-color: var(--hover);
     width: 100%;
     max-width: var(--maxWidthContent);
 
@@ -195,6 +195,21 @@
         display: flex;
         justify-content: space-between;
         width: 100%;
+    }
+
+    &_rankBadge {
+        position: absolute;
+        top: -0.4em;
+        left: -0.4em;
+        z-index: 5;
+        background-color: var(--primary-500);
+        color: var(--surface-base);
+        font-size: 0.75rem;
+        font-weight: 800;
+        padding: 0.3em 0.6em;
+        border-radius: 4px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+        pointer-events: none;
     }
 
     /* Footer en columna limpia */
