@@ -12,16 +12,27 @@
 
     &:hover {
         transform: translateY(-6px);
+        z-index: 10;
+
+        .movie_poster {
+            filter: brightness(1.1);
+        }
+
+        .movie_posterWrapper {
+            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.8);
+            border-color: var(--primary-400);
+        }
+
+        .movie_title {
+            color: var(--primary-300);
+        }
+
+        .movie_optionsContainer {
+            opacity: 1;
+        }
     }
 
-    &_overlay {
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(0deg, rgba(0, 0, 0, 0.1) 0%, transparent 50%, rgba(3, 7, 18, 0.7) 100%);
-        pointer-events: none;
-    }
-
-    &_picture {
+    &_posterWrapper {
         position: relative;
         width: 100%;
         height: 15.5em;
@@ -32,7 +43,7 @@
         transition: all 0.3s ease;
     }
 
-    &_photo {
+    &_poster {
         width: 100%;
         height: 100%;
         object-fit: cover;
@@ -44,14 +55,27 @@
         }
     }
 
-    &_description {
+    &_overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(0deg, rgba(0, 0, 0, 0.1) 0%, transparent 50%, rgba(3, 7, 18, 0.7) 100%);
+        pointer-events: none;
+    }
+
+    &_meta {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    &_footer {
         display: flex;
         flex-direction: column;
         padding: 0.5em 0.2em;
         gap: 0.25em;
     }
 
-    &_name {
+    &_title {
         color: var(--text);
         font-size: 0.85em;
         font-weight: 600;
@@ -63,30 +87,51 @@
         width: 100%;
     }
 
-    &_age {
+    &_subfooter {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+
+    &_year {
         color: var(--text-secondary);
         font-size: 0.75em;
         font-weight: 400;
     }
 
-    &_fav {
-        display: none;
-        position: absolute;
-        top: 0.25em;
-        left: 0.25em;
+    &_actions {
+        display: flex;
+        align-items: center;
+        gap: 0.5em;
+    }
+
+    &_average {
+        display: flex;
+        align-items: center;
+        gap: 0.2em;
+        font-weight: 700;
+        font-size: 0.75em;
         color: var(--text);
-        background-color: transparent;
-        border: none;
-        transition: all 0.25s ease-in-out;
-        cursor: pointer;
 
-        &:hover {
-            color: #FF0000;
+        span {
+            color: var(--warning);
         }
+    }
 
-        &Icon {
-            width: 2em;
-            height: 2em;
-        }
+    &_icon {
+        width: 0.85em;
+        height: 0.85em;
+        color: var(--warning);
+    }
+
+    &_optionsContainer {
+        display: flex;
+        position: absolute;
+        align-items: center;
+        top: 0;
+        right: 0;
+        opacity: 0;
+        transition: opacity 0.3s ease;
     }
 }
