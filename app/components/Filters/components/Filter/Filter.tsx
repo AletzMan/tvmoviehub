@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
-import { CheckBox } from "@/app/components/CheckBox/CheckBox"
 import { Button } from "@/app/components/Button/Button"
 import { ArrowDownSolidIcon, ResetIcon, SuccessIcon } from "@/app/utils/svg"
 import styles from "./filter.module.scss"
@@ -102,16 +101,16 @@ export function Filter({ properties, nameParam, nameView, isInline = false }: Pr
     if (isInline) {
         return (
             <div className={styles.inlineContainer}>
-                <div className={`${styles.options} scrollBarStyle`}>
+                <div className={`${styles.tagsContainer} scrollBarStyle`}>
                     {properties.map((category, index) => (
-                        <CheckBox
+                        <button
                             key={category.value}
-                            name={category.value}
-                            id={`category-${category.value}`}
-                            label={category.option}
-                            checkBoxOnChange={() => HandleChangeFilter(index)}
-                            checked={valuesActive[index]}
-                        />
+                            type="button"
+                            className={`${styles.tag} ${valuesActive[index] ? styles.tagActive : ""}`}
+                            onClick={() => HandleChangeFilter(index)}
+                        >
+                            {category.option}
+                        </button>
                     ))}
                 </div>
                 <footer className={styles.footer}>
@@ -149,24 +148,24 @@ export function Filter({ properties, nameParam, nameView, isInline = false }: Pr
             </button>
 
             {isOpen && (
-                <div 
+                <div
                     className={styles.menu}
                     style={{
                         position: 'fixed',
                         top: `${menuPosition.top}px`,
                         left: `${menuPosition.left}px`
-                    }} 
+                    }}
                 >
-                    <div className={`${styles.options} scrollBarStyle`}>
+                    <div className={`${styles.tagsContainer} scrollBarStyle`}>
                         {properties.map((category, index) => (
-                            <CheckBox
+                            <button
                                 key={category.value}
-                                name={category.value}
-                                id={`category-${category.value}`}
-                                label={category.option}
-                                checkBoxOnChange={() => HandleChangeFilter(index)}
-                                checked={valuesActive[index]}
-                            />
+                                type="button"
+                                className={`${styles.tag} ${valuesActive[index] ? styles.tagActive : ""}`}
+                                onClick={() => HandleChangeFilter(index)}
+                            >
+                                {category.option}
+                            </button>
                         ))}
                     </div>
 
