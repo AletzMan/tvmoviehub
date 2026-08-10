@@ -1,105 +1,148 @@
-.details {
-    appearance: none;
-    border-radius: 0.15em;
-    border: 1px solid var(--hover);
-    background-color: #DDDDDD;
+.dropdownContainer {
+    position: relative;
+    display: inline-block;
+    z-index: 9999;
+}
 
-    &::-webkit-details-marker {
-        display: none;
+.trigger {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    height: 2.4em;
+    padding: 0 1rem;
+    background-color: var(--surface-a);
+    border: 1px solid var(--surface-a);
+    border-radius: var(--radius-sm);
+    color: var(--text-secondary);
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+
+    &:hover {
+        background-color: var(--surface-b);
+        color: var(--text);
     }
 
-    &[open] .summary_icon {
-        transform: rotate(180deg);
+    &Active {
+        background-color: var(--surface-a);
+        border-color: var(--primary-500);
+        color: var(--text);
+        box-shadow: 0 0 0 2px rgba(var(--primary-500-rgb), 0.2);
+    }
+
+    &Title {
+        max-width: 160px;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
 }
 
-.summary {
-    position: relative;
+.badge {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    height: 2em;
-    padding: 0.5em 2em 0.5em 0.5em;
-    position: relative;
-    color: transparent;
-    cursor: pointer;
-    transition: background-color 0.25s ease-in-out;
-    //background-color: red;
+    justify-content: center;
+    min-width: 1.25rem;
+    height: 1.25rem;
+    padding: 0 0.3rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    border-radius: 9999px;
+    color: var(--surface-base);
+    background-color: var(--primary-500);
+}
 
-    &:hover {
-        background-color: var(--hover);
+.icon {
+    width: 0.95rem;
+    height: 0.95rem;
+    color: var(--text-secondary);
+    transition: transform 0.2s ease;
 
-        &>.summary_title {
-            color: var(--primary-500);
-        }
-
-        &>.summary_icon {
-            color: var(--primary-500);
-        }
+    &Open {
+        transform: rotate(180deg);
+        color: var(--primary-500);
     }
+}
 
-    &_title {
-        font-weight: 500;
-        font-size: 0.95em;
-        color: var(--surface-base);
-        transition: color 0.25s ease-in-out;
-    }
-
-    &_count {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 1.5em;
-        height: 1.5em;
-        font-size: 0.85em;
-        font-weight: 500;
-        border-radius: 0.2em;
-        color: var(--text);
-        border: 1px solid var(--hover);
-        background-color: var(--primary-500);
-    }
-
-    &_icon {
-        position: absolute;
-        right: 0;
-        width: 1.25em;
-        height: 1.25em;
-        transition: all 0.2s ease-in-out;
-        color: var(--surface-base);
-    }
+.menu {
+    min-width: 260px;
+    max-width: 320px;
+    background-color: var(--surface-a);
+    border: 1px solid var(--surface-b);
+    border-radius: var(--radius-sm);
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6);
+    z-index: 5000;
+    overflow: hidden;
+    animation: menuAppear 0.15s ease-out;
 }
 
 .options {
+    padding: 0.5rem;
     display: flex;
-    justify-content: flex-end;
-    padding: 0.5em;
-    width: 100%;
+    flex-direction: column;
+    gap: 0.2rem;
+    max-height: 240px;
+    overflow-y: auto;
+}
 
-    &_label {
-        font-size: 0.8em;
-        color: var(--surface-b);
-    }
+.combobox {
+    &_option {
+        width: 100%;
+        padding: 0.5rem 0.75rem;
+        text-align: left;
+        background-color: transparent;
+        border: none;
+        border-radius: var(--radius-xs);
+        color: var(--text-secondary);
+        font-family: inherit;
+        font-size: 0.85rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
 
-    &_select {
-        padding: 0.2em 0.5em 0.2em 0.5em;
-        font-family: var(--font-family);
-        color: var(--surface-base);
-        min-width: 20em;
-        border-radius: 0.2em;
-        border: 1px solid var(--surface-a);
-        background-color: var(--text);
+        &:hover {
+            background-color: var(--surface-c);
+            color: var(--text);
+        }
 
-        &:disabled {
-            cursor: not-allowed;
-            border: 1px solid var(--text-secondary);
-            color: var(--text-secondary);
+        &Active {
+            background-color: var(--primary-500);
+            color: var(--surface-base);
+            font-weight: 600;
+
+            &:hover {
+                background-color: var(--primary-400);
+            }
         }
     }
 }
 
 .footer {
     display: flex;
-    justify-content: flex-end;
-    gap: 0.5em;
-    padding: 0.25em;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 0.85rem;
+    background-color: var(--surface-b);
+    border-top: 1px solid var(--border);
+}
+
+@keyframes menuAppear {
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.inlineContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }

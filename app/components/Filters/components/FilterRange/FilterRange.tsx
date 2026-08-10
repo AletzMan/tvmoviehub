@@ -1,14 +1,20 @@
-import { CheckBox } from "@/app/components/CheckBox/CheckBox"
-import styles from "./filter.module.scss"
-import { ChangeEvent, MouseEvent, useEffect, useState } from "react"
-import { ArrowDownSolidIcon, ResetIcon, SuccessIcon } from "@/app/utils/svg"
-import { Button } from "@/app/components/Button/Button"
+"use client"
+
+import { ChangeEvent, useEffect, useRef, useState } from "react"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
+import { Button } from "@/app/components/Button/Button"
+import { ArrowDownSolidIcon, ResetIcon, SuccessIcon } from "@/app/utils/svg"
+import styles from "./filter.module.scss"
 
 interface Props {
     nameParam: string
     nameView: string
     section: string
+    min?: number
+    max?: number
+    step?: number
+    singleValue?: boolean
+    isInline?: boolean
 }
 
 interface IRange {
@@ -16,85 +22,271 @@ interface IRange {
     lte: number
 }
 
-const defaultDate: IRange = {
-    gte: 0,
-    lte: 0
-}
+export function FilterRange({ nameParam, nameView, min = 0, max = 10, step = 1, singleValue = false, isInline = false }: Props) {
+    const [isOpen, setIsOpen] = useState(false)
+    const [range, setRange] = useState<IRange>({ gte: min, lte: max })
 
-export function FilterRange({ nameParam, nameView, section }: Props) {
-    const [date, setDate] = useState<IRange>(defaultDate)
-    const [error, setError] = useState(false)
+    const dropdownRef = useRef<HTMLDivElement>(null)
+    const triggerRef = useRef<HTMLButtonElement>(null)
+    const [menuPosition, setMenuPosition] = useState({ top: 0, left: 0 })
     const searchParams = useSearchParams()
     const pathname = usePathname()
     const router = useRouter()
 
     useEffect(() => {
         const whitParamGte = searchParams.get(`${nameParam}.gte`)
-        const whitParamLte = searchParams.get(`${nameParam}.lte`)
+        const whitParamLte = singleValue ? null : searchParams.get(`${nameParam}.lte`)
 
-        if (whitParamGte || whitParamLte) {
-            setDate({ lte: Number(whitParamLte), gte: Number(whitParamGte) })
-        } else {
-            setDate({ gte: 0, lte: 0 })
+        setRange({
+            gte: whitParamGte ? Number(whitParamGte) : min,
+            lte: whitParamLte ? Number(whitParamLte) : max
+        })
+    }, [searchParams, nameParam, min, max, singleValue])
+
+    // Cerrar al hacer clic fuera
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+                setIsOpen(false)
+            }
         }
-    }, [searchParams, nameParam])
+        document.addEventListener("mousedown", handleClickOutside)
+        return () => document.removeEventListener("mousedown", handleClickOutside)
+    }, [])
 
-
-    const HandleChangeFilter = (e: ChangeEvent<HTMLInputElement>) => {
-        const newValues = { ...date }
-        if (e.currentTarget.name === 'gte') {
-            setDate({ ...newValues, gte: Number(e.currentTarget.value) })
-        } else {
-            setDate({ ...newValues, lte: Number(e.currentTarget.value) })
+    // Calcular posición del menú cuando se abre
+    useEffect(() => {
+        if (isOpen && triggerRef.current) {
+            const rect = triggerRef.current.getBoundingClientRect()
+            setMenuPosition({
+                top: rect.bottom + 8,
+                left: rect.left
+            })
         }
+    }, [isOpen])
+
+    const HandleChangeGte = (e: ChangeEvent<HTMLInputElement>) => {
+        const value = singleValue ? Number(e.target.value) : Math.min(Number(e.target.value), range.lte - step)
+        setRange(prev => ({ ...prev, gte: value }))
     }
 
-    const HandleApplyFilter = (e: MouseEvent<HTMLButtonElement>) => {
-        const newSearchParams = new URLSearchParams(searchParams)
+    const HandleChangeLte = (e: ChangeEvent<HTMLInputElement>) => {
+        const value = Math.max(Number(e.target.value), range.gte + step)
+        setRange(prev => ({ ...prev, lte: value }))
+    }
 
-        if (date.lte === 0 && date.gte === 0) {
-            newSearchParams.delete(`${nameParam}.gte`)
-            newSearchParams.delete(`${nameParam}.lte`)
-        } if (date.lte !== 0 && date.gte !== 0) {
-            newSearchParams.set(`${nameParam}.gte`, date.gte.toString())
-            newSearchParams.set(`${nameParam}.lte`, date.lte.toString())
-        } else if (date.gte !== 0 && date.lte === 0) {
-            newSearchParams.set(`${nameParam}.gte`, date.gte.toString())
-            newSearchParams.delete(`${nameParam}.lte`)
-        } else if (date.gte === 0 && date.lte !== 0) {
-            newSearchParams.set(`${nameParam}.lte`, date.lte.toString())
-            newSearchParams.delete(`${nameParam}.gte`)
+    const HandleApplyFilter = () => {
+        const newSearchParams = new URLSearchParams(searchParams.toString())
+
+        if (singleValue) {
+            if (range.gte === min) {
+                newSearchParams.delete(`${nameParam}.gte`)
+            } else {
+                newSearchParams.set(`${nameParam}.gte`, range.gte.toString())
+            }
+        } else {
+            if (range.gte === min && range.lte === max) {
+                newSearchParams.delete(`${nameParam}.gte`)
+                newSearchParams.delete(`${nameParam}.lte`)
+            } else {
+                if (range.gte !== min) {
+                    newSearchParams.set(`${nameParam}.gte`, range.gte.toString())
+                } else {
+                    newSearchParams.delete(`${nameParam}.gte`)
+                }
+
+                if (range.lte !== max) {
+                    newSearchParams.set(`${nameParam}.lte`, range.lte.toString())
+                } else {
+                    newSearchParams.delete(`${nameParam}.lte`)
+                }
+            }
         }
+
         router.push(`${pathname}?${newSearchParams.toString()}`)
+        setIsOpen(false)
     }
 
     const HandleResetFilter = () => {
-        setDate({ gte: 0, lte: 0 })
+        setRange({ gte: min, lte: max })
+        const newSearchParams = new URLSearchParams(searchParams.toString())
+        newSearchParams.delete(`${nameParam}.gte`)
+        if (!singleValue) {
+            newSearchParams.delete(`${nameParam}.lte`)
+        }
+        router.push(`${pathname}?${newSearchParams.toString()}`)
+        setIsOpen(false)
     }
 
+    const isActive = singleValue ? range.gte !== min : range.gte !== min || range.lte !== max
+
+    // Cálculo porcentual para la barra de progreso interna del slider
+    const minPercent = ((range.gte - min) / (max - min)) * 100
+    const maxPercent = ((range.lte - min) / (max - min)) * 100
+
+    if (isInline) {
+        return (
+            <div className={styles.inlineContainer}>
+                <div className={styles.content}>
+                    <div className={styles.valuesDisplay}>
+                        <span>{range.gte}</span>
+                        {!singleValue && (
+                            <>
+                                <span className={styles.separator}>-</span>
+                                <span>{range.lte}</span>
+                            </>
+                        )}
+                    </div>
+
+                    <div className={styles.sliderWrapper}>
+                        <div className={styles.sliderContainer}>
+                            <div className={styles.sliderTrack} />
+                            {!singleValue && (
+                                <div
+                                    className={styles.sliderRange}
+                                    style={{ left: `${minPercent}%`, right: `${100 - maxPercent}%` }}
+                                />
+                            )}
+                            <input
+                                type="range"
+                                min={min}
+                                max={max}
+                                step={step}
+                                value={range.gte}
+                                onChange={HandleChangeGte}
+                                className={styles.rangeInput}
+                            />
+                            {!singleValue && (
+                                <input
+                                    type="range"
+                                    min={min}
+                                    max={max}
+                                    step={step}
+                                    value={range.lte}
+                                    onChange={HandleChangeLte}
+                                    className={styles.rangeInput}
+                                />
+                            )}
+                        </div>
+
+                        <div className={styles.sliderLabels}>
+                            <span className={styles.sliderLabelItem}>{min}</span>
+                            <span className={`${styles.sliderLabelItem} ${styles.sliderLabelCenter}`}>{Math.round((min + max) / 2)}</span>
+                            <span className={styles.sliderLabelItem}>{max}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <footer className={styles.footer}>
+                    <Button
+                        text="Limpiar"
+                        isSecondary
+                        icon={<ResetIcon />}
+                        onClick={HandleResetFilter}
+                        mode="button"
+                    />
+                    <Button
+                        text="Aplicar"
+                        icon={<SuccessIcon />}
+                        onClick={HandleApplyFilter}
+                        mode="button"
+                    />
+                </footer>
+            </div>
+        )
+    }
 
     return (
-        <details className={styles.details} name="d">
-            <summary className={styles.summary}>
-                <h3 className={styles.summary_title}>{nameView}</h3>
-                {(date.gte !== 0 || date.lte !== 0) && <div className={styles.summary_count}>{1}</div>}
-                <ArrowDownSolidIcon className={styles.summary_icon} />
-            </summary>
-            <div className={styles.options}>
-                <label className={styles.options_label}>
-                    Desde
-                    <input className={`${styles.options_input} `} name="gte" type="number" onChange={HandleChangeFilter} value={date.gte} />
-                </label>
-                <label className={styles.options_label}>
-                    Hasta
-                    <input className={`${styles.options_input} ${error && styles.options_inputError}`} min={date.gte} name="lte" type="number" onChange={HandleChangeFilter} value={date.lte} />
-                    {error && <span className={styles.options_error}>Elige una fecha</span>}
-                </label>
-            </div>
-            <footer className={styles.footer}>
-                <Button text="Aplicar" icon={<SuccessIcon />} onClick={HandleApplyFilter} mode="button" />
-                <Button text="Reestablecer" isSecondary icon={<ResetIcon />} onClick={HandleResetFilter} mode="button" />
-            </footer>
-        </details>
+        <div className={styles.dropdownContainer} ref={dropdownRef}>
+            <button
+                type="button"
+                className={`${styles.trigger} ${isOpen ? styles.triggerActive : ""}`}
+                onClick={() => setIsOpen(!isOpen)}
+                ref={triggerRef}
+            >
+                <span className={styles.triggerTitle}>{nameView}</span>
+                {isActive && (
+                    <span className={styles.badge}>1</span>
+                )}
+                <ArrowDownSolidIcon className={`${styles.icon} ${isOpen ? styles.iconOpen : ""}`} />
+            </button>
+
+            {isOpen && (
+                <div 
+                    className={styles.menu}
+                    style={{
+                        position: 'fixed',
+                        top: `${menuPosition.top}px`,
+                        left: `${menuPosition.left}px`
+                    }} >
+                    <div className={styles.content}>
+                        <div className={styles.valuesDisplay}>
+                            <span>{range.gte}</span>
+                            {!singleValue && (
+                                <>
+                                    <span className={styles.separator}>-</span>
+                                    <span>{range.lte}</span>
+                                </>
+                            )}
+                        </div>
+
+                        <div className={styles.sliderWrapper}>
+                            <div className={styles.sliderContainer}>
+                                <div className={styles.sliderTrack} />
+                                {!singleValue && (
+                                    <div
+                                        className={styles.sliderRange}
+                                        style={{ left: `${minPercent}%`, right: `${100 - maxPercent}%` }}
+                                    />
+                                )}
+                                <input
+                                    type="range"
+                                    min={min}
+                                    max={max}
+                                    step={step}
+                                    value={range.gte}
+                                    onChange={HandleChangeGte}
+                                    className={styles.rangeInput}
+                                />
+                                {!singleValue && (
+                                    <input
+                                        type="range"
+                                        min={min}
+                                        max={max}
+                                        step={step}
+                                        value={range.lte}
+                                        onChange={HandleChangeLte}
+                                        className={styles.rangeInput}
+                                    />
+                                )}
+                            </div>
+
+                            {/* Etiquetas integradas perfectamente al ancho exacto del slider */}
+                            <div className={styles.sliderLabels}>
+                                <span className={styles.sliderLabelItem}>{min}</span>
+                                <span className={`${styles.sliderLabelItem} ${styles.sliderLabelCenter}`}>{Math.round((min + max) / 2)}</span>
+                                <span className={styles.sliderLabelItem}>{max}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <footer className={styles.footer}>
+                        <Button
+                            text="Limpiar"
+                            isSecondary
+                            icon={<ResetIcon />}
+                            onClick={HandleResetFilter}
+                            mode="button"
+                        />
+                        <Button
+                            text="Aplicar"
+                            icon={<SuccessIcon />}
+                            onClick={HandleApplyFilter}
+                            mode="button"
+                        />
+                    </footer>
+                </div>
+            )}
+        </div>
     )
 }
