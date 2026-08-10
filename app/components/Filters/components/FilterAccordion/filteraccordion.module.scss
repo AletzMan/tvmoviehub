@@ -1,0 +1,58 @@
+.accordion {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    transition: border-color 0.3s ease;
+
+    &:hover {
+        border-color: var(--surface-d);
+    }
+}
+
+.accordionHeader {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background-color: var(--surface-b);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 500;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 0.9rem;
+    transition: background-color 0.2s ease;
+    user-select: none;
+
+    &:hover {
+        background-color: var(--surface-c);
+    }
+}
+
+.accordionTitle {
+    flex: 1;
+    text-align: left;
+}
+
+.accordionIcon {
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+
+    &Open {
+        transform: rotate(180deg);
+    }
+}
+
+.accordionContent {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+}
+
+.accordionInner {
+    padding: 1rem;
+    background-color: var(--surface-a);
+}
