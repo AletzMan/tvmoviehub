@@ -1,0 +1,125 @@
+.wheelContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 2px;
+}
+
+.arrowButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 4px 0;
+    border: none;
+    background: transparent;
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: color 0.2s ease, opacity 0.2s ease;
+    border-radius: var(--radius-sm);
+
+    &:hover:not(:disabled) {
+        color: var(--primary-300);
+        background-color: rgba(var(--primary-400-rgb), 0.08);
+    }
+
+    &:active:not(:disabled) {
+        color: var(--primary-400);
+    }
+
+    &:disabled {
+        opacity: 0.25;
+        cursor: default;
+    }
+}
+
+.arrowUp svg {
+    transform: rotate(180deg);
+}
+
+.arrowDown svg {
+    transform: rotate(0deg);
+}
+
+.wheelArea {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: var(--radius-sm);
+    background-color: var(--surface-a);
+}
+
+.wheel {
+    position: relative;
+    overflow: hidden;
+    cursor: grab;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: none;
+
+    &:active {
+        cursor: grabbing;
+    }
+}
+
+.wheelContent {
+    position: absolute;
+    width: 100%;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
+}
+
+.wheelItem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    transition: all 0.2s ease;
+    cursor: pointer;
+    user-select: none;
+
+    &:hover {
+        color: var(--text);
+    }
+}
+
+.wheelItemSelected {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary-300);
+    text-shadow: 0 0 20px rgba(var(--primary-300-rgb), 0.5);
+}
+
+.selectionLine {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 40px;
+    transform: translateY(-50%);
+    border-top: 1px solid var(--primary-400);
+    border-bottom: 1px solid var(--primary-400);
+    background-color: rgba(var(--primary-400-rgb), 0.1);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom,
+            var(--surface-a) 0%,
+            transparent 30%,
+            transparent 70%,
+            var(--surface-a) 100%);
+    pointer-events: none;
+    z-index: 2;
+}
