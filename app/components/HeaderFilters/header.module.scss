@@ -1,27 +1,26 @@
 .header {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     justify-content: space-between;
-    border-radius: 0.15em;
-    padding: 0.5em;
-    background-color: var(--hover);
+    width: 100%;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+    /* Línea divisoria elegante estilo VOD */
+    background-color: transparent; // Adiós a la caja grisácea de fondo
+
+    &_filtersArea {
+        display: flex;
+        align-items: center;
+        flex: 1;
+        min-width: 0; // Previene desbordamientos en flexbox
+    }
 
     &_order {
         display: flex;
-        align-items: flex-end;
-        gap: 0.5em;
+        align-items: center;
+        gap: 0.5rem;
+        flex-shrink: 0;
     }
-
-    &_title {
-        color: var(--text);
-    }
-
-    &_icon {
-        width: 2.5em;
-        height: 2.5em;
-        color: var(--text-secondary);
-        animation: animation;
-    }
-
-    @keyframes animation {}
 }

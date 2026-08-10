@@ -1,11 +1,10 @@
 "use client"
-import { ChangeEvent, useEffect, useState } from "react"
+
+import { ChangeEvent, useEffect, useState, Suspense } from "react"
 import { ComboBox } from "../ComboBox/ComboBox"
 import { SortButton } from "../SortButton/SortButton"
 import styles from "./header.module.scss"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
-import { Filters } from "../Filters/Filters"
-import { Suspense } from "react"
 
 function HeaderFiltersContent() {
     const [defaultSort, setDefaultSort] = useState("")
@@ -16,13 +15,13 @@ function HeaderFiltersContent() {
 
     useEffect(() => {
         const currentSort = searchParams.get("sort_by")
-        const newSort = new URLSearchParams(searchParams)
+        const newSort = new URLSearchParams(searchParams.toString())
         if (currentSort) {
             const currentSortValue = currentSort.split(".")[0]
             setDefaultSort(currentSortValue)
         } else {
             newSort.set("sort_by", `popularity.desc`)
-            router.push(`${pathname}?${newSort}`)
+            router.push(`${pathname}?${newSort.toString()}`)
         }
         const section = pathname.split("/")[1]
         const options = section === "movies" ? sortMovies : sortSeries
@@ -32,21 +31,20 @@ function HeaderFiltersContent() {
 
     const HandleChangeSort = (e: ChangeEvent<HTMLSelectElement>) => {
         const value = e.currentTarget.value
-
         const currentSort = searchParams.get("sort_by")
-        const newSort = new URLSearchParams(searchParams)
+        const newSort = new URLSearchParams(searchParams.toString())
+
         if (currentSort) {
-            const currentSortValue = currentSort.split(".")[1]
+            const currentSortValue = currentSort.split(".")[1] || "desc"
             newSort.set("sort_by", `${value}.${currentSortValue}`)
         } else {
             newSort.set("sort_by", `${value}.desc`)
         }
-        router.push(`${pathname}?${newSort}`)
+        router.push(`${pathname}?${newSort.toString()}`)
     }
 
     return (
         <header className={styles.header}>
-            <Filters section={pathname.split("/")[1]} />
             <div className={styles.header_order}>
                 <ComboBox properties={sortOptions} label="Ordenar por:" onChange={HandleChangeSort} defaultValue={defaultSort} />
                 <SortButton />
@@ -63,41 +61,16 @@ export function HeaderFilters() {
     )
 }
 
-
 const sortMovies = [
-    {
-        option: "Título",
-        value: "title"
-    },
-    {
-        option: "Popularidad",
-        value: "popularity"
-    },
-    {
-        option: "Valoración",
-        value: "vote_average"
-    },
-    {
-        option: "Fecha de lanzamiento",
-        value: "primary_release_date"
-    },
+    { option: "Título", value: "title" },
+    { option: "Popularidad", value: "popularity" },
+    { option: "Valoración", value: "vote_average" },
+    { option: "Fecha de lanzamiento", value: "primary_release_date" },
 ]
 
 const sortSeries = [
-    {
-        option: "Nombre",
-        value: "name"
-    },
-    {
-        option: "Popularidad",
-        value: "popularity"
-    },
-    {
-        option: "Valoración",
-        value: "vote_average"
-    },
-    {
-        option: "Fecha de primera emisión",
-        value: "first_air_date"
-    },
+    { option: "Nombre", value: "name" },
+    { option: "Popularidad", value: "popularity" },
+    { option: "Valoración", value: "vote_average" },
+    { option: "Fecha de primera emisión", value: "first_air_date" },
 ]
