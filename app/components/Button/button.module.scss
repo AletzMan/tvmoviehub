@@ -1,52 +1,55 @@
 .button {
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    justify-content: flex-start;
-    gap: 0.75em;
-    padding: 0.38em 0.8em;
-    border: none;
-    border-radius: 0.25em;
-    font-size: 0.8em;
-    max-width: max-content;
-    font-weight: 300;
-    font-family: var(--font-family);
-    color: var(--text);
-    background: linear-gradient(-12deg, var(--primary-500), var(--primary-500));
+    justify-content: center;
+    gap: 0.6em;
+    padding: 0.5em 1em;
+    border-radius: var(--radius-sm);
+    font-size: 0.85em;
+    font-weight: 500;
+    font-family: inherit;
+    color: var(--surface-base);
+    background: var(--primary-500);
     border: 1px solid transparent;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     text-decoration: none;
     cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+
+    &:hover:not(:disabled) {
+        background: var(--primary-400);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(var(--primary-500-rgb), 0.25);
+    }
+
+    &:active:not(:disabled) {
+        transform: translateY(0);
+    }
 
     &:disabled {
-        //pointer-events: none;
         cursor: not-allowed;
-        background: var(--surface-a);
-        border: 1px solid var(--hover);
-        filter: grayscale(1) brightness(150%);
+        opacity: 0.4;
+        filter: grayscale(1);
     }
 
     &_secondary {
-        background: linear-gradient(-12deg, var(--text), var(--text-secondary)0%);
-        color: var(--surface-base);
+        background-color: var(--surface-d);
+        color: var(--text);
+        border: none;
         font-weight: 400;
 
-        &:disabled {
-            //pointer-events: none;
-            cursor: not-allowed;
-            filter: grayscale(1) brightness(100%);
+        &:hover:not(:disabled) {
+            background-color: var(--surface-c);
+            border-color: var(--surface-d);
+            color: var(--text);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         }
     }
 
-    &:hover {
-        filter: brightness(140%);
-        //background-position: -200% -100%;
-    }
-
     &>svg {
-        width: 1.5em;
-        height: 1.5em;
+        width: 1.2em;
+        height: 1.2em;
+        flex-shrink: 0;
     }
-
-
-
 }
