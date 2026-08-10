@@ -20,7 +20,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<IQu
             <HeaderSection title="Resultados para: " icon={<SearchIcon />} />
             <div className={styles.layout}>
                 <Filters section="movies" />
-                <div className={styles.content}>
+                <div className={`${styles.content}`}>
                     {popularMovies.results.length > 0 &&
                         <>
                             <HeaderFiltersSearch />
