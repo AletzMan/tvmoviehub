@@ -6,8 +6,6 @@ import styles from "./filters.module.scss"
 import { Filter } from "./components/Filter/Filter"
 import { Button } from "../Button/Button"
 import { FilterDate } from "./components/FilterDate/FilterDate"
-import { FilterComboBox } from "./components/FilterComboBox/FilterComboBox"
-import { GetLatestYears } from "@/app/utils/helpers"
 import { FilterRange } from "./components/FilterRange/FilterRange"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { FilterAccordion } from "./components/FilterAccordion/FilterAccordion"
@@ -46,7 +44,7 @@ function FiltersContent({ section }: Props) {
     return (
         <>
             {/* Botón móvil */}
-            <button 
+            <button
                 className={styles.mobileButton}
                 onClick={() => setIsMobileOpen(true)}
             >
@@ -62,7 +60,7 @@ function FiltersContent({ section }: Props) {
                     <aside className={styles.mobileSidebar}>
                         <div className={styles.mobileSidebarHeader}>
                             <h2>Filtros</h2>
-                            <button 
+                            <button
                                 className={styles.mobileCloseButton}
                                 onClick={() => setIsMobileOpen(false)}
                             >
@@ -83,11 +81,8 @@ function FiltersContent({ section }: Props) {
                                     <Filter properties={releaseTypes} nameView="" nameParam="with_release_type" isInline={true} />
                                 </FilterAccordion>
                             )}
-                            <FilterAccordion title="Fecha de lanzamiento">
-                                <FilterDate nameView="" section={section} nameParam={section === "movies" ? "primary_release_date" : "first_air_date"} isInline={true} />
-                            </FilterAccordion>
                             <FilterAccordion title="Año de lanzamiento">
-                                <FilterComboBox properties={years} section={section} nameView="" nameParam={section === "movies" ? "primary_release_year" : "first_air_date_year"} isInline={true} />
+                                <FilterDate nameView="" section={section} nameParam={section === "movies" ? "primary_release_date" : "first_air_date"} isInline={true} />
                             </FilterAccordion>
                             <FilterAccordion title="Valoración">
                                 <FilterRange nameView="" section={section} nameParam={"vote_average"} isInline={true} />
@@ -126,11 +121,8 @@ function FiltersContent({ section }: Props) {
                         <Filter properties={releaseTypes} nameView="" nameParam="with_release_type" isInline={true} />
                     </FilterAccordion>
                 )}
-                <FilterAccordion title="Fecha de lanzamiento">
-                    <FilterDate nameView="" section={section} nameParam={section === "movies" ? "primary_release_date" : "first_air_date"} isInline={true} />
-                </FilterAccordion>
                 <FilterAccordion title="Año de lanzamiento">
-                    <FilterComboBox properties={years} section={section} nameView="" nameParam={section === "movies" ? "primary_release_year" : "first_air_date_year"} isInline={true} />
+                    <FilterDate nameView="" section={section} nameParam={section === "movies" ? "primary_release_date" : "first_air_date"} isInline={true} />
                 </FilterAccordion>
                 <FilterAccordion title="Valoración">
                     <FilterRange nameView="" section={section} nameParam={"vote_average"} isInline={true} />
@@ -167,9 +159,7 @@ const FilterNames = [
     "certification",
     "with_release_type",
     "primary_release_date.gte",
-    "first_air_date",
-    "primary_release_year",
-    "first_air_date_year",
+    "first_air_date.gte",
     "vote_average.gte",
     "vote_count.gte"
 ]
@@ -231,5 +221,3 @@ export const Certifications = [
     { value: "C", option: "Para mayores de 18 años. (C)" },
     { value: "D", option: "Películas para adultos (D)" }
 ]
-
-const years = GetLatestYears()
