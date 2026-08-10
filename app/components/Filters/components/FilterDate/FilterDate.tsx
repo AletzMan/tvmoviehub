@@ -4,6 +4,7 @@ import { ChangeEvent, useEffect, useRef, useState } from "react"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { Button } from "@/app/components/Button/Button"
 import { ArrowDownSolidIcon, ResetIcon, SuccessIcon } from "@/app/utils/svg"
+import { WheelPicker } from "../WheelPicker/WheelPicker"
 import styles from "./filter.module.scss"
 
 interface Props {
@@ -23,6 +24,18 @@ const defaultDate: IDate = {
     lte: ""
 }
 
+const generateYearOptions = () => {
+    const currentYear = new Date().getFullYear()
+    const startYear = 1900
+    const years = []
+    for (let year = currentYear; year >= startYear; year--) {
+        years.push({ label: year.toString(), value: year.toString() })
+    }
+    return years
+}
+
+const yearOptions = generateYearOptions()
+
 export function FilterDate({ nameParam, nameView, section, isInline = false }: Props) {
     const [isOpen, setIsOpen] = useState(false)
     const [date, setDate] = useState<IDate>(defaultDate)
@@ -40,7 +53,10 @@ export function FilterDate({ nameParam, nameView, section, isInline = false }: P
         const whitParamLte = searchParams.get(`${nameParam}.lte`)
 
         if (whitParamGte && whitParamLte) {
-            setDate({ lte: whitParamLte, gte: whitParamGte })
+            // Extract years from date format (YYYY-MM-DD)
+            const startYear = whitParamGte.split('-')[0]
+            const endYear = whitParamLte.split('-')[0]
+            setDate({ lte: startYear, gte: endYear })
         } else {
             setDate({ gte: "", lte: "" })
         }
@@ -86,8 +102,12 @@ export function FilterDate({ nameParam, nameView, section, isInline = false }: P
             newSearchParams.delete(`${nameParam}.lte`)
             setError(false)
         } else if (date.gte !== "" && date.lte !== "") {
-            newSearchParams.set(`${nameParam}.gte`, date.gte)
-            newSearchParams.set(`${nameParam}.lte`, date.lte)
+            // Convert years to date format: from Jan 1st of start year to Dec 31st of end year
+            const startDate = `${date.lte}-01-01`
+            const endDate = `${date.gte}-12-31`
+
+            newSearchParams.set(`${nameParam}.gte`, startDate)
+            newSearchParams.set(`${nameParam}.lte`, endDate)
             const filterYear = section === "movies" ? "primary_release_year" : "first_air_date_year"
             newSearchParams.set("sort_by", "primary_release_date.asc")
             newSearchParams.delete(filterYear)
@@ -115,31 +135,27 @@ export function FilterDate({ nameParam, nameView, section, isInline = false }: P
     if (isInline) {
         return (
             <div className={styles.inlineContainer}>
-                <div className={styles.options}>
-                    <label className={styles.options_label}>
-                        Desde
-                        <input
-                            className={styles.options_input}
-                            name="gte"
-                            type="date"
-                            onChange={HandleChangeFilter}
-                            value={date.gte}
-                        />
-                    </label>
-                    <label className={styles.options_label}>
-                        Hasta
-                        <input
-                            className={`${styles.options_input} ${error ? styles.options_inputError : ""}`}
-                            min={date.gte}
-                            name="lte"
-                            type="date"
-                            disabled={date.gte === ""}
-                            onChange={HandleChangeFilter}
+                <div className={styles.wheelPickers}>
+                    <div className={styles.wheelPickerWrapper}>
+                        <label className={styles.wheelLabel}>Desde</label>
+                        <WheelPicker
+                            items={yearOptions}
                             value={date.lte}
+                            onChange={(value) => setDate({ ...date, lte: value })}
+                            height={150}
                         />
-                        {error && <span className={styles.options_error}>Elige una fecha válida</span>}
-                    </label>
+                    </div>
+                    <div className={styles.wheelPickerWrapper}>
+                        <label className={styles.wheelLabel}>Hasta</label>
+                        <WheelPicker
+                            items={yearOptions.filter(y => !date.lte || y.value >= date.lte)}
+                            value={date.gte}
+                            onChange={(value) => setDate({ ...date, gte: value })}
+                            height={150}
+                        />
+                    </div>
                 </div>
+                {error && <span className={styles.options_error}>Selecciona ambos años</span>}
                 <footer className={styles.footer}>
                     <Button
                         text="Limpiar"
@@ -175,38 +191,34 @@ export function FilterDate({ nameParam, nameView, section, isInline = false }: P
             </button>
 
             {isOpen && (
-                <div 
+                <div
                     className={styles.menu}
                     style={{
                         position: 'fixed',
                         top: `${menuPosition.top}px`,
                         left: `${menuPosition.left}px`
                     }} >
-                    <div className={styles.options}>
-                        <label className={styles.options_label}>
-                            Desde
-                            <input
-                                className={styles.options_input}
-                                name="gte"
-                                type="date"
-                                onChange={HandleChangeFilter}
-                                value={date.gte}
-                            />
-                        </label>
-                        <label className={styles.options_label}>
-                            Hasta
-                            <input
-                                className={`${styles.options_input} ${error ? styles.options_inputError : ""}`}
-                                min={date.gte}
-                                name="lte"
-                                type="date"
-                                disabled={date.gte === ""}
-                                onChange={HandleChangeFilter}
+                    <div className={styles.wheelPickers}>
+                        <div className={styles.wheelPickerWrapper}>
+                            <label className={styles.wheelLabel}>Desde</label>
+                            <WheelPicker
+                                items={yearOptions}
                                 value={date.lte}
+                                onChange={(value) => setDate({ ...date, lte: value })}
+                                height={150}
                             />
-                            {error && <span className={styles.options_error}>Elige una fecha válida</span>}
-                        </label>
+                        </div>
+                        <div className={styles.wheelPickerWrapper}>
+                            <label className={styles.wheelLabel}>Hasta</label>
+                            <WheelPicker
+                                items={yearOptions.filter(y => !date.lte || y.value >= date.lte)}
+                                value={date.gte}
+                                onChange={(value) => setDate({ ...date, gte: value })}
+                                height={150}
+                            />
+                        </div>
                     </div>
+                    {error && <span className={styles.options_error}>Selecciona ambos años</span>}
                     <footer className={styles.footer}>
                         <Button
                             text="Limpiar"
