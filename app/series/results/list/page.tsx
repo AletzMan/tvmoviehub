@@ -8,6 +8,7 @@ import { IQueryParamasSeries } from "@/app/interfaces/serie"
 import { HeaderFilters } from "@/app/components/HeaderFilters/HeaderFilters"
 import { NotResultsView } from "@/app/components/NotResultsView/NotResultsView"
 import { HeaderTags } from "@/app/components/HeaderTags/HeaderTags"
+import { Filters } from "@/app/components/Filters/Filters"
 
 export default async function Page({ searchParams }: { searchParams: Promise<IQueryParamasSeries> }) {
 
@@ -17,19 +18,24 @@ export default async function Page({ searchParams }: { searchParams: Promise<IQu
     return (
         <section className={`${styles.section}  `}>
             <HeaderTags />
-            <HeaderFilters />
-            {popularSeries.results.length > 0 ?
-                <div className={`${styles.movies} scrollBarStyle`}>
-                    {
-                        popularSeries.results.map((movie, index) => (
-                            <MovieCardDetails key={movie.id} movie={movie as IPartCollection} type="tv" />
-                        ))
+            <div className={styles.layout}>
+                <Filters section="series" />
+                <div className={styles.content}>
+                    <HeaderFilters />
+                    {popularSeries.results.length > 0 ?
+                        <div className={`${styles.movies} scrollBarStyle`}>
+                            {
+                                popularSeries.results.map((movie, index) => (
+                                    <MovieCardDetails key={movie.id} movie={movie as IPartCollection} type="tv" />
+                                ))
+                            }
+                        </div>
+                        :
+                        <NotResultsView />
                     }
+                    {popularSeries.results.length > 0 && <Pagination currentPage={popularSeries.page} totalPages={popularSeries.total_pages} />}
                 </div>
-                :
-                <NotResultsView />
-            }
-            {popularSeries.results.length > 0 && <Pagination currentPage={popularSeries.page} totalPages={popularSeries.total_pages} />}
+            </div>
         </section>
     )
 }

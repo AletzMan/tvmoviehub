@@ -9,6 +9,7 @@ import { NotResultsView } from "@/app/components/NotResultsView/NotResultsView"
 import { HeaderFiltersSearch } from "@/app/components/HeaderFiltersSearch/HeaderFiltersSearch"
 import { HeaderSection } from "@/app/components/HeaderSection/HeaderSection"
 import { SearchIcon } from "@/app/utils/svg"
+import { Filters } from "@/app/components/Filters/Filters"
 
 export default async function Page({ searchParams }: { searchParams: Promise<IQueryParamasSeries> }) {
 
@@ -18,22 +19,27 @@ export default async function Page({ searchParams }: { searchParams: Promise<IQu
     return (
         <section className={`${styles.section}  `}>
             <HeaderSection title="Resultados para: " icon={<SearchIcon />} />
-            {popularSeries.results.length > 0 &&
-                <>
-                    <HeaderFiltersSearch />
-                </>
-            }
-            {popularSeries.results.length > 0 ? <div className={`${styles.movies} scrollBarStyle`}>
-                {
-                    popularSeries.results.map((movie, index) => (
-                        <MovieCardDetails key={movie.id} movie={movie as IPartCollection} type="tv" />
-                    ))
-                }
+            <div className={styles.layout}>
+                <Filters section="series" />
+                <div className={styles.content}>
+                    {popularSeries.results.length > 0 &&
+                        <>
+                            <HeaderFiltersSearch />
+                        </>
+                    }
+                    {popularSeries.results.length > 0 ? <div className={`${styles.movies} scrollBarStyle`}>
+                        {
+                            popularSeries.results.map((movie, index) => (
+                                <MovieCardDetails key={movie.id} movie={movie as IPartCollection} type="tv" />
+                            ))
+                        }
+                    </div>
+                        :
+                        <NotResultsView />
+                    }
+                    {popularSeries.results.length > 0 && <Pagination currentPage={popularSeries.page} totalPages={popularSeries.total_pages} />}
+                </div>
             </div>
-                :
-                <NotResultsView />
-            }
-            {popularSeries.results.length > 0 && <Pagination currentPage={popularSeries.page} totalPages={popularSeries.total_pages} />}
         </section>
     )
 }

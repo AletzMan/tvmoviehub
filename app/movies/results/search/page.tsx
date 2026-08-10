@@ -8,6 +8,7 @@ import { NotResultsView } from "@/app/components/NotResultsView/NotResultsView"
 import { HeaderFiltersSearch } from "@/app/components/HeaderFiltersSearch/HeaderFiltersSearch"
 import { HeaderSection } from "@/app/components/HeaderSection/HeaderSection"
 import { SearchIcon } from "@/app/utils/svg"
+import { Filters } from "@/app/components/Filters/Filters"
 
 export default async function Page({ searchParams }: { searchParams: Promise<IQueryParamasMovies> }) {
 
@@ -17,23 +18,28 @@ export default async function Page({ searchParams }: { searchParams: Promise<IQu
     return (
         <section className={`${styles.section} `}>
             <HeaderSection title="Resultados para: " icon={<SearchIcon />} />
-            {popularMovies.results.length > 0 &&
-                <>
-                    <HeaderFiltersSearch />
-                </>
-            }
-            {popularMovies.results.length > 0 ?
-                <div className={`${styles.movies} scrollBarStyle`}>
-                    {
-                        popularMovies.results.map((movie, index) => (
-                            <MovieCardDetails key={movie.id} movie={movie as IPartCollection} type="movie" />
-                        ))
+            <div className={styles.layout}>
+                <Filters section="movies" />
+                <div className={styles.content}>
+                    {popularMovies.results.length > 0 &&
+                        <>
+                            <HeaderFiltersSearch />
+                        </>
                     }
+                    {popularMovies.results.length > 0 ?
+                        <div className={`${styles.movies} scrollBarStyle`}>
+                            {
+                                popularMovies.results.map((movie, index) => (
+                                    <MovieCardDetails key={movie.id} movie={movie as IPartCollection} type="movie" />
+                                ))
+                            }
+                        </div>
+                        :
+                        <NotResultsView />
+                    }
+                    {popularMovies.results.length > 0 && <Pagination currentPage={popularMovies.page} totalPages={popularMovies.total_pages} />}
                 </div>
-                :
-                <NotResultsView />
-            }
-            {popularMovies.results.length > 0 && <Pagination currentPage={popularMovies.page} totalPages={popularMovies.total_pages} />}
+            </div>
         </section>
     )
 }
