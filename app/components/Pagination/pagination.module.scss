@@ -3,45 +3,52 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    gap: 1em;
-    padding: 0.5em 1em;
-    background-color: transparent; // Sin cajas
-    border: none;
-    box-shadow: none;
+    gap: 1em; // Espaciado limpio, sin apretar
+    margin: 3em auto;
     width: fit-content;
-    margin: 1.5em auto;
 
     &_button {
+        position: relative; // Necesario para posicionar el subrayado
         display: flex;
         align-items: center;
         justify-content: center;
         min-width: 2em;
         height: 2em;
-        padding: 0 0.4em;
-        font-size: 0.85em;
+        padding: 0 0.2em;
+        font-size: 0.95em;
         font-weight: 500;
         text-decoration: none;
-        text-align: center;
+        background-color: transparent; // Cero cajas
         border: none;
-        background-color: transparent; // Cero cajas de fondo
-        color: var(--text-secondary);
+        color: var(--text-secondary); // Gris de los textos secundarios de tus tarjetas
         cursor: pointer;
-        transition: color 0.2s ease, transform 0.2s ease;
+        transition: color 0.2s ease; // Transición sobria, sin saltos ni zoom
 
         &:hover:not(:disabled) {
-            color: var(--text);
-            transform: scale(1.1); // Sutil zoom al pasar el cursor
+            color: var(--text); // Al pasar el mouse se ilumina a blanco
         }
 
         &Current {
-            color: var(--primary-500); // El número activo resalta en dorado puro
+            color: var(--text); // El número activo es blanco puro
             font-weight: 700;
             pointer-events: none;
+
+            /* Hacemos match con el menú superior: Subrayado dorado */
+            &::after {
+                content: '';
+                position: absolute;
+                bottom: -4px; // Separación exacta para que respire
+                left: 10%;
+                width: 80%; // No ocupa todo el ancho, haciéndolo más sutil
+                height: 2px; // Mismo grosor que el de "Películas"
+                background-color: var(--primary-500); // Tu dorado clásico
+                border-radius: 2px;
+            }
         }
 
         &Inactive {
             pointer-events: none;
-            opacity: 0.2;
+            opacity: 0.25; // Flechas tenues cuando no hay más páginas
         }
     }
 
@@ -52,7 +59,7 @@
         color: var(--text-secondary);
         font-weight: 500;
         user-select: none;
-        opacity: 0.4;
+        opacity: 0.5;
         padding: 0 0.2em;
     }
 }
