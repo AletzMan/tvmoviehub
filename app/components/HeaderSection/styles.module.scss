@@ -1,9 +1,11 @@
 .header {
-    position: relative;
+    position: sticky;
+    top: 5em;
     display: flex;
     justify-content: space-between;
     padding: 0.25em 1.25em;
     align-items: center;
+    z-index: 10;
 
     &::before {
         content: "";

@@ -115,10 +115,9 @@
 // Sidebar desktop fijo
 .desktopSidebar {
     display: none;
-    position: sticky;
-    top: 1rem;
+    position: relative;
     width: 280px;
-    max-height: calc(100vh - 2rem);
+    /*max-height: calc(100vh - 2rem);*/
     overflow-y: auto;
     padding: 1rem;
     background-color: var(--surface-a);
@@ -139,6 +138,7 @@
     from {
         transform: translateX(100%);
     }
+
     to {
         transform: translateX(0);
     }
