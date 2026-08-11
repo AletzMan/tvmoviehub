@@ -3,7 +3,7 @@
 import { ReactNode } from "react"
 import styles from "./movieslider.module.scss"
 import dynamic from "next/dynamic"
-import Link from "next/link" 
+import Link from "next/link"
 import { NextArrow, PrevArrow } from "../ArrowSlider/ArrowSlider"
 
 // Importamos react-slick de forma dinámica para evitar problemas con SSR
@@ -20,18 +20,18 @@ interface Props {
 }
 
 export const MovieSliderGeneral = ({ title, children, list_link }: Props) => {
-   const settings = {
+    const settings = {
         infinite: false,
         speed: 700,
-        slidesToShow: 5,     
+        slidesToShow: 7,
         slidesToScroll: 1,     // <--- Crucial: Permite que avance de 1 en 1 de forma fluida sin romper el cálculo de anchos
-        variableWidth: true, 
-        swipe: true,         
+        variableWidth: false,
+        swipe: true,
         swipeToSlide: true,    // <--- Permite arrastrar de forma natural y libre hasta el límite
         autoplay: false,
-        arrows: true, 
-        dots: false, 
-        rows: 1, 
+        arrows: true,
+        dots: false,
+        rows: 1,
         nextArrow: <NextArrow />,
         prevArrow: <PrevArrow />
     }
