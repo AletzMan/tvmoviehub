@@ -3,9 +3,11 @@
     top: 5em;
     display: flex;
     justify-content: space-between;
+    background-color: var(--surface-base);
     padding: 0.25em 1.25em;
     align-items: center;
-    z-index: 10;
+    z-index: 100;
+
 
     &::before {
         content: "";
@@ -24,10 +26,10 @@
         content: "";
         position: absolute;
         right: 0;
-        bottom: 0;
-        height: 1px;
+        top: -10px;
+        height: 10px;
         width: 100%;
-        background: linear-gradient(to left, var(--surface-b), transparent);
+        background: var(--surface-base);
         pointer-events: none;
     }
 
