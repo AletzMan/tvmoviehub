@@ -1,6 +1,6 @@
 "use client"
 
-import { ChangeEvent, useEffect, useRef, useState } from "react"
+import { ChangeEvent, useCallback, useEffect, useRef, useState } from "react"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { Button } from "@/app/components/Button/Button"
 import { ArrowDownSolidIcon, ResetIcon, SuccessIcon } from "@/app/utils/svg"
@@ -12,6 +12,11 @@ interface Props {
     nameView: string
     section: string
     isInline?: boolean
+    onActiveChange?: (isActive: boolean) => void
+    onApply?: () => void
+    onPendingChange?: (pending: boolean, key: string) => void
+    onRegisterValue?: (value: any, key: string) => void
+    filterKey?: string
 }
 
 interface IDate {
@@ -36,7 +41,7 @@ const generateYearOptions = () => {
 
 const yearOptions = generateYearOptions()
 
-export function FilterDate({ nameParam, nameView, section, isInline = false }: Props) {
+export function FilterDate({ nameParam, nameView, section, isInline = false, onActiveChange, onApply, onPendingChange, onRegisterValue, filterKey }: Props) {
     const [isOpen, setIsOpen] = useState(false)
     const [date, setDate] = useState<IDate>(defaultDate)
     const [error, setError] = useState(false)
@@ -47,6 +52,12 @@ export function FilterDate({ nameParam, nameView, section, isInline = false }: P
     const searchParams = useSearchParams()
     const pathname = usePathname()
     const router = useRouter()
+
+    const isActive = date.gte !== "" && date.lte !== ""
+
+    useEffect(() => {
+        onActiveChange?.(isActive)
+    }, [isActive, onActiveChange])
 
     useEffect(() => {
         const whitParamGte = searchParams.get(`${nameParam}.gte`)
@@ -61,6 +72,18 @@ export function FilterDate({ nameParam, nameView, section, isInline = false }: P
             setDate({ gte: "", lte: "" })
         }
     }, [searchParams, nameParam])
+
+    // Track if current state differs from URL params
+    useEffect(() => {
+        const whitParamGte = searchParams.get(`${nameParam}.gte`)
+        const whitParamLte = searchParams.get(`${nameParam}.lte`)
+        
+        const currentGte = date.lte ? `${date.lte}-01-01` : ""
+        const currentLte = date.gte ? `${date.gte}-12-31` : ""
+        
+        const hasPending = currentGte !== (whitParamGte || "") || currentLte !== (whitParamLte || "")
+        onPendingChange?.(hasPending, filterKey || "")
+    }, [date, searchParams, nameParam, onPendingChange, filterKey])
 
     // Cerrar al hacer clic fuera
     useEffect(() => {
@@ -94,7 +117,7 @@ export function FilterDate({ nameParam, nameView, section, isInline = false }: P
         setError(false)
     }
 
-    const HandleApplyFilter = () => {
+    const HandleApplyFilter = useCallback(() => {
         const newSearchParams = new URLSearchParams(searchParams.toString())
 
         if (date.lte === "" && date.gte === "") {
@@ -118,7 +141,15 @@ export function FilterDate({ nameParam, nameView, section, isInline = false }: P
 
         router.push(`${pathname}?${newSearchParams.toString()}`)
         setIsOpen(false)
-    }
+        onApply?.()
+    }, [date, searchParams, nameParam, section, pathname, router, onApply])
+
+    // Register current value with parent
+    useEffect(() => {
+        if (onRegisterValue && filterKey) {
+            onRegisterValue(date, filterKey)
+        }
+    }, [date, onRegisterValue, filterKey])
 
     const HandleResetFilter = () => {
         setDate({ gte: "", lte: "" })
@@ -129,8 +160,6 @@ export function FilterDate({ nameParam, nameView, section, isInline = false }: P
         router.push(`${pathname}?${newSearchParams.toString()}`)
         setIsOpen(false)
     }
-
-    const isActive = date.gte !== "" && date.lte !== ""
 
     if (isInline) {
         return (
@@ -156,21 +185,6 @@ export function FilterDate({ nameParam, nameView, section, isInline = false }: P
                     </div>
                 </div>
                 {error && <span className={styles.options_error}>Selecciona ambos años</span>}
-                <footer className={styles.footer}>
-                    <Button
-                        text="Limpiar"
-                        isSecondary
-                        icon={<ResetIcon />}
-                        onClick={HandleResetFilter}
-                        mode="button"
-                    />
-                    <Button
-                        text="Aplicar"
-                        icon={<SuccessIcon />}
-                        onClick={HandleApplyFilter}
-                        mode="button"
-                    />
-                </footer>
             </div>
         )
     }
@@ -185,7 +199,10 @@ export function FilterDate({ nameParam, nameView, section, isInline = false }: P
             >
                 <span className={styles.triggerTitle}>{nameView}</span>
                 {isActive && (
-                    <span className={styles.badge}>1</span>
+                    <span className={styles.activeBadge}>
+                        <span className={styles.activeDot} />
+                        Activo
+                    </span>
                 )}
                 <ArrowDownSolidIcon className={`${styles.icon} ${isOpen ? styles.iconOpen : ""}`} />
             </button>
