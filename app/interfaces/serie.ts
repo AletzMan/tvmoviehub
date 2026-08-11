@@ -197,5 +197,6 @@ export interface IQueryParamasSeries {
 	"vote_average.lte"?: number
 	"vote_count.gte"?: number
 	"vote_count.lte"?: number
+	query?: string
 }
 
