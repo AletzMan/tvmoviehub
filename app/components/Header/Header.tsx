@@ -34,12 +34,12 @@ export default function Header() {
 
 
     const HandleSession = async () => {
-        if (session.session_id) { 
+        if (session.session_id) {
             localStorage.removeItem("tvmoviehub_sessionid")
             await DeleteCookie()
             HandleSetOpen("account")
             router.refresh()
-        } else { 
+        } else {
             router.push(`/login`)
         }
     }
@@ -68,7 +68,7 @@ export default function Header() {
                     <div className={styles.mobile}>
                         <Link href="/">
                             <LogoIcon className={styles.mobile_logo} />
-                            <span>MOVIEDECK</span>
+                            <span>MOVIE<span>DECK</span></span>
                         </Link>
                         {/*<div className={styles.mobile_pathname}>
                             {MainMenu.find(menu => menu.link === section)?.icon}

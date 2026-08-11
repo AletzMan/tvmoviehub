@@ -9,9 +9,8 @@
     height: 4.5em;
     border-radius: var(--surface-b);
     z-index: 2;
-    background: color-mix(in srgb,  var(--surface-base) 90%, transparent 10%);
-    backdrop-filter: blur(2px);
-    border-bottom: 1px solid var(--surface-a);
+    background: linear-gradient(to bottom, rgba(from var(--surface-base) r g b / 0.8), rgba(from var(--surface-a) r g b / 0.8));
+    backdrop-filter: blur(4px);
     z-index: 9999;
 
     &_container {
