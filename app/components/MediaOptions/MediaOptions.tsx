@@ -14,6 +14,7 @@ import { useSearchParams } from "next/navigation"
 import { FormAddMovie } from "@/app/lists/components/FormAddMovie"
 import Link from "next/link"
 import { Suspense } from "react"
+import { createPortal } from "react-dom"
 
 interface Props {
     id: number
@@ -34,6 +35,11 @@ function MediaOptionsContent({ id, type, title, viewMenu, setViewMenu }: Props) 
     const [viewRating, setViewRating] = useState(false)
     const [viewLists, setViewLists] = useState(false)
     const searchParams = useSearchParams()
+    const [mounted, setMounted] = useState(false)
+
+    useEffect(() => {
+        setMounted(true)
+    }, [])
 
     useEffect(() => {
         if (session_id && viewMenu)
@@ -178,15 +184,15 @@ function MediaOptionsContent({ id, type, title, viewMenu, setViewMenu }: Props) 
         const name = event.currentTarget.name
         const status = await CheckItemStatus(value, id)
         if (!status?.item_present) {
-            const response = await AddItemToList(session_id, value, id) 
+            const response = await AddItemToList(session_id, value, id)
             if (response?.status_code === 12) {
                 await RevalidateURL("lists")
-                await RevalidateURL("listMovies") 
+                await RevalidateURL("listMovies")
                 enqueueSnackbar(`¡${title} se ha agregado a lista ${name}! `, { variant: "success" })
             } else if (response?.status_code === 8) {
-                enqueueSnackbar(`El elemento ya había sido añadido previamente.`, { variant: "error" }) 
+                enqueueSnackbar(`El elemento ya había sido añadido previamente.`, { variant: "error" })
             }
-        } else { 
+        } else {
             enqueueSnackbar(`El elemento ya había sido añadido previamente.`, { variant: "error" })
         }
     }
@@ -224,31 +230,39 @@ function MediaOptionsContent({ id, type, title, viewMenu, setViewMenu }: Props) 
                         <button className={`${styles.menu_option}  `} onClick={HandleAddWatchList} onMouseOver={() => setViewRating(false)}><BookmarkIcon className={`${styles.menu_icon} ${accountState?.watchlist ? styles.watchlist : ""}`} />Lista de seguimiento</button>
                     </li>
                     <hr className={styles.menu_separator} />
-                    <li className={`${styles.options_li} ${styles.rated}`}>
+                    <li className={styles.options_li}>
                         <button className={`${styles.menu_option} `} onClick={HandleViewRating} >
                             <StarIcon className={`${styles.menu_icon}  ${accountState?.rated.value ? styles.rating : ""}`} /> Tu puntuación
                         </button>
-                        {viewRating &&
-                            <div className={styles.rated_rating} onMouseLeave={HandleViewRating} >
-                                <div className={styles.rated_stars} role="button" onMouseLeave={HandleLeaveRated}>
-                                    <button className={`${styles.rated_star} ${currentRated >= 1 ? styles.rated_starActive : ""}`} onClick={HandleAddRating} onMouseOver={HandleOverRated} value={1} attr-tag="Terrible">1</button>
-                                    <button className={`${styles.rated_star} ${currentRated >= 2 ? styles.rated_starActive : ""}`} onClick={HandleAddRating} onMouseOver={HandleOverRated} value={2} attr-tag="Olvidable">2</button>
-                                    <button className={`${styles.rated_star} ${currentRated >= 3 ? styles.rated_starActive : ""}`} onClick={HandleAddRating} onMouseOver={HandleOverRated} value={3} attr-tag="Insípida">3</button>
-                                    <button className={`${styles.rated_star} ${currentRated >= 4 ? styles.rated_starActive : ""}`} onClick={HandleAddRating} onMouseOver={HandleOverRated} value={4} attr-tag="Tolerable">4</button>
-                                    <button className={`${styles.rated_star} ${currentRated >= 5 ? styles.rated_starActive : ""}`} onClick={HandleAddRating} onMouseOver={HandleOverRated} value={5} attr-tag="Decente">5</button>
-                                    <button className={`${styles.rated_star} ${currentRated >= 6 ? styles.rated_starActive : ""}`} onClick={HandleAddRating} onMouseOver={HandleOverRated} value={6} attr-tag="Satisfactoria">6</button>
-                                    <button className={`${styles.rated_star} ${currentRated >= 7 ? styles.rated_starActive : ""}`} onClick={HandleAddRating} onMouseOver={HandleOverRated} value={7} attr-tag="Recomendable">7</button>
-                                    <button className={`${styles.rated_star} ${currentRated >= 8 ? styles.rated_starActive : ""}`} onClick={HandleAddRating} onMouseOver={HandleOverRated} value={8} attr-tag="Brillante">8</button>
-                                    <button className={`${styles.rated_star} ${currentRated >= 9 ? styles.rated_starActive : ""}`} onClick={HandleAddRating} onMouseOver={HandleOverRated} value={9} attr-tag="Espectacular">9</button>
-                                    <button className={`${styles.rated_star} ${currentRated >= 10 ? styles.rated_starActive : ""}`} onClick={HandleAddRating} onMouseOver={HandleOverRated} value={10} attr-tag="Legendaria">10</button>
-                                    <div className={styles.rated_color}></div>
-                                </div>
-                                <Button className={styles.rated_delete} mode="button" text="Eliminar mi puntuación" onClick={HandleDeleteRating} />
-                            </div>
-                        }
                     </li>
                 </ul>
             }
+            {mounted && viewRating && createPortal(
+                <dialog className={styles.rating_dialog} open onMouseDown={(e) => e.stopPropagation()}>
+                    <div className={styles.rating_content}>
+                        <h3 className={styles.rating_title}>Calificar "{title}"</h3>
+                        <div className={styles.rating_emojis}>
+                            <button className={`${styles.rating_emoji} ${currentRated === 1 ? styles.rating_emojiActive : ""}`} onClick={HandleAddRating} value={1} title="Terrible">😠</button>
+                            <button className={`${styles.rating_emoji} ${currentRated === 2 ? styles.rating_emojiActive : ""}`} onClick={HandleAddRating} value={2} title="Mala">🙁</button>
+                            <button className={`${styles.rating_emoji} ${currentRated === 3 ? styles.rating_emojiActive : ""}`} onClick={HandleAddRating} value={3} title="Regular">😐</button>
+                            <button className={`${styles.rating_emoji} ${currentRated === 4 ? styles.rating_emojiActive : ""}`} onClick={HandleAddRating} value={4} title="Buena">🙂</button>
+                            <button className={`${styles.rating_emoji} ${currentRated === 5 ? styles.rating_emojiActive : ""}`} onClick={HandleAddRating} value={5} title="Muy buena">😊</button>
+                            <button className={`${styles.rating_emoji} ${currentRated === 6 ? styles.rating_emojiActive : ""}`} onClick={HandleAddRating} value={6} title="Excelente">😄</button>
+                            <button className={`${styles.rating_emoji} ${currentRated === 7 ? styles.rating_emojiActive : ""}`} onClick={HandleAddRating} value={7} title="Increíble">🤩</button>
+                            <button className={`${styles.rating_emoji} ${currentRated === 8 ? styles.rating_emojiActive : ""}`} onClick={HandleAddRating} value={8} title="Fantástica">🌟</button>
+                            <button className={`${styles.rating_emoji} ${currentRated === 9 ? styles.rating_emojiActive : ""}`} onClick={HandleAddRating} value={9} title="Espectacular">✨</button>
+                            <button className={`${styles.rating_emoji} ${currentRated === 10 ? styles.rating_emojiActive : ""}`} onClick={HandleAddRating} value={10} title="Legendaria">🏆</button>
+                        </div>
+                        <div className={styles.rating_actions}>
+                            <Button className={styles.rating_close} mode="button" text="Cerrar" onClick={HandleViewRating} />
+                            {accountState?.rated.value &&
+                                <Button className={styles.rating_delete} mode="button" text="Eliminar puntuación" onClick={HandleDeleteRating} />
+                            }
+                        </div>
+                    </div>
+                </dialog>,
+                document.getElementById('rating-portal')!
+            )}
         </div>
     )
 }

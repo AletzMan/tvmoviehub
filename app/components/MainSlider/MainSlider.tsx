@@ -4,12 +4,12 @@ import styles from "./mainslider.module.scss"
 import Image from "next/image"
 import { BASE_URL_IMG_CUSTOM } from "@/app/utils/const"
 import { useEffect, useState } from "react"
-import {   PlayIcon, StarIcon } from "@/app/utils/svg"
+import { PlayIcon, StarIcon } from "@/app/utils/svg"
 import Link from "next/link"
 import Slider from "react-slick"
 import { NextArrow, PrevArrow } from "../ArrowSlider/ArrowSlider"
 import "slick-carousel/slick/slick.css"
-import "slick-carousel/slick/slick-theme.css" 
+import "slick-carousel/slick/slick-theme.css"
 import { useLoadingState } from "@/app/services/store"
 
 interface Props {
@@ -29,7 +29,7 @@ export const MainSlider = ({ movies }: Props) => {
             ]
             setCarouselMovies(extendedMovies)
         }
-    }, [movies]) 
+    }, [movies])
 
     return (
         <article className={styles.article} >
@@ -45,9 +45,9 @@ export const MainSlider = ({ movies }: Props) => {
                                 </div>
                                 <h3 className={styles.movie_title}>{movie.title}</h3>
                                 <h4 className={styles.movie_subtitle}>{`(${movie.original_title})`}</h4>
-                                 <div className={styles.movie_details}>
+                                <div className={styles.movie_details}>
                                     <Link className={styles.movie_info} onClick={() => setLoadingState(true)} href={`/movies/${movie.id}`}><PlayIcon className={styles.movie_icon} /> VER DETALLES</Link>
-                                 </div>
+                                </div>
                             </div>
                         </div>
                         <Image
@@ -79,7 +79,7 @@ const settings = {
     dotsClass: "slick-dots slick-thumb",
     speed: 1500,
     slidesToScroll: 1,
-    autoplay: true,
+    autoplay: false,
     autoplaySpeed: 3000,
     arrows: false,
     dots: true,

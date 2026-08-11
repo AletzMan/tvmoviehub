@@ -14,16 +14,17 @@ export default async function Page({ searchParams }: { searchParams: Promise<IQu
 
     const params = await searchParams
     const popularMovies: IMovieResponse = await GetSearchMovies("movie", params)
+    const query = params.query
 
     return (
         <section className={`${styles.section} `}>
-            <HeaderSection title="Resultados para: " icon={<SearchIcon />} />
+            <HeaderSection title="Resultados para: " icon={<SearchIcon />} query={query} />
             <div className={styles.layout}>
                 <Filters section="movies" />
                 <div className={`${styles.content}`}>
                     {popularMovies.results.length > 0 &&
                         <>
-                            <HeaderFiltersSearch />
+                            {/* <HeaderFiltersSearch />*/}
                         </>
                     }
                     {popularMovies.results.length > 0 ?

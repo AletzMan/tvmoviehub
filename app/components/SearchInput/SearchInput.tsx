@@ -113,11 +113,19 @@ function SearchInputContent({ section, onSearch }: Props) {
         <header className={styles.search_header}>
             <div className={styles.search}>
                 <SearchIcon className={styles.search_icon} />
-                <input className={styles.search_input} type="search" placeholder={placeholder} onChange={HandleSearch} onKeyDown={HandlekeyDown} value={search} />
+                <input
+                    className={styles.search_input}
+                    type="search"
+                    placeholder={placeholder}
+                    onChange={HandleSearch}
+                    onKeyDown={HandlekeyDown}
+                    value={search}
+                    autoFocus
+                />
                 <Button className={styles.search_button} onClick={Search} text="Buscar" disabled={search.length < 3} mode="button" />
             </div>
             <div className={styles.checkbox}>
-                <RadioButton checkBoxOnChange={HandleChange} label="Todo" name="type_search" id="all" checked={selectOption.search} />
+                {/*<RadioButton checkBoxOnChange={HandleChange} label="Todo" name="type_search" id="all" checked={selectOption.search} />*/}
                 <RadioButton checkBoxOnChange={HandleChange} label="Peliculas" name="type_search" id="movies" checked={selectOption.movies} />
                 <RadioButton checkBoxOnChange={HandleChange} label="Series" name="type_search" id="series" checked={selectOption.series} />
                 <RadioButton checkBoxOnChange={HandleChange} label="Personas" name="type_search" id="people" checked={selectOption.people} />

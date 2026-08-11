@@ -31,6 +31,7 @@ export default function RootLayout({
         {<LoadingPage />}
         {<TrailerPage />}
         {<DialogAlert />}
+        <div id="rating-portal" />
       </body>
     </html>
   )

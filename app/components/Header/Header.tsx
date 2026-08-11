@@ -5,7 +5,7 @@ import { usePathname, useRouter } from "next/navigation"
 import { SearchInput } from "../SearchInput/SearchInput"
 import { ArrowDownIcon, CloseIcon, LogInIcon, LogoIcon, LogoutIcon, MenuIcon, SearchIcon } from "@/app/utils/svg"
 import { SideMenu } from "../SideMenu/SideMenu"
-import { MouseEvent, useEffect, useState } from "react"
+import { MouseEvent, useEffect, useRef, useState } from "react"
 import Link from "next/link"
 import { useSession } from "@/app/hooks/useSession"
 import { DeleteCookie } from "@/app/utils/serveractions"
@@ -25,6 +25,7 @@ export default function Header() {
     const { setLoadingState } = useLoadingState()
     const section = pathname.split("/")[1]
     const router = useRouter()
+    const loginWrapperRef = useRef<HTMLDivElement>(null)
 
 
     const HandleSetOpen = (type: 'menu' | 'search' | 'account') => {
@@ -50,6 +51,24 @@ export default function Header() {
         }
     }
 
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (loginWrapperRef.current && !loginWrapperRef.current.contains(event.target as Node)) {
+                if (open.account) {
+                    HandleSetOpen("account")
+                }
+            }
+        }
+
+        if (open.account) {
+            document.addEventListener("mousedown", handleClickOutside as unknown as EventListener)
+        }
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside as unknown as EventListener)
+        }
+    }, [open.account])
+
     return (
         <>
             <SnackbarProvider anchorOrigin={{ vertical: "top", horizontal: "center" }} autoHideDuration={3500} />
@@ -68,7 +87,7 @@ export default function Header() {
                     <div className={styles.mobile}>
                         <Link href="/">
                             <LogoIcon className={styles.mobile_logo} />
-                            <span>MOVIE<span>DECK</span></span>
+                            <div>MOVIE<span>DECK</span></div>
                         </Link>
                         {/*<div className={styles.mobile_pathname}>
                             {MainMenu.find(menu => menu.link === section)?.icon}
@@ -86,11 +105,28 @@ export default function Header() {
                         <button className={styles.button} onClick={() => HandleSetOpen("search")}>
                             <SearchIcon className={styles.button_icon} />
                         </button>
-                        <button className={`${styles.login} ${open.account && styles.login_open}`} onClick={() => HandleSetOpen("account")}>
-                            <span className={styles.login_user}>{`${session.session_id ? session.username : "Invitado"}`}</span>
-                            <ArrowDownIcon className={styles.login_arrow} />
-                        </button>
-
+                        <div className={styles.login_wrapper} ref={loginWrapperRef}>
+                            <button className={`${styles.login} ${open.account && styles.login_open}`} onClick={() => HandleSetOpen("account")}>
+                                <span className={styles.login_user}>{`${session.session_id ? session.username : "Invitado"}`}</span>
+                                <ArrowDownIcon className={styles.login_arrow} />
+                            </button>
+                            <nav className={`${styles.login_menu} ${open.account && styles.login_menuOpen}`}>
+                                {session.session_id &&
+                                    MainMenu.filter((_, index) => index > 4 && index < 9).map(menu => (
+                                        <Link key={menu.id} className={`${styles.login_menuLink} ${menu.link.split("?")[0] === section && styles.login_menuLinkCurrent}  ${menu.name}`} onClick={() => setLoadingState(true)} href={`/${menu.link}`} title={`Ir a ${menu.name}`}>{menu.icon}{menu.name}</Link>
+                                    ))
+                                }
+                                {session.session_id && <hr className={styles.separator} />}
+                                <button className={styles.login_menuLink} title="Iniciar sesión" onClick={HandleSession}>
+                                    {session.session_id ?
+                                        <LogoutIcon className={styles.login_menuIcon} />
+                                        :
+                                        <LogInIcon className={styles.login_menuIcon} />
+                                    }
+                                    {session.session_id ? "Cerrar sesión" : "Iniciar sesión"}
+                                </button>
+                            </nav>
+                        </div>
                     </div>
                 </div>
                 {
@@ -98,24 +134,6 @@ export default function Header() {
                         <SearchInput section={section} onSearch={() => HandleSetOpen("search")} />
                     </dialog>
                 }
-                <dialog open className={`${styles.login_dialog} ${open.account && styles.login_dialogOpen}`} onClick={() => HandleSetOpen("account")}>
-                    <nav className={`${styles.login_menu} ${open.account && styles.login_menuOpen}`}>
-                        {session.session_id &&
-                            MainMenu.filter((_, index) => index > 4 && index < 9).map(menu => (
-                                <Link key={menu.id} className={`${styles.login_menuLink} ${menu.link.split("?")[0] === section && styles.login_menuLinkCurrent}  ${menu.name}`} onClick={() => setLoadingState(true)} href={`/${menu.link}`} title={`Ir a ${menu.name}`}>{menu.icon}{menu.name}</Link>
-                            ))
-                        }
-                        {session.session_id && <hr className={styles.separator} />}
-                        <button className={styles.login_menuLink} title="Iniciar sesión" onClick={HandleSession}>
-                            {session.session_id ?
-                                <LogoutIcon className={styles.login_menuIcon} />
-                                :
-                                <LogInIcon className={styles.login_menuIcon} />
-                            }
-                            {session.session_id ? "Cerrar sesión" : "Iniciar sesión"}
-                        </button>
-                    </nav>
-                </dialog>
             </header>
         </>
     )
