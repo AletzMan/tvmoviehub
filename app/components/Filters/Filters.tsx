@@ -49,7 +49,7 @@ function FiltersContent({ section }: Props) {
 
     const handleApplyAll = () => {
         const newSearchParams = new URLSearchParams(searchParams.toString())
-        
+
         // Apply all filter values
         filterValues.current.forEach((value, key) => {
             if (key === "genres") {
@@ -110,7 +110,7 @@ function FiltersContent({ section }: Props) {
                 }
             }
         })
-        
+
         router.push(`${pathname}?${newSearchParams.toString()}`)
         pendingFilters.current.clear()
         setHasPendingChanges(false)
@@ -386,18 +386,18 @@ const categoriesSeries = [
 ]
 
 const releaseTypes = [
-    { option: "Estreno(Premiere)", value: "1" },
-    { option: "Estreno en cines", value: "3" },
-    { option: "Lanzamiento digital", value: "4" },
-    { option: "Lanzamiento físico", value: "5" },
-    { option: "Lanzamiento en TV", value: "6" }
-]
+    { option: "Premiere", value: "1" },
+    { option: "Cines", value: "3" },
+    { option: "Digital", value: "4" },
+    { option: "Físico", value: "5" },
+    { option: "TV", value: "6" }
+];
 
 export const Certifications = [
-    { value: "AA", option: "Menores de 7 años (AA)" },
-    { value: "A", option: "Para todos los grupos de edad (A)" },
-    { value: "B", option: "Adolescentes a partir de 12 años (B)" },
-    { value: "B-15", option: "Mayores de 15 años (B-15)" },
-    { value: "C", option: "Para mayores de 18 años. (C)" },
-    { value: "D", option: "Películas para adultos (D)" }
-]
+    { value: "AA", option: "AA (< 7 años)" },
+    { value: "A", option: "A (Todo público)" },
+    { value: "B", option: "B (+12 años)" },
+    { value: "B-15", option: "B-15 (+15 años)" },
+    { value: "C", option: "C (+18 años)" },
+    { value: "D", option: "D (Adultos)" }
+];
