@@ -1,4 +1,5 @@
 "use client"
+
 import { ChangeEventHandler } from "react"
 import styles from "./combobox.module.scss"
 
@@ -16,16 +17,18 @@ interface Props {
 }
 
 export const ComboBox = ({ properties, onChange, label, defaultValue, name }: Props) => {
-
-
     return (
-        <div className={styles.combobox} >
-            {label && <label className={styles.combobox_label} >{label}</label>}
-            <select className={styles.select} onChange={onChange} value={defaultValue} name={name}>
-                {properties.map((property, index) => (
-                    <option key={property.option} className={styles.option} value={property.value}>{property.option}</option>
-                ))}
-            </select>
+        <div className={styles.combobox}>
+            {label && <label className={styles.combobox_label}>{label}</label>}
+            <div className={styles.selectWrapper}>
+                <select className={styles.select} onChange={onChange} value={defaultValue} name={name}>
+                    {properties.map((property) => (
+                        <option key={property.value} className={styles.option} value={property.value}>
+                            {property.option}
+                        </option>
+                    ))}
+                </select>
+            </div>
         </div>
     )
 }
