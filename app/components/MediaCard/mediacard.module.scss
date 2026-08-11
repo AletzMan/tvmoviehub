@@ -1,12 +1,10 @@
 .mediaCard {
     display: flex;
     flex-direction: column;
-    min-width: 11em;
-    max-width: 11em;
     text-decoration: none;
     transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
     scroll-snap-align: start;
-    margin: 1em 0.5em;
+    margin: 0.5em 0 0 0;
     cursor: pointer;
     position: relative;
 
