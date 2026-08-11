@@ -118,7 +118,10 @@ export function FilterComboBox({ nameParam, nameView, properties, isInline = fal
                     {isActive ? `${nameView}: ${data}` : nameView}
                 </span>
                 {isActive && (
-                    <span className={styles.badge}>1</span>
+                    <span className={styles.activeBadge}>
+                        <span className={styles.activeDot} />
+                        Activo
+                    </span>
                 )}
                 <ArrowDownSolidIcon className={`${styles.icon} ${isOpen ? styles.iconOpen : ""}`} />
             </button>
