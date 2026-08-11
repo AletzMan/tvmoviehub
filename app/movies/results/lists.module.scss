@@ -38,6 +38,6 @@
 .movies {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(10.5em, 1fr));
-    gap: 0.8em;
+    gap: 0.25em;
 
 }

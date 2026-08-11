@@ -15,16 +15,17 @@ export default async function Page({ searchParams }: { searchParams: Promise<IQu
 
     const params = await searchParams
     const popularSeries: ISerieResponse = await GetSearchSeries(params)
+    const query = params.query
 
     return (
         <section className={`${styles.section}  `}>
-            <HeaderSection title="Resultados para: " icon={<SearchIcon />} />
+            <HeaderSection title="Resultados para: " icon={<SearchIcon />} query={query} />
             <div className={styles.layout}>
                 <Filters section="series" />
                 <div className={styles.content}>
                     {popularSeries.results.length > 0 &&
                         <>
-                            <HeaderFiltersSearch />
+                            {/* <HeaderFiltersSearch />*/}
                         </>
                     }
                     {popularSeries.results.length > 0 ? <div className={`${styles.movies} scrollBarStyle`}>
