@@ -1,6 +1,6 @@
 "use client"
 
-import { ChangeEvent, useEffect, useRef, useState } from "react"
+import { ChangeEvent, useCallback, useEffect, useRef, useState } from "react"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { Button } from "@/app/components/Button/Button"
 import { ArrowDownSolidIcon, ResetIcon, SuccessIcon } from "@/app/utils/svg"
@@ -15,6 +15,11 @@ interface Props {
     step?: number
     singleValue?: boolean
     isInline?: boolean
+    onActiveChange?: (isActive: boolean) => void
+    onApply?: () => void
+    onPendingChange?: (pending: boolean, key: string) => void
+    onRegisterValue?: (value: any, key: string) => void
+    filterKey?: string
 }
 
 interface IRange {
@@ -22,7 +27,7 @@ interface IRange {
     lte: number
 }
 
-export function FilterRange({ nameParam, nameView, min = 0, max = 10, step = 1, singleValue = false, isInline = false }: Props) {
+export function FilterRange({ nameParam, nameView, min = 0, max = 10, step = 1, singleValue = false, isInline = false, onActiveChange, onApply, onPendingChange, onRegisterValue, filterKey }: Props) {
     const [isOpen, setIsOpen] = useState(false)
     const [range, setRange] = useState<IRange>({ gte: min, lte: max })
 
@@ -33,6 +38,12 @@ export function FilterRange({ nameParam, nameView, min = 0, max = 10, step = 1, 
     const pathname = usePathname()
     const router = useRouter()
 
+    const isActive = singleValue ? range.gte !== min : range.gte !== min || range.lte !== max
+
+    useEffect(() => {
+        onActiveChange?.(isActive)
+    }, [isActive, onActiveChange])
+
     useEffect(() => {
         const whitParamGte = searchParams.get(`${nameParam}.gte`)
         const whitParamLte = singleValue ? null : searchParams.get(`${nameParam}.lte`)
@@ -42,6 +53,18 @@ export function FilterRange({ nameParam, nameView, min = 0, max = 10, step = 1, 
             lte: whitParamLte ? Number(whitParamLte) : max
         })
     }, [searchParams, nameParam, min, max, singleValue])
+
+    // Track if current state differs from URL params
+    useEffect(() => {
+        const whitParamGte = searchParams.get(`${nameParam}.gte`)
+        const whitParamLte = singleValue ? null : searchParams.get(`${nameParam}.lte`)
+        
+        const currentGte = range.gte.toString()
+        const currentLte = range.lte.toString()
+        
+        const hasPending = currentGte !== (whitParamGte || "") || (!singleValue && currentLte !== (whitParamLte || ""))
+        onPendingChange?.(hasPending, filterKey || "")
+    }, [range, searchParams, nameParam, singleValue, onPendingChange, filterKey])
 
     // Cerrar al hacer clic fuera
     useEffect(() => {
@@ -75,7 +98,7 @@ export function FilterRange({ nameParam, nameView, min = 0, max = 10, step = 1, 
         setRange(prev => ({ ...prev, lte: value }))
     }
 
-    const HandleApplyFilter = () => {
+    const HandleApplyFilter = useCallback(() => {
         const newSearchParams = new URLSearchParams(searchParams.toString())
 
         if (singleValue) {
@@ -105,7 +128,15 @@ export function FilterRange({ nameParam, nameView, min = 0, max = 10, step = 1, 
 
         router.push(`${pathname}?${newSearchParams.toString()}`)
         setIsOpen(false)
-    }
+        onApply?.()
+    }, [range, searchParams, nameParam, min, max, singleValue, pathname, router, onApply])
+
+    // Register current value with parent
+    useEffect(() => {
+        if (onRegisterValue && filterKey) {
+            onRegisterValue(range, filterKey)
+        }
+    }, [range, onRegisterValue, filterKey])
 
     const HandleResetFilter = () => {
         setRange({ gte: min, lte: max })
@@ -117,8 +148,6 @@ export function FilterRange({ nameParam, nameView, min = 0, max = 10, step = 1, 
         router.push(`${pathname}?${newSearchParams.toString()}`)
         setIsOpen(false)
     }
-
-    const isActive = singleValue ? range.gte !== min : range.gte !== min || range.lte !== max
 
     // Cálculo porcentual para la barra de progreso interna del slider
     const minPercent = ((range.gte - min) / (max - min)) * 100
@@ -176,22 +205,6 @@ export function FilterRange({ nameParam, nameView, min = 0, max = 10, step = 1, 
                         </div>
                     </div>
                 </div>
-
-                <footer className={styles.footer}>
-                    <Button
-                        text="Limpiar"
-                        isSecondary
-                        icon={<ResetIcon />}
-                        onClick={HandleResetFilter}
-                        mode="button"
-                    />
-                    <Button
-                        text="Aplicar"
-                        icon={<SuccessIcon />}
-                        onClick={HandleApplyFilter}
-                        mode="button"
-                    />
-                </footer>
             </div>
         )
     }
@@ -206,7 +219,10 @@ export function FilterRange({ nameParam, nameView, min = 0, max = 10, step = 1, 
             >
                 <span className={styles.triggerTitle}>{nameView}</span>
                 {isActive && (
-                    <span className={styles.badge}>1</span>
+                    <span className={styles.activeBadge}>
+                        <span className={styles.activeDot} />
+                        Activo
+                    </span>
                 )}
                 <ArrowDownSolidIcon className={`${styles.icon} ${isOpen ? styles.iconOpen : ""}`} />
             </button>
