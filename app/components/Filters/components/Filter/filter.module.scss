@@ -42,17 +42,19 @@
 }
 
 .badge {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     min-width: 1.25rem;
     height: 1.25rem;
-    padding: 0 0.3rem;
-    font-size: 0.7rem;
+    padding: 0 0.35rem;
+    font-size: 0.725rem;
     font-weight: 700;
     border-radius: 9999px;
-    color: var(--surface-base);
-    background-color: var(--primary-500);
+    color: #ffffff;
+    background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
+    box-shadow: 0 2px 6px rgba(168, 85, 247, 0.35);
+    line-height: 1;
 }
 
 .icon {
@@ -93,7 +95,6 @@
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
-    max-height: 280px;
     overflow-y: auto;
 }
 
@@ -104,8 +105,8 @@
     font-family: inherit;
     color: var(--text-secondary);
     background-color: var(--surface-b);
-    border: 1px solid var(--border);
-    border-radius: 9999px;
+    border: none;
+    border-radius: 12px;
     cursor: pointer;
     transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     user-select: none;
@@ -117,14 +118,15 @@
     }
 
     &Active {
-        background-color: var(--primary-500);
+        background-color: var(--primary-300);
         border-color: var(--primary-400);
         color: var(--surface-base);
         box-shadow: 0 2px 8px rgba(var(--primary-500-rgb), 0.3);
 
         &:hover {
-            background-color: var(--primary-400);
-            border-color: var(--primary-300);
+            background-color: var(--primary-500);
+            border-color: var(--primary-500);
+            color: var(--surface-base);
         }
     }
 }

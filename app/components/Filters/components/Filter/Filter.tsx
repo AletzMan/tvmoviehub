@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { Button } from "@/app/components/Button/Button"
 import { ArrowDownSolidIcon, ResetIcon, SuccessIcon } from "@/app/utils/svg"
@@ -16,9 +16,14 @@ interface Props {
     nameParam: string
     nameView: string
     isInline?: boolean
+    onCountChange?: (count: number) => void
+    onApply?: () => void
+    onPendingChange?: (pending: boolean, key: string) => void
+    onRegisterValue?: (value: any, key: string) => void
+    filterKey?: string
 }
 
-export function Filter({ properties, nameParam, nameView, isInline = false }: Props) {
+export function Filter({ properties, nameParam, nameView, isInline = false, onCountChange, onApply, onPendingChange, onRegisterValue, filterKey }: Props) {
     const [isOpen, setIsOpen] = useState(false)
     const [valuesActive, setValuesActive] = useState<boolean[]>(
         new Array(properties.length).fill(false)
@@ -41,6 +46,24 @@ export function Filter({ properties, nameParam, nameView, isInline = false }: Pr
             setValuesActive(new Array(properties.length).fill(false))
         }
     }, [properties, searchParams, nameParam])
+
+    const activeCount = valuesActive.filter(Boolean).length
+
+    useEffect(() => {
+        onCountChange?.(activeCount)
+    }, [activeCount, onCountChange])
+
+    // Track if current state differs from URL params
+    useEffect(() => {
+        const whitParam = searchParams.get(nameParam)
+        const currentValues = valuesActive
+            .map((active, index) => active ? properties[index].value : null)
+            .filter(Boolean)
+            .join(",")
+        
+        const hasPending = currentValues !== (whitParam || "")
+        onPendingChange?.(hasPending, filterKey || "")
+    }, [valuesActive, searchParams, nameParam, properties, onPendingChange, filterKey])
 
     // Cerrar el dropdown al hacer clic fuera
     useEffect(() => {
@@ -70,7 +93,7 @@ export function Filter({ properties, nameParam, nameView, isInline = false }: Pr
         setValuesActive(newsValues)
     }
 
-    const HandleApplyFilter = () => {
+    const HandleApplyFilter = useCallback(() => {
         const selectOptions = properties
             .filter((_, index) => valuesActive[index])
             .map(option => option.value)
@@ -86,7 +109,19 @@ export function Filter({ properties, nameParam, nameView, isInline = false }: Pr
 
         router.push(`${pathname}?${newSearchParams.toString()}`)
         setIsOpen(false)
-    }
+        onApply?.()
+    }, [valuesActive, properties, searchParams, nameParam, pathname, router, onApply])
+
+    // Register current value with parent
+    useEffect(() => {
+        if (onRegisterValue && filterKey) {
+            const selectOptions = valuesActive
+                .map((active, index) => active ? properties[index].value : null)
+                .filter(Boolean)
+                .join(",")
+            onRegisterValue(selectOptions, filterKey)
+        }
+    }, [valuesActive, properties, onRegisterValue, filterKey])
 
     const HandleResetFilter = () => {
         setValuesActive(new Array(properties.length).fill(false))
@@ -96,12 +131,10 @@ export function Filter({ properties, nameParam, nameView, isInline = false }: Pr
         setIsOpen(false)
     }
 
-    const activeCount = valuesActive.filter(Boolean).length
-
     if (isInline) {
         return (
             <div className={styles.inlineContainer}>
-                <div className={`${styles.tagsContainer} scrollBarStyle`}>
+                <div className={`${styles.tagsContainer} `}>
                     {properties.map((category, index) => (
                         <button
                             key={category.value}
@@ -113,21 +146,6 @@ export function Filter({ properties, nameParam, nameView, isInline = false }: Pr
                         </button>
                     ))}
                 </div>
-                <footer className={styles.footer}>
-                    <Button
-                        text="Limpiar"
-                        isSecondary
-                        icon={<ResetIcon />}
-                        onClick={HandleResetFilter}
-                        mode="button"
-                    />
-                    <Button
-                        text="Aplicar"
-                        icon={<SuccessIcon />}
-                        onClick={HandleApplyFilter}
-                        mode="button"
-                    />
-                </footer>
             </div>
         )
     }
