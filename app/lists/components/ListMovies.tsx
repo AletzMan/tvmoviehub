@@ -14,7 +14,7 @@ export default async function ListMovies({ searchParams }: { searchParams: { typ
     return (
         <div className={styles.lists}>
             {lists && lists.results.length > 0 &&
-                <section className={`${styles.lists_section} scrollBarStyle`}>
+                <section className={`${styles.lists_section}  `}>
                     {lists?.results.map(list => (
                         <ListCard key={list.id} list={list} />
                     ))

@@ -14,7 +14,12 @@ interface IList {
     description: string
 }
 
-export function FormAddMovie() {
+interface Props {
+    onSuccess?: () => void
+    onCancel?: () => void
+}
+
+export function FormAddMovie({ onSuccess, onCancel }: Props) {
     const { session_id } = useSession()
     const [list, setList] = useState<IList>({ name: "", description: "" })
     const [errorList, setErrorList] = useState<IList>({ name: "", description: "" })
@@ -37,6 +42,8 @@ export function FormAddMovie() {
             const response = await CreateList(session_id, list.name, list.description)
             if (response) {
                 RevalidateURL("listMovies")
+                setList({ name: "", description: "" })
+                if (onSuccess) onSuccess()
             }
         }
     }
@@ -59,6 +66,15 @@ export function FormAddMovie() {
                 value={list.description}
                 onChange={HandleChange} />
             <fieldset className={styles.dialog_buttons}>
+                {onCancel && (
+                    <Button
+                        mode="button"
+                        text="Cancelar"
+                        icon={<CloseIcon />}
+                        onClick={onCancel}
+                        isSecondary
+                    />
+                )}
                 <Button
                     mode="button"
                     text="Guardar"
