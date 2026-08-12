@@ -7,11 +7,12 @@ import Link from "next/link"
 import { NextArrow, PrevArrow } from "../ArrowSlider/ArrowSlider"
 
 // Importamos react-slick de forma dinámica para evitar problemas con SSR
-const Slider = dynamic(() => import("react-slick"), { ssr: false })
+//const Slider = dynamic(() => import("react-slick"), { ssr: false })
 
 // Importamos únicamente los estilos CSS necesarios para que funcione visualmente
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
+import Slider from "react-slick"
 
 interface Props {
     title: string
@@ -21,7 +22,7 @@ interface Props {
 
 export const MovieSliderGeneral = ({ title, children, list_link }: Props) => {
     const settings = {
-        infinite: false,
+        infinite: true,
         speed: 700,
         slidesToShow: 7,
         slidesToScroll: 1,     // <--- Crucial: Permite que avance de 1 en 1 de forma fluida sin romper el cálculo de anchos
