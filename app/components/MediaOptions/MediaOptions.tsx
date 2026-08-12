@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 "use client"
-import { AddIcon, BookmarkIcon, FavoriteFullIcon, ListIcon, OptionsIcon, StarIcon } from "@/app/utils/svg"
+import { AddIcon, BookmarkIcon, BuenaIcon, CloseIcon, EspectacularIcon, ExcelenteIcon, FantasticaIcon, FavoriteFullIcon, IncreibleIcon, LegendariaIcon, ListIcon, MalaIcon, MuyBuenaIcon, OptionsIcon, RegularIcon, StarIcon, TerribleIcon } from "@/app/utils/svg"
 import styles from "./styles.module.scss"
 import { useState, MouseEvent, KeyboardEvent, useRef, useEffect, Dispatch, SetStateAction, SyntheticEvent, ChangeEvent } from "react"
 import { useSession } from "@/app/hooks/useSession"
@@ -12,9 +12,9 @@ import { Button } from "../Button/Button"
 import { IListMovie, IResponseListMovie } from "@/app/interfaces/list"
 import { useSearchParams } from "next/navigation"
 import { FormAddMovie } from "@/app/lists/components/FormAddMovie"
-import Link from "next/link"
 import { Suspense } from "react"
 import { createPortal } from "react-dom"
+import { ComboBox } from "../ComboBox/ComboBox"
 
 interface Props {
     id: number
@@ -34,6 +34,8 @@ function MediaOptionsContent({ id, type, title, viewMenu, setViewMenu }: Props) 
     const [currentRated, setCurrentRated] = useState(0)
     const [viewRating, setViewRating] = useState(false)
     const [viewLists, setViewLists] = useState(false)
+    const [viewCreateList, setViewCreateList] = useState(false)
+    const [selectedList, setSelectedList] = useState<string>("")
     const searchParams = useSearchParams()
     const [mounted, setMounted] = useState(false)
 
@@ -119,17 +121,20 @@ function MediaOptionsContent({ id, type, title, viewMenu, setViewMenu }: Props) 
 
     const HandleAddRating = async (event: MouseEvent<HTMLButtonElement>) => {
         const value = event.currentTarget.value
-        const response = await AddRating(session_id, id, currentRated, type)
+        console.log(value)
+
+        const response = await AddRating(session_id, id, parseInt(value), type)
+        console.log(response)
         if (response?.status_code === 1) {
             setCurrentRated(parseInt(value))
             if (accountState)
                 setAccountState({ ...accountState, rated: { value: parseInt(value) } })
-            enqueueSnackbar(`Has calificado "${title}" con "${currentRated}". ¡Gracias por compartir tu opinión!`, { variant: "success" })
+            enqueueSnackbar(`Has calificado "${title}" con "${parseInt(value)}". ¡Gracias por compartir tu opinión!`, { variant: "success" })
         } else if (response?.status_code === 12) {
             setCurrentRated(parseInt(value))
             if (accountState)
                 setAccountState({ ...accountState, rated: { value: parseInt(value) } })
-            enqueueSnackbar(`Has cambiado tu calificación de "${title}" a "${currentRated}".`, { variant: "success" })
+            enqueueSnackbar(`Has cambiado tu calificación de "${title}" a "${parseInt(value)}".`, { variant: "success" })
         } else {
             enqueueSnackbar(`No pudimos procesar tu solicitud. Por favor, inténtalo de nuevo más tarde.'`, { variant: "error" })
         }
@@ -171,6 +176,7 @@ function MediaOptionsContent({ id, type, title, viewMenu, setViewMenu }: Props) 
         const response = await GetLists(session_id, searchParams)
         setLists(response)
         setViewLists(true)
+        setViewMenu(false)
     }
 
     const HandleMouseOver = () => {
@@ -179,22 +185,40 @@ function MediaOptionsContent({ id, type, title, viewMenu, setViewMenu }: Props) 
     }
 
 
-    const HandleSelectList = async (event: ChangeEvent<HTMLSelectElement>) => {
+    const HandleSelectList = (event: ChangeEvent<HTMLSelectElement>) => {
         const value = event.currentTarget.value
-        const name = event.currentTarget.name
-        const status = await CheckItemStatus(value, id)
+        setSelectedList(value)
+    }
+
+    const HandleAddToList = async () => {
+        if (!selectedList) {
+            enqueueSnackbar(`Por favor selecciona una lista.`, { variant: "error" })
+            return
+        }
+        const status = await CheckItemStatus(selectedList, id)
+        console.log("STATUS ADD LIST RESPONSE", status)
         if (!status?.item_present) {
-            const response = await AddItemToList(session_id, value, id)
+            const response = await AddItemToList(session_id, selectedList, id)
             if (response?.status_code === 12) {
                 await RevalidateURL("lists")
                 await RevalidateURL("listMovies")
-                enqueueSnackbar(`¡${title} se ha agregado a lista ${name}! `, { variant: "success" })
+                const listName = lists?.results.find(l => l.id === parseInt(selectedList))?.name
+                enqueueSnackbar(`¡${title} se ha agregado a lista ${listName}! `, { variant: "success" })
+                setViewLists(false)
+                setSelectedList("")
             } else if (response?.status_code === 8) {
                 enqueueSnackbar(`El elemento ya había sido añadido previamente.`, { variant: "error" })
+                setSelectedList("")
             }
         } else {
             enqueueSnackbar(`El elemento ya había sido añadido previamente.`, { variant: "error" })
+            setSelectedList("")
         }
+    }
+
+    const HandleCreateListSuccess = () => {
+        setViewCreateList(false)
+        HandleViewMenuList()
     }
 
     return (
@@ -203,31 +227,15 @@ function MediaOptionsContent({ id, type, title, viewMenu, setViewMenu }: Props) 
             {viewMenu &&
                 <ul className={`${styles.menu} ${viewMenu ? styles.menu_open : styles.menu_close}`} ref={dropdownListRef} >
                     <li className={styles.options_li}>
-                        <button className={`${styles.menu_option} `} onClick={HandleViewMenuList} onMouseOver={HandleMouseOver}><ListIcon className={styles.menu_icon} />Añadir a lista</button>
-                        {viewLists &&
-                            <div className={styles.list} onMouseLeave={() => setViewLists(false)} >
-                                <Link className={styles.list_add} href="/lists/new" ><AddIcon />Crear nueva lista</Link>
-                                <div className={styles.lists}>
-                                    <label className={styles.lists_label}>
-                                        Añadir a:</label>
-                                    <select className={styles.lists_select} onChange={HandleSelectList} >
-                                        <option className={styles.lists_optionDefault}>Seleccione una lista</option>
-                                        {lists?.results.map((list, index) => (
-                                            <option key={list.id} className={styles.lists_option} value={list.id}>{list.name}</option>
-                                        ))}
-                                    </select>
-
-                                </div>
-                            </div>
-                        }
+                        <button className={`${styles.menu_option} `} onClick={HandleViewMenuList}><ListIcon className={styles.menu_icon} />Añadir a lista</button>
                     </li>
                     <hr className={styles.menu_separator} />
                     <li className={styles.options_li}>
-                        <button className={`${styles.menu_option}  `} onClick={HandleAddRemoveFavorite} onMouseOver={() => setViewRating(false)}><FavoriteFullIcon className={`${styles.menu_icon} ${accountState?.favorite ? styles.favorite : ""}`} />Favorito</button>
+                        <button className={`${styles.menu_option}  `} onClick={HandleAddRemoveFavorite}><FavoriteFullIcon className={`${styles.menu_icon} ${accountState?.favorite ? styles.favorite : ""}`} />Favorito</button>
                     </li>
                     <hr className={styles.menu_separator} />
                     <li className={styles.options_li}>
-                        <button className={`${styles.menu_option}  `} onClick={HandleAddWatchList} onMouseOver={() => setViewRating(false)}><BookmarkIcon className={`${styles.menu_icon} ${accountState?.watchlist ? styles.watchlist : ""}`} />Lista de seguimiento</button>
+                        <button className={`${styles.menu_option}  `} onClick={HandleAddWatchList}><BookmarkIcon className={`${styles.menu_icon} ${accountState?.watchlist ? styles.watchlist : ""}`} />Lista de seguimiento</button>
                     </li>
                     <hr className={styles.menu_separator} />
                     <li className={styles.options_li}>
@@ -240,24 +248,66 @@ function MediaOptionsContent({ id, type, title, viewMenu, setViewMenu }: Props) 
             {mounted && viewRating && createPortal(
                 <dialog className={styles.rating_dialog} open onMouseDown={(e) => e.stopPropagation()}>
                     <div className={styles.rating_content}>
-                        <h3 className={styles.rating_title}>Calificar "{title}"</h3>
+                        <Button icon={<CloseIcon />} text="" mode="button" color="danger" className={styles.rating_close} onClick={HandleViewRating} />
+
+                        <span>Calificar: </span>
+                        <h3 className={styles.rating_title}>"{title}"</h3>
                         <div className={styles.rating_emojis}>
-                            <button className={`${styles.rating_emoji} ${currentRated === 1 ? styles.rating_emojiActive : ""}`} onClick={HandleAddRating} value={1} title="Terrible">😠</button>
-                            <button className={`${styles.rating_emoji} ${currentRated === 2 ? styles.rating_emojiActive : ""}`} onClick={HandleAddRating} value={2} title="Mala">🙁</button>
-                            <button className={`${styles.rating_emoji} ${currentRated === 3 ? styles.rating_emojiActive : ""}`} onClick={HandleAddRating} value={3} title="Regular">😐</button>
-                            <button className={`${styles.rating_emoji} ${currentRated === 4 ? styles.rating_emojiActive : ""}`} onClick={HandleAddRating} value={4} title="Buena">🙂</button>
-                            <button className={`${styles.rating_emoji} ${currentRated === 5 ? styles.rating_emojiActive : ""}`} onClick={HandleAddRating} value={5} title="Muy buena">😊</button>
-                            <button className={`${styles.rating_emoji} ${currentRated === 6 ? styles.rating_emojiActive : ""}`} onClick={HandleAddRating} value={6} title="Excelente">😄</button>
-                            <button className={`${styles.rating_emoji} ${currentRated === 7 ? styles.rating_emojiActive : ""}`} onClick={HandleAddRating} value={7} title="Increíble">🤩</button>
-                            <button className={`${styles.rating_emoji} ${currentRated === 8 ? styles.rating_emojiActive : ""}`} onClick={HandleAddRating} value={8} title="Fantástica">🌟</button>
-                            <button className={`${styles.rating_emoji} ${currentRated === 9 ? styles.rating_emojiActive : ""}`} onClick={HandleAddRating} value={9} title="Espectacular">✨</button>
-                            <button className={`${styles.rating_emoji} ${currentRated === 10 ? styles.rating_emojiActive : ""}`} onClick={HandleAddRating} value={10} title="Legendaria">🏆</button>
+                            <button className={`${styles.rating_emoji} ${currentRated === 1 ? styles.rating_emojiActive : ""}`} onClick={HandleAddRating} value={1} data-tooltip="Terrible"><TerribleIcon /></button>
+                            <button className={`${styles.rating_emoji} ${currentRated === 2 ? styles.rating_emojiActive : ""}`} onClick={HandleAddRating} value={2} data-tooltip="Mala"><MalaIcon /></button>
+                            <button className={`${styles.rating_emoji} ${currentRated === 3 ? styles.rating_emojiActive : ""}`} onClick={HandleAddRating} value={3} data-tooltip="Regular"><RegularIcon /></button>
+                            <button className={`${styles.rating_emoji} ${currentRated === 4 ? styles.rating_emojiActive : ""}`} onClick={HandleAddRating} value={4} data-tooltip="Buena"><BuenaIcon /></button>
+                            <button className={`${styles.rating_emoji} ${currentRated === 5 ? styles.rating_emojiActive : ""}`} onClick={HandleAddRating} value={5} data-tooltip="Muy buena"><MuyBuenaIcon /></button>
+                            <button className={`${styles.rating_emoji} ${currentRated === 6 ? styles.rating_emojiActive : ""}`} onClick={HandleAddRating} value={6} data-tooltip="Excelente"><ExcelenteIcon /></button>
+                            <button className={`${styles.rating_emoji} ${currentRated === 7 ? styles.rating_emojiActive : ""}`} onClick={HandleAddRating} value={7} data-tooltip="Increíble"><IncreibleIcon /></button>
+                            <button className={`${styles.rating_emoji} ${currentRated === 8 ? styles.rating_emojiActive : ""}`} onClick={HandleAddRating} value={8} data-tooltip="Fantástica"><FantasticaIcon /></button>
+                            <button className={`${styles.rating_emoji} ${currentRated === 9 ? styles.rating_emojiActive : ""}`} onClick={HandleAddRating} value={9} data-tooltip="Espectacular"><EspectacularIcon /></button>
+                            <button className={`${styles.rating_emoji} ${currentRated === 10 ? styles.rating_emojiActive : ""}`} onClick={HandleAddRating} value={10} data-tooltip="Legendaria"><LegendariaIcon /></button>
                         </div>
                         <div className={styles.rating_actions}>
-                            <Button className={styles.rating_close} mode="button" text="Cerrar" onClick={HandleViewRating} />
-                            {accountState?.rated.value &&
+                            {accountState?.rated.value ?
                                 <Button className={styles.rating_delete} mode="button" text="Eliminar puntuación" onClick={HandleDeleteRating} />
+                                : null
                             }
+                        </div>
+                    </div>
+                </dialog>,
+                document.getElementById('rating-portal')!
+            )}
+            {mounted && viewLists && createPortal(
+                <dialog className={styles.rating_dialog} open onMouseDown={(e) => e.stopPropagation()}>
+                    <div className={styles.rating_list}>
+                        <Button icon={<CloseIcon />} text="" mode="button" color="danger" className={styles.rating_close} onClick={() => { setViewLists(false); setViewCreateList(false); setSelectedList("") }} />
+                        <span>Añadir a lista: </span>
+                        <h3 className={styles.rating_title}>"{title}"</h3>
+                        <div className={styles.rating_items}>
+                            {!viewCreateList ? (
+                                <>
+                                    <div className={styles.lists}>
+                                        <label className={styles.lists_label}>
+                                            Añadir a:</label>
+                                        <div className={styles.lists_buttons}>
+                                            <ComboBox
+                                                properties={lists?.results.map(list => ({ option: list.name, value: list.id.toString() })) || []}
+                                                onChange={HandleSelectList}
+                                                defaultValue={selectedList}
+                                                label=""
+                                            />
+
+                                            <Button
+                                                mode="button"
+                                                text="Añadir"
+                                                onClick={HandleAddToList}
+                                            />
+                                        </div>
+                                        <Button mode="button" variant="text" text="Crear nueva lista" icon={<AddIcon />} onClick={() => setViewCreateList(true)} />
+                                    </div>
+                                </>
+                            ) : (
+                                <div className={styles.create_list_form}>
+                                    <FormAddMovie onSuccess={HandleCreateListSuccess} onCancel={() => setViewCreateList(false)} />
+                                </div>
+                            )}
                         </div>
                     </div>
                 </dialog>,
