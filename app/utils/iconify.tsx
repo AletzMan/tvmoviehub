@@ -321,3 +321,14 @@ export function SoapIcon({ className }: Props) {
 export function TalkIcon({ className }: Props) {
     return <Icon icon="mdi:microphone" className={className} />
 }
+
+export const TerribleIcon = ({ className }: Props) => <Icon icon="streamline-freehand:smiley-dizzy" className={className} />;
+export const MalaIcon = ({ className }: Props) => <Icon icon="streamline-freehand:smiley-in-trouble" className={className} />;
+export const RegularIcon = ({ className }: Props) => <Icon icon="streamline-freehand:smiley-grumpy" className={className} />;
+export const BuenaIcon = ({ className }: Props) => <Icon icon="streamline-freehand:smiley-cheeky" className={className} />;
+export const MuyBuenaIcon = ({ className }: Props) => <Icon icon="streamline-freehand:smiley-smile-2" className={className} />;
+export const ExcelenteIcon = ({ className }: Props) => <Icon icon="streamline-freehand:smiley-happy" className={className} />;
+export const IncreibleIcon = ({ className }: Props) => <Icon icon="streamline-freehand:smiley-blessed" className={className} />;
+export const FantasticaIcon = ({ className }: Props) => <Icon icon="streamline-freehand:smiley-thrilled" className={className} />;
+export const EspectacularIcon = ({ className }: Props) => <Icon icon="streamline-freehand:smiley-shine-big-eyes" className={className} />;
+export const LegendariaIcon = ({ className }: Props) => <Icon icon="streamline-freehand:smiley-kiss-heart" className={className} />;

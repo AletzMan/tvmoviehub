@@ -549,6 +549,9 @@ export const GetStates = async (session_id: string, movie_id: number, type: 'mov
 
 export const AddRating = async (session_id: string, serie_id: number, value: number, type: 'movie' | 'tv') => {
 	const url = `${API_URL_BASE}/${type}/${serie_id}/rating?session_id=${session_id}`
+	console.log("URL ADD RATING", url)
+	console.log("VALUE RATING", value)
+
 	const response = await fetch(url,
 		{
 			method: "POST",
@@ -561,6 +564,7 @@ export const AddRating = async (session_id: string, serie_id: number, value: num
 		})
 	let data: IResponseRating | null = null
 	const result = (await response.json()) as IResponseRating
+	console.log("DATA RESPONSE ADD RATING", result)
 	if (response.status === 201) {
 		return result
 	}
