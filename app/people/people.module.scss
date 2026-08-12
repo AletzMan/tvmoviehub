@@ -18,7 +18,7 @@
 // Cuadrícula estilo Bento dinámica
 .peopleBentoGrid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(11em, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(10em, 1fr));
     gap: 1.25em;
     padding-bottom: 2em;
 

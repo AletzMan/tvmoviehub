@@ -4,12 +4,13 @@
     flex-direction: column;
     background-color: var(--surface-b);
     border-radius: 0.5em;
-    overflow: hidden;
     border: 1px solid var(--hover);
     transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
     text-decoration: none;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    height: 18em; // Tarjetas más compactas
+    margin: 1rem 0 0 0;
+    height: 18em;
+    min-width: 10em;
 
     &_featured {
         @media (min-width: 900px) {
@@ -40,16 +41,42 @@
 
     &_rank {
         position: absolute;
-        top: 0.5em;
-        left: 0.5em;
-        z-index: 10;
-        background-color: var(--primary-500);
-        color: #000;
-        font-weight: 800;
-        font-size: 0.75rem;
-        padding: 0.2em 0.5em;
-        border-radius: 0.25em;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+        top: -5px;
+        left: -5px;
+        width: 57px;
+        height: 40px;
+        z-index: 20;
+        pointer-events: none;
+
+        svg {
+            path {
+                fill: var(--primary-300);
+            }
+        }
+
+        &Featured {
+            svg {
+                path {
+                    fill: var(--warning);
+                }
+            }
+        }
+
+        & span {
+            position: absolute;
+            top: 0;
+            width: 52px;
+            height: 40px;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #000;
+            font-size: 0.9rem;
+            font-weight: 800;
+            line-height: 1;
+        }
     }
 
     &_imageWrapper {
