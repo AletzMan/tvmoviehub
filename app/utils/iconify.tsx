@@ -46,11 +46,11 @@ export function DeleteIcon({ className }: Props) {
 }
 
 export function ArrowLeftIcon({ className }: Props) {
-    return <Icon icon="mdi:arrow-left" className={className} />
+    return <Icon icon="nrk:chevron-left-expressive" className={className} />
 }
 
 export function ArrowRightIcon({ className }: Props) {
-    return <Icon icon="mdi:arrow-right" className={className} />
+    return <Icon icon="nrk:chevron-right-expressive" className={className} />
 }
 
 export function PlayIcon({ className }: Props) {
@@ -134,7 +134,7 @@ export function ViewOffIcon({ className }: Props) {
 }
 
 export function ArrowDownIcon({ className }: Props) {
-    return <Icon icon="mdi:arrow-down" className={className} />
+    return <Icon icon="lucide:chevron-down" className={className} />
 }
 
 export function ArrowDownSolidIcon({ className }: Props) {
