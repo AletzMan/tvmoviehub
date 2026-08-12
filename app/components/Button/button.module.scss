@@ -4,7 +4,7 @@
     justify-content: center;
     gap: 0.6em;
     padding: 0.5em 1em;
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-md);
     font-size: 0.85em;
     font-weight: 500;
     font-family: inherit;
@@ -18,9 +18,7 @@
     white-space: nowrap;
 
     &:hover:not(:disabled) {
-        background: var(--primary-400);
         transform: translateY(-1px);
-        box-shadow: 0 4px 12px rgba(var(--primary-500-rgb), 0.25);
     }
 
     &:active:not(:disabled) {
@@ -33,15 +31,94 @@
         filter: grayscale(1);
     }
 
+    // Variants
+    &_solid {
+        background: var(--button-color, var(--primary-500));
+        color: var(--surface-base);
+
+        &:hover:not(:disabled) {
+            background: var(--button-hover, var(--primary-400));
+            box-shadow: 0 4px 12px var(--button-shadow, rgba(168, 85, 247, 0.25));
+        }
+    }
+
+    &_outline {
+        background: transparent;
+        border: 1px solid var(--button-color, var(--primary-500));
+        color: var(--button-color, var(--primary-500));
+
+        &:hover:not(:disabled) {
+            background: var(--button-color, var(--primary-500));
+            color: var(--surface-base);
+            box-shadow: 0 4px 12px var(--button-shadow, rgba(168, 85, 247, 0.25));
+        }
+    }
+
+    &_text {
+        background: transparent;
+        border: none;
+        color: var(--button-color, var(--primary-500));
+
+        &:hover:not(:disabled) {
+            background: var(--button-bg-hover, rgba(168, 85, 247, 0.1));
+        }
+    }
+
+    &_ghost {
+        background: transparent;
+        border: 1px solid transparent;
+        color: var(--button-color, var(--primary-500));
+
+        &:hover:not(:disabled) {
+            background: var(--button-bg-hover, rgba(168, 85, 247, 0.1));
+            border-color: var(--button-color, var(--primary-500));
+        }
+    }
+
+    // Colors
+    &_primary {
+        --button-color: var(--primary-500);
+        --button-hover: var(--primary-400);
+        --button-shadow: rgba(168, 85, 247, 0.25);
+        --button-bg-hover: rgba(168, 85, 247, 0.1);
+    }
+
+    &_danger {
+        --button-color: var(--danger);
+        --button-hover: #DC2626;
+        --button-shadow: rgba(239, 68, 68, 0.25);
+        --button-bg-hover: rgba(239, 68, 68, 0.1);
+    }
+
+    &_success {
+        --button-color: var(--success);
+        --button-hover: #16A34A;
+        --button-shadow: rgba(34, 197, 94, 0.25);
+        --button-bg-hover: rgba(34, 197, 94, 0.1);
+    }
+
+    &_warning {
+        --button-color: var(--warning);
+        --button-hover: #D97706;
+        --button-shadow: rgba(245, 158, 11, 0.25);
+        --button-bg-hover: rgba(245, 158, 11, 0.1);
+    }
+
+    &_info {
+        --button-color: var(--info);
+        --button-hover: #0EA5E9;
+        --button-shadow: rgba(56, 189, 248, 0.25);
+        --button-bg-hover: rgba(56, 189, 248, 0.1);
+    }
+
     &_secondary {
-        background-color: var(--surface-d);
+        background-color: var(--gray-700);
         color: var(--text);
         border: none;
         font-weight: 400;
 
         &:hover:not(:disabled) {
-            background-color: var(--surface-c);
-            border-color: var(--surface-d);
+            background-color: var(--gray-600);
             color: var(--text);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         }
