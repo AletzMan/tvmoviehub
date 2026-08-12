@@ -9,11 +9,9 @@ import { FormattedDateSearch } from "../utils/helpers"
 import { GetNowPlaying, GetPopularMovies, GetTopRatedMovies, GetUpcomingMovies } from "../services/fetchData"
 import { IMovie } from "../interfaces/movie"
 
-// Evita que el build falle si la API requiere datos dinámicos
-export const dynamic = "force-dynamic"
 
 export default async function Page({ searchParams }: { searchParams: Promise<{ page?: string }> }) {
-    const currentTheatres: IMovie[] = (await GetNowPlaying()) || [] 
+    const currentTheatres: IMovie[] = (await GetNowPlaying()) || []
     const params = await searchParams
     const page = Number(params.page) || 1
 
@@ -35,14 +33,14 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ p
                             <MovieCard key={movie.id} movie={movie} top={index + 1} />
                         ))}
                     </>
-                </MovieSliderGeneral> 
+                </MovieSliderGeneral>
                 <MovieSliderGeneral title="Populares" list_link="/movies/results/list?sort_by=popularity.desc">
                     <>
                         {popularMovies?.results?.map((movie, index) => (
                             <MovieCard key={movie.id} movie={movie} top={index + 1} />
                         ))}
                     </>
-                </MovieSliderGeneral> 
+                </MovieSliderGeneral>
                 <MovieSliderGeneral title="Próximamente" list_link={`/movies/results/list?sort_by=popularity.desc&with_release_type=2,3&release_date.gte=${dateStart}&release_date.lte=${dateEnd}`}>
                     <>
                         {upcomingMovies?.results?.map((movie, index) => (
