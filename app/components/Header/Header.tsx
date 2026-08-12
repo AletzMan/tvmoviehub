@@ -71,8 +71,8 @@ export default function Header() {
 
     return (
         <>
-            <SnackbarProvider anchorOrigin={{ vertical: "top", horizontal: "center" }} autoHideDuration={3500} />
             <header className={styles.header}>
+                <SnackbarProvider anchorOrigin={{ vertical: "top", horizontal: "center" }} autoHideDuration={3500} />
                 <div className={styles.header_container}>
                     <div className={styles.menu}>
                         <button className={styles.menu_button} onClick={() => HandleSetOpen("menu")}>
