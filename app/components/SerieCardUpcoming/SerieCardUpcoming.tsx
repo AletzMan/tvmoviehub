@@ -6,9 +6,10 @@ import { FormattedDateUpcoming } from "@/app/utils/helpers"
 
 interface Props {
     serie: ISerie
+    aspectRatio?: string
 }
 
-export const SerieCardUpcoming = ({ serie }: Props) => {
+export const SerieCardUpcoming = ({ serie, aspectRatio }: Props) => {
     return (
         <MediaCard
             id={serie.id}
@@ -19,6 +20,7 @@ export const SerieCardUpcoming = ({ serie }: Props) => {
             type="tv"
             href={`/series/${serie.id}`}
             showOptions={true}
+            aspectRatio={aspectRatio}
         />
     )
 }

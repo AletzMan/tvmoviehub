@@ -2,7 +2,7 @@
 "use client"
 import { AddIcon, BookmarkIcon, BuenaIcon, CloseIcon, EspectacularIcon, ExcelenteIcon, FantasticaIcon, FavoriteFullIcon, IncreibleIcon, LegendariaIcon, ListIcon, MalaIcon, MuyBuenaIcon, OptionsIcon, RegularIcon, StarIcon, TerribleIcon } from "@/app/utils/svg"
 import styles from "./styles.module.scss"
-import { useState, MouseEvent, KeyboardEvent, useRef, useEffect, Dispatch, SetStateAction, SyntheticEvent, ChangeEvent } from "react"
+import { useState, MouseEvent, KeyboardEvent, useRef, useEffect, useCallback, Dispatch, SetStateAction, SyntheticEvent, ChangeEvent } from "react"
 import { useSession } from "@/app/hooks/useSession"
 import { IAccountStates } from "@/app/interfaces/movie"
 import { AddItemToList, AddRating, AddRemoveFavorite, AddToWatchList, CheckItemStatus, DeleteRating, GetLists, GetStates } from "@/app/services/fetchData"
@@ -10,9 +10,9 @@ import { RevalidateURL } from "@/app/utils/serveractions"
 import { enqueueSnackbar, } from "notistack"
 import { Button } from "../Button/Button"
 import { IListMovie, IResponseListMovie } from "@/app/interfaces/list"
-import { useSearchParams } from "next/navigation"
+
 import { FormAddMovie } from "@/app/lists/components/FormAddMovie"
-import { Suspense } from "react"
+
 import { createPortal } from "react-dom"
 import { ComboBox } from "../ComboBox/ComboBox"
 
@@ -20,12 +20,10 @@ interface Props {
     id: number
     type: 'movie' | 'tv'
     title: string
-    viewMenu: boolean
-    setViewMenu: Dispatch<SetStateAction<boolean>>
 }
 
 
-function MediaOptionsContent({ id, type, title, viewMenu, setViewMenu }: Props) {
+function MediaOptionsContent({ id, type, title }: Props) {
     const { session_id } = useSession()
     const activatorRef = useRef<HTMLElement | null>(null)
     const dropdownListRef = useRef<HTMLUListElement | null>(null)
@@ -36,34 +34,24 @@ function MediaOptionsContent({ id, type, title, viewMenu, setViewMenu }: Props) 
     const [viewLists, setViewLists] = useState(false)
     const [viewCreateList, setViewCreateList] = useState(false)
     const [selectedList, setSelectedList] = useState<string>("")
-    const searchParams = useSearchParams()
+    const [viewMenu, setViewMenu] = useState(false)
+
     const [mounted, setMounted] = useState(false)
 
     useEffect(() => {
         setMounted(true)
     }, [])
 
-    useEffect(() => {
-        if (session_id && viewMenu)
-            GetData()
-    }, [session_id, viewMenu])
-
-    useEffect(() => {
-        if (viewMenu && dropdownListRef.current) {
-            dropdownListRef!.current!.querySelector("button")?.focus()
-            document.addEventListener("mousedown", clickOutsideHandler)
-        } else {
-            document.addEventListener("mousedown", clickOutsideHandler)
-        }
-
-
-    }, [viewMenu])
-
-    const GetData = async (newValue?: number) => {
+    const GetData = useCallback(async (newValue?: number) => {
         const stateData = await GetStates(session_id, id, type)
         setAccountState(stateData)
         setCurrentRated(newValue || (stateData?.rated.value || NaN))
-    }
+    }, [session_id, id, type])
+
+    useEffect(() => {
+        if (session_id && viewMenu)
+            GetData()
+    }, [session_id, viewMenu, GetData])
 
     function HandleViewMenu(event: MouseEvent<HTMLButtonElement>): void {
         setViewMenu(prev => !prev)
@@ -78,7 +66,7 @@ function MediaOptionsContent({ id, type, title, viewMenu, setViewMenu }: Props) 
         }
     }
 
-    const clickOutsideHandler = (event: any) => {
+    const clickOutsideHandler = useCallback((event: any) => {
         if (dropdownListRef?.current) {
             if (
                 dropdownListRef.current.contains(event.target) ||
@@ -88,7 +76,18 @@ function MediaOptionsContent({ id, type, title, viewMenu, setViewMenu }: Props) 
             }
             setViewMenu(false)
         }
-    }
+    }, [])
+
+    useEffect(() => {
+        if (viewMenu && dropdownListRef.current) {
+            dropdownListRef!.current!.querySelector("button")?.focus()
+            document.addEventListener("mousedown", clickOutsideHandler)
+        }
+
+        return () => {
+            document.removeEventListener("mousedown", clickOutsideHandler)
+        }
+    }, [viewMenu, clickOutsideHandler])
 
     const HandleAddRemoveFavorite = async () => {
         const AddFavorite = async () => {
@@ -173,7 +172,9 @@ function MediaOptionsContent({ id, type, title, viewMenu, setViewMenu }: Props) 
     }
 
     const HandleViewMenuList = async () => {
-        const response = await GetLists(session_id, searchParams)
+        const currentSearchParams = new URLSearchParams(window.location.search)
+        const paramsObj = Object.fromEntries(currentSearchParams.entries())
+        const response = await GetLists(session_id, paramsObj)
         setLists(response)
         setViewLists(true)
         setViewMenu(false)
@@ -318,9 +319,5 @@ function MediaOptionsContent({ id, type, title, viewMenu, setViewMenu }: Props) 
 }
 
 export function MediaOptions(props: Props) {
-    return (
-        <Suspense fallback={null}>
-            <MediaOptionsContent {...props} />
-        </Suspense>
-    )
+    return <MediaOptionsContent {...props} />
 }

@@ -7,9 +7,10 @@ interface Props {
     movie: IPartCollection
     type: 'movie' | 'tv'
     isFavorites?: boolean
+    aspectRatio?: string
 }
 
-export function MovieCardDetails({ movie, type, isFavorites }: Props) {
+export function MovieCardDetails({ movie, type, isFavorites, aspectRatio }: Props) {
     return (
         <MediaCard
             id={movie.id}
@@ -20,6 +21,7 @@ export function MovieCardDetails({ movie, type, isFavorites }: Props) {
             type={type}
             href={type === "movie" ? `/movies/${movie.id}` : `/series/${movie.id}`}
             showOptions={true}
+            aspectRatio={aspectRatio}
         />
     )
 }

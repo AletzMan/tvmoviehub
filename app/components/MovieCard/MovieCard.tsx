@@ -7,9 +7,10 @@ import styles from "../MediaCard/mediacard.module.scss"
 interface Props {
     movie: IMovie
     top?: number
+    aspectRatio?: string
 }
 
-export const MovieCard = ({ movie, top }: Props) => {
+export const MovieCard = ({ movie, top, aspectRatio }: Props) => {
     return (
         <MediaCard
             id={movie.id}
@@ -21,6 +22,7 @@ export const MovieCard = ({ movie, top }: Props) => {
             href={`/movies/${movie.id}`}
             showRank={top}
             className={styles.mediaCard}
+            aspectRatio={aspectRatio}
         />
     )
 }

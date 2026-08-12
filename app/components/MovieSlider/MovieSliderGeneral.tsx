@@ -18,24 +18,54 @@ interface Props {
     title: string
     children: ReactNode
     list_link?: string
+    slidesToShow?: number
 }
 
-export const MovieSliderGeneral = ({ title, children, list_link }: Props) => {
+export const MovieSliderGeneral = ({ title, children, list_link, slidesToShow = 7 }: Props) => {
     const settings = {
         infinite: true,
         speed: 700,
-        slidesToShow: 7,
-        slidesToScroll: 1,     // <--- Crucial: Permite que avance de 1 en 1 de forma fluida sin romper el cálculo de anchos
+        slidesToShow: slidesToShow, // Tu valor base para pantallas grandes
+        slidesToScroll: 1,
         variableWidth: false,
         swipe: true,
-        swipeToSlide: true,    // <--- Permite arrastrar de forma natural y libre hasta el límite
+        swipeToSlide: true,
         autoplay: false,
         arrows: true,
         dots: false,
+        adaptiveHeight: true,
         rows: 1,
         nextArrow: <NextArrow />,
-        prevArrow: <PrevArrow />
-    }
+        prevArrow: <PrevArrow />,
+        responsive: [
+            {
+                breakpoint: 1280, // Pantallas grandes / Laptops
+                settings: {
+                    slidesToShow: Math.min(slidesToShow, 4),
+                }
+            },
+            {
+                breakpoint: 1024, // Tablets horizontales
+                settings: {
+                    slidesToShow: Math.min(slidesToShow, 3),
+                }
+            },
+            {
+                breakpoint: 768, // Tablets verticales / Celulares grandes
+                settings: {
+                    slidesToShow: 2,
+                    arrows: false // Oculta las flechas en touch para mejor espacio
+                }
+            },
+            {
+                breakpoint: 480, // Celulares pequeños
+                settings: {
+                    slidesToShow: 1.2, // Muestra parte de la siguiente tarjeta para invitar al swipe
+                    arrows: false
+                }
+            }
+        ]
+    };
 
     return (
         <div className={styles.slider}>

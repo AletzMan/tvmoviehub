@@ -6,9 +6,10 @@ import { ISerie } from "@/app/interfaces/serie"
 interface Props {
     serie: ISerie
     top?: number
+    aspectRatio?: string
 }
 
-export const SerieCard = ({ serie, top }: Props) => {
+export const SerieCard = ({ serie, top, aspectRatio }: Props) => {
     return (
         <MediaCard
             id={serie.id}
@@ -19,6 +20,7 @@ export const SerieCard = ({ serie, top }: Props) => {
             type="tv"
             href={`/series/${serie.id}`}
             showRank={top}
+            aspectRatio={aspectRatio}
         />
     )
 }

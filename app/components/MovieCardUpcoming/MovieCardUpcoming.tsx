@@ -6,9 +6,10 @@ import { FormattedDateUpcoming } from "@/app/utils/helpers"
 
 interface Props {
     movie: IMovie
+    aspectRatio?: string
 }
 
-export const MovieCardUpcoming = ({ movie }: Props) => {
+export const MovieCardUpcoming = ({ movie, aspectRatio }: Props) => {
     return (
         <MediaCard
             id={movie.id}
@@ -19,6 +20,7 @@ export const MovieCardUpcoming = ({ movie }: Props) => {
             type="movie"
             href={`/movies/${movie.id}`}
             showOptions={true}
+            aspectRatio={aspectRatio}
         />
     )
 }

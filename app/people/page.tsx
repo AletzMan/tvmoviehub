@@ -27,6 +27,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ p
                                 person={person}
                                 rank={globalIndex}
                                 isFeatured={isFeatured}
+                                aspectRatio="1/2"
                             />
                         )
                     })

@@ -24,6 +24,7 @@ export interface MediaCardProps {
     extraContent?: ReactNode
     actions?: ReactNode
     className?: string
+    aspectRatio?: string
 }
 
 export const MediaCard = ({
@@ -39,11 +40,11 @@ export const MediaCard = ({
     showRank,
     extraContent,
     actions,
-    className
+    className,
+    aspectRatio = "8/11",
 }: MediaCardProps) => {
     const router = useRouter()
     const { setLoadingState } = useLoadingState()
-    const [viewMenu, setViewMenu] = useState(false)
     const { handlePointerDown, handlePointerMove, handleClick } = useDragPreventClick()
 
     const handleCardClick = () => {
@@ -84,7 +85,7 @@ export const MediaCard = ({
             }
 
 
-            <div className={styles.mediaCard_posterWrapper}>
+            <div className={styles.mediaCard_posterWrapper} style={{ aspectRatio }}>
                 <Image
                     className={styles.mediaCard_poster}
                     src={imageUrl}
@@ -118,7 +119,7 @@ export const MediaCard = ({
                             onClick={(e) => e.stopPropagation()}
                             className={styles.mediaCard_optionsContainer}
                         >
-                            <MediaOptions id={id} type={type as "movie" | "tv"} title={title} viewMenu={viewMenu} setViewMenu={setViewMenu} />
+                            <MediaOptions id={id} type={type as "movie" | "tv"} title={title} />
                         </div>
                     )}
                 </div>

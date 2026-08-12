@@ -8,9 +8,10 @@ import { DeleteIcon } from "@/app/utils/svg"
 interface Props {
     movie: IListItem
     list_id: number
+    aspectRatio?: string
 }
 
-export function MovieCardList({ movie, list_id }: Props) {
+export function MovieCardList({ movie, list_id, aspectRatio }: Props) {
     const { viewDialog, setViewDialog, setItemToDelete, setTypeDialog } = useDialogAlert()
 
     const handleDeleteItem = async () => {
@@ -43,6 +44,7 @@ export function MovieCardList({ movie, list_id }: Props) {
             href={movie.media_type === "tv" ? `/series/${movie.id}` : `/movies/${movie.id}`}
             showOptions={false}
             actions={deleteButton}
+            aspectRatio={aspectRatio}
         />
     )
 }

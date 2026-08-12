@@ -13,9 +13,11 @@ interface Props {
     person: IPeople
     rank?: number
     isFeatured?: boolean
+    isCircle?: boolean
+    aspectRatio?: string
 }
 
-export const PersonCard = ({ person, rank, isFeatured = false }: Props) => {
+export const PersonCard = ({ person, rank, isFeatured = false, isCircle = false, aspectRatio = "8/9" }: Props) => {
     const [load, setLoad] = useState(true)
     const router = useRouter()
     const { setLoadingState } = useLoadingState()
@@ -39,7 +41,7 @@ export const PersonCard = ({ person, rank, isFeatured = false }: Props) => {
         "Camera": "Cámara",
         "Sound": "Sonido",
         "Art": "Arte",
-        "Costume & Make-up": "Vestuario y Maquillaje",
+        "Costume & Make-Up": "Vestuario y Maquillaje",
         "Visual Effects": "Efectos Visuales",
         "Crew": "Equipo Técnico",
         "Lighting": "Iluminación",
@@ -53,7 +55,7 @@ export const PersonCard = ({ person, rank, isFeatured = false }: Props) => {
 
     return (
         <div
-            className={`${styles.person} ${isFeatured ? styles.person_featured : ''}`}
+            className={`${styles.person} ${isFeatured ? styles.person_featured : ''} ${isCircle ? styles.person_circle : null}`}
             onPointerDown={handlePointerDown}
             onPointerMove={handlePointerMove}
             onClick={handleClick(handleCardClick)}
@@ -66,7 +68,7 @@ export const PersonCard = ({ person, rank, isFeatured = false }: Props) => {
                 </svg>
                 <span>#{rank}</span>
             </div>}
-            <div className={styles.person_imageWrapper}>
+            <div className={`${styles.person_imageWrapper} ${isCircle ? styles.person_imageCircle : null}`} style={{ aspectRatio }}>
 
                 <Image
                     className={styles.person_image}

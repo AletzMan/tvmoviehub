@@ -6,9 +6,10 @@ import { FemaleIcon, MaleIcon } from "@/app/utils/svg"
 
 interface Props {
     result: IResult
+    aspectRatio?: string
 }
 
-export function MultiCard({ result }: Props) {
+export function MultiCard({ result, aspectRatio }: Props) {
     const getImageUrl = () => {
         if (result.poster_path) {
             return result.poster_path
@@ -42,6 +43,7 @@ export function MultiCard({ result }: Props) {
             href={href}
             showOptions={result.media_type !== "person"}
             extraContent={genderIcon}
+            aspectRatio={aspectRatio}
         />
     )
 }
