@@ -28,7 +28,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<IQu
                             {/* <HeaderFiltersSearch />*/}
                         </>
                     }
-                    {popularSeries.results.length > 0 ? <div className={`${styles.movies} scrollBarStyle`}>
+                    {popularSeries.results.length > 0 ? <div className={`${styles.movies}`}>
                         {
                             popularSeries.results.map((movie, index) => (
                                 <MovieCardDetails key={movie.id} movie={movie as IPartCollection} type="tv" />
