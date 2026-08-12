@@ -4,9 +4,10 @@ import styles from "./personcard.module.scss"
 import Image from "next/image"
 import { BASE_URL_IMG_CUSTOM } from "@/app/utils/const"
 import { FemaleIcon, LoadingIcon, MaleIcon } from "@/app/utils/svg"
-import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { useLoadingState } from "@/app/services/store"
+import { useDragPreventClick } from "@/app/hooks/useDragPreventClick"
 
 interface Props {
     person: IPeople
@@ -16,7 +17,14 @@ interface Props {
 
 export const PersonCard = ({ person, rank, isFeatured = false }: Props) => {
     const [load, setLoad] = useState(true)
+    const router = useRouter()
     const { setLoadingState } = useLoadingState()
+    const { handlePointerDown, handlePointerMove, handleClick } = useDragPreventClick()
+
+    const handleCardClick = () => {
+        setLoadingState(true)
+        router.push(`/people/${person.id}`)
+    }
 
     const HandleLoadImage = () => {
         setLoad(false)
@@ -44,10 +52,11 @@ export const PersonCard = ({ person, rank, isFeatured = false }: Props) => {
     };
 
     return (
-        <Link
+        <div
             className={`${styles.person} ${isFeatured ? styles.person_featured : ''}`}
-            href={`/people/${person.id}`}
-            onClick={() => setLoadingState(true)}
+            onPointerDown={handlePointerDown}
+            onPointerMove={handlePointerMove}
+            onClick={handleClick(handleCardClick)}
         >
             {rank && <div className={`${styles.person_rank} ${isFeatured ? styles.person_rankFeatured : null}`}>
                 <svg width="60"
@@ -82,6 +91,6 @@ export const PersonCard = ({ person, rank, isFeatured = false }: Props) => {
                     <MaleIcon className={`${styles.person_gender} ${styles.person_genderMale}`} />
                 }
             </div>
-        </Link>
+        </div>
     )
 }

@@ -5,9 +5,10 @@ import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { BASE_URL_IMG, URL_IMAGE_NOTCOVER } from "@/app/utils/const"
 import { StarIcon } from "@/app/utils/svg"
-import { useRef, PointerEvent, useState, ReactNode } from "react"
+import { useState, ReactNode } from "react"
 import { useLoadingState } from "@/app/services/store"
 import { MediaOptions } from "../MediaOptions/MediaOptions"
+import { useDragPreventClick } from "@/app/hooks/useDragPreventClick"
 
 export interface MediaCardProps {
     id: number
@@ -43,27 +44,9 @@ export const MediaCard = ({
     const router = useRouter()
     const { setLoadingState } = useLoadingState()
     const [viewMenu, setViewMenu] = useState(false)
-
-    const pointerPos = useRef({ x: 0, y: 0 })
-    const isDraggingRef = useRef(false)
-
-    const handlePointerDown = (e: PointerEvent<HTMLDivElement>) => {
-        pointerPos.current = { x: e.clientX, y: e.clientY }
-        isDraggingRef.current = false
-    }
-
-    const handlePointerMove = (e: PointerEvent<HTMLDivElement>) => {
-        const dx = Math.abs(e.clientX - pointerPos.current.x)
-        const dy = Math.abs(e.clientY - pointerPos.current.y)
-
-        if (dx > 5 || dy > 5) {
-            isDraggingRef.current = true
-        }
-    }
+    const { handlePointerDown, handlePointerMove, handleClick } = useDragPreventClick()
 
     const handleCardClick = () => {
-        if (isDraggingRef.current) return
-
         if (onClick) {
             onClick()
         } else if (href) {
@@ -86,7 +69,7 @@ export const MediaCard = ({
             className={`${styles.mediaCard} ${className || ''}`}
             onPointerDown={handlePointerDown}
             onPointerMove={handlePointerMove}
-            onClick={handleCardClick}
+            onClick={handleClick(handleCardClick)}
         >
             {showRank &&
                 <div className={styles.mediaCard_rankBadge}>

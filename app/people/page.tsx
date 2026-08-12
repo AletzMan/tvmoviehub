@@ -14,7 +14,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ p
     return (
         <section className={`${styles.section} `}>
             <HeaderSection title="Top personas (Popularidad)" icon={<PopularIcon />} />
-            <div className={`${styles.peopleBentoGrid} scrollBarStyle`}>
+            <div className={`${styles.peopleBentoGrid}  `}>
                 {
                     popularPeople.results.map((person, index) => {
                         const globalIndex = index + 1 + (page - 1) * 20;

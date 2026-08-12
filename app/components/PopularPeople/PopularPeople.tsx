@@ -2,31 +2,39 @@
 
 import { IPeople } from "@/app/interfaces/people"
 import styles from "./popularpeople.module.scss"
-import Image from "next/image"
-import { BASE_URL_IMG, URL_IMAGE_NOTPHOTO } from "@/app/utils/const"
-import { StarIcon } from "@/app/utils/svg"
-import Link from "next/link"
-import { useLoadingState } from "@/app/services/store"
+import { PersonCard } from "@/app/people/components/PersonCard/PersonCard"
+import Slider from "react-slick"
+import { NextArrow, PrevArrow } from "../ArrowSlider/ArrowSlider"
 
 type Props = {
     people: IPeople[]
 }
 export const PopularPeople = ({ people }: Props) => {
-    const { setLoadingState } = useLoadingState() 
-
     return (
         <section className={styles.section}>
             {
-                people.map((person, index) => (
-                    <Link key={person.id} className={styles.person} href={`/people/${person.id}`} onClick={() => setLoadingState(true)}>
-                        <picture className={styles.person_picture}>
-                            <Image className={styles.person_image} src={person.profile_path ? BASE_URL_IMG.concat(person.profile_path || "") : URL_IMAGE_NOTPHOTO} alt={`Foto de ${person.name}`} width={90} height={120} />
-                        </picture>
-                        <span className={styles.person_name}>{person.name}</span>
-                        {/*<div className={styles.person_position}><StarIcon className={styles.person_positionIcon} /> <span className={styles.person_positionNumber}>{index + 1}</span></div>*/}
-                    </Link>
-                ))
+                <Slider {...settings}>
+                    {people.map((person, index) => (
+                        <PersonCard person={person} rank={index + 1} key={person.original_name} />
+                    ))}
+                </Slider>
             }
         </section>
     )
+}
+
+const settings = {
+    infinite: true,
+    speed: 700,
+    slidesToShow: 7,
+    slidesToScroll: 1,     // <--- Crucial: Permite que avance de 1 en 1 de forma fluida sin romper el cálculo de anchos
+    variableWidth: false,
+    swipe: true,
+    swipeToSlide: true,    // <--- Permite arrastrar de forma natural y libre hasta el límite
+    autoplay: false,
+    arrows: true,
+    dots: false,
+    rows: 1,
+    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow />
 }
