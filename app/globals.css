@@ -43,6 +43,18 @@
 	/* Hover */
 	--hover: rgba(50, 95, 220, 0.1);
 
+	--gray-50: oklch(0.984 0.003 247.858);
+	--gray-100: oklch(0.968 0.007 247.896);
+	--gray-200: oklch(0.929 0.013 255.508);
+	--gray-300: oklch(0.869 0.022 252.894);
+	--gray-400: oklch(0.704 0.04 256.788);
+	--gray-500: oklch(0.554 0.046 257.417);
+	--gray-600: oklch(0.446 0.043 257.281);
+	--gray-700: oklch(0.372 0.044 257.287);
+	--gray-800: oklch(0.279 0.041 260.031);
+	--gray-900: oklch(0.208 0.042 265.755);
+	--gray-950: oklch(0.129 0.042 264.695);
+
 	/* Borders */
 	--border: #201e20;
 
@@ -50,6 +62,8 @@
 	--radius-xs: 0.125em;
 	--radius-sm: 0.25em;
 	--radius-md: 0.5em;
+	--radius-lg: 0.75em;
+	--radius-xl: 1em;
 
 	--maxWidth: 1520px;
 	--maxWidthContent: 1515px;
