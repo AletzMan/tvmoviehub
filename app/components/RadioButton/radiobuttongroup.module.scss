@@ -1,0 +1,51 @@
+.radiobutton_group {
+    display: flex;
+    align-items: center;
+
+    padding: 0.25rem;
+
+    background: var(--surface-base);
+    border-radius: var(--radius-md);
+}
+
+.radiobutton_label {
+    position: relative;
+
+    padding: 0.55rem 1rem;
+
+    border: 0;
+    border-radius: calc(var(--radius-md) - 0.15rem);
+
+    background: transparent;
+    color: var(--text-muted);
+
+    font-family: inherit;
+    font-size: 0.82rem;
+
+    cursor: pointer;
+
+    transition:
+        color 0.2s ease,
+        background-color 0.2s ease;
+
+    &:not(:last-child) {
+        margin-right: 0.25rem;
+    }
+
+    &:hover {
+        color: var(--text);
+    }
+
+    &Active {
+        color: var(--primary-200);
+
+        background:
+            rgba(from var(--primary-500) r g b / 0.15);
+    }
+}
+
+.radiobutton_input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
