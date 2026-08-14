@@ -1,6 +1,6 @@
-import { IPeopleDetails, IPeopleImages } from "@/app/interfaces/people"
+import { IPeopleDetails, IFindByExternalID, IPersonResult } from "@/app/interfaces/people"
 import styles from "./person.module.scss"
-import { GetMoviesCredits, GetPersonDetails, GetSeriesCredits } from "@/app/services/fetchData"
+import { GetPersonDetails, GetFindByExternalID } from "@/app/services/fetchData"
 import Image from "next/image"
 import { BASE_URL_IMG, getAvailableSocialLinks, getDepartmentTranslation, SmallDateLocal } from "@/app/utils/const"
 import { SliderPhotos } from "../components/SliderPhotos/SliderPhotos"
@@ -25,17 +25,29 @@ const GetDetails = async (id: string): Promise<IPeopleDetails | null> => {
     }
 }
 
+const GetKnownFor = async (imdb_id: string): Promise<IPersonResult | null> => {
+    const data = await GetFindByExternalID(imdb_id, 'imdb_id')
+    if (data && data.person_results && data.person_results.length > 0) {
+        return data.person_results[0]
+    }
+    return null
+}
+
 export default async function Page(params: { params: Promise<{ id: string }>, searchParams: Promise<{}> }) {
     const details: IPeopleDetails | null = await GetDetails((await params.params).id)
 
-    console.log(details)
-    // Ordenar el reparto de mayor a menor popularidad
+    // Obtener known_for usando el nuevo endpoint /find
+    const knownForData = details?.imdb_id ? await GetKnownFor(details.imdb_id) : null
+    const knownFor = knownForData?.known_for || []
+
+    // Ordenar el reparto de mayor a menor popularidad (fallback)
     const sortedCast = details?.movie_credits?.cast
         ?.slice() // Muy importante: crea una copia para no mutar el array original
         ?.sort((a, b) => b.popularity - a.popularity) || [];
 
+    // Usar known_for del endpoint /find si está disponible, si no usar sortedCast
+    const displayKnownFor = knownFor.length > 0 ? knownFor : sortedCast
 
-    console.log("MAX: ", sortedCast)
 
 
     const socialLinks = getAvailableSocialLinks(details?.external_ids)
@@ -53,12 +65,15 @@ export default async function Page(params: { params: Promise<{ id: string }>, se
         return `${total} en total`;
     };
 
+
+    console.log("IMAGES", details)
+
     return (
         <section className={`${styles.section}  `}>
             {details ?
                 <>
                     <article className={styles.people} >
-                        <Image className={styles.people_backdrop} src={BASE_URL_IMG.concat(sortedCast[0].backdrop_path || "https://raw.githubusercontent.com/AletzMan/ImagesStorage/main/streamin-movie-clone/Image_not_available.jpg")} alt={`Foto de ${details.name}`} width={200} height={300} />
+                        <Image className={styles.people_backdrop} src={BASE_URL_IMG.concat(displayKnownFor[0]?.backdrop_path || "https://raw.githubusercontent.com/AletzMan/ImagesStorage/main/streamin-movie-clone/Image_not_available.jpg")} alt={`Foto de ${details.name}`} width={200} height={300} />
 
                         <Image className={styles.people_photo} src={BASE_URL_IMG.concat(details.profile_path || "https://raw.githubusercontent.com/AletzMan/ImagesStorage/main/streamin-movie-clone/Image_not_available.jpg")} alt={`Foto de ${details.name}`} width={200} height={300} />
                         <div className={styles.people_description}>
@@ -109,18 +124,22 @@ export default async function Page(params: { params: Promise<{ id: string }>, se
                     {/*<SliderPhotos id_people={(await params.params).id} name_people={details.name} />*/}
 
 
-                    {(details.movie_credits && sortedCast.length > 0) &&
-                        <MovieSliderGeneral title="Conocido por" slidesToShow={6}  >
+                    {(details.movie_credits && displayKnownFor.length > 0) &&
+                        <MovieSliderGeneral title="Conocido por" slidesToShow={6} infinite={false} >
                             <>
                                 {
-                                    sortedCast?.filter((_, index) => index < 6).map((serie) => (
-                                        <MovieCard key={serie.id} movie={serie as IMovie} aspectRatio="16/16" />
+                                    displayKnownFor?.filter((_, index) => index < 6).map((serie) => (
+                                        <MovieCard key={serie.id} movie={serie as IMovie} />
                                     ))
                                 }
                             </>
                         </MovieSliderGeneral>
                     }
-                    <PersonJobs moviesCast={details.movie_credits.cast} />
+                    <PersonJobs
+                        moviesCredits={details.movie_credits}
+                        seriesCredits={details.tv_credits}
+                        galery={details.images?.profiles}
+                        biography={details.biography} />
                     {/*(details.movie_credits && details.movie_credits.cast.length > 0) && <MovieSliderCredits parts={details.movie_credits.cast} title="Reparto" type="movie" />*/}
                     {/*(details.movie_credits && details.movie_credits.crew.length > 0) && <MovieSliderCredits parts={details.movie_credits.crew} title="Detrás de cámaras" type="movie" />*/}
 
