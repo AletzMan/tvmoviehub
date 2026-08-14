@@ -404,7 +404,7 @@ export const GetSeasonDetails = async (idSerie: string, season: number) => {
 
 export const GetPersonDetails = async (idPeople: string, language: 'ES' | 'EN') => {
 	let LANGUAGE = language === "ES" ? LANGUAGE_ES : LANGUAGE_EN
-	const url = `${API_URL_BASE}/person/${idPeople}?language=${LANGUAGE}&append_to_response=movie_credits%2Ctv_credits`
+	const url = `${API_URL_BASE}/person/${idPeople}?language=${LANGUAGE}&append_to_response=movie_credits%2Ctv_credits%2Cexternal_ids`
 	const response = await fetch(url, optionsGET)
 	let data: IPeopleDetails | null = null
 	if (response.status === 200) {

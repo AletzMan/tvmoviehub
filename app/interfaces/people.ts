@@ -52,6 +52,7 @@ export interface IPeopleDetails {
 	profile_path: string
 	movie_credits: IMovieCredits
 	tv_credits: ISerieCredits
+	external_ids?: Record<string, any>
 }
 
 
