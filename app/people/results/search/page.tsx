@@ -8,17 +8,16 @@ import { HeaderSection } from "@/app/components/HeaderSection/HeaderSection"
 import { SearchIcon } from "@/app/utils/svg"
 import { NotResultsView } from "@/app/components/NotResultsView/NotResultsView"
 
-export default async function Page({ searchParams }: { searchParams: Promise<{ page: number }> }) {
-
-
+export default async function Page({ searchParams }: { searchParams: Promise<{ page: number, query: string }> }) {
     const params = await searchParams
+    const query = params.query
     const popularPeople: IPeopleResponse = await GetSearchPeople(params)
 
     return (
         <section className={`${styles.section}`}>
-            <HeaderSection title="Resultados para: " icon={<SearchIcon />} />
+            <HeaderSection title="Resultados para: " icon={<SearchIcon />} query={query} />
             {popularPeople.results.length > 0 ?
-                <div className={`${styles.people} scrollBarStyle`}>
+                <div className={`${styles.peopleBentoGrid}  `}>
                     {
                         popularPeople.results.map(person => (
                             <PersonCard key={person.id} person={person} />
