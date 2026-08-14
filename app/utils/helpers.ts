@@ -159,11 +159,13 @@ export function getCountryFromText(text: string) {
 }
 
 export function getScoreColor(score: number): string {
-	if (score >= 8) {
-		return "#22C55E"; // Success (Verde)
-	} else if (score >= 5.1) {
-		return "#F59E0B"; // Warning (Amarillo/Naranja)
+	if (score >= 9.0) {
+		return "#06B6D4"; // Cian / Azul brillante (Excepcional / Obra maestra)
+	} else if (score >= 7.0) {
+		return "#22C55E"; // Verde (Buena)
+	} else if (score >= 5.0) {
+		return "#F59E0B"; // Amarillo / Ámbar (Regular)
 	} else {
-		return "#EF4444"; // Danger (Rojo)
+		return "#EF4444"; // Rojo (Mala)
 	}
 }
