@@ -21,6 +21,12 @@ export function StarIcon({ className }: Props) {
     return <Icon icon="mdi:star" className={className} />
 }
 
+
+export function ClapperboardIcon({ className }: Props) {
+    return <Icon icon="reicon:clapperboard-open" className={className} />
+}
+
+
 export function OptionsIcon({ className }: Props) {
     return <Icon icon="mdi:dots-vertical" className={className} />
 }
@@ -105,6 +111,10 @@ export function FacebookIcon({ className }: Props) {
     return <Icon icon="mdi:facebook" className={className} />
 }
 
+export function GlobeIcon({ className }: Props) {
+    return <Icon icon="reicon:globe" className={className} />
+}
+
 export function XIcon({ className }: Props) {
     return <Icon icon="mdi:x-twitter" className={className} />
 }
@@ -118,8 +128,13 @@ export function SaveIcon({ className }: Props) {
 }
 
 export function DateIcon({ className }: Props) {
-    return <Icon icon="mdi:calendar" className={className} />
+    return <Icon icon="mage:calendar" className={className} />
 }
+
+export function LocationIcon({ className }: Props) {
+    return <Icon icon="fluent:location-28-regular" className={className} />
+}
+
 
 export function TimeIcon({ className }: Props) {
     return <Icon icon="mdi:clock" className={className} />
