@@ -6,7 +6,7 @@ import { IKeywords, IResult } from "../interfaces/keyword"
 import { IResponseList, IResponseCreateMovie, IResponseListMovie, IItemStatus, IListDetails } from "../interfaces/list"
 import { IAccountStates, ICollectionDetails, IExternalIDs, IMovie, IMovieDetails, IMovieVideos, IQueryParamasMovies } from "../interfaces/movie"
 import { IMultiResponse } from "../interfaces/multi"
-import { IPeopleDetails, IPeopleImages } from "../interfaces/people"
+import { IPeopleDetails, IPeopleImages, IFindByExternalID } from "../interfaces/people"
 import { IAiringTodayResponse, IMovieResponse, INowPlayingResponse, IPeopleResponse, IRecommendationResponse, IResponseRating, ISerieResponse } from "../interfaces/responses"
 import { IQueryParamasSeries, ISeasonDetails, ISerie, ISerieDetails } from "../interfaces/serie"
 
@@ -404,7 +404,7 @@ export const GetSeasonDetails = async (idSerie: string, season: number) => {
 
 export const GetPersonDetails = async (idPeople: string, language: 'ES' | 'EN') => {
 	let LANGUAGE = language === "ES" ? LANGUAGE_ES : LANGUAGE_EN
-	const url = `${API_URL_BASE}/person/${idPeople}?language=${LANGUAGE}&append_to_response=movie_credits%2Ctv_credits%2Cexternal_ids`
+	const url = `${API_URL_BASE}/person/${idPeople}?language=${LANGUAGE}&append_to_response=movie_credits%2Ctv_credits%2Cexternal_ids%2Cimages`
 	const response = await fetch(url, optionsGET)
 	let data: IPeopleDetails | null = null
 	if (response.status === 200) {
@@ -880,6 +880,17 @@ export const GetVideos = async (movie_id: number, language: "es-MX" | "en-US", t
 	let data: IMovieVideos | null = null
 	if (response.status === 200) {
 		const result = (await response.json()) as IMovieVideos
+		return result
+	}
+	return data
+}
+
+export const GetFindByExternalID = async (external_id: string, external_source: 'imdb_id' | 'freebase_mid' | 'freebase_name' | 'tvdb_id' | 'tvrage_id' = 'imdb_id') => {
+	const url = `${API_URL_BASE}/find/${external_id}?external_source=${external_source}&language=${LANGUAGE_MX}`
+	const response = await fetch(url, optionsGET)
+	let data: IFindByExternalID | null = null
+	if (response.status === 200) {
+		const result = (await response.json()) as IFindByExternalID
 		return result
 	}
 	return data
