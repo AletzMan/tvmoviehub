@@ -75,6 +75,22 @@
         }
     }
 
+    &_surface {
+        padding: 0.6rem 1.25rem;
+        border: 0;
+        border-radius: var(--radius-md);
+        background: var(--surface-b);
+        color: var(--text-secondary);
+        font-size: 0.82rem;
+        font-weight: 400;
+
+        &:hover:not(:disabled) {
+            background: var(--surface-c);
+            color: var(--primary-200);
+            transform: translateY(-1px);
+        }
+    }
+
     // Colors
     &_primary {
         --button-color: var(--primary-500);

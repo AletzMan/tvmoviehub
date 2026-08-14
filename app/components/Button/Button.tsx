@@ -13,7 +13,7 @@ interface Props {
     href?: string
     target?: '_blank' | '_parent' | '_self' | '_top'
     color?: 'danger' | 'success' | 'warning' | 'info' | 'primary' | 'secondary'
-    variant?: 'solid' | 'outline' | 'text' | 'ghost'
+    variant?: 'solid' | 'outline' | 'text' | 'ghost' | 'surface'
 }
 
 export function Button({ text, icon, isSecondary, onClick, disabled, className, mode, href, target, color = 'primary', variant = 'solid' }: Props) {
