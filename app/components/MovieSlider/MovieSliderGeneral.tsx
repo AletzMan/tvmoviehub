@@ -19,11 +19,12 @@ interface Props {
     children: ReactNode
     list_link?: string
     slidesToShow?: number
+    infinite?: boolean
 }
 
-export const MovieSliderGeneral = ({ title, children, list_link, slidesToShow = 7 }: Props) => {
+export const MovieSliderGeneral = ({ title, children, list_link, slidesToShow = 7, infinite = true }: Props) => {
     const settings = {
-        infinite: true,
+        infinite: infinite,
         speed: 700,
         slidesToShow: slidesToShow, // Tu valor base para pantallas grandes
         slidesToScroll: 1,
