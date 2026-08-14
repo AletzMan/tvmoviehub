@@ -2,7 +2,7 @@
 import { IPeople } from "@/app/interfaces/people"
 import styles from "./personcard.module.scss"
 import Image from "next/image"
-import { BASE_URL_IMG_CUSTOM } from "@/app/utils/const"
+import { BASE_URL_IMG_CUSTOM, getDepartmentTranslation } from "@/app/utils/const"
 import { FemaleIcon, LoadingIcon, MaleIcon } from "@/app/utils/svg"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
@@ -32,26 +32,7 @@ export const PersonCard = ({ person, rank, isFeatured = false, isCircle = false,
         setLoad(false)
     }
 
-    const departmentTranslations: Record<string, string> = {
-        "Acting": "Actuación",
-        "Directing": "Dirección",
-        "Production": "Producción",
-        "Writing": "Guion",
-        "Editing": "Edición",
-        "Camera": "Cámara",
-        "Sound": "Sonido",
-        "Art": "Arte",
-        "Costume & Make-Up": "Vestuario y Maquillaje",
-        "Visual Effects": "Efectos Visuales",
-        "Crew": "Equipo Técnico",
-        "Lighting": "Iluminación",
-        "Music": "Música"
-    };
 
-    // Función para obtenerlo traducido (con respaldo por si viene alguno nuevo)
-    const translateDepartment = (dept: string) => {
-        return departmentTranslations[dept] || dept;
-    };
 
     return (
         <div
@@ -85,7 +66,7 @@ export const PersonCard = ({ person, rank, isFeatured = false, isCircle = false,
             <div className={styles.person_info}>
                 <div className={styles.person_details}>
                     <span className={styles.person_name} title={person.name}>{person.name}</span>
-                    <span className={styles.person_department}>{translateDepartment(person.known_for_department)}</span>
+                    <span className={styles.person_department}>{getDepartmentTranslation(person.known_for_department, person.gender)}</span>
                 </div>
                 {person.gender === 1 ?
                     <FemaleIcon className={`${styles.person_gender} ${styles.person_genderFemale}`} />
