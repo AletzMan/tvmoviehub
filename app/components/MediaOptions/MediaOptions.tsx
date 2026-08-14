@@ -9,12 +9,13 @@ import { AddItemToList, AddRating, AddRemoveFavorite, AddToWatchList, CheckItemS
 import { RevalidateURL } from "@/app/utils/serveractions"
 import { enqueueSnackbar, } from "notistack"
 import { Button } from "../Button/Button"
-import { IListMovie, IResponseListMovie } from "@/app/interfaces/list"
+import { IResponseListMovie } from "@/app/interfaces/list"
 
 import { FormAddMovie } from "@/app/lists/components/FormAddMovie"
 
 import { createPortal } from "react-dom"
 import { ComboBox } from "../ComboBox/ComboBox"
+import { useCloseOnScrollOrResize } from "@/app/hooks/useCloseOnScrollOrResize"
 
 interface Props {
     id: number
@@ -25,7 +26,7 @@ interface Props {
 
 function MediaOptionsContent({ id, type, title }: Props) {
     const { session_id } = useSession()
-    const activatorRef = useRef<HTMLElement | null>(null)
+    const activatorRef = useRef<HTMLButtonElement | null>(null)
     const dropdownListRef = useRef<HTMLUListElement | null>(null)
     const [accountState, setAccountState] = useState<IAccountStates | null>(null)
     const [lists, setLists] = useState<IResponseListMovie | null>(null)
@@ -37,6 +38,7 @@ function MediaOptionsContent({ id, type, title }: Props) {
     const [viewMenu, setViewMenu] = useState(false)
 
     const [mounted, setMounted] = useState(false)
+    const [menuPosition, setMenuPosition] = useState({ top: 0, left: 0 })
 
     useEffect(() => {
         setMounted(true)
@@ -54,8 +56,17 @@ function MediaOptionsContent({ id, type, title }: Props) {
     }, [session_id, viewMenu, GetData])
 
     function HandleViewMenu(event: MouseEvent<HTMLButtonElement>): void {
-        setViewMenu(prev => !prev)
+        const newState = !viewMenu
+        setViewMenu(newState)
         setViewLists(false)
+
+        if (newState && activatorRef.current) {
+            const rect = activatorRef.current.getBoundingClientRect()
+            setMenuPosition({
+                top: rect.bottom + 8,
+                left: rect.right - 200
+            })
+        }
     }
 
     const keyHandler = (event: KeyboardEvent<HTMLDivElement>) => {
@@ -89,6 +100,8 @@ function MediaOptionsContent({ id, type, title }: Props) {
         }
     }, [viewMenu, clickOutsideHandler])
 
+    useCloseOnScrollOrResize(() => setViewMenu(false), viewMenu)
+
     const HandleAddRemoveFavorite = async () => {
         const AddFavorite = async () => {
             const response = await AddRemoveFavorite(session_id, type, id, !accountState?.favorite)
@@ -109,21 +122,11 @@ function MediaOptionsContent({ id, type, title }: Props) {
         }
         AddFavorite()
     }
-    function HandleOverRated(event: MouseEvent<HTMLButtonElement>): void {
-        const value = event.currentTarget.value
-        setCurrentRated(parseInt(value))
-    }
-
-    function HandleLeaveRated(event: MouseEvent<HTMLButtonElement | HTMLDivElement>): void {
-        setCurrentRated(accountState?.rated.value || NaN)
-    }
 
     const HandleAddRating = async (event: MouseEvent<HTMLButtonElement>) => {
         const value = event.currentTarget.value
-        console.log(value)
-
         const response = await AddRating(session_id, id, parseInt(value), type)
-        console.log(response)
+
         if (response?.status_code === 1) {
             setCurrentRated(parseInt(value))
             if (accountState)
@@ -180,12 +183,6 @@ function MediaOptionsContent({ id, type, title }: Props) {
         setViewMenu(false)
     }
 
-    const HandleMouseOver = () => {
-        setViewRating(false)
-        setViewLists(false)
-    }
-
-
     const HandleSelectList = (event: ChangeEvent<HTMLSelectElement>) => {
         const value = event.currentTarget.value
         setSelectedList(value)
@@ -224,9 +221,13 @@ function MediaOptionsContent({ id, type, title }: Props) {
 
     return (
         <div className={`${styles.options} `} onKeyUp={keyHandler}>
-            <button className={styles.options_button} onClick={HandleViewMenu}  ><OptionsIcon /></button>
-            {viewMenu &&
-                <ul className={`${styles.menu} ${viewMenu ? styles.menu_open : styles.menu_close}`} ref={dropdownListRef} >
+            <button className={styles.options_button} onClick={HandleViewMenu} ref={activatorRef}><OptionsIcon /></button>
+            {mounted && viewMenu && createPortal(
+                <ul
+                    className={`${styles.menu} ${viewMenu ? styles.menu_open : styles.menu_close}`}
+                    ref={dropdownListRef}
+                    style={{ top: `${menuPosition.top}px`, left: `${menuPosition.left}px` }}
+                >
                     <li className={styles.options_li}>
                         <button className={`${styles.menu_option} `} onClick={HandleViewMenuList}><ListIcon className={styles.menu_icon} />Añadir a lista</button>
                     </li>
@@ -244,8 +245,9 @@ function MediaOptionsContent({ id, type, title }: Props) {
                             <StarIcon className={`${styles.menu_icon}  ${accountState?.rated.value ? styles.rating : ""}`} /> Tu puntuación
                         </button>
                     </li>
-                </ul>
-            }
+                </ul>,
+                document.body
+            )}
             {mounted && viewRating && createPortal(
                 <dialog className={styles.rating_dialog} open onMouseDown={(e) => e.stopPropagation()}>
                     <div className={styles.rating_content}>

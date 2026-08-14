@@ -5,7 +5,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 5;
+    z-index: 1;
 
 
     &_button {
@@ -44,10 +44,8 @@
 }
 
 .menu {
-    position: absolute;
-    top: calc(100% + 0.5rem);
-    right: -10px;
-    z-index: 10;
+    position: fixed;
+    z-index: 100;
     padding: 0.25rem;
     background-color: var(--surface-a);
     backdrop-filter: blur(20px);
