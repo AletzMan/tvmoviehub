@@ -1,6 +1,6 @@
 import { IErrorLogin, IResponseLogin, ISessionID } from "../interfaces/authentication"
 import { CreateSession } from "../services/fetchData"
-import { SmallDateLocal } from "./const"
+import { countryFlags, SmallDateLocal } from "./const"
 
 export const currencyFormatter = new Intl.NumberFormat("en-US", {
 	style: "currency",
@@ -16,17 +16,41 @@ export const ConvertMinutesToHours = (time: number) => {
 }
 
 export const FormattedDate = (date: string, type: "small" | "long") => {
-	const newDate = date.split("-")
-	const day = Number(newDate[2]) + 1
-	const month = newDate[1]
-	const year = newDate[0]
-	const birthday = new Date(date).getTime()
-	const currentTime = new Date().getTime()
-	const age = currentTime - birthday
-	const formatted = new Date(`${year}-${month}-${day}`).toLocaleDateString("es-MX", SmallDateLocal)
-	const years = Math.floor(((((age / 1000) / 60) / 60) / 24) / 365)
-	return `${formatted} (${years} años)`
-}
+	const [year, month, day] = date.split("-").map(Number);
+	const birthDate = new Date(year, month - 1, day);
+	const today = new Date();
+
+	let age = today.getFullYear() - birthDate.getFullYear();
+	const m = today.getMonth() - birthDate.getMonth();
+	if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+		age--;
+	}
+
+	if (type === "small") {
+		const formatted = birthDate.toLocaleDateString("es-MX", {
+			day: 'numeric',
+			month: 'numeric',
+			year: 'numeric'
+		});
+		return `${formatted} (${age} años)`;
+	}
+
+	// Formato "long" personalizado con la estructura exacta: 1 de junio de 1996
+	const months = [
+		"enero", "febrero", "marzo", "abril", "mayo", "junio",
+		"julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"
+	];
+
+	const dayNumber = birthDate.getDate();
+	const monthName = months[birthDate.getMonth()];
+	const yearNumber = birthDate.getFullYear();
+
+	return `${dayNumber} de ${monthName} de ${yearNumber} (${age} años)`;
+};
+
+// Ejemplos de uso:
+// FormattedDate("1996-06-01", "small") -> "1/6/1996 (30 años)"
+// FormattedDate("1996-06-01", "long")  -> "1 de junio de 1996 (30 años)"
 
 
 export const FormattedDateUpcoming = (date: string) => {
@@ -110,5 +134,36 @@ export const ValidateLogin = async (username: string, password: string) => {
 			error_password: ""
 		}
 		return response
+	}
+}
+
+export function getCountryFromText(text: string) {
+	if (!text || !countryFlags) return null;
+	for (const item of countryFlags) {
+		// Verificamos si alguna de las abreviaturas coincide en el texto
+		const match = item.abbreviations.some(abbr => {
+			// \b asegura que sea la palabra completa (evita falsos positivos)
+			const regex = new RegExp(`\\b${abbr}\\b`, 'i');
+			return regex.test(text);
+		});
+
+		if (match) {
+			return {
+				country: item.country,
+				flag: item.flag
+			};
+		}
+	}
+
+	return null; // Si no encuentra ninguna coincidencia
+}
+
+export function getScoreColor(score: number): string {
+	if (score >= 8) {
+		return "#22C55E"; // Success (Verde)
+	} else if (score >= 5.1) {
+		return "#F59E0B"; // Warning (Amarillo/Naranja)
+	} else {
+		return "#EF4444"; // Danger (Rojo)
 	}
 }

@@ -310,6 +310,7 @@ export const countryFlags = [
         "emoji": "🇦🇫",
         "latinAmerica": false,
         "phoneLength": 9,
+        "abbreviations": ["AFG", "Afghanistan", "Afganistán"],
     },
     {
         "country": "Albania",
@@ -319,6 +320,7 @@ export const countryFlags = [
         "emoji": "🇦🇱",
         "latinAmerica": false,
         "phoneLength": 9,
+        "abbreviations": ["ALB", "Albania", "Albania"],
     },
     {
         "country": "Alemania",
@@ -328,6 +330,7 @@ export const countryFlags = [
         "emoji": "🇩🇪",
         "latinAmerica": false,
         "phoneLength": 10,
+        "abbreviations": ["DEU", "Germany", "Alemania"],
     },
     {
         "country": "Andorra",
@@ -337,6 +340,7 @@ export const countryFlags = [
         "emoji": "🇦🇩",
         "latinAmerica": false,
         "phoneLength": 6,
+        "abbreviations": ["AND", "Andorra", "Andorra"],
     },
     {
         "country": "Angola",
@@ -346,6 +350,7 @@ export const countryFlags = [
         "emoji": "🇦🇴",
         "latinAmerica": false,
         "phoneLength": 9,
+        "abbreviations": ["AGO", "Angola", "Angola"],
     },
     {
         "country": "Antigua y Barbuda",
@@ -355,6 +360,7 @@ export const countryFlags = [
         "emoji": "🇦🇬",
         "latinAmerica": false,
         "phoneLength": 10,
+        "abbreviations": ["ATG", "Antigua and Barbuda", "Antigua y Barbuda"],
     },
     {
         "country": "Arabia Saudita",
@@ -364,6 +370,7 @@ export const countryFlags = [
         "emoji": "🇸🇦",
         "latinAmerica": false,
         "phoneLength": 9,
+        "abbreviations": ["SAU", "Saudi Arabia", "Arabia Saudita"],
     },
     {
         "country": "Argelia",
@@ -373,6 +380,7 @@ export const countryFlags = [
         "emoji": "🇩🇿",
         "latinAmerica": false,
         "phoneLength": 9,
+        "abbreviations": ["DZA", "Algeria", "Argelia"],
     },
     {
         "country": "Argentina",
@@ -382,6 +390,7 @@ export const countryFlags = [
         "emoji": "🇦🇷",
         "latinAmerica": true,
         "phoneLength": 8,
+        "abbreviations": ["ARG", "Argentina", "Argentina"],
     },
     {
         "country": "Armenia",
@@ -391,6 +400,7 @@ export const countryFlags = [
         "emoji": "🇦🇲",
         "latinAmerica": false,
         "phoneLength": 6,
+        "abbreviations": ["ARM", "Armenia", "Armenia"],
     },
     {
         "country": "Australia",
@@ -400,6 +410,7 @@ export const countryFlags = [
         "emoji": "🇦🇺",
         "latinAmerica": false,
         "phoneLength": 9,
+        "abbreviations": ["AUS", "Australia", "Australia"],
     },
     {
         "country": "Austria",
@@ -409,6 +420,7 @@ export const countryFlags = [
         "emoji": "🇦🇹",
         "latinAmerica": false,
         "phoneLength": 9,
+        "abbreviations": ["AUT", "Austria", "Austria"],
     },
     {
         "country": "Azerbaiyán",
@@ -418,6 +430,7 @@ export const countryFlags = [
         "emoji": "🇦🇿",
         "latinAmerica": false,
         "phoneLength": 9,
+        "abbreviations": ["AZE", "Azerbaijan", "Azerbaiyán"],
     },
     {
         "country": "Bahamas",
@@ -427,6 +440,7 @@ export const countryFlags = [
         "emoji": "🇧🇸",
         "latinAmerica": false,
         "phoneLength": 10,
+        "abbreviations": ["BHS", "Bahamas", "Bahamas"],
     },
     {
         "country": "Bangladés",
@@ -436,6 +450,7 @@ export const countryFlags = [
         "emoji": "🇧🇩",
         "latinAmerica": false,
         "phoneLength": 10,
+        "abbreviations": ["BGD", "Bangladesh", "Bangladés"],
     },
     {
         "country": "Barbados",
@@ -445,6 +460,7 @@ export const countryFlags = [
         "emoji": "🇧🇧",
         "latinAmerica": false,
         "phoneLength": 10,
+        "abbreviations": ["BRB", "Barbados", "Barbados"],
     },
     {
         "country": "Baréin",
@@ -454,6 +470,7 @@ export const countryFlags = [
         "emoji": "🇧🇭",
         "latinAmerica": false,
         "phoneLength": 8,
+        "abbreviations": ["BHR", "Bahrain", "Baréin"],
     },
     {
         "country": "Bélgica",
@@ -463,6 +480,7 @@ export const countryFlags = [
         "emoji": "🇧🇪",
         "latinAmerica": false,
         "phoneLength": 8,
+        "abbreviations": ["BEL", "Belgium", "Bélgica"],
     },
     {
         "country": "Belice",
@@ -472,6 +490,7 @@ export const countryFlags = [
         "emoji": "🇧🇿",
         "latinAmerica": false,
         "phoneLength": 7,
+        "abbreviations": ["BLZ", "Belize", "Belice"],
     },
     {
         "country": "Benín",
@@ -481,6 +500,7 @@ export const countryFlags = [
         "emoji": "🇧🇯",
         "latinAmerica": false,
         "phoneLength": 8,
+        "abbreviations": ["BEN", "Benin", "Benín"],
     },
     {
         "country": "Bielorrusia",
@@ -490,6 +510,7 @@ export const countryFlags = [
         "emoji": "🇧🇾",
         "latinAmerica": false,
         "phoneLength": 9,
+        "abbreviations": ["BLR", "Belarus", "Bielorrusia"],
     },
     {
         "country": "Birmania",
@@ -499,6 +520,7 @@ export const countryFlags = [
         "emoji": "🇲🇲",
         "latinAmerica": false,
         "phoneLength": 10,
+        "abbreviations": ["MMR", "Myanmar", "Birmania"],
     },
     {
         "country": "Bolivia",
@@ -508,6 +530,7 @@ export const countryFlags = [
         "emoji": "🇧🇴",
         "latinAmerica": true,
         "phoneLength": 9,
+        "abbreviations": ["BOL", "Bolivia", "Bolivia"],
     },
     {
         "country": "Bosnia y Herzegovina",
@@ -517,6 +540,7 @@ export const countryFlags = [
         "emoji": "🇧🇦",
         "latinAmerica": false,
         "phoneLength": 8,
+        "abbreviations": ["BIH", "Bosnia and Herzegovina", "Bosnia y Herzegovina"],
     },
     {
         "country": "Botsuana",
@@ -526,6 +550,7 @@ export const countryFlags = [
         "emoji": "🇧🇼",
         "latinAmerica": false,
         "phoneLength": 7,
+        "abbreviations": ["BWA", "Botswana", "Botsuana"],
     },
     {
         "country": "Brasil",
@@ -535,6 +560,7 @@ export const countryFlags = [
         "emoji": "🇧🇷",
         "latinAmerica": true,
         "phoneLength": 11,
+        "abbreviations": ["BRA", "Brazil", "Brasil"],
     },
     {
         "country": "Brunéi",
@@ -544,6 +570,7 @@ export const countryFlags = [
         "emoji": "🇧🇳",
         "latinAmerica": false,
         "phoneLength": 7,
+        "abbreviations": ["BRN", "Brunei", "Brunéi"],
     },
     {
         "country": "Bulgaria",
@@ -553,6 +580,7 @@ export const countryFlags = [
         "emoji": "🇧🇬",
         "latinAmerica": false,
         "phoneLength": 9,
+        "abbreviations": ["BGR", "Bulgaria", "Bulgaria"],
     },
     {
         "country": "Burkina Faso",
@@ -562,6 +590,7 @@ export const countryFlags = [
         "emoji": "🇧🇫",
         "latinAmerica": false,
         "phoneLength": 8,
+        "abbreviations": ["BFA", "Burkina Faso", "Burkina Faso"],
     },
     {
         "country": "Burundi",
@@ -571,6 +600,7 @@ export const countryFlags = [
         "emoji": "🇧🇮",
         "latinAmerica": false,
         "phoneLength": 8,
+        "abbreviations": ["BDI", "Burundi", "Burundi"],
     },
     {
         "country": "Bután",
@@ -580,6 +610,7 @@ export const countryFlags = [
         "emoji": "🇧🇹",
         "latinAmerica": false,
         "phoneLength": 7,
+        "abbreviations": ["BTN", "Bhutan", "Bután"],
     },
     {
         "country": "Cabo Verde",
@@ -589,6 +620,7 @@ export const countryFlags = [
         "emoji": "🇨🇻",
         "latinAmerica": false,
         "phoneLength": 7,
+        "abbreviations": ["CPV", "Cabo Verde", "Cabo Verde"],
     },
     {
         "country": "Camboya",
@@ -598,6 +630,7 @@ export const countryFlags = [
         "emoji": "🇰🇭",
         "latinAmerica": false,
         "phoneLength": 9,
+        "abbreviations": ["KHM", "Cambodia", "Camboya"],
     },
     {
         "country": "Camerún",
@@ -607,6 +640,7 @@ export const countryFlags = [
         "emoji": "🇨🇲",
         "latinAmerica": false,
         "phoneLength": 9,
+        "abbreviations": ["CMR", "Cameroon", "Camerún"],
     },
     {
         "country": "Canadá",
@@ -616,6 +650,7 @@ export const countryFlags = [
         "emoji": "🇨🇦",
         "latinAmerica": false,
         "phoneLength": 10,
+        "abbreviations": ["CAN", "Canada", "Canadá"],
     },
     {
         "country": "Catar",
@@ -625,6 +660,7 @@ export const countryFlags = [
         "emoji": "🇶🇦",
         "latinAmerica": false,
         "phoneLength": 8,
+        "abbreviations": ["QAT", "Qatar", "Catar"],
     },
     {
         "country": "Chad",
@@ -634,6 +670,7 @@ export const countryFlags = [
         "emoji": "🇹🇩",
         "latinAmerica": false,
         "phoneLength": 6,
+        "abbreviations": ["TCD", "Chad", "Chad"],
     },
     {
         "country": "Chile",
@@ -643,6 +680,7 @@ export const countryFlags = [
         "emoji": "🇨🇱",
         "latinAmerica": true,
         "phoneLength": 9,
+        "abbreviations": ["CHL", "Chile", "Chile"],
     },
     {
         "country": "China",
@@ -652,6 +690,7 @@ export const countryFlags = [
         "emoji": "🇨🇳",
         "latinAmerica": false,
         "phoneLength": 11,
+        "abbreviations": ["CHN", "China", "China"],
     },
     {
         "country": "Chipre",
@@ -661,6 +700,7 @@ export const countryFlags = [
         "emoji": "🇨🇾",
         "latinAmerica": false,
         "phoneLength": 8,
+        "abbreviations": ["CYP", "Cyprus", "Chipre"],
     },
     {
         "country": "Colombia",
@@ -670,6 +710,7 @@ export const countryFlags = [
         "emoji": "🇨🇴",
         "latinAmerica": true,
         "phoneLength": 10,
+        "abbreviations": ["COL", "Colombia", "Colombia"],
     },
     {
         "country": "Comoras",
@@ -679,6 +720,7 @@ export const countryFlags = [
         "emoji": "🇰🇲",
         "latinAmerica": false,
         "phoneLength": 7,
+        "abbreviations": ["COM", "Comoros", "Comoras"],
     },
     {
         "country": "Congo",
@@ -688,6 +730,7 @@ export const countryFlags = [
         "emoji": "🇨🇬",
         "latinAmerica": false,
         "phoneLength": 9,
+        "abbreviations": ["COG", "Congo", "Congo"],
     },
     {
         "country": "Corea del Norte",
@@ -697,6 +740,7 @@ export const countryFlags = [
         "emoji": "🇰🇵",
         "latinAmerica": false,
         "phoneLength": 13,
+        "abbreviations": ["PRK", "North Korea", "Corea del Norte"],
     },
     {
         "country": "Corea del Sur",
@@ -706,6 +750,7 @@ export const countryFlags = [
         "emoji": "🇰🇷",
         "latinAmerica": false,
         "phoneLength": 8,
+        "abbreviations": ["KOR", "South Korea", "Corea del Sur"],
     },
     {
         "country": "Costa de Marfil",
@@ -715,6 +760,7 @@ export const countryFlags = [
         "emoji": "🇨🇮",
         "latinAmerica": false,
         "phoneLength": 8,
+        "abbreviations": ["CIV", "Ivory Coast", "Costa de Marfil"],
     },
     {
         "country": "Costa Rica",
@@ -724,6 +770,7 @@ export const countryFlags = [
         "emoji": "🇨🇷",
         "latinAmerica": true,
         "phoneLength": 8,
+        "abbreviations": ["CRI", "Costa Rica", "Costa Rica"],
     },
     {
         "country": "Croacia",
@@ -733,6 +780,7 @@ export const countryFlags = [
         "emoji": "🇭🇷",
         "latinAmerica": false,
         "phoneLength": 9,
+        "abbreviations": ["HRV", "Croatia", "Croacia"],
     },
     {
         "country": "Cuba",
@@ -742,6 +790,7 @@ export const countryFlags = [
         "emoji": "🇨🇺",
         "latinAmerica": true,
         "phoneLength": 8,
+        "abbreviations": ["CUB", "Cuba", "Cuba"],
     },
     {
         "country": "Dinamarca",
@@ -751,6 +800,7 @@ export const countryFlags = [
         "emoji": "🇩🇰",
         "latinAmerica": false,
         "phoneLength": 8,
+        "abbreviations": ["DNK", "Denmark", "Dinamarca"],
     },
     {
         "country": "Dominica",
@@ -760,6 +810,7 @@ export const countryFlags = [
         "emoji": "🇩🇲",
         "latinAmerica": false,
         "phoneLength": 10,
+        "abbreviations": ["DMA", "Dominica", "Dominica"],
     },
     {
         "country": "Ecuador",
@@ -769,6 +820,7 @@ export const countryFlags = [
         "emoji": "🇪🇨",
         "latinAmerica": true,
         "phoneLength": 9,
+        "abbreviations": ["ECU", "Ecuador", "Ecuador"],
     },
     {
         "country": "Egipto",
@@ -778,6 +830,7 @@ export const countryFlags = [
         "emoji": "🇪🇬",
         "latinAmerica": false,
         "phoneLength": 10,
+        "abbreviations": ["EGY", "Egypt", "Egipto"],
     },
     {
         "country": "El Salvador",
@@ -787,6 +840,7 @@ export const countryFlags = [
         "emoji": "🇸🇻",
         "latinAmerica": true,
         "phoneLength": 8,
+        "abbreviations": ["SLV", "El Salvador", "El Salvador"],
     },
     {
         "country": "Emiratos Árabes Unidos",
@@ -796,6 +850,7 @@ export const countryFlags = [
         "emoji": "🇦🇪",
         "latinAmerica": false,
         "phoneLength": 9,
+        "abbreviations": ["ARE", "United Arab Emirates", "Emiratos Árabes Unidos"],
     },
     {
         "country": "Eritrea",
@@ -805,6 +860,7 @@ export const countryFlags = [
         "emoji": "🇪🇷",
         "latinAmerica": false,
         "phoneLength": 7,
+        "abbreviations": ["ERI", "Eritrea", "Eritrea"],
     },
     {
         "country": "Eslovaquia",
@@ -814,6 +870,7 @@ export const countryFlags = [
         "emoji": "🇸🇰",
         "latinAmerica": false,
         "phoneLength": 9,
+        "abbreviations": ["SVK", "Slovakia", "Eslovaquia"],
     },
     {
         "country": "Eslovenia",
@@ -823,6 +880,7 @@ export const countryFlags = [
         "emoji": "🇸🇮",
         "latinAmerica": false,
         "phoneLength": 9,
+        "abbreviations": ["SVN", "Slovenia", "Eslovenia"],
     },
     {
         "country": "España",
@@ -832,6 +890,7 @@ export const countryFlags = [
         "emoji": "🇪🇸",
         "latinAmerica": false,
         "phoneLength": 9,
+        "abbreviations": ["ESP", "Spain", "España"],
     },
     {
         "country": "Estados Unidos",
@@ -841,6 +900,7 @@ export const countryFlags = [
         "emoji": "🇺🇸",
         "latinAmerica": false,
         "phoneLength": 10,
+        "abbreviations": ["USA", "United States", "Estados Unidos"],
     },
     {
         "country": "Estonia",
@@ -850,6 +910,7 @@ export const countryFlags = [
         "emoji": "🇪🇪",
         "latinAmerica": false,
         "phoneLength": 8,
+        "abbreviations": ["EST", "Estonia", "Estonia"],
     },
     {
         "country": "Etiopía",
@@ -859,6 +920,7 @@ export const countryFlags = [
         "emoji": "🇪🇹",
         "latinAmerica": false,
         "phoneLength": 9,
+        "abbreviations": ["ETH", "Ethiopia", "Etiopía"],
     },
     {
         "country": "Filipinas",
@@ -868,6 +930,7 @@ export const countryFlags = [
         "emoji": "🇵🇭",
         "latinAmerica": false,
         "phoneLength": 10,
+        "abbreviations": ["PHL", "Philippines", "Filipinas"],
     },
     {
         "country": "Finlandia",
@@ -877,6 +940,7 @@ export const countryFlags = [
         "emoji": "🇫🇮",
         "latinAmerica": false,
         "phoneLength": 11,
+        "abbreviations": ["FIN", "Finland", "Finlandia"],
     },
     {
         "country": "Fiyi",
@@ -886,6 +950,7 @@ export const countryFlags = [
         "emoji": "🇫🇯",
         "latinAmerica": false,
         "phoneLength": 7,
+        "abbreviations": ["FJI", "Fiji", "Fiyi"],
     },
     {
         "country": "Francia",
@@ -895,6 +960,7 @@ export const countryFlags = [
         "emoji": "🇫🇷",
         "latinAmerica": false,
         "phoneLength": 9,
+        "abbreviations": ["FRA", "France", "Francia"],
     },
     {
         "country": "Gabón",
@@ -904,6 +970,7 @@ export const countryFlags = [
         "emoji": "🇬🇦",
         "latinAmerica": false,
         "phoneLength": 7,
+        "abbreviations": ["GAB", "Gabon", "Gabón"],
     },
     {
         "country": "Gambia",
@@ -913,6 +980,7 @@ export const countryFlags = [
         "emoji": "🇬🇲",
         "latinAmerica": false,
         "phoneLength": 7,
+        "abbreviations": ["GMB", "Gambia", "Gambia"],
     },
     {
         "country": "Georgia",
@@ -922,6 +990,7 @@ export const countryFlags = [
         "emoji": "🇬🇪",
         "latinAmerica": false,
         "phoneLength": 9,
+        "abbreviations": ["GEO", "Georgia", "Georgia"],
     },
     {
         "country": "Ghana",
@@ -931,6 +1000,7 @@ export const countryFlags = [
         "emoji": "🇬🇭",
         "latinAmerica": false,
         "phoneLength": 9,
+        "abbreviations": ["GHA", "Ghana", "Ghana"],
     },
     {
         "country": "Granada",
@@ -940,6 +1010,7 @@ export const countryFlags = [
         "emoji": "🇬🇩",
         "latinAmerica": false,
         "phoneLength": 10,
+        "abbreviations": ["GRD", "Grenada", "Granada"],
     },
     {
         "country": "Grecia",
@@ -949,6 +1020,7 @@ export const countryFlags = [
         "emoji": "🇬🇷",
         "latinAmerica": false,
         "phoneLength": 10,
+        "abbreviations": ["GRC", "Greece", "Grecia"],
     },
     {
         "country": "Guatemala",
@@ -958,6 +1030,7 @@ export const countryFlags = [
         "emoji": "🇬🇹",
         "latinAmerica": true,
         "phoneLength": 8,
+        "abbreviations": ["GTM", "Guatemala", "Guatemala"],
     },
     {
         "country": "Guinea",
@@ -967,6 +1040,7 @@ export const countryFlags = [
         "emoji": "🇬🇳",
         "latinAmerica": false,
         "phoneLength": 9,
+        "abbreviations": ["GIN", "Guinea", "Guinea"],
     },
     {
         "country": "Guinea-Bisáu",
@@ -976,6 +1050,7 @@ export const countryFlags = [
         "emoji": "🇬🇼",
         "latinAmerica": false,
         "phoneLength": 9,
+        "abbreviations": ["GNB", "Guinea-Bissau", "Guinea-Bisáu"],
     },
     {
         "country": "Guinea Ecuatorial",
@@ -985,6 +1060,7 @@ export const countryFlags = [
         "emoji": "🇬🇶",
         "latinAmerica": false,
         "phoneLength": 9,
+        "abbreviations": ["GNQ", "Equatorial Guinea", "Guinea Ecuatorial"],
     },
     {
         "country": "Guyana",
@@ -994,6 +1070,7 @@ export const countryFlags = [
         "emoji": "🇬🇾",
         "latinAmerica": false,
         "phoneLength": 7,
+        "abbreviations": ["GUY", "Guyana", "Guyana"],
     },
     {
         "country": "Haití",
@@ -1003,6 +1080,7 @@ export const countryFlags = [
         "emoji": "🇭🇹",
         "latinAmerica": true,
         "phoneLength": 8,
+        "abbreviations": ["HTI", "Haiti", "Haití"],
     },
     {
         "country": "Honduras",
@@ -1012,6 +1090,7 @@ export const countryFlags = [
         "emoji": "🇭🇳",
         "latinAmerica": true,
         "phoneLength": 8,
+        "abbreviations": ["HND", "Honduras", "Honduras"],
     },
     {
         "country": "Hungría",
@@ -1021,6 +1100,7 @@ export const countryFlags = [
         "emoji": "🇭🇺",
         "latinAmerica": false,
         "phoneLength": 9,
+        "abbreviations": ["HUN", "Hungary", "Hungría"],
     },
     {
         "country": "India",
@@ -1030,6 +1110,7 @@ export const countryFlags = [
         "emoji": "🇮🇳",
         "latinAmerica": false,
         "phoneLength": 10,
+        "abbreviations": ["IND", "India", "India"],
     },
     {
         "country": "Indonesia",
@@ -1039,6 +1120,7 @@ export const countryFlags = [
         "emoji": "🇮🇩",
         "latinAmerica": false,
         "phoneLength": 11,
+        "abbreviations": ["IDN", "Indonesia", "Indonesia"],
     },
     {
         "country": "Irak",
@@ -1048,6 +1130,7 @@ export const countryFlags = [
         "emoji": "🇮🇶",
         "latinAmerica": false,
         "phoneLength": 10,
+        "abbreviations": ["IRQ", "Iraq", "Irak"],
     },
     {
         "country": "Irán",
@@ -1057,6 +1140,7 @@ export const countryFlags = [
         "emoji": "🇮🇷",
         "latinAmerica": false,
         "phoneLength": 11,
+        "abbreviations": ["IRN", "Iran", "Irán"],
     },
     {
         "country": "Irlanda",
@@ -1066,6 +1150,7 @@ export const countryFlags = [
         "emoji": "🇮🇪",
         "latinAmerica": false,
         "phoneLength": 9,
+        "abbreviations": ["IRL", "Ireland", "Irlanda"],
     },
     {
         "country": "Islandia",
@@ -1075,6 +1160,7 @@ export const countryFlags = [
         "emoji": "🇮🇸",
         "latinAmerica": false,
         "phoneLength": 7,
+        "abbreviations": ["ISL", "Iceland", "Islandia"],
     },
     {
         "country": "Islas Marshall",
@@ -1084,6 +1170,7 @@ export const countryFlags = [
         "emoji": "🇲🇭",
         "latinAmerica": false,
         "phoneLength": 7,
+        "abbreviations": ["MHL", "Marshall Islands", "Islas Marshall"],
     },
     {
         "country": "Islas Salomón",
@@ -1093,6 +1180,7 @@ export const countryFlags = [
         "emoji": "🇸🇧",
         "latinAmerica": false,
         "phoneLength": 7,
+        "abbreviations": ["SLB", "Solomon Islands", "Islas Salomón"],
     },
     {
         "country": "Israel",
@@ -1102,6 +1190,7 @@ export const countryFlags = [
         "emoji": "🇮🇱",
         "latinAmerica": false,
         "phoneLength": 9,
+        "abbreviations": ["ISR", "Israel", "Israel"],
     },
     {
         "country": "Italia",
@@ -1111,6 +1200,7 @@ export const countryFlags = [
         "emoji": "🇮🇹",
         "latinAmerica": false,
         "phoneLength": 10,
+        "abbreviations": ["ITA", "Italy", "Italia"],
     },
     {
         "country": "Jamaica",
@@ -1120,6 +1210,7 @@ export const countryFlags = [
         "emoji": "🇯🇲",
         "latinAmerica": false,
         "phoneLength": 10,
+        "abbreviations": ["JAM", "Jamaica", "Jamaica"],
     },
     {
         "country": "Japón",
@@ -1129,6 +1220,7 @@ export const countryFlags = [
         "emoji": "🇯🇵",
         "latinAmerica": false,
         "phoneLength": 0,
+        "abbreviations": ["JPN", "Japan", "Japón"],
     },
     {
         "country": "Jordania",
@@ -1138,6 +1230,7 @@ export const countryFlags = [
         "emoji": "🇯🇴",
         "latinAmerica": false,
         "phoneLength": 9,
+        "abbreviations": ["JOR", "Jordan", "Jordania"],
     },
     {
         "country": "Kazajistán",
@@ -1147,6 +1240,7 @@ export const countryFlags = [
         "emoji": "🇰🇿",
         "latinAmerica": false,
         "phoneLength": 10,
+        "abbreviations": ["KAZ", "Kazakhstan", "Kazajistán"],
     },
     {
         "country": "Kenia",
@@ -1156,6 +1250,7 @@ export const countryFlags = [
         "emoji": "🇰🇪",
         "latinAmerica": false,
         "phoneLength": 10,
+        "abbreviations": ["KEN", "Kenya", "Kenia"],
     },
     {
         "country": "Kirguistán",
@@ -1165,6 +1260,7 @@ export const countryFlags = [
         "emoji": "🇰🇬",
         "latinAmerica": false,
         "phoneLength": 9,
+        "abbreviations": ["KGZ", "Kyrgyzstan", "Kirguistán"],
     },
     {
         "country": "Kiribati",
@@ -1174,6 +1270,7 @@ export const countryFlags = [
         "emoji": "🇰🇮",
         "latinAmerica": false,
         "phoneLength": 8,
+        "abbreviations": ["KIR", "Kiribati", "Kiribati"],
     },
     {
         "country": "Kuwait",
@@ -1183,6 +1280,7 @@ export const countryFlags = [
         "emoji": "🇰🇼",
         "latinAmerica": false,
         "phoneLength": 8,
+        "abbreviations": ["KWT", "Kuwait", "Kuwait"],
     },
     {
         "country": "Laos",
@@ -1192,6 +1290,7 @@ export const countryFlags = [
         "emoji": "🇱🇦",
         "latinAmerica": false,
         "phoneLength": 9,
+        "abbreviations": ["LAO", "Laos", "Laos"],
     },
     {
         "country": "Lesoto",
@@ -1201,6 +1300,7 @@ export const countryFlags = [
         "emoji": "🇱🇸",
         "latinAmerica": false,
         "phoneLength": 8,
+        "abbreviations": ["LSO", "Lesotho", "Lesoto"],
     },
     {
         "country": "Letonia",
@@ -1210,6 +1310,7 @@ export const countryFlags = [
         "emoji": "🇱🇻",
         "latinAmerica": false,
         "phoneLength": 8,
+        "abbreviations": ["LVA", "Latvia", "Letonia"],
     },
     {
         "country": "Líbano",
@@ -1219,6 +1320,7 @@ export const countryFlags = [
         "emoji": "🇱🇧",
         "latinAmerica": false,
         "phoneLength": 8,
+        "abbreviations": ["LBN", "Lebanon", "Líbano"],
     },
     {
         "country": "Liberia",
@@ -1228,6 +1330,7 @@ export const countryFlags = [
         "emoji": "🇱🇷",
         "latinAmerica": false,
         "phoneLength": 9,
+        "abbreviations": ["LBR", "Liberia", "Liberia"],
     },
     {
         "country": "Libia",
@@ -1237,6 +1340,7 @@ export const countryFlags = [
         "emoji": "🇱🇾",
         "latinAmerica": false,
         "phoneLength": 10,
+        "abbreviations": ["LBY", "Libya", "Libia"],
     },
     {
         "country": "Liechtenstein",
@@ -1246,6 +1350,7 @@ export const countryFlags = [
         "emoji": "🇱🇮",
         "latinAmerica": false,
         "phoneLength": 7,
+        "abbreviations": ["LIE", "Liechtenstein", "Liechtenstein"],
     },
     {
         "country": "Lituania",
@@ -1255,6 +1360,7 @@ export const countryFlags = [
         "emoji": "🇱🇹",
         "latinAmerica": false,
         "phoneLength": 8,
+        "abbreviations": ["LTU", "Lithuania", "Lituania"],
     },
     {
         "country": "Luxemburgo",
@@ -1264,6 +1370,7 @@ export const countryFlags = [
         "emoji": "🇱🇺",
         "latinAmerica": false,
         "phoneLength": 9,
+        "abbreviations": ["LUX", "Luxembourg", "Luxemburgo"],
     },
     {
         "country": "Madagascar",
@@ -1273,6 +1380,7 @@ export const countryFlags = [
         "emoji": "🇲🇬",
         "latinAmerica": false,
         "phoneLength": 7,
+        "abbreviations": ["MDG", "Madagascar", "Madagascar"],
     },
     {
         "country": "Malasia",
@@ -1282,6 +1390,7 @@ export const countryFlags = [
         "emoji": "🇲🇾",
         "latinAmerica": false,
         "phoneLength": 7,
+        "abbreviations": ["MYS", "Malaysia", "Malasia"],
     },
     {
         "country": "Malaui",
@@ -1291,6 +1400,7 @@ export const countryFlags = [
         "emoji": "🇲🇼",
         "latinAmerica": false,
         "phoneLength": 9,
+        "abbreviations": ["MWI", "Malawi", "Malaui"],
     },
     {
         "country": "Maldivas",
@@ -1300,6 +1410,7 @@ export const countryFlags = [
         "emoji": "🇲🇻",
         "latinAmerica": false,
         "phoneLength": 7,
+        "abbreviations": ["MDV", "Maldives", "Maldivas"],
     },
     {
         "country": "Malí",
@@ -1309,6 +1420,7 @@ export const countryFlags = [
         "emoji": "🇲🇱",
         "latinAmerica": false,
         "phoneLength": 8,
+        "abbreviations": ["MLI", "Mali", "Malí"],
     },
     {
         "country": "Malta",
@@ -1318,6 +1430,7 @@ export const countryFlags = [
         "emoji": "🇲🇹",
         "latinAmerica": false,
         "phoneLength": 8,
+        "abbreviations": ["MLT", "Malta", "Malta"],
     },
     {
         "country": "Marruecos",
@@ -1327,6 +1440,7 @@ export const countryFlags = [
         "emoji": "🇲🇦",
         "latinAmerica": false,
         "phoneLength": 9,
+        "abbreviations": ["MAR", "Morocco", "Marruecos"],
     },
     {
         "country": "Mauricio",
@@ -1336,6 +1450,7 @@ export const countryFlags = [
         "emoji": "🇲🇺",
         "latinAmerica": false,
         "phoneLength": 8,
+        "abbreviations": ["MUS", "Mauritius", "Mauricio"],
     },
     {
         "country": "Mauritania",
@@ -1345,6 +1460,7 @@ export const countryFlags = [
         "emoji": "🇲🇷",
         "latinAmerica": false,
         "phoneLength": 8,
+        "abbreviations": ["MRT", "Mauritania", "Mauritania"],
     },
     {
         "country": "México",
@@ -1354,6 +1470,7 @@ export const countryFlags = [
         "emoji": "🇲🇽",
         "latinAmerica": true,
         "phoneLength": 10,
+        "abbreviations": ["MEX", "Mexico", "México"],
     },
     {
         "country": "Micronesia",
@@ -1363,6 +1480,7 @@ export const countryFlags = [
         "emoji": "🇫🇲",
         "latinAmerica": false,
         "phoneLength": 7,
+        "abbreviations": ["FSM", "Micronesia", "Micronesia"],
     },
     {
         "country": "Moldavia",
@@ -1372,6 +1490,7 @@ export const countryFlags = [
         "emoji": "🇲🇩",
         "latinAmerica": false,
         "phoneLength": 8,
+        "abbreviations": ["MDA", "Moldova", "Moldavia"],
     },
     {
         "country": "Mónaco",
@@ -1381,6 +1500,7 @@ export const countryFlags = [
         "emoji": "🇲🇨",
         "latinAmerica": false,
         "phoneLength": 8,
+        "abbreviations": ["MCO", "Monaco", "Mónaco"],
     },
     {
         "country": "Mongolia",
@@ -1390,6 +1510,7 @@ export const countryFlags = [
         "emoji": "🇲🇳",
         "latinAmerica": false,
         "phoneLength": 8,
+        "abbreviations": ["MNG", "Mongolia", "Mongolia"],
     },
     {
         "country": "Montenegro",
@@ -1399,6 +1520,7 @@ export const countryFlags = [
         "emoji": "🇲🇪",
         "latinAmerica": false,
         "phoneLength": 8,
+        "abbreviations": ["MNE", "Montenegro", "Montenegro"],
     },
     {
         "country": "Mozambique",
@@ -1408,6 +1530,7 @@ export const countryFlags = [
         "emoji": "🇲🇿",
         "latinAmerica": false,
         "phoneLength": 12,
+        "abbreviations": ["MOZ", "Mozambique", "Mozambique"],
     },
     {
         "country": "Namibia",
@@ -1417,6 +1540,7 @@ export const countryFlags = [
         "emoji": "🇳🇦",
         "latinAmerica": false,
         "phoneLength": 7,
+        "abbreviations": ["NAM", "Namibia", "Namibia"],
     },
     {
         "country": "Nauru",
@@ -1426,6 +1550,7 @@ export const countryFlags = [
         "emoji": "🇳🇷",
         "latinAmerica": false,
         "phoneLength": 7,
+        "abbreviations": ["NRU", "Nauru", "Nauru"],
     },
     {
         "country": "Nepal",
@@ -1435,6 +1560,7 @@ export const countryFlags = [
         "emoji": "🇳🇵",
         "latinAmerica": false,
         "phoneLength": 10,
+        "abbreviations": ["NPL", "Nepal", "Nepal"],
     },
     {
         "country": "Nicaragua",
@@ -1444,6 +1570,7 @@ export const countryFlags = [
         "emoji": "🇳🇮",
         "latinAmerica": true,
         "phoneLength": 8,
+        "abbreviations": ["NIC", "Nicaragua", "Nicaragua"],
     },
     {
         "country": "Níger",
@@ -1453,6 +1580,7 @@ export const countryFlags = [
         "emoji": "🇳🇪",
         "latinAmerica": false,
         "phoneLength": 8,
+        "abbreviations": ["NER", "Niger", "Níger"],
     },
     {
         "country": "Nigeria",
@@ -1462,6 +1590,7 @@ export const countryFlags = [
         "emoji": "🇳🇬",
         "latinAmerica": false,
         "phoneLength": 8,
+        "abbreviations": ["NGA", "Nigeria", "Nigeria"],
     },
     {
         "country": "Noruega",
@@ -1471,6 +1600,7 @@ export const countryFlags = [
         "emoji": "🇳🇴",
         "latinAmerica": false,
         "phoneLength": 8,
+        "abbreviations": ["NOR", "Norway", "Noruega"],
     },
     {
         "country": "Nueva Zelanda",
@@ -1480,6 +1610,7 @@ export const countryFlags = [
         "emoji": "🇳🇿",
         "latinAmerica": false,
         "phoneLength": 9,
+        "abbreviations": ["NZL", "New Zealand", "Nueva Zelanda"],
     },
     {
         "country": "Omán",
@@ -1489,6 +1620,7 @@ export const countryFlags = [
         "emoji": "🇴🇲",
         "latinAmerica": false,
         "phoneLength": 8,
+        "abbreviations": ["OMN", "Oman", "Omán"],
     },
     {
         "country": "Países Bajos",
@@ -1498,6 +1630,7 @@ export const countryFlags = [
         "emoji": "🇳🇱",
         "latinAmerica": false,
         "phoneLength": 9,
+        "abbreviations": ["NLD", "Netherlands", "Países Bajos"],
     },
     {
         "country": "Pakistán",
@@ -1507,6 +1640,7 @@ export const countryFlags = [
         "emoji": "🇵🇰",
         "latinAmerica": false,
         "phoneLength": 10,
+        "abbreviations": ["PAK", "Pakistan", "Pakistán"],
     },
     {
         "country": "Palaos",
@@ -1516,6 +1650,7 @@ export const countryFlags = [
         "emoji": "🇵🇼",
         "latinAmerica": false,
         "phoneLength": 7,
+        "abbreviations": ["PLW", "Palau", "Palaos"],
     },
     {
         "country": "Panamá",
@@ -1525,6 +1660,7 @@ export const countryFlags = [
         "emoji": "🇵🇦",
         "latinAmerica": true,
         "phoneLength": 8,
+        "abbreviations": ["PAN", "Panama", "Panamá"],
     },
     {
         "country": "Papúa Nueva Guinea",
@@ -1534,6 +1670,7 @@ export const countryFlags = [
         "emoji": "🇵🇬",
         "latinAmerica": false,
         "phoneLength": 8,
+        "abbreviations": ["PNG", "Papua New Guinea", "Papúa Nueva Guinea"],
     },
     {
         "country": "Paraguay",
@@ -1543,6 +1680,7 @@ export const countryFlags = [
         "emoji": "🇵🇾",
         "latinAmerica": true,
         "phoneLength": 9,
+        "abbreviations": ["PRY", "Paraguay", "Paraguay"],
     },
     {
         "country": "Perú",
@@ -1552,6 +1690,7 @@ export const countryFlags = [
         "emoji": "🇵🇪",
         "latinAmerica": true,
         "phoneLength": 9,
+        "abbreviations": ["PER", "Peru", "Perú"],
     },
     {
         "country": "Polonia",
@@ -1561,6 +1700,7 @@ export const countryFlags = [
         "emoji": "🇵🇱",
         "latinAmerica": false,
         "phoneLength": 9,
+        "abbreviations": ["POL", "Poland", "Polonia"],
     },
     {
         "country": "Portugal",
@@ -1570,6 +1710,7 @@ export const countryFlags = [
         "emoji": "🇵🇹",
         "latinAmerica": false,
         "phoneLength": 9,
+        "abbreviations": ["PRT", "Portugal", "Portugal"],
     },
     {
         "country": "Reino Unido",
@@ -1579,6 +1720,7 @@ export const countryFlags = [
         "emoji": "🇬🇧",
         "latinAmerica": false,
         "phoneLength": 10,
+        "abbreviations": ["GBR", "United Kingdom", "Reino Unido", "UK", "England"],
     },
     {
         "country": "República Centroafricana",
@@ -1588,6 +1730,7 @@ export const countryFlags = [
         "emoji": "🇨🇫",
         "latinAmerica": false,
         "phoneLength": 8,
+        "abbreviations": ["CAF", "Central African Republic", "República Centroafricana"],
     },
     {
         "country": "República Checa",
@@ -1597,6 +1740,7 @@ export const countryFlags = [
         "emoji": "🇨🇿",
         "latinAmerica": false,
         "phoneLength": 9,
+        "abbreviations": ["CZE", "Czech Republic", "República Checa"],
     },
     {
         "country": "República del Congo",
@@ -1606,6 +1750,7 @@ export const countryFlags = [
         "emoji": "🇨🇩",
         "latinAmerica": false,
         "phoneLength": 7,
+        "abbreviations": ["COD", "Democratic Republic of the Congo", "República del Congo"],
     },
     {
         "country": "República Dominicana",
@@ -1615,6 +1760,7 @@ export const countryFlags = [
         "emoji": "🇩🇴",
         "latinAmerica": true,
         "phoneLength": 10,
+        "abbreviations": ["DOM", "Dominican Republic", "República Dominicana"],
     },
     {
         "country": "Ruanda",
@@ -1624,6 +1770,7 @@ export const countryFlags = [
         "emoji": "🇷🇼",
         "latinAmerica": false,
         "phoneLength": 9,
+        "abbreviations": ["RWA", "Rwanda", "Ruanda"],
     },
     {
         "country": "Rumania",
@@ -1633,6 +1780,7 @@ export const countryFlags = [
         "emoji": "🇷🇴",
         "latinAmerica": false,
         "phoneLength": 10,
+        "abbreviations": ["ROU", "Romania", "Rumania"],
     },
     {
         "country": "Rusia",
@@ -1642,6 +1790,7 @@ export const countryFlags = [
         "emoji": "🇷🇺",
         "latinAmerica": false,
         "phoneLength": 10,
+        "abbreviations": ["RUS", "Russia", "Rusia"],
     },
     {
         "country": "Samoa",
@@ -1651,6 +1800,7 @@ export const countryFlags = [
         "emoji": "🇼🇸",
         "latinAmerica": false,
         "phoneLength": 7,
+        "abbreviations": ["WSM", "Samoa", "Samoa"],
     },
     {
         "country": "San Cristóbal y Nieves",
@@ -1660,6 +1810,7 @@ export const countryFlags = [
         "emoji": "🇰🇳",
         "latinAmerica": false,
         "phoneLength": 10,
+        "abbreviations": ["KNA", "Saint Kitts and Nevis", "San Cristóbal y Nieves"],
     },
     {
         "country": "San Marino",
@@ -1669,6 +1820,7 @@ export const countryFlags = [
         "emoji": "🇸🇲",
         "latinAmerica": false,
         "phoneLength": 10,
+        "abbreviations": ["SMR", "San Marino", "San Marino"],
     },
     {
         "country": "Santa Lucía",
@@ -1678,6 +1830,7 @@ export const countryFlags = [
         "emoji": "🇱🇨",
         "latinAmerica": false,
         "phoneLength": 7,
+        "abbreviations": ["LCA", "Saint Lucia", "Santa Lucía"],
     },
     {
         "country": "Santo Tomé y Príncipe",
@@ -1687,6 +1840,7 @@ export const countryFlags = [
         "emoji": "🇸🇹",
         "latinAmerica": false,
         "phoneLength": 7,
+        "abbreviations": ["STP", "Sao Tome and Principe", "Santo Tomé y Príncipe"],
     },
     {
         "country": "San Vicente y las Granadinas",
@@ -1696,6 +1850,7 @@ export const countryFlags = [
         "emoji": "🇻🇨",
         "latinAmerica": false,
         "phoneLength": 7,
+        "abbreviations": ["VCT", "Saint Vincent and the Grenadines", "San Vicente y las Granadinas"],
     },
     {
         "country": "Senegal",
@@ -1705,6 +1860,7 @@ export const countryFlags = [
         "emoji": "🇸🇳",
         "latinAmerica": false,
         "phoneLength": 9,
+        "abbreviations": ["SEN", "Senegal", "Senegal"],
     },
     {
         "country": "Serbia",
@@ -1714,6 +1870,7 @@ export const countryFlags = [
         "emoji": "🇷🇸",
         "latinAmerica": false,
         "phoneLength": 9,
+        "abbreviations": ["SRB", "Serbia", "Serbia"],
     },
     {
         "country": "Seychelles",
@@ -1723,6 +1880,7 @@ export const countryFlags = [
         "emoji": "🇸🇨",
         "latinAmerica": false,
         "phoneLength": 7,
+        "abbreviations": ["SYC", "Seychelles", "Seychelles"],
     },
     {
         "country": "Sierra Leona",
@@ -1732,6 +1890,7 @@ export const countryFlags = [
         "emoji": "🇸🇱",
         "latinAmerica": false,
         "phoneLength": 8,
+        "abbreviations": ["SLE", "Sierra Leone", "Sierra Leona"],
     },
     {
         "country": "Singapur",
@@ -1741,6 +1900,7 @@ export const countryFlags = [
         "emoji": "🇸🇬",
         "latinAmerica": false,
         "phoneLength": 8,
+        "abbreviations": ["SGP", "Singapore", "Singapur"],
     },
     {
         "country": "Siria",
@@ -1750,6 +1910,7 @@ export const countryFlags = [
         "emoji": "🇸🇾",
         "latinAmerica": false,
         "phoneLength": 7,
+        "abbreviations": ["SYR", "Syria", "Siria"],
     },
     {
         "country": "Somalia",
@@ -1759,6 +1920,7 @@ export const countryFlags = [
         "emoji": "🇸🇴",
         "latinAmerica": false,
         "phoneLength": 9,
+        "abbreviations": ["SOM", "Somalia", "Somalia"],
     },
     {
         "country": "Sri Lanka",
@@ -1768,6 +1930,7 @@ export const countryFlags = [
         "emoji": "🇱🇰",
         "latinAmerica": false,
         "phoneLength": 7,
+        "abbreviations": ["LKA", "Sri Lanka", "Sri Lanka"],
     },
     {
         "country": "Sudáfrica",
@@ -1777,6 +1940,7 @@ export const countryFlags = [
         "emoji": "🇿🇦",
         "latinAmerica": false,
         "phoneLength": 9,
+        "abbreviations": ["ZAF", "South Africa", "Sudáfrica"],
     },
     {
         "country": "Sudán",
@@ -1786,6 +1950,7 @@ export const countryFlags = [
         "emoji": "🇸🇩",
         "latinAmerica": false,
         "phoneLength": 7,
+        "abbreviations": ["SDN", "Sudan", "Sudán"],
     },
     {
         "country": "Sudán del Sur",
@@ -1795,6 +1960,7 @@ export const countryFlags = [
         "emoji": "🇸🇸",
         "latinAmerica": false,
         "phoneLength": 7,
+        "abbreviations": ["SSD", "South Sudan", "Sudán del Sur"],
     },
     {
         "country": "Suecia",
@@ -1804,6 +1970,7 @@ export const countryFlags = [
         "emoji": "🇸🇪",
         "latinAmerica": false,
         "phoneLength": 7,
+        "abbreviations": ["SWE", "Sweden", "Suecia"],
     },
     {
         "country": "Suiza",
@@ -1813,6 +1980,7 @@ export const countryFlags = [
         "emoji": "🇨🇭",
         "latinAmerica": false,
         "phoneLength": 9,
+        "abbreviations": ["CHE", "Switzerland", "Suiza"],
     },
     {
         "country": "Surinam",
@@ -1822,6 +1990,7 @@ export const countryFlags = [
         "emoji": "🇸🇷",
         "latinAmerica": false,
         "phoneLength": 7,
+        "abbreviations": ["SUR", "Suriname", "Surinam"],
     },
     {
         "country": "Tailandia",
@@ -1831,6 +2000,7 @@ export const countryFlags = [
         "emoji": "🇹🇭",
         "latinAmerica": false,
         "phoneLength": 9,
+        "abbreviations": ["THA", "Thailand", "Tailandia"],
     },
     {
         "country": "Tanzania",
@@ -1840,6 +2010,7 @@ export const countryFlags = [
         "emoji": "🇹🇿",
         "latinAmerica": false,
         "phoneLength": 7,
+        "abbreviations": ["TZA", "Tanzania", "Tanzania"],
     },
     {
         "country": "Tayikistán",
@@ -1849,6 +2020,7 @@ export const countryFlags = [
         "emoji": "🇹🇯",
         "latinAmerica": false,
         "phoneLength": 9,
+        "abbreviations": ["TJK", "Tajikistan", "Tayikistán"],
     },
     {
         "country": "Timor Oriental",
@@ -1858,6 +2030,7 @@ export const countryFlags = [
         "emoji": "🇹🇱",
         "latinAmerica": false,
         "phoneLength": 7,
+        "abbreviations": ["TLS", "Timor-Leste", "Timor Oriental"],
     },
     {
         "country": "Togo",
@@ -1867,6 +2040,7 @@ export const countryFlags = [
         "emoji": "🇹🇬",
         "latinAmerica": false,
         "phoneLength": 8,
+        "abbreviations": ["TGO", "Togo", "Togo"],
     },
     {
         "country": "Tonga",
@@ -1876,6 +2050,7 @@ export const countryFlags = [
         "emoji": "🇹🇴",
         "latinAmerica": false,
         "phoneLength": 5,
+        "abbreviations": ["TON", "Tonga", "Tonga"],
     },
     {
         "country": "Trinidad y Tobago",
@@ -1885,6 +2060,7 @@ export const countryFlags = [
         "emoji": "🇹🇹",
         "latinAmerica": false,
         "phoneLength": 7,
+        "abbreviations": ["TTO", "Trinidad and Tobago", "Trinidad y Tobago"],
     },
     {
         "country": "Túnez",
@@ -1894,6 +2070,7 @@ export const countryFlags = [
         "emoji": "🇹🇳",
         "latinAmerica": false,
         "phoneLength": 8,
+        "abbreviations": ["TUN", "Tunisia", "Túnez"],
     },
     {
         "country": "Turkmenistán",
@@ -1903,6 +2080,7 @@ export const countryFlags = [
         "emoji": "🇹🇲",
         "latinAmerica": false,
         "phoneLength": 8,
+        "abbreviations": ["TKM", "Turkmenistan", "Turkmenistán"],
     },
     {
         "country": "Turquía",
@@ -1912,6 +2090,7 @@ export const countryFlags = [
         "emoji": "🇹🇷",
         "latinAmerica": false,
         "phoneLength": 11,
+        "abbreviations": ["TUR", "Turkey", "Turquía"],
     },
     {
         "country": "Tuvalu",
@@ -1921,6 +2100,7 @@ export const countryFlags = [
         "emoji": "🇹🇻",
         "latinAmerica": false,
         "phoneLength": 5,
+        "abbreviations": ["TUV", "Tuvalu", "Tuvalu"],
     },
     {
         "country": "Ucrania",
@@ -1930,6 +2110,7 @@ export const countryFlags = [
         "emoji": "🇺🇦",
         "latinAmerica": false,
         "phoneLength": 9,
+        "abbreviations": ["UKR", "Ukraine", "Ucrania"],
     },
     {
         "country": "Uganda",
@@ -1939,6 +2120,7 @@ export const countryFlags = [
         "emoji": "🇺🇬",
         "latinAmerica": false,
         "phoneLength": 7,
+        "abbreviations": ["UGA", "Uganda", "Uganda"],
     },
     {
         "country": "Uruguay",
@@ -1948,6 +2130,7 @@ export const countryFlags = [
         "emoji": "🇺🇾",
         "latinAmerica": true,
         "phoneLength": 8,
+        "abbreviations": ["URY", "Uruguay", "Uruguay"],
     },
     {
         "country": "Uzbekistán",
@@ -1957,6 +2140,7 @@ export const countryFlags = [
         "emoji": "🇺🇿",
         "latinAmerica": false,
         "phoneLength": 9,
+        "abbreviations": ["UZB", "Uzbekistan", "Uzbekistán"],
     },
     {
         "country": "Vanuatu",
@@ -1966,6 +2150,7 @@ export const countryFlags = [
         "emoji": "🇻🇺",
         "latinAmerica": false,
         "phoneLength": 5,
+        "abbreviations": ["VUT", "Vanuatu", "Vanuatu"],
     },
     {
         "country": "Venezuela",
@@ -1975,6 +2160,7 @@ export const countryFlags = [
         "emoji": "🇻🇪",
         "latinAmerica": true,
         "phoneLength": 7,
+        "abbreviations": ["VEN", "Venezuela", "Venezuela"],
     },
     {
         "country": "Vietnam",
@@ -1984,6 +2170,7 @@ export const countryFlags = [
         "emoji": "🇻🇳",
         "latinAmerica": false,
         "phoneLength": 9,
+        "abbreviations": ["VNM", "Vietnam", "Vietnam"],
     },
     {
         "country": "Yemen",
@@ -1993,6 +2180,7 @@ export const countryFlags = [
         "emoji": "🇾🇪",
         "latinAmerica": false,
         "phoneLength": 9,
+        "abbreviations": ["YEM", "Yemen", "Yemen"],
     },
     {
         "country": "Yibuti",
@@ -2002,6 +2190,7 @@ export const countryFlags = [
         "emoji": "🇩🇯",
         "latinAmerica": false,
         "phoneLength": 10,
+        "abbreviations": ["DJI", "Djibouti", "Yibuti"],
     },
     {
         "country": "Zambia",
@@ -2011,6 +2200,7 @@ export const countryFlags = [
         "emoji": "🇿🇲",
         "latinAmerica": false,
         "phoneLength": 9,
+        "abbreviations": ["ZMB", "Zambia", "Zambia"],
     },
     {
         "country": "Zimbabue",
@@ -2020,6 +2210,7 @@ export const countryFlags = [
         "emoji": "🇿🇼",
         "latinAmerica": false,
         "phoneLength": 9,
+        "abbreviations": ["ZWE", "Zimbabwe", "Zimbabue"],
     },
 ]
 
@@ -2060,3 +2251,79 @@ export const LargeDateLocal: Intl.DateTimeFormatOptions = {
 }
 
 
+
+export function getDepartmentTranslation(department: string, gender: number = 0): string {
+    const translations: Record<string, { male: string; female: string; neutral: string }> = {
+        "Acting": { male: "Actuación", female: "Actuación", neutral: "Actuación" },
+        "Directing": { male: "Dirección", female: "Dirección", neutral: "Dirección" },
+        "Production": { male: "Producción", female: "Producción", neutral: "Producción" },
+        "Writing": { male: "Guion", female: "Guion", neutral: "Guion" },
+        "Editing": { male: "Edición", female: "Edición", neutral: "Edición" },
+        "Camera": { male: "Cámara", female: "Cámara", neutral: "Cámara" },
+        "Sound": { male: "Sonido", female: "Sonido", neutral: "Sonido" },
+        "Art": { male: "Arte", female: "Arte", neutral: "Arte" },
+        "Costume & Make-Up": { male: "Vestuario y Maquillaje", female: "Vestuario y Maquillaje", neutral: "Vestuario y Maquillaje" },
+        "Visual Effects": { male: "Efectos Visuales", female: "Efectos Visuales", neutral: "Efectos Visuales" },
+        "Crew": { male: "Equipo Técnico", female: "Equipo Técnico", neutral: "Equipo Técnico" },
+        "Lighting": { male: "Iluminación", female: "Iluminación", neutral: "Iluminación" },
+        "Music": { male: "Música", female: "Música", neutral: "Música" }
+    };
+
+    const role = translations[department];
+    if (!role) return department;
+
+    switch (gender) {
+        case 1:
+            return role.female;
+        case 2:
+            return role.male;
+        case 0:
+        case 3:
+        default:
+            return role.neutral;
+    }
+}
+
+export interface SocialIconResult {
+    name: string;
+    icon: string; // Ej: "FacebookIcon", "InstagramIcon", etc.
+    url: string;
+}
+
+export interface SocialIconResult {
+    name: string;
+    icon: string;
+    url: string;
+}
+
+export function getAvailableSocialLinks(socials?: Record<string, any> | null): SocialIconResult[] | null {
+    // Si viene undefined o null, regresa null
+    if (!socials) {
+        return null;
+    }
+
+    const socialConfig: Record<string, { name: string; icon: string; baseUrl: string }> = {
+        facebook_id: { name: "Facebook", icon: "ic:baseline-facebook", baseUrl: "https://www.facebook.com/" },
+        instagram_id: { name: "Instagram", icon: "mdi:instagram", baseUrl: "https://www.instagram.com/" },
+        tiktok_id: { name: "TikTok", icon: "ic:baseline-tiktok", baseUrl: "https://www.tiktok.com/@" },
+        twitter_id: { name: "Twitter", icon: "mdi:twitter", baseUrl: "https://twitter.com/" },
+        youtube_id: { name: "YouTube", icon: "mdi:youtube", baseUrl: "https://www.youtube.com/@" },
+    };
+
+    const results: SocialIconResult[] = [];
+
+    for (const [key, value] of Object.entries(socials)) {
+        if (socialConfig[key] && value && value !== "" && value !== 0) {
+            const config = socialConfig[key];
+            results.push({
+                name: config.name,
+                icon: config.icon,
+                url: `${config.baseUrl}${value}`
+            });
+        }
+    }
+
+    // Si no hay ninguna red social válida, puedes decidir si regresa un array vacío [] o null.
+    // Aquí regresa el array con los elementos encontrados.
+    return results.length > 0 ? results : null;
+}
