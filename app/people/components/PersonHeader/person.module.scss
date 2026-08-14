@@ -1,0 +1,21 @@
+.people {
+    position: relative;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    width: 100%;
+    height: 25em;
+
+    @media (width < 590px) {
+        justify-content: center;
+    }
+
+    &_photo {
+        height: 100%;
+        width: 20em;
+        object-fit: cover;
+        object-position: top;
+        border-radius: 0.25em;
+        mask-image: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 45%, rgba(0, 0, 0, 1) 70%, rgba(0, 0, 0, 0) 100%);
+    }
+}
