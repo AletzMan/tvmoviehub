@@ -3,30 +3,22 @@
 import { SearchIcon } from "@/app/utils/svg"
 import styles from "./searchinput.module.scss"
 import { ChangeEvent, KeyboardEvent, useEffect, useState } from "react"
-import { RadioButton } from "../RadioButton/RadioButton"
+import { RadioButtonGroup } from "../RadioButton/RadioButtonGroup"
 import { Button } from "../Button/Button"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { Suspense } from "react"
-
-interface IOptions {
-    search: boolean
-    movies: boolean
-    series: boolean
-    people: boolean
-}
-
-const defaultOptions: IOptions = {
-    search: true,
-    movies: false,
-    series: false,
-    people: false
-}
 
 const sectionType = {
     movies: "películas",
     series: "series",
     people: "personas"
 }
+
+const searchOptions = [
+    { id: "movies", label: "Películas" },
+    { id: "series", label: "Series" },
+    { id: "people", label: "Personas" }
+]
 
 type Props = {
     section: string
@@ -35,7 +27,7 @@ type Props = {
 }
 function SearchInputContent({ section, onSearch }: Props) {
     const searchParams = useSearchParams()
-    const [selectOption, setSelectOption] = useState<IOptions>(defaultOptions)
+    const [selectedOption, setSelectedOption] = useState<string>("movies")
     const [placeholder, setPlaceholder] = useState("Buscar en películas, series y personas")
     const [search, setSearch] = useState("")
     const router = useRouter()
@@ -49,40 +41,19 @@ function SearchInputContent({ section, onSearch }: Props) {
         } else {
             setSearch("")
         }
-        let newStatusChecked: IOptions = selectOption
         if (Object.keys(sectionType).includes(section)) {
-            newStatusChecked = { ...defaultOptions, search: false, [section]: true }
+            setSelectedOption(section)
             setPlaceholder(`Buscar ${sectionType[section as ("movies" | "series" | "people")]}`)
         } else {
-            newStatusChecked = { ...defaultOptions, search: true }
+            setSelectedOption("movies")
             setPlaceholder("Buscar en películas, series y personas")
         }
-        setSelectOption(newStatusChecked)
 
     }, [section, pathname])
 
-    const HandleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const name = e.currentTarget.id
-        const checked = e.currentTarget.checked
-
-        let newStatusChecked: IOptions = selectOption
-        if (name === "all") {
-            if (checked) {
-                setPlaceholder("Buscar en películas, series y personas")
-                newStatusChecked = { search: true, movies: false, series: false, people: false }
-            } else {
-                if (section) {
-                    newStatusChecked = { ...defaultOptions, search: false, [section]: true }
-                }
-                else {
-                    newStatusChecked = { ...defaultOptions, search: false, movies: true }
-                }
-            }
-        } else {
-            newStatusChecked = { ...defaultOptions, search: false, [name]: true }
-            setPlaceholder(`Buscar ${sectionType[name as ("movies" | "series" | "people")]}`)
-        }
-        setSelectOption(newStatusChecked)
+    const HandleChange = (value: string) => {
+        setSelectedOption(value)
+        setPlaceholder(`Buscar ${sectionType[value as ("movies" | "series" | "people")]}`)
     }
 
     const HandleSearch = (e: ChangeEvent<HTMLInputElement>) => {
@@ -97,14 +68,12 @@ function SearchInputContent({ section, onSearch }: Props) {
     }
 
     const Search = () => {
-        if (selectOption.movies) {
+        if (selectedOption === "movies") {
             router.push(`/movies/results/search?query=${search}&page=1`)
-        } else if (selectOption.series) {
+        } else if (selectedOption === "series") {
             router.push(`/series/results/search?query=${search}&page=1`)
-        } else if (selectOption.people) {
+        } else if (selectedOption === "people") {
             router.push(`/people/results/search?query=${search}&page=1`)
-        } else if (selectOption.search) {
-            router.push(`/search?query=${search}&page=1`)
         }
         onSearch()
     }
@@ -125,10 +94,12 @@ function SearchInputContent({ section, onSearch }: Props) {
                 <Button className={styles.search_button} onClick={Search} text="Buscar" disabled={search.length < 3} mode="button" />
             </div>
             <div className={styles.checkbox}>
-                {/*<RadioButton checkBoxOnChange={HandleChange} label="Todo" name="type_search" id="all" checked={selectOption.search} />*/}
-                <RadioButton checkBoxOnChange={HandleChange} label="Peliculas" name="type_search" id="movies" checked={selectOption.movies} />
-                <RadioButton checkBoxOnChange={HandleChange} label="Series" name="type_search" id="series" checked={selectOption.series} />
-                <RadioButton checkBoxOnChange={HandleChange} label="Personas" name="type_search" id="people" checked={selectOption.people} />
+                <RadioButtonGroup
+                    options={searchOptions}
+                    name="type_search"
+                    selectedValue={selectedOption}
+                    onChange={HandleChange}
+                />
             </div>
         </header>
     )
