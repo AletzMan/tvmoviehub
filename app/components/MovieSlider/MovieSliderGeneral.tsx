@@ -41,19 +41,19 @@ export const MovieSliderGeneral = ({ title, children, list_link, slidesToShow = 
             {
                 breakpoint: 1280, // Pantallas grandes / Laptops
                 settings: {
-                    slidesToShow: Math.min(slidesToShow, 4),
+                    slidesToShow: Math.min(slidesToShow, 5),
                 }
             },
             {
                 breakpoint: 1024, // Tablets horizontales
                 settings: {
-                    slidesToShow: Math.min(slidesToShow, 3),
+                    slidesToShow: Math.min(slidesToShow, 4),
                 }
             },
             {
                 breakpoint: 768, // Tablets verticales / Celulares grandes
                 settings: {
-                    slidesToShow: 2,
+                    slidesToShow: 3,
                     arrows: false // Oculta las flechas en touch para mejor espacio
                 }
             },
