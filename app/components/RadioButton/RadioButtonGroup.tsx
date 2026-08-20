@@ -16,29 +16,29 @@ interface Props {
 }
 
 export function RadioButtonGroup({ options, name, selectedValue, onChange }: Props) {
-    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        onChange(e.currentTarget.id)
-    }
-
     return (
         <div className={styles.radiobutton_group}>
-            {options.map((option) => (
-                <label
-                    key={option.id}
-                    className={`${styles.radiobutton_label} ${selectedValue === option.id ? styles.radiobutton_labelActive : ""}`}
-                    htmlFor={option.id}
-                >
-                    <input
-                        className={styles.radiobutton_input}
-                        type="radio"
-                        name={name}
-                        id={option.id}
-                        onChange={handleChange}
-                        checked={selectedValue === option.id}
-                    />
-                    {option.label}
-                </label>
-            ))}
+            {options.map((option) => {
+                const inputId = `${name}-${option.id}`
+                return (
+                    <label
+                        key={option.id}
+                        className={`${styles.radiobutton_label} ${selectedValue === option.id ? styles.radiobutton_labelActive : ""}`}
+                        htmlFor={inputId}
+                    >
+                        <input
+                            className={styles.radiobutton_input}
+                            type="radio"
+                            name={name}
+                            id={inputId}
+                            value={option.id}
+                            onChange={() => onChange(option.id)}
+                            checked={selectedValue === option.id}
+                        />
+                        {option.label}
+                    </label>
+                )
+            })}
         </div>
     )
 }
