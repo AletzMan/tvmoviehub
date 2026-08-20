@@ -112,9 +112,18 @@ export default function Header() {
                             </button>
                             <nav className={`${styles.login_menu} ${open.account && styles.login_menuOpen}`}>
                                 {session.session_id &&
-                                    MainMenu.filter((_, index) => index > 4 && index < 9).map(menu => (
-                                        <Link key={menu.id} className={`${styles.login_menuLink} ${menu.link.split("?")[0] === section && styles.login_menuLinkCurrent}  ${menu.name}`} onClick={() => setLoadingState(true)} href={`/${menu.link}`} title={`Ir a ${menu.name}`}>{menu.icon}{menu.name}</Link>
-                                    ))
+                                    MainMenu.filter((_, index) => index > 4 && index < 9).map(menu => {
+                                        let href = `/${menu.link}`;
+                                        if (menu.link === 'favorites' || menu.link === 'watchlist') {
+                                            href += '?type=movies&page=1';
+                                        } else if (menu.link === 'lists') {
+                                            href += '?page=1';
+                                        }
+                                        const currentSection = pathname.split("/")[1];
+                                        return (
+                                            <Link key={menu.id} className={`${styles.login_menuLink} ${menu.link === currentSection && styles.login_menuLinkCurrent}  ${menu.name}`} onClick={() => { setLoadingState(true); HandleSetOpen("account"); }} href={href} title={`Ir a ${menu.name}`}>{menu.icon}{menu.name}</Link>
+                                        );
+                                    })
                                 }
                                 {session.session_id && <hr className={styles.separator} />}
                                 <button className={styles.login_menuLink} title="Iniciar sesión" onClick={HandleSession}>

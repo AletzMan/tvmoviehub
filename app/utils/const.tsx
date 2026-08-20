@@ -36,19 +36,19 @@ export const MainMenu = [
     {
         id: 5,
         name: "Favoritos",
-        link: "favorites?type=movies&page=1",
+        link: "favorites",
         icon: <FavoriteEmptyIcon className="mainMenuLogo" />
     },
     {
         id: 6,
         name: "Listas",
-        link: "lists?page=1",
+        link: "lists",
         icon: <MovieListIcon className="mainMenuLogo" />
     },
     {
         id: 7,
         name: "Lista de seguimiento",
-        link: "watchlist?type=movies&page=1",
+        link: "watchlist",
         icon: <BookmarkIcon className="mainMenuLogo" />
     },
     {
@@ -299,6 +299,7 @@ export const BASE_URL_IMG = 'https://image.tmdb.org/t/p/original'
 export const BASE_URL_IMG_CUSTOM = 'https://image.tmdb.org/t/p/'
 
 export const URL_IMAGE_NOTPHOTO = "https://raw.githubusercontent.com/AletzMan/ImagesStorage/refs/heads/main/film_data_hub/not_photo.png"
+export const URL_IMAGE_NOTPHOTO_PROFILE = "https://raw.githubusercontent.com/AletzMan/ImagesStorage/refs/heads/main/film_data_hub/not-photo.webp"
 export const URL_IMAGE_NOTCOVER = "https://raw.githubusercontent.com/AletzMan/ImagesStorage/refs/heads/main/film_data_hub/not_cover.webp"
 
 export const countryFlags = [
