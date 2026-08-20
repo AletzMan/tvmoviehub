@@ -9,12 +9,11 @@
 
     &_section {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(10em, 1fr));
-        grid-template-rows: max-content;
-        place-items: start start;
+        grid-template-columns: repeat(auto-fill, minmax(11.5em, 1fr));
+        //grid-template-rows: max-content;
+        //place-items: start start;
         gap: 0.25em;
-        height: calc(100svh - 16em);
-        background-color: var(--primary-900);
+       // height: calc(100svh - 16em); 
         padding: 0.25em 0.5em 0.25em 0;
     }
 }

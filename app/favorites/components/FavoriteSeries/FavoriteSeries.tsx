@@ -21,7 +21,7 @@ export default async function FavoriteSeries({ page, type }: Props) {
         <div className={styles.favorites}>
             <section className={`${styles.favorites_section} scrollBarStyle`}>
                 {movies?.results.map(movie => (
-                    <MovieCardDetails key={movie.id} movie={movie as IPartCollection} type="tv" isFavorites />
+                    <MovieCardDetails key={movie.id} movie={movie as IPartCollection} type="tv" isFavorites aspectRatio="6/2.8" />
                 ))
                 }
             </section>

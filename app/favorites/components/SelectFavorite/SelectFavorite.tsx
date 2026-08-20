@@ -2,13 +2,14 @@
 "use client"
 import { useEffect, useState } from "react"
 import styles from "./styles.module.scss"
-import { useRouter, useSearchParams } from "next/navigation"
+import { useRouter, useSearchParams, usePathname } from "next/navigation"
 import { Suspense } from "react"
 
 function SelectFavoriteContent() {
     const [option, setOption] = useState(false)
     const searchParams = useSearchParams()
     const router = useRouter()
+    const pathname = usePathname()
 
     useEffect(() => {
         const paramType = searchParams.get("type")
@@ -21,7 +22,7 @@ function SelectFavoriteContent() {
         setOption(prev => !prev)
         const paramPage = searchParams.get("page")
         if (paramPage) {
-            router.push(option ? `?type=movies&page=${paramPage}` : `?type=series&page=${paramPage}`)
+            router.push(`${pathname}?type=${option ? "movies" : "series"}&page=${paramPage}`)
         }
     }
 
