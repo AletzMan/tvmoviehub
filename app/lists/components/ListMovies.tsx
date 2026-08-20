@@ -1,22 +1,31 @@
+"use client"
+
 import styles from "./styles.module.scss"
-import { GetLists } from "@/app/services/fetchData"
-import { cookies } from "next/headers"
 import { Pagination } from "@/app/components/Pagination/Pagination"
 import { IResponseListMovie } from "@/app/interfaces/list"
 import { ListCard } from "./ListCard"
 
 
-export default async function ListMovies({ searchParams }: { searchParams: { type: string, page: string } }) {
-    const cookie = (await cookies()).get("session_tvmoviehub")?.value
+const cardColors = [
+    'var(--primary-500)',
+    'var(--info)',
+    'var(--danger)',
+    'var(--warning)',
+    'var(--success)'
+]
 
-    const lists: IResponseListMovie | null = await GetLists(cookie as string, searchParams)
+interface Props {
+    lists: IResponseListMovie | null
+    searchParams: { type: string, page: string }
+}
 
+export default function ListMovies({ lists, searchParams }: Props) {
     return (
         <div className={styles.lists}>
             {lists && lists.results.length > 0 &&
                 <section className={`${styles.lists_section}  `}>
-                    {lists?.results.map(list => (
-                        <ListCard key={list.id} list={list} />
+                    {lists?.results.map((list, index) => (
+                        <ListCard key={list.id} list={list} color={cardColors[index % cardColors.length]} />
                     ))
                     }
                 </section>
