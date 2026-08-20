@@ -96,7 +96,7 @@ export function PeopleIcon({ className }: Props) {
 }
 
 export function MovieIcon({ className }: Props) {
-    return <Icon icon="mdi:movie" className={className} />
+    return <Icon icon="simple-line-icons:film" className={className} />
 }
 
 export function SerieIcon({ className }: Props) {
