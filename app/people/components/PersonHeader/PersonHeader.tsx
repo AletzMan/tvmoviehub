@@ -1,8 +1,6 @@
 "use client"
-import { useRef } from "react"
 import Image from "next/image"
 import styles from "./person.module.scss"
-import { applyGradientFromImage } from "@/app/utils/helpers"
 import { BASE_URL_IMG } from "@/app/utils/const"
 import { IPeopleDetails } from "@/app/interfaces/people"
 
