@@ -56,223 +56,328 @@ const optionsDELETE = {
 }
 
 export const GetNowPlaying = async () => {
-	const url = `${API_URL_BASE}${NOW_PLAYING}?language=${LANGUAGE_MX}&region=MX`
-	const response = await fetch(url, optionsGET)
-	const data = (await response.json()) as IMovieResponse
-	const numberRandoms: number[] = []
+	try {
+		const url = `${API_URL_BASE}${NOW_PLAYING}?language=${LANGUAGE_MX}&region=MX`
+		const response = await fetch(url, optionsGET)
 
-	do {
-		const random = Math.floor(Math.random() * 20)
-		if (!numberRandoms.includes(random)) {
-			numberRandoms.push(random)
+		if (!response.ok) {
+			return []
 		}
-	} while (numberRandoms.length < 10)
 
-	const results: IMovie[] = []
+		const data = (await response.json()) as IMovieResponse
+		const numberRandoms: number[] = []
 
-	data.results.forEach((movie, index) => {
-		if (numberRandoms.includes(index)) {
-			results.push(movie)
-		}
-	})
+		do {
+			const random = Math.floor(Math.random() * 20)
+			if (!numberRandoms.includes(random)) {
+				numberRandoms.push(random)
+			}
+		} while (numberRandoms.length < 10)
 
-	return results
+		const results: IMovie[] = []
+
+		data?.results?.forEach((movie, index) => {
+			if (numberRandoms.includes(index)) {
+				results.push(movie)
+			}
+		})
+
+		return results
+	} catch {
+		return []
+	}
 }
 
 export const GetPopularMovies = async (page: number) => {
-	const url = `${API_URL_BASE}/movie/popular?language=${LANGUAGE_MX}&region=MX&page=${page}`
-	const response = await fetch(url, optionsGET)
-	const data = (await response.json()) as IMovieResponse
-	return data
+	try {
+		const url = `${API_URL_BASE}/movie/popular?language=${LANGUAGE_MX}&region=MX&page=${page}`
+		const response = await fetch(url, optionsGET)
+
+		if (!response.ok) {
+			return { page: 0, results: [], total_pages: 0, total_results: 0 }
+		}
+
+		const data = (await response.json()) as IMovieResponse
+		return data
+	} catch {
+		return { page: 0, results: [], total_pages: 0, total_results: 0 }
+	}
 }
 
 export const GetTopRatedMovies = async (page: number) => {
-	const url = `${API_URL_BASE}/movie/top_rated?language=${LANGUAGE_MX}&region=MX&page=${page}`
-	const response = await fetch(url, optionsGET)
-	const data = (await response.json()) as IMovieResponse
-	return data
+	try {
+		const url = `${API_URL_BASE}/movie/top_rated?language=${LANGUAGE_MX}&region=MX&page=${page}`
+		const response = await fetch(url, optionsGET)
+
+		if (!response.ok) {
+			return { page: 0, results: [], total_pages: 0, total_results: 0 }
+		}
+
+		const data = (await response.json()) as IMovieResponse
+		return data
+	} catch {
+		return { page: 0, results: [], total_pages: 0, total_results: 0 }
+	}
 }
 
 export const GetUpcomingMovies = async (page: number) => {
-	const url = `${API_URL_BASE}/movie/upcoming?language=${LANGUAGE_MX}&region=MX&page=${page}`
-	const response = await fetch(url, optionsGET)
-	const data = (await response.json()) as IMovieResponse
-	return data
+	try {
+		const url = `${API_URL_BASE}/movie/upcoming?language=${LANGUAGE_MX}&region=MX&page=${page}`
+		const response = await fetch(url, optionsGET)
+
+		if (!response.ok) {
+			return { page: 0, results: [], total_pages: 0, total_results: 0 }
+		}
+
+		const data = (await response.json()) as IMovieResponse
+		return data
+	} catch {
+		return { page: 0, results: [], total_pages: 0, total_results: 0 }
+	}
 }
 
 export const GetSearchMovies = async (type: 'movie' | 'tv' | 'person' | 'multi', queryParams: IQueryParamasMovies) => {
-	const params = Object.entries(queryParams)
-	let stringParams = ""
-	params.forEach((param, index) => {
-		stringParams += `${"&"}${param[0]}=${param[1]}`
-	})
+	try {
+		const params = Object.entries(queryParams)
+		let stringParams = ""
+		params?.forEach((param, index) => {
+			stringParams += `${"&"}${param[0]}=${param[1]}`
+		})
 
-	const url = `${API_URL_BASE}/search/${type}?language=${LANGUAGE_MX}&region=MX${stringParams}`
-	const response = await fetch(url, optionsGET)
+		const url = `${API_URL_BASE}/search/${type}?language=${LANGUAGE_MX}&region=MX${stringParams}`
+		const response = await fetch(url, optionsGET)
 
-	let data: IMovieResponse = { page: 0, results: [], total_pages: 0, total_results: 0 }
-	if (response.status === 400) {
+		let data: IMovieResponse = { page: 0, results: [], total_pages: 0, total_results: 0 }
+		if (response.status === 400) {
+			return data
+		} else {
+			data = (await response.json()) as IMovieResponse
+		}
 		return data
-	} else {
-		data = (await response.json()) as IMovieResponse
+	} catch {
+		return { page: 0, results: [], total_pages: 0, total_results: 0 }
 	}
-	return data
 }
 
 export const GetDiscoverMovies = async (queryParams: IQueryParamasMovies) => {
-	const params = Object.entries(queryParams)
-	let stringParams = ""
-	params.forEach((param, index) => {
-		stringParams += `${"&"}${param[0]}=${param[1]}`
-	})
+	try {
+		const params = Object.entries(queryParams)
+		let stringParams = ""
+		params?.forEach((param, index) => {
+			stringParams += `${"&"}${param[0]}=${param[1]}`
+		})
 
-	const url = `${API_URL_BASE}/discover/movie?language=${LANGUAGE_MX}&region=MX&certification_country=MX${stringParams}`
-	const response = await fetch(url, optionsGET)
+		const url = `${API_URL_BASE}/discover/movie?language=${LANGUAGE_MX}&region=MX&certification_country=MX${stringParams}`
+		const response = await fetch(url, optionsGET)
 
-	let data: IMovieResponse = { page: 0, results: [], total_pages: 0, total_results: 0 }
+		let data: IMovieResponse = { page: 0, results: [], total_pages: 0, total_results: 0 }
 
-	if (response.status === 200) {
-		data = (await response.json()) as IMovieResponse
-	} else {
+		if (response.status === 200) {
+			data = (await response.json()) as IMovieResponse
+		} else {
+			return data
+		}
 		return data
+	} catch {
+		return { page: 0, results: [], total_pages: 0, total_results: 0 }
 	}
-	return data
 }
 
 
 export const GetSeriesAiringToday = async () => {
-	const url = `${API_URL_BASE}/tv/airing_today?language=${LANGUAGE_MX}&region=MX`
-	const response = await fetch(url, optionsGET)
-	const data = (await response.json()) as IAiringTodayResponse
-	const numberRandoms: number[] = []
+	try {
+		const url = `${API_URL_BASE}/tv/airing_today?language=${LANGUAGE_MX}&region=MX`
+		const response = await fetch(url, optionsGET)
 
-	do {
-		const random = Math.floor(Math.random() * 20)
-		if (!numberRandoms.includes(random)) {
-			numberRandoms.push(random)
+		if (!response.ok) {
+			return []
 		}
-	} while (numberRandoms.length < 10)
 
-	const results: ISerie[] = []
+		const data = (await response.json()) as IAiringTodayResponse
+		const numberRandoms: number[] = []
 
-	data.results.forEach((serie, index) => {
-		if (numberRandoms.includes(index)) {
-			results.push(serie)
-		}
-	})
+		do {
+			const random = Math.floor(Math.random() * 20)
+			if (!numberRandoms.includes(random)) {
+				numberRandoms.push(random)
+			}
+		} while (numberRandoms.length < 10)
 
-	return results
+		const results: ISerie[] = []
+
+		data?.results?.forEach((serie, index) => {
+			if (numberRandoms.includes(index)) {
+				results.push(serie)
+			}
+		})
+
+		return results
+	} catch {
+		return []
+	}
 }
 
 export const GetTopRatedSeries = async (page: number) => {
-	const url = `${API_URL_BASE}/tv/top_rated?language=${LANGUAGE_MX}&region=MX&page=${page}`
-	const response = await fetch(url, optionsGET)
-	const data = (await response.json()) as ISerieResponse
-	return data
+	try {
+		const url = `${API_URL_BASE}/tv/top_rated?language=${LANGUAGE_MX}&region=MX&page=${page}`
+		const response = await fetch(url, optionsGET)
+
+		if (!response.ok) {
+			return { page: 0, results: [], total_pages: 0, total_results: 0 }
+		}
+
+		const data = (await response.json()) as ISerieResponse
+		return data
+	} catch {
+		return { page: 0, results: [], total_pages: 0, total_results: 0 }
+	}
 }
 
 export const GetPopularSeries = async (page: number) => {
-	const url = `${API_URL_BASE}/tv/popular?language=${LANGUAGE_MX}&region=MX&page=${page}`
-	const response = await fetch(url, optionsGET)
-	const data = (await response.json()) as ISerieResponse
-	return data
+	try {
+		const url = `${API_URL_BASE}/tv/popular?language=${LANGUAGE_MX}&region=MX&page=${page}`
+		const response = await fetch(url, optionsGET)
+
+		if (!response.ok) {
+			return { page: 0, results: [], total_pages: 0, total_results: 0 }
+		}
+
+		const data = (await response.json()) as ISerieResponse
+		return data
+	} catch {
+		return { page: 0, results: [], total_pages: 0, total_results: 0 }
+	}
 }
 
 
 export const GetOnTheAirSeries = async (page: number) => {
-	const url = `${API_URL_BASE}/tv/on_the_air?language=${LANGUAGE_MX}&region=MX&page=${page}`
-	const response = await fetch(url, optionsGET)
-	const data = (await response.json()) as ISerieResponse
-	return data
+	try {
+		const url = `${API_URL_BASE}/tv/on_the_air?language=${LANGUAGE_MX}&region=MX&page=${page}`
+		const response = await fetch(url, optionsGET)
+
+		if (!response.ok) {
+			return { page: 0, results: [], total_pages: 0, total_results: 0 }
+		}
+
+		const data = (await response.json()) as ISerieResponse
+		return data
+	} catch {
+		return { page: 0, results: [], total_pages: 0, total_results: 0 }
+	}
 }
 
 
 export const GetDiscoverSeries = async (queryParams: IQueryParamasSeries) => {
-	const params = Object.entries(queryParams)
-	let stringParams = ""
-	params.forEach((param, index) => {
-		stringParams += `${"&"}${param[0]}=${param[1]}`
-	})
+	try {
+		const params = Object.entries(queryParams)
+		let stringParams = ""
+		params?.forEach((param, index) => {
+			stringParams += `${"&"}${param[0]}=${param[1]}`
+		})
 
-	const url = `${API_URL_BASE}/discover/tv?language=${LANGUAGE_MX}&region=MX${stringParams}`
-	const response = await fetch(url, optionsGET)
+		const url = `${API_URL_BASE}/discover/tv?language=${LANGUAGE_MX}&region=MX${stringParams}`
+		const response = await fetch(url, optionsGET)
 
-	let data: ISerieResponse = { page: 0, results: [], total_pages: 0, total_results: 0 }
-	if (response.status === 400) {
+		let data: ISerieResponse = { page: 0, results: [], total_pages: 0, total_results: 0 }
+		if (response.status === 400) {
+			return data
+		} else {
+			data = (await response.json()) as ISerieResponse
+		}
+
 		return data
-	} else {
-		data = (await response.json()) as ISerieResponse
+	} catch {
+		return { page: 0, results: [], total_pages: 0, total_results: 0 }
 	}
-
-	return data
 }
 
 export const GetSearchSeries = async (queryParams: IQueryParamasSeries) => {
-	const params = Object.entries(queryParams)
-	let stringParams = ""
-	params.forEach((param, index) => {
-		stringParams += `${"&"}${param[0]}=${param[1]}`
-	})
+	try {
+		const params = Object.entries(queryParams)
+		let stringParams = ""
+		params?.forEach((param, index) => {
+			stringParams += `${"&"}${param[0]}=${param[1]}`
+		})
 
-	const url = `${API_URL_BASE}/search/tv?language=${LANGUAGE_MX}&region=MX${stringParams}`
-	const response = await fetch(url, optionsGET)
+		const url = `${API_URL_BASE}/search/tv?language=${LANGUAGE_MX}&region=MX${stringParams}`
+		const response = await fetch(url, optionsGET)
 
-	let data: ISerieResponse = { page: 0, results: [], total_pages: 0, total_results: 0 }
-	if (response.status === 400) {
+		let data: ISerieResponse = { page: 0, results: [], total_pages: 0, total_results: 0 }
+		if (response.status === 400) {
+			return data
+		} else {
+			data = (await response.json())
+		}
+
 		return data
-	} else {
-		data = (await response.json())
+	} catch {
+		return { page: 0, results: [], total_pages: 0, total_results: 0 }
 	}
-
-	return data
 }
 
 export const GetSearchPeople = async (queryParams: IQueryParamasSeries) => {
-	const params = Object.entries(queryParams)
-	let stringParams = ""
-	params.forEach((param, index) => {
-		stringParams += `${"&"}${param[0]}=${param[1]}`
-	})
+	try {
+		const params = Object.entries(queryParams)
+		let stringParams = ""
+		params?.forEach((param, index) => {
+			stringParams += `${"&"}${param[0]}=${param[1]}`
+		})
 
-	const url = `${API_URL_BASE}/search/person?language=${LANGUAGE_MX}&include_adult=false${stringParams}`
-	const response = await fetch(url, optionsGET)
+		const url = `${API_URL_BASE}/search/person?language=${LANGUAGE_MX}&include_adult=false${stringParams}`
+		const response = await fetch(url, optionsGET)
 
-	let data: IPeopleResponse = { page: 0, results: [], total_pages: 0, total_results: 0 }
-	if (response.status === 400) {
+		let data: IPeopleResponse = { page: 0, results: [], total_pages: 0, total_results: 0 }
+		if (response.status === 400) {
+			return data
+		} else {
+			data = (await response.json())
+		}
+
 		return data
-	} else {
-		data = (await response.json())
+	} catch {
+		return { page: 0, results: [], total_pages: 0, total_results: 0 }
 	}
-
-	return data
 }
 
 
 export const GetSearchMulti = async (queryParams: IQueryParamasSeries) => {
-	const params = Object.entries(queryParams)
-	let stringParams = ""
-	params.forEach((param, index) => {
-		stringParams += `${"&"}${param[0]}=${param[1]}`
-	})
+	try {
+		const params = Object.entries(queryParams)
+		let stringParams = ""
+		params?.forEach((param, index) => {
+			stringParams += `${"&"}${param[0]}=${param[1]}`
+		})
 
-	const url = `${API_URL_BASE}/search/multi?language=${LANGUAGE_MX}&include_adult=false${stringParams}`
-	const response = await fetch(url, optionsGET)
+		const url = `${API_URL_BASE}/search/multi?language=${LANGUAGE_MX}&include_adult=false${stringParams}`
+		const response = await fetch(url, optionsGET)
 
-	let data: IMultiResponse = { page: 0, results: [], total_pages: 0, total_results: 0 }
-	if (response.status === 200) {
-		data = (await response.json())
+		let data: IMultiResponse = { page: 0, results: [], total_pages: 0, total_results: 0 }
+		if (response.status === 200) {
+			data = (await response.json())
+		}
+
+		return data
+	} catch {
+		return { page: 0, results: [], total_pages: 0, total_results: 0 }
 	}
-
-	return data
 }
 
 
 
 export const GetPeoplePopular = async (page: number) => {
-	const url = `${API_URL_BASE}/person/popular?language=${LANGUAGE_MX}&page=${page}`
-	const response = await fetch(url, optionsGET)
-	const data = (await response.json()) as IPeopleResponse
-	return data
+	try {
+		const url = `${API_URL_BASE}/person/popular?language=${LANGUAGE_MX}&page=${page}`
+		const response = await fetch(url, optionsGET)
+
+		if (!response.ok) {
+			return { page: 0, results: [], total_pages: 0, total_results: 0 }
+		}
+
+		const data = (await response.json()) as IPeopleResponse
+		return data
+	} catch {
+		return { page: 0, results: [], total_pages: 0, total_results: 0 }
+	}
 }
 
 export const GetMovieDetails = async (idMovie: string) => {
@@ -645,50 +750,58 @@ export const AddRemoveFavorite = async (session_id: string, type: 'movie' | 'tv'
 
 
 export const GetLists = async (session_id: string, queryParams: Object) => {
-	const params = Object.entries(queryParams)
-	let stringParams = ""
-	params.forEach((param, index) => {
-		stringParams += `${"&"}${param[0]}=${param[1]}`
-	})
-	const url = `${API_URL_BASE}/account/18482247/lists?session_id=${session_id}${stringParams}`
-	const response = await fetch(url, {
-		method: "GET",
-		headers: {
-			accept: "application/json",
-			Authorization: `Bearer ${API_KEY}`,
-		},
-		next: { revalidate: 10000, tags: ['listMovies'] },
-	})
-	let data: IResponseListMovie | null = null
-	if (response.status === 200) {
-		return (await response.json()) as IResponseListMovie
-	}
+	try {
+		const params = Object.entries(queryParams)
+		let stringParams = ""
+		params?.forEach((param, index) => {
+			stringParams += `${"&"}${param[0]}=${param[1]}`
+		})
+		const url = `${API_URL_BASE}/account/18482247/lists?session_id=${session_id}${stringParams}`
+		const response = await fetch(url, {
+			method: "GET",
+			headers: {
+				accept: "application/json",
+				Authorization: `Bearer ${API_KEY}`,
+			},
+			next: { revalidate: 10000, tags: ['listMovies'] },
+		})
+		let data: IResponseListMovie | null = null
+		if (response.status === 200) {
+			return (await response.json()) as IResponseListMovie
+		}
 
-	return data
+		return data
+	} catch {
+		return null
+	}
 }
 
 
 export const GetRated = async (session_id: string, queryParams: Object, media_type: 'movies' | 'tv') => {
-	const params = Object.entries(queryParams)
-	let stringParams = ""
-	params.forEach((param, index) => {
-		stringParams += `${"&"}${param[0]}=${param[1]}`
-	})
-	const url = `${API_URL_BASE}/account/18482247/rated/${media_type}?session_id=${session_id}${stringParams}`
-	const response = await fetch(url, {
-		method: "GET",
-		headers: {
-			accept: "application/json",
-			Authorization: `Bearer ${API_KEY}`,
-		},
-		next: { revalidate: 10000, tags: ['listMovies'] },
-	})
-	let data: IMultiResponse | null = null
-	if (response.status === 200) {
-		return (await response.json()) as IMultiResponse
-	}
+	try {
+		const params = Object.entries(queryParams)
+		let stringParams = ""
+		params?.forEach((param, index) => {
+			stringParams += `${"&"}${param[0]}=${param[1]}`
+		})
+		const url = `${API_URL_BASE}/account/18482247/rated/${media_type}?session_id=${session_id}${stringParams}`
+		const response = await fetch(url, {
+			method: "GET",
+			headers: {
+				accept: "application/json",
+				Authorization: `Bearer ${API_KEY}`,
+			},
+			next: { revalidate: 10000, tags: ['listMovies'] },
+		})
+		let data: IMultiResponse | null = null
+		if (response.status === 200) {
+			return (await response.json()) as IMultiResponse
+		}
 
-	return data
+		return data
+	} catch {
+		return null
+	}
 }
 
 export const CreateList = async (session_id: string, name: string, description: string) => {

@@ -11,7 +11,7 @@ import { GetNowPlaying, GetPeoplePopular, GetPopularMovies, GetTopRatedMovies } 
 
 export default async function Home() {
   const data: IMovie[] = await GetNowPlaying()
-  const dataPeople: IPeopleResponse = await GetPeoplePopular(1)
+  const dataPeople: IPeopleResponse = await GetPeoplePopular(1) || { results: [] }
   const popularMovies: IMovieResponse = (await GetPopularMovies(1)) || { results: [] }
   const ratingMovies: IMovieResponse = (await GetTopRatedMovies(1)) || { results: [] }
 

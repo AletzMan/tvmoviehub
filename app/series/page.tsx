@@ -18,11 +18,11 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ p
     const params = await searchParams
     const page = params.page || 1
 
-    const popularSeries: ISerieResponse = await GetPopularSeries(page)
+    const popularSeries: ISerieResponse = await GetPopularSeries(page) || { results: [] }
 
-    const ratingSeries: ISerieResponse = await GetTopRatedSeries(page)
+    const ratingSeries: ISerieResponse = await GetTopRatedSeries(page) || { results: [] }
 
-    const upcomingSeries: ISerieResponse = await GetOnTheAirSeries(page)
+    const upcomingSeries: ISerieResponse = await GetOnTheAirSeries(page) || { results: [] }
 
     const dateStart = FormattedDateSearch(new Date(Date.UTC(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() + 7)).toISOString())
     const dateEnd = FormattedDateSearch(new Date(Date.UTC(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() + 14)).toISOString())
@@ -39,7 +39,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ p
                         {
                             ratingSeries?.results?.map((serie, index) => (
                                 <SerieCard key={serie.id} serie={serie as ISerie} top={index + 1} />
-                            ))
+                            )) || []
                         }
                     </>
                 </MovieSliderGeneral>
@@ -48,7 +48,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ p
                         {
                             popularSeries?.results?.map((serie, index) => (
                                 <SerieCard key={serie.id} serie={serie as ISerie} top={index + 1} />
-                            ))
+                            )) || []
                         }
                     </>
                 </MovieSliderGeneral>
@@ -57,7 +57,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ p
                         {
                             upcomingSeries?.results?.map((serie, index) => (
                                 <SerieCardUpcoming key={serie.id} serie={serie as ISerie} />
-                            ))
+                            )) || []
                         }
                     </>
                 </MovieSliderGeneral>
