@@ -4,6 +4,7 @@ import { MediaCard } from "../MediaCard/MediaCard"
 import { IListItem } from "@/app/interfaces/list"
 import { useDialogAlert } from "@/app/services/store"
 import { DeleteIcon } from "@/app/utils/svg"
+import styles from "./styles.module.scss"
 
 interface Props {
     movie: IListItem
@@ -22,14 +23,14 @@ export function MovieCardList({ movie, list_id, aspectRatio }: Props) {
 
     const deleteButton = (
         <button
-            className="delete"
+            className={styles.delete}
             title="Eliminar de la lista"
             onClick={(e) => {
                 e.stopPropagation()
                 handleDeleteItem()
             }}
         >
-            <DeleteIcon className="delete_icon" />
+            <DeleteIcon className={styles.delete_icon} />
         </button>
     )
 

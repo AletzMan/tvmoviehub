@@ -137,6 +137,9 @@
 }
 
 .delete {
+    position: absolute;
+    top: 0.5em;
+    right: 0.5em;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -149,11 +152,12 @@
     transition: all 0.15s ease-in-out;
 
     &:hover .delete_icon {
-        color: var(--primary-500);
+        color: var(--danger);
     }
 
     &_icon {
         color: var(--text);
+        font-size: 1.25em;
         transition: all 0.15s ease-in-out;
     }
 }
