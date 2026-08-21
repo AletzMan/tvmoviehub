@@ -296,6 +296,8 @@ export const CategoriesSeries = [
 
 
 export const BASE_URL_IMG = 'https://image.tmdb.org/t/p/original'
+export const BASE_URL_MEDIA = 'https://media.themoviedb.org/t/p/original'
+
 export const BASE_URL_IMG_CUSTOM = 'https://image.tmdb.org/t/p/'
 
 export const URL_IMAGE_NOTPHOTO = "https://raw.githubusercontent.com/AletzMan/ImagesStorage/refs/heads/main/film_data_hub/not_photo.png"

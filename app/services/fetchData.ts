@@ -7,6 +7,7 @@ import { IResponseList, IResponseCreateMovie, IResponseListMovie, IItemStatus, I
 import { IAccountStates, ICollectionDetails, IExternalIDs, IMovie, IMovieDetails, IMovieVideos, IQueryParamasMovies } from "../interfaces/movie"
 import { IMultiResponse } from "../interfaces/multi"
 import { IPeopleDetails, IPeopleImages, IFindByExternalID } from "../interfaces/people"
+import { IWatchProvidersRegion } from "../interfaces/provider"
 import { IAiringTodayResponse, IMovieResponse, INowPlayingResponse, IPeopleResponse, IRecommendationResponse, IResponseRating, ISerieResponse } from "../interfaces/responses"
 import { IQueryParamasSeries, ISeasonDetails, ISerie, ISerieDetails } from "../interfaces/serie"
 
@@ -183,6 +184,27 @@ export const GetDiscoverMovies = async (queryParams: IQueryParamasMovies) => {
 	}
 }
 
+type MediaType = "movie" | "tv"
+
+export const GetWatchProviders = async (
+	id: number | string,
+	type: MediaType
+): Promise<IWatchProvidersRegion | null> => {
+	try {
+		const url = `${API_URL_BASE}/${type}/${id}/watch/providers`
+		const response = await fetch(url, optionsGET)
+
+		if (!response.ok) {
+			return null
+		}
+
+		const data = await response.json()
+
+		return data.results?.MX ?? null
+	} catch {
+		return null
+	}
+}
 
 export const GetSeriesAiringToday = async () => {
 	try {
