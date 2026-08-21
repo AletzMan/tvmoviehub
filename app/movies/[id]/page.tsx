@@ -1,20 +1,20 @@
 import { ICollectionDetails, IMovieDetails } from "@/app/interfaces/movie"
 import styles from "./detailsmovie.module.scss"
 import Image from "next/image"
-import { BASE_URL_IMG, URL_IMAGE_NOTCOVER, countryFlags } from "@/app/utils/const"
+import { BASE_URL_IMG, countryFlags } from "@/app/utils/const"
 import { ConvertMinutesToHours, currencyFormatter } from "@/app/utils/helpers"
-import { DateIcon, StarIcon, TimeIcon, TrilerIcon } from "@/app/utils/svg"
+import { StarIcon } from "@/app/utils/svg"
 import { SliderCrew } from "./components/SliderCrew/SliderCrew"
 import { MovieSlider } from "@/app/components/MovieSlider/MovieSlider"
-import { GetCollectionsDetails, GetMovieDetails, GetMovieImages } from "@/app/services/fetchData"
+import { GetCollectionsDetails, GetMovieDetails, GetMovieImages, GetWatchProviders } from "@/app/services/fetchData"
 import { Crew } from "@/app/components/Crew/Crew"
 import { NotResults } from "@/app/components/NotResults/NotResults"
 import { IImages } from "@/app/interfaces/image"
 import { SectionImages } from "./components/SectionImages/SectionImages"
 import { SectionTags } from "./components/SectionTags/SectionTags"
-import { Button } from "@/app/components/Button/Button"
 import { FavoriteButton } from "@/app/components/FavoriteButton/FavoriteButton"
 import { ButtonTrailer } from "@/app/components/ButtonTrailer/ButtonTrailer"
+import { WatchProviders } from "./components/WatchProviders/WatchProviders"
 
 export default async function Page(params: { params: Promise<{ id: string }>, searchParams: Promise<{}> }) {
 
@@ -28,111 +28,299 @@ export default async function Page(params: { params: Promise<{ id: string }>, se
 
     const images: IImages | null = await GetMovieImages((await params.params).id)
 
+
     //const keywords: IKeywords | null = await GetMovieKeywords(params.params.id)
 
     const id = await params.params
 
+    const providers = await GetWatchProviders(id.id, "movie")
+
     return (
         <section className={`${styles.section} scrollBarStyle`}>
-            {data ?
+            {data ? (
                 <>
-                    <article className={styles.movie}>
-                        <Image className={styles.movie_image} overrideSrc={URL_IMAGE_NOTCOVER} src={BASE_URL_IMG.concat(data.backdrop_path || "")} alt={`Imagen de fondo de ${data.title}`} width={1150} height={700} />
-                        <div className={styles.movie_shadow}></div>
-                        <div className={styles.movie_header}>
-                            <h2 className={styles.movie_title}>{data.title}</h2>
-                            <h3 className={styles.movie_subtitle}>{`(${data.original_title})`}</h3>
-                            <div className={styles.movie_country}>
-                                <Image className={styles.movie_countryFlag} src={countryFlags.find(country => country.code === data.origin_country[0])?.flag || ""} width={26} height={16} alt="" />
-                                <span className={styles.movie_countryName}>{countryFlags.find(country => country.code === data.origin_country[0])?.country}</span>
-                            </div>
+                    <section className={styles.hero}>
+                        <div className={styles.hero_backdrop}>
+                            <Image
+                                src={BASE_URL_IMG.concat(data.backdrop_path || "")}
+                                alt=""
+                                fill
+                                priority
+                                className={styles.hero_backdropImage}
+                            />
                         </div>
-                        <div className={styles.movie_details}>
-                            <Image className={styles.movie_poster} src={BASE_URL_IMG.concat(data.poster_path || "")} alt={`Imagen de fondo de ${data.title}`} width={150} height={220} />
-                            <div className={styles.movie_info} >
-                                <p className={styles.movie_tagline}>{data.tagline}</p>
-                                <div className={styles.movie_genres}>
-                                    {
-                                        data.genres.map(genre => (
-                                            <span key={genre.id} className={styles.movie_genre}>{genre.name}</span>
-                                        ))
-                                    }
+
+                        <div className={styles.hero_poster}>
+                            <Image
+                                src={BASE_URL_IMG.concat(data.poster_path || "")}
+                                alt={`Poster de ${data.title}`}
+                                width={360}
+                                height={540}
+                                priority
+                                className={styles.hero_posterImage}
+                            />
+                        </div>
+
+                        <div className={styles.hero_content}>
+                            <div className={styles.hero_heading}>
+                                <h1>{data.title}</h1>
+
+                                {data.original_title !== data.title && (
+                                    <span>{data.original_title}</span>
+                                )}
+                            </div>
+
+                            <div className={styles.hero_meta}>
+                                <span>
+                                    {new Date(data.release_date).getFullYear()}
+                                </span>
+
+                                <span className={styles.hero_dot}>•</span>
+
+                                <span>
+                                    {ConvertMinutesToHours(data.runtime)}
+                                </span>
+
+                                <span className={styles.hero_dot}>•</span>
+
+                                <div className={styles.hero_genres}>
+                                    {data.genres.slice(0, 3).map(genre => (
+                                        <span key={genre.id}>
+                                            {genre.name}
+                                        </span>
+                                    ))}
                                 </div>
 
-                                <div className={styles.movie_timeYear}>
-                                    <span className={styles.movie_runtime}><TimeIcon className={styles.movie_icon} />{ConvertMinutesToHours(data.runtime)}</span>
-                                    <p className={styles.movie_year}><DateIcon className={styles.movie_iconDate} />{new Date(data.release_date).getFullYear()}</p>
-                                    <span className={styles.movie_average}><StarIcon className={styles.movie_iconDate} />{data.vote_average.toFixed(1)}</span>
-                                </div>
-                                <div className={styles.movie_buttons}>
-                                    <ButtonTrailer id={data.id} type="movie" />
-                                    <FavoriteButton id={data.id} title={data.title} type="movie" />
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-                    <div className={styles.description}>
-                        <div className={styles.description_crew}>
-                            {images && <SectionImages images={images} id={data.id} type="movie" />}
-                            <h4 className={styles.details_title}>SINOPSIS</h4>
-                            <article className={styles.details}>
-                                <p className={styles.details_overview}>{data.overview}</p>
-                            </article>
-                            {data.credits && <SliderCrew credits={data.credits} type="cast" title="REPARTO" />}
-                            <div className={`${styles.description_data} ${styles.description_dataMobile}`}>
-                                <div className={styles.movie_companies}>
-                                    {
-                                        data.production_companies.filter(company => company.logo_path !== null).map(company => (
-                                            <div className={styles.movie_company} key={company.id} >
-                                                <Image className={styles.movie_companyLogo} src={BASE_URL_IMG.concat(company.logo_path || "")} width={60} height={30} alt={company.name} />
-                                                <span className={styles.movie_companyName}>{company.name}</span>
-                                            </div>
-                                        ))
-                                    }
-                                </div>
-                                {data.credits && <Crew credits={data.credits} />}
-                                <hr className="separator" />
-                                <div className={styles.financial}>
-                                    <label className={styles.financial_label}>Presupuesto:</label>
-                                    <span className={styles.financial_number}>{currencyFormatter.format(data.budget)}</span>
-                                    <label className={styles.financial_label}>Ingresos:</label>
-                                    <span className={styles.financial_number}>{currencyFormatter.format(data.revenue)}</span>
-                                </div>
-                                {data.keywords && <SectionTags keywords={data.keywords} />}
-                            </div>
-                            <hr className="separator" />
-                            {(collections && collections?.parts) && <MovieSlider parts={collections?.parts?.filter(movie => movie.id.toString() !== id.id)} title="DE LA MISMA COLECCIÓN" />}
-                            {(data.recommendations && data.recommendations.results.length > 0) && <MovieSlider parts={data.recommendations.results} title="RECOMENDACIONES" />}
-                        </div>
-                        <div className={`${styles.description_data} ${styles.description_dataDesktop}`}>
-                            <div className={styles.movie_companies}>
-                                {
-                                    data.production_companies.filter(company => company.logo_path !== null).map(company => (
-                                        <div className={styles.movie_company} key={company.id} >
-                                            <Image className={styles.movie_companyLogo} src={BASE_URL_IMG.concat(company.logo_path || "")} width={60} height={30} alt={company.name} />
-                                            <span className={styles.movie_companyName}>{company.name}</span>
+                                {data.origin_country?.[0] && (
+                                    <>
+                                        <span className={styles.hero_dot}>•</span>
+
+                                        <div className={styles.hero_country}>
+                                            <Image
+                                                src={
+                                                    countryFlags.find(
+                                                        country =>
+                                                            country.code ===
+                                                            data.origin_country[0]
+                                                    )?.flag || ""
+                                                }
+                                                width={22}
+                                                height={14}
+                                                alt=""
+                                            />
+
+                                            <span>
+                                                {
+                                                    countryFlags.find(
+                                                        country =>
+                                                            country.code ===
+                                                            data.origin_country[0]
+                                                    )?.country
+                                                }
+                                            </span>
                                         </div>
-                                    ))
-                                }
+                                    </>
+                                )}
                             </div>
-                            {data.credits && <Crew credits={data.credits} />}
-                            <hr className="separator" />
-                            <div className={styles.financial}>
-                                <label className={styles.financial_label}>Presupuesto:</label>
-                                <span className={styles.financial_number}>{currencyFormatter.format(data.budget)}</span>
-                                <label className={styles.financial_label}>Ingresos:</label>
-                                <span className={styles.financial_number}>{currencyFormatter.format(data.revenue)}</span>
-                            </div>
-                            {data.keywords && <SectionTags keywords={data.keywords} />}
-                        </div>
-                    </div>
-                </>
-                :
-                <NotResults id={(await params.params).id} type="movie" />
-            }
 
+                            <div className={styles.hero_rating}>
+                                <div className={styles.rating_score}>
+                                    <StarIcon />
+
+                                    <div>
+                                        <strong>
+                                            {data.vote_average.toFixed(1)}
+                                        </strong>
+                                        <span>/10</span>
+                                    </div>
+                                </div>
+
+                                <div className={styles.rating_votes}>
+                                    {data.vote_count.toLocaleString("es-MX")} votos
+                                </div>
+                            </div>
+
+                            {data.tagline && (
+                                <p className={styles.hero_tagline}>
+                                    {data.tagline}
+                                </p>
+                            )}
+
+                            <p className={styles.hero_overview}>
+                                {data.overview}
+                            </p>
+
+                            <div className={styles.hero_actions}>
+                                <ButtonTrailer
+                                    id={data.id}
+                                    type="movie"
+                                />
+
+                                <FavoriteButton
+                                    id={data.id}
+                                    title={data.title}
+                                    type="movie"
+                                />
+                            </div>
+                        </div>
+
+                        <aside className={styles.sidebar}>
+                            <div className={styles.sidebar_section}>
+                                <span className={styles.sidebar_label}>
+                                    Dirección
+                                </span>
+
+                                <div className={styles.sidebar_value}>
+                                    {data.credits?.crew
+                                        ?.filter(
+                                            person =>
+                                                person.job === "Director"
+                                        )
+                                        .map(person => person.name)
+                                        .join(", ") || "—"}
+                                </div>
+                            </div>
+
+                            <div className={styles.sidebar_section}>
+                                <span className={styles.sidebar_label}>
+                                    Producción
+                                </span>
+
+                                <div className={styles.sidebar_value}>
+                                    {data.credits?.crew
+                                        ?.filter(
+                                            person =>
+                                                person.job === "Producer"
+                                        )
+                                        .slice(0, 3)
+                                        .map(person => person.name)
+                                        .join(", ") || "—"}
+                                </div>
+                            </div>
+
+                            <div className={styles.sidebar_separator} />
+
+                            <div className={styles.sidebar_financial}>
+                                <div>
+                                    <span>Presupuesto</span>
+                                    <strong>
+                                        {data.budget
+                                            ? currencyFormatter.format(
+                                                data.budget
+                                            )
+                                            : "—"}
+                                    </strong>
+                                </div>
+
+                                <div>
+                                    <span>Ingresos</span>
+                                    <strong>
+                                        {data.revenue
+                                            ? currencyFormatter.format(
+                                                data.revenue
+                                            )
+                                            : "—"}
+                                    </strong>
+                                </div>
+                            </div>
+                        </aside>
+                    </section>
+
+                    <section className={styles.content}>
+                        <main className={styles.content_main}>
+                            {data.credits && (
+                                <section className={styles.block}>
+                                    <div className={styles.block_header}>
+                                        <h2>Reparto principal</h2>
+                                    </div>
+
+                                    <SliderCrew
+                                        credits={data.credits}
+                                        type="cast"
+                                        title=""
+                                    />
+                                </section>
+                            )}
+
+                            {images && (
+                                <SectionImages
+                                    images={images}
+                                    id={data.id}
+                                    type="movie"
+                                />
+                            )}
+
+                            {collections?.parts?.length ? (
+                                <MovieSlider
+                                    parts={collections.parts.filter(
+                                        movie =>
+                                            movie.id.toString() !== id.id
+                                    )}
+                                    title="DE LA MISMA COLECCIÓN"
+                                />
+                            ) : null}
+
+                            {data.recommendations?.results?.length ? (
+                                <MovieSlider
+                                    parts={data.recommendations.results}
+                                    title="RECOMENDACIONES PARA TI"
+                                />
+                            ) : null}
+                        </main>
+
+                        <aside className={styles.content_sidebar}>
+                            {data.keywords && (
+                                <section className={styles.sideBlock}>
+                                    <h3>Palabras clave</h3>
+
+                                    <SectionTags
+                                        keywords={data.keywords}
+                                    />
+                                </section>
+                            )}
+                            <WatchProviders providers={providers} />
+                            <section className={styles.sideBlock}>
+                                <h3>Productoras</h3>
+
+                                <div className={styles.companies}>
+                                    {data.production_companies
+                                        .filter(
+                                            company =>
+                                                company.logo_path !== null
+                                        )
+                                        .slice(0, 4)
+                                        .map(company => (
+                                            <div
+                                                key={company.id}
+                                                className={styles.company}
+                                            >
+                                                <Image
+                                                    src={BASE_URL_IMG.concat(
+                                                        company.logo_path!
+                                                    )}
+                                                    width={80}
+                                                    height={35}
+                                                    alt={company.name}
+                                                />
+
+                                                <span>
+                                                    {company.name}
+                                                </span>
+                                            </div>
+                                        ))}
+                                </div>
+                            </section>
+                        </aside>
+                    </section>
+                </>
+            ) : (
+                <NotResults
+                    id={(await params.params).id}
+                    type="movie"
+                />
+            )}
         </section>
-    );
+    )
 }
 
 
